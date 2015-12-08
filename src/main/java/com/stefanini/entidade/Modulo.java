@@ -20,8 +20,6 @@ public class Modulo implements BaseEntity, Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MODU_SEQ")
-//	@SequenceGenerator(name = "MODU_SEQ", sequenceName = "MODU_SEQ", allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ID_MODULO", unique = true, nullable = false, precision = 38 )
 	private Long id;
