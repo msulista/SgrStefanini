@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+    template="/pages/template/default.xhtml"
+    xmlns:pretty="http://ocpsoft.com/prettyfaces">
+
+    <ui:define name="content">
+    	<h2>#{message['title.submodulo']}</h2>
+        <h:form prependId="false">        
+        	<p:growl id="growl" life="4000" />
+			<p:panel header="#{message['title.submodulo.cadastro']}">
+			<p:focus context="nome" />
+				<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" />
+				<p:inputText id="nome" value="#{submoduloManager.submoduloSelecionado.nome}" required="true" requiredMessage="Nome é obrigatório!" /><br /><br />
+				
+				<p:outputLabel for="modulo" value="#{message['label.modulo']}" styleClass="label" />
+				<p:selectOneMenu id="modulo" value="#{submoduloManager.submoduloSelecionado.modulo}" converter="simpleEntityConverter">
+					<f:selectItem itemLabel="Selecione um módulo" noSelectionOption="true"/>
+					<f:selectItems value="#{moduloManager.listar()}" var="modulo" itemLabel="#{modulo.nome}" itemValue="#{modulo}"/>
+				</p:selectOneMenu>
+				<br /><br />				
+				<p:commandButton value="Salvar" action="#{submoduloManager.update()}" update="growl" />
+			</p:panel>
+		</h:form>
+    </ui:define>
+
+</ui:composition>

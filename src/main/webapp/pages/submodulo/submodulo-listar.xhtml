@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/template/default.xhtml"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces">
+
+	<ui:define name="content">
+		<h2>#{message['title.submodulo']}</h2>
+		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
+		<h:form>
+			<p:dataTable id="gridContatos" var="submodulo" value="#{submoduloManager.listar()}" emptyMessage="#{message['alerta.listaVazia']}" >
+				<p:column width="200" headerText="#{message['label.nome']}">
+					<h:outputText value="#{submodulo.nome}" />
+				</p:column>
+				<p:column width="100" headerText="#{message['label.modulo']}">
+					<h:outputText value="#{submodulo.modulo.nome}" />
+				</p:column>
+				
+				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
+					<pretty:link mappingId="submodulo-editar">
+						<f:param value="#{submodulo.id}" />
+						<p:commandButton type="button" value="#{message['button.editar']}" />
+					</pretty:link>
+					<p:commandButton value="#{message['button.excluir']}" action="#{submoduloManager.remove(submodulo.id)}" update="gridContatos">
+						<p:confirm header="#{message['button.excluir.submodulo']}" message="#{message['questiona.excluir']}" icon="ui-icon-alert" />	
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
+				<p:commandButton value="#{message['button.sim']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="growl" />
+				<p:commandButton value="#{message['button.nao']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+			<br />
+			<p:button value="#{message['button.novo']}" outcome="pretty:submodulo-incluir" />
+		</h:form>
+		
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+    template="/pages/template/default.xhtml"
+    xmlns:pretty="http://ocpsoft.com/prettyfaces">
+
+    <ui:define name="content">
+    	<h2>#{message['title.usuarios']}</h2>
+        <h:form prependId="false">        
+        	<p:growl id="growl" life="4000" />
+			<p:panel header="#{message['title.usuario.cadastro']}">
+			<p:focus context="nomeInclud" />
+				<p:outputLabel for="nomeInclud" value="#{message['label.nome']}" styleClass="label" />
+				<p:inputText id="nomeInclud" value="#{usuarioManager.usuario.nome}" required="true" requiredMessage="Nome é obrigatório!" /><br /><br />
+				
+				<p:outputLabel for="cpfInclud" value="#{message['label.cpf']} *" styleClass="label" />
+				<p:inputMask id="cpfInclud" value="#{usuarioManager.usuario.cpf}" mask="999.999.999-99" converter="conversorCpf" /><br /><br />				
+				
+				<p:outputLabel for="emailInclud" value="#{message['label.email']}" styleClass="label" />
+				<p:inputText id="emailInclud" value="#{usuarioManager.usuario.email}" required="true" requiredMessage="E-mail é obrigatório!" /><br /><br />
+								
+				<p:outputLabel for="foneInclud" value="#{message['label.telefone']}" styleClass="label" />
+				<p:inputMask id="foneInclud" value="#{usuarioManager.usuario.telefone}" mask="(99) 9999.9999" converter="conversorFone"/><br /><br />
+				
+				<p:outputLabel for="celInclud" value="#{message['label.celular']}" styleClass="label" />
+				<p:inputMask id="celInclud" value="#{usuarioManager.usuario.celular}" mask="(99) 9999.9999" converter="conversorFone"/><br /><br />
+				
+				<p:outputLabel for="cepInclud" value="#{message['label.cep']}" styleClass="label" />
+				<p:inputMask id="cepInclud" value="#{usuarioManager.usuario.cep}" mask="99999-999" converter="conversorCep" /><br /><br />
+				
+				<p:outputLabel for="endInclud" value="#{message['label.endereco']}" styleClass="label" />
+				<p:inputText id="endInclud" value="#{usuarioManager.usuario.endereco}"/><br /><br />
+				
+				<p:outputLabel for="bairroInclud" value="#{message['label.bairro']}" styleClass="label" />
+				<p:inputText id="bairroInclud" value="#{usuarioManager.usuario.bairro}"/><br /><br />				
+				
+				<p:outputLabel for="cidadeInclud" value="#{message['label.cidade']}" styleClass="label" />
+				<p:selectOneMenu id="cidadeInclud" value="#{usuarioManager.usuario.cidade}" converter="simpleEntityConverter">
+					<f:selectItem itemLabel="Selecione uma cidade" noSelectionOption="true"/>
+					<f:selectItems value="#{cidadeManager.listar()}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}"/>
+				</p:selectOneMenu>
+				<br /><br />
+				<p:outputLabel for="ativoInclud" value="#{message['label.ativo']}" styleClass="label" />
+				<p:selectOneMenu id="ativoInclud" value="#{usuarioManager.usuario.ativo}">
+					<f:selectItems value="#{confirmaCheckManager.confirmaCheck}" var="check" itemLabel="#{message[check.label]}" itemValue="#{check}"/>					
+				</p:selectOneMenu>
+				<br /><br />
+											
+				<p:commandButton value="Salvar" action="#{usuarioManager.save()}" update="growl" />
+			</p:panel>
+		</h:form>
+    </ui:define>
+
+</ui:composition>

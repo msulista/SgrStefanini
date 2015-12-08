@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+    template="/pages/template/default.xhtml"
+    xmlns:pretty="http://ocpsoft.com/prettyfaces">
+
+    <ui:define name="content">
+    	<h2>#{message['title.contatos']}</h2>
+        <h:form>
+        	<p:growl id="growl" life="4000" />
+			<p:panel header="Editar Contato">
+				<p:outputLabel value="#{message['label.nome']}" styleClass="label" />
+				<p:inputText value="#{contatoManager.contato.nome}" required="true" requiredMessage="Nome é obrigatório!" /><br /><br />
+				<p:outputLabel value="#{message['label.email']}" styleClass="label" />
+				<p:inputText value="#{contatoManager.contato.email}" required="true" requiredMessage="E-mail é obrigatório!" /><br /><br />
+				<p:commandButton value="Salvar" action="#{contatoManager.update()}" update="growl" />
+			</p:panel>
+		</h:form>
+    </ui:define>
+
+</ui:composition>

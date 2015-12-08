@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces">
+
+<h:head>
+	<title>#{app.title}</title>
+	<base href="#{request.contextPath}/" />
+	<link rel="stylesheet" type="text/css" href="resources/css/style.css" />
+</h:head>
+<h:body>
+	<div class="ct-top">
+		<h1>#{app['title.default']}</h1>
+	</div>
+	<div class="ct-menu">
+		<ul>
+			<li><h:link outcome="pretty:contato" >#{message['title.contatos']}</h:link></li>
+			<li><h:link outcome="pretty:modulo" >#{message['title.modulo']}</h:link></li>
+			<li><h:link outcome="pretty:submodulo">#{message['title.submodulo']}</h:link></li>
+			<li><h:link outcome="pretty:usuario">#{message['title.usuarios']}</h:link></li>
+			<li><h:link outcome="pretty:timer">Teste Louco</h:link></li>
+			<li class="item-last"><a href="#">Indisponível</a></li>
+		</ul>
+	</div>
+	<div class="ct-content">
+		<ui:insert name="content" />
+	</div>
+</h:body>
+</html>

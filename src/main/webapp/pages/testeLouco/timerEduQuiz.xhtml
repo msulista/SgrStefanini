@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/template/default.xhtml"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces">
+
+	<ui:define name="content">
+	<h:outputScript library="primefaces" name="primefaces.js" />
+		<h2>Testes Loucos</h2>
+		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
+		<h:form>
+		
+			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
+			<h:outputText id="cont" value="Tempo Restante: #{testeLouco.numero}"/>
+			<p:poll interval="1" listener="#{testeLouco.contador()}" update="cont growl"/>			
+			<br />
+			<br />
+			<p:clock pattern="HH:mm:ss"/>
+			
+			
+				
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
