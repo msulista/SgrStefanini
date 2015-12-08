@@ -13,7 +13,7 @@ public class CargaHoraria {
 
 	@Id
 	@Column(name = "ID_CARGA_HORARIA", nullable = false, precision = 32)
-	private int idCargaHoraria;
+	private long idCargaHoraria;
 
 	@Column(name = "CARGA_HORARIA")
 	private double cargaHoraria;
@@ -24,11 +24,11 @@ public class CargaHoraria {
 	@Column(name = "REGISTRO_VALIDADE_FIM", nullable = true)
 	private Date registroValidadeFim;
 
-	public int getIdCargaHoraria() {
+	public long getIdCargaHoraria() {
 		return idCargaHoraria;
 	}
 
-	public void setIdCargaHoraria(int idCargaHoraria) {
+	public void setIdCargaHoraria(long idCargaHoraria) {
 		this.idCargaHoraria = idCargaHoraria;
 	}
 
