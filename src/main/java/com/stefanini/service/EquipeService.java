@@ -7,11 +7,17 @@ import com.stefanini.util.JPAUtil;
 
 public class EquipeService {
 
-	public void save(Equipe equipe){
+	public void save(Equipe equipe) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 		manager.persist(equipe);
 		manager.getTransaction().commit();
 		manager.close();
+	}
+
+	public void update(Equipe equipe) {
+		EntityManager manager = JPAUtil.getEntityManager();
+		manager.getTransaction().begin();
+
 	}
 }
