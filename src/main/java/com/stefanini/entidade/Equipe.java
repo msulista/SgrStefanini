@@ -13,7 +13,7 @@ public class Equipe {
 
 	@Id
 	@Column(name="ID_EQUIPE", nullable=false, precision = 32)
-	private int idEquipe;
+	private long idEquipe;
 
 	@Column(name="NOME", length=45, nullable=false)
 	private String nome;
@@ -24,11 +24,11 @@ public class Equipe {
 	@Column(name="REGISTRO_VALIDADE_FIM", nullable=true)
 	private Date registroValidadeFim;
 
-	public int getIdEquipe() {
+	public long getIdEquipe() {
 		return idEquipe;
 	}
 
-	public void setIdEquipe(int idEquipe) {
+	public void setIdEquipe(long idEquipe) {
 		this.idEquipe = idEquipe;
 	}
 
