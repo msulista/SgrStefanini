@@ -32,7 +32,7 @@ public class EquipeService {
 		Query q = manager.createNativeQuery(
 				"UPDATE sgr_equipe SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_EQUIPE = :id", Equipe.class);
 		q.setParameter("dataFim", equipe.getRegistroValidadeFim());
-		q.setParameter("idEquipe", equipe.getIdEquipe());
+		q.setParameter("idEquipe", equipe.getId());
 		q.executeUpdate();
 		manager.close();
 	}

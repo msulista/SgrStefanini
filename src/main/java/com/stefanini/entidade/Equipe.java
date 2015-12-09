@@ -17,7 +17,7 @@ public class Equipe {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (idEquipe ^ (idEquipe >>> 32));
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((registroValidadeFim == null) ? 0 : registroValidadeFim.hashCode());
 		result = prime * result + ((registroValidadeInicio == null) ? 0 : registroValidadeInicio.hashCode());
@@ -33,7 +33,7 @@ public class Equipe {
 		if (getClass() != obj.getClass())
 			return false;
 		Equipe other = (Equipe) obj;
-		if (idEquipe != other.idEquipe)
+		if (id != other.id)
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -55,7 +55,7 @@ public class Equipe {
 
 	@Id
 	@Column(name = "ID_EQUIPE", nullable = false, precision = 32)
-	private long idEquipe;
+	private long id;
 
 	@Column(name = "NOME", length = 45, nullable = false)
 	private String nome;
@@ -66,12 +66,12 @@ public class Equipe {
 	@Column(name = "REGISTRO_VALIDADE_FIM", nullable = true)
 	private Date registroValidadeFim;
 
-	public long getIdEquipe() {
-		return idEquipe;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdEquipe(long idEquipe) {
-		this.idEquipe = idEquipe;
+	public void setId(long idEquipe) {
+		this.id = idEquipe;
 	}
 
 	public String getNome() {
