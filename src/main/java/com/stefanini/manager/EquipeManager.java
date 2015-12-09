@@ -20,11 +20,10 @@ import com.stefanini.service.EquipeService;
 		})
 public class EquipeManager {
 
-	private Equipe equipe;
-	private EquipeService service;
+	private Equipe equipe = new Equipe();
+	private EquipeService service = new EquipeService();
 
 	public EquipeManager() {
-
 	}
 
 	public Equipe getEquipe() {

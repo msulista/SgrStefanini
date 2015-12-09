@@ -29,18 +29,16 @@ public class EquipeService {
 		novaEquipe.setRegistroValidadeInicio(equipe.getRegistroValidadeFim());
 		manager.persist(novaEquipe);
 
-		Query query = manager.createNativeQuery(
+		Query q = manager.createNativeQuery(
 				"UPDATE sgr_equipe SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_EQUIPE = :id", Equipe.class);
-		query.setParameter("dataFim", equipe.getRegistroValidadeFim());
-		query.setParameter("idEquipe", equipe.getIdEquipe());
-		query.executeUpdate();
-
-		manager.getTransaction().commit();
+		q.setParameter("dataFim", equipe.getRegistroValidadeFim());
+		q.setParameter("idEquipe", equipe.getIdEquipe());
+		q.executeUpdate();
 		manager.close();
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Equipe> listar(){
+	public List<Equipe> listar() {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE REGISTRO_VALIDADE_FIM IS NULL", Equipe.class);
 		List<Equipe> equipes = q.getResultList();
@@ -49,26 +47,20 @@ public class EquipeService {
 
 	public Equipe getEquipeById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query query = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE ID_EQUIPE = :idEquipe", Equipe.class);
-		query.setParameter("idEquipe", id);
-		Equipe equipe = (Equipe) query.getSingleResult();
+		Query q = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE ID_EQUIPE = :idEquipe");
+		q.setParameter("idEquipe", id);
+		Equipe equipe = (Equipe) q.getSingleResult();
 		manager.close();
 		return equipe;
 	}
 
 	public void desativar(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Equipe equipe = getEquipeById(id);
-		equipe.setRegistroValidadeFim(new Date());
-		manager.getTransaction().begin();
 
-		Query query = manager.createNativeQuery(
-				"UPDATE sgr_equipe SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_EQUIPE = :id", Equipe.class);
-		query.setParameter("dataFim", new Date());
-		query.setParameter("id", equipe.getIdEquipe());
-		query.executeUpdate();
-		manager.getTransaction().commit();
+		Query q = manager.createNativeQuery("UPDATE sgr_equipe SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_EQUIPE = :id");
+		q.setParameter("dataFim", new Date());
+		q.setParameter("id",id);
+		q.executeUpdate();
 		manager.close();
-
 	}
 }

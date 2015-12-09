@@ -13,8 +13,13 @@
 			<p:dataTable id="gridEquipes" var="equipe"
 				value="#{equipeManager.listarAtivos()}"
 				emptyMessage="{message['alerta.listaVazia']}">
-				<p:column width="100" headerText="#{message['label.nome']}">
+				<p:column width="200" headerText="#{message['label.nome']}">
 					<h:outputText value="#{equipe.nome}" />
+				</p:column>
+				<p:column width="200" headerText="#{message['label.data.inicio']}">
+					<h:outputText value="#{equipe.registroValidadeInicio}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
+					</h:outputText>
 				</p:column>
 				<p:column headerText="#{message['label.acoes']}"
 					styleClass="txtcenter">
@@ -22,12 +27,12 @@
 						<f:param value="#{equipe.idEquipe}" />
 						<p:commandButton type="button" value="#{message['button.editar']}" />
 					</pretty:link>
-					<h:commandButton value="#{message['button.desativar']}"
+					<p:commandButton value="#{message['button.desativar']}"
 						action="#{equipeManager.desativar(equipe.idEquipe)}"
 						update="gridEquipes">
 						<p:confirm header="Desativar Cargo"
 							message="Desaja mesmo Desativar?" icon="ui-icon-alert" />
-					</h:commandButton>
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
