@@ -36,6 +36,7 @@ public class CargoService {
 		manager.close();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Cargo> listar(){
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery("SELECT * FROM sgr_cargo WHERE REGISTRO_VALIDADE_FIM <> null");
