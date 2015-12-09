@@ -13,7 +13,7 @@ public class Cargo {
 
 	@Id
 	@Column(name = "ID_CARGO", nullable = false, precision = 32)
-	private long idCargo;
+	private long id;
 
 	@Column(name = "NOME", length = 45, nullable = false)
 	private String nome;
@@ -24,12 +24,12 @@ public class Cargo {
 	@Column(name = "REGISTRO_VALIDADE_FIM", nullable = true)
 	private Date registroValidadeFim;
 
-	public long getIdCargo() {
-		return idCargo;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdCargo(long idCargo) {
-		this.idCargo = idCargo;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
