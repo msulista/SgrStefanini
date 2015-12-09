@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+    template="/pages/template/default.xhtml"
+    xmlns:pretty="http://ocpsoft.com/prettyfaces">
+
+    <ui:define name="content">
+    	<h2>#{message['title.modulo']}</h2>
+        <h:form>
+        	<p:growl id="growl" life="4000" />
+			<p:panel header="#{message['title.modulo.cadastro']}">			
+				<p:outputLabel value="#{message['label.nome']} *" styleClass="label" />
+				<p:inputText  value="#{moduloManager.modulo.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" /><br /><br />
+				<p:outputLabel value="#{message['label.mapping']} *" styleClass="label" />
+				<p:inputText value="#{moduloManager.modulo.mappingId}" required="true" requiredMessage="#{message['span.obrigatorio.mapping']}" /><br /><br />
+				<p:commandButton value="#{message['button.salvar']}" action="#{moduloManager.save()}" update="growl" />
+			</p:panel>
+		</h:form>
+    </ui:define>
+
+</ui:composition>

@@ -53,12 +53,12 @@ public class CargaHorariaManager {
 		return "pretty:cargaHoraria";
 	}
 
-	public List<CargaHoraria> listar() {
+	public List<CargaHoraria> listarAtivos() {
 		return service.listarAtivos();
 	}
 
-	public void remove(Long id) {
-		service.remove(id);
+	public void desativar(Long id) {
+		service.desativar(id);
 	}
 
 	@URLActions(actions = { @URLAction(mappingId = "cargaHoraria-editar", onPostback = false) })

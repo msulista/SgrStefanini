@@ -61,7 +61,7 @@ public class CargaHorariaService {
 		return cargaHoraria;
 	}
 
-	public void remove(Long id) throws ConverterException {
+	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
 		CargaHoraria cargaHoraria = getCargaHorariaById(id);
 		try {
