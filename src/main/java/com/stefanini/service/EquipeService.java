@@ -55,7 +55,7 @@ public class EquipeService {
 		return equipe;
 	}
 	
-	public void arquivar(long id){
+	public void Desativar(long id){
 		EntityManager manager = JPAUtil.getEntityManager();
 		Equipe equipe = getEquipeById(id);
 		equipe.setRegistroValidadeFim(new Date());
