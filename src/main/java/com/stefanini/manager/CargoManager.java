@@ -23,7 +23,7 @@ public class CargoManager {
 	private Cargo cargo;
 	private CargoService service;
 	
-	public CargoManager(Cargo cargo, CargoService service) {
+	public CargoManager() {
 		this.cargo = new Cargo();
 		this.service = new CargoService();
 	}
@@ -64,6 +64,6 @@ public class CargoManager {
 	
 	@URLActions(actions = {@URLAction(mappingId = "cargo-editar", onPostback = false)})
 	public void load() throws IOException{
-		cargo = service.getCargoById(cargo.getIdCargo());		
+		cargo = service.getCargoById(cargo.getId());		
 	}
 }

@@ -32,7 +32,7 @@ public class CargoService {
 		
 		Query q = manager.createNativeQuery("UPDATE sgr_cargo SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_CARGO = :id");
 		q.setParameter("dataFim", cargo.getRegistroValidadeFim());
-		q.setParameter("id", cargo.getIdCargo());
+		q.setParameter("id", cargo.getId());
 		q.executeUpdate();
 		manager.close();
 	}
@@ -40,7 +40,7 @@ public class CargoService {
 	@SuppressWarnings("unchecked")
 	public List<Cargo> listarAtivos(){
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_cargo WHERE REGISTRO_VALIDADE_FIM <> null");
+		Query q = manager.createNativeQuery("SELECT * FROM sgr_cargo WHERE REGISTRO_VALIDADE_FIM IS NULL", Cargo.class);
 		List<Cargo> cargos = q.getResultList();
 		return cargos;
 	}
@@ -60,7 +60,7 @@ public class CargoService {
 		
 		Query q = manager.createNativeQuery("UPDATE sgr_cargo SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_CARGO = :id");
 		q.setParameter("dataFim", new Date());
-		q.setParameter("id", cargo.getIdCargo());
+		q.setParameter("id", cargo.getId());
 		q.executeUpdate();
 		manager.close();		
 	}
