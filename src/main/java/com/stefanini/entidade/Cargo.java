@@ -55,6 +55,46 @@ public class Cargo {
 	public void setRegistroValidadeFim(Date registroValidadeFim) {
 		this.registroValidadeFim = registroValidadeFim;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((registroValidadeFim == null) ? 0 : registroValidadeFim.hashCode());
+		result = prime * result + ((registroValidadeInicio == null) ? 0 : registroValidadeInicio.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cargo other = (Cargo) obj;
+		if (id != other.id)
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (registroValidadeFim == null) {
+			if (other.registroValidadeFim != null)
+				return false;
+		} else if (!registroValidadeFim.equals(other.registroValidadeFim))
+			return false;
+		if (registroValidadeInicio == null) {
+			if (other.registroValidadeInicio != null)
+				return false;
+		} else if (!registroValidadeInicio.equals(other.registroValidadeInicio))
+			return false;
+		return true;
+	}
 	
 	
 
