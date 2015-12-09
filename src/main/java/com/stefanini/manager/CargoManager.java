@@ -20,12 +20,10 @@ import com.stefanini.service.CargoService;
 })
 public class CargoManager {
 
-	private Cargo cargo;
-	private CargoService service;
+	private Cargo cargo = new Cargo();
+	private CargoService service = new CargoService();
 	
-	public CargoManager() {
-		this.cargo = new Cargo();
-		this.service = new CargoService();
+	public CargoManager() {		
 	}
 
 	public Cargo getCargo() {
