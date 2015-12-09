@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+    template="/pages/template/default.xhtml"
+    xmlns:pretty="http://ocpsoft.com/prettyfaces">
+
+    <ui:define name="content">
+    	<h2>#{message['title.cargos']}</h2>
+        <h:form>
+        	<p:growl id="growl" life="4000" />
+			<p:panel header="#{message['title.cargo.editar']}">
+				<p:outputLabel value="#{message['label.nome']}" styleClass="label" />
+				<p:inputText value="#{cargoManager.cargo.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" /><br /><br />
+				<p:outputLabel value="#{message['label.data.inicio']}" styleClass="label" />
+				<p:calendar id="button" validator="#{cargoManager.cargo.registroValidadeInicio}" showOn="button"/>
+				<br /><br />
+				<p:commandButton value="#{message['button.salvar']}" action="#{cargoManager.update()}" update="growl" />
+			</p:panel>
+		</h:form>
+    </ui:define>
+
+</ui:composition>
