@@ -42,10 +42,9 @@ public class EquipeService {
 	@SuppressWarnings("unchecked")
 	public List<Equipe> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query query = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE REGISTRO_VALIDADE_FIM is null",
+		Query query = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE REGISTRO_VALIDADE_FIM IS NULL",
 				Equipe.class);
 		List<Equipe> equipes = query.getResultList();
-		manager.close();
 		return equipes;
 	}
 
@@ -66,7 +65,7 @@ public class EquipeService {
 
 		Query query = manager.createQuery(
 				"UPDATE sgr_equipe SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_EQUIPE = :id", Equipe.class);
-		query.setParameter("dataFim", equipe.getRegistroValidadeFim());
+		query.setParameter("dataFim", new Date());
 		query.setParameter("id", equipe.getIdEquipe());
 		query.executeUpdate();
 		manager.getTransaction().commit();

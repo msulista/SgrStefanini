@@ -11,7 +11,7 @@
 		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 		<h:form>
 			<p:dataTable id="gridEquipes" var="equipe"
-				value="#{equipeManager.listarAtivo()}"
+				value="#{equipeManager.listarAtivos()}"
 				emptyMessage="{message['alerta.listaVazia']}">
 				<p:column width="100" headerText="#{message['label.nome']}">
 					<h:outputText value="#{equipe.nome}" />
