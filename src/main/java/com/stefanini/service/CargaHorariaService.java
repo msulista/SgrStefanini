@@ -1,5 +1,6 @@
 package com.stefanini.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -26,13 +27,21 @@ public class CargaHorariaService {
 	}
 	
 	public void update(CargaHoraria cargaHoraria) {
-		
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		manager.merge(cargaHoraria);
-		manager.getTransaction().commit();
-		manager.close();
 		
+		cargaHoraria.setRegistroValidadeFim(new Date());
+		
+		CargaHoraria novaCargaHoraria = new CargaHoraria();
+		novaCargaHoraria.setCargaHoraria(cargaHoraria.getCargaHoraria());
+		novaCargaHoraria.setRegistroValidadeInicio(cargaHoraria.getRegistroValidadeFim());
+		
+		Query query = manager.createNativeQuery("UPDATE sgr_carga_horaria SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_CARGA_HORARIA = :id");
+		query.setParameter("dataFim", cargaHoraria.getRegistroValidadeFim());
+		query.setParameter("id", cargaHoraria.getIdCargaHoraria());
+		query.executeUpdate();
+		save(novaCargaHoraria);
+		manager.close();
 	}
 	
 	@SuppressWarnings("unchecked")
