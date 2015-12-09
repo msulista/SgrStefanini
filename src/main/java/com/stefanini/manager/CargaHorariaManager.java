@@ -12,6 +12,7 @@ import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
 import com.stefanini.entidade.CargaHoraria;
 import com.stefanini.entidade.Modulo;
+import com.stefanini.service.CargaHorariaService;
 import com.stefanini.service.ModuloService;
 
 @ManagedBean
@@ -55,18 +56,18 @@ public class CargaHorariaManager {
 		return "pretty:cargaHoraria";
 	}
 	
-	public List<CargaHoraria> listar(){
-		return service.listar();
-	}
+//	public List<CargaHoraria> listar(){
+//		return service.listar();
+//	}
 	
 	public void remove(Long id) {
 		service.remove(id);
 	}
-	
-	@URLActions(actions = {@URLAction(mappingId = "cargaHoraria-editar", onPostback = false)})
-	public void load() throws IOException{
-		cargaHoraria = service.getCargaHorariaById(cargaHoraria.getIdCargaHoraria());
-	}
+//	
+//	@URLActions(actions = {@URLAction(mappingId = "cargaHoraria-editar", onPostback = false)})
+//	public void load() throws IOException{
+//		cargaHoraria = service.getCargaHorariaById(cargaHoraria.getIdCargaHoraria());
+//	}
 	
 	
 	
