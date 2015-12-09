@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.RollbackException;
 
+import com.stefanini.entidade.CargaHoraria;
 import com.stefanini.entidade.Modulo;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
@@ -24,13 +25,15 @@ public class CargaHorariaService {
 		manager.close();
 	}
 	
-	public void update(Modulo modulo) {
-		EntityManager manager = JPAUtil.getEntityManager();
-		manager.getTransaction().begin();
-		manager.merge(modulo);
-		manager.getTransaction().commit();
-		manager.close();
-	}
+//	public void update(Modulo modulo) {
+//		EntityManager manager = JPAUtil.getEntityManager();
+//		modulo.setMappingId(dataAtualSistema);
+//		manager.getTransaction().begin();
+//		manager.merge(modulo);
+//		manager.getTransaction().commit();
+//		manager.close();
+//		save(modulo);
+//	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Modulo> listar(){
@@ -65,6 +68,20 @@ public class CargaHorariaService {
 			manager.close();
 		}
 	}
+
+	public void save(CargaHoraria cargaHoraria) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void update(CargaHoraria cargaHoraria) {
+		// TODO Auto-generated method stub
+		
+	}
 	
+//	public List<CargaHoraria> listar(){
+//		return null;
+//	}
+//	
 
 }
