@@ -17,48 +17,48 @@ import com.stefanini.util.Mensagem;
 public class CargaHorariaService {
 	
 	
-	public void save(Modulo modulo){
+	public void save(CargaHoraria cargaHoraria){
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		manager.persist(modulo);
+		manager.persist(cargaHoraria);
 		manager.getTransaction().commit();
 		manager.close();
 	}
 	
-//	public void update(Modulo modulo) {
-//		EntityManager manager = JPAUtil.getEntityManager();
-//		modulo.setMappingId(dataAtualSistema);
-//		manager.getTransaction().begin();
-//		manager.merge(modulo);
-//		manager.getTransaction().commit();
-//		manager.close();
-//		save(modulo);
-//	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Modulo> listar(){
+	public void update(CargaHoraria cargaHoraria) {
+		
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM apr_modulo", Modulo.class);
-		List<Modulo> modulos = q.getResultList();
+		manager.getTransaction().begin();
+		manager.merge(cargaHoraria);
+		manager.getTransaction().commit();
 		manager.close();
-		return modulos;
+		
 	}
 	
-	public Modulo getModuloById(Long id){
+	@SuppressWarnings("unchecked")
+	public List<CargaHoraria> listar(){
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM apr_modulo WHERE ID_MODULO = :idModulo", Modulo.class);
-		q.setParameter("idModulo", id);
-		Modulo modulo = (Modulo)q.getSingleResult();
+		Query q = manager.createNativeQuery("SELECT * FROM apr_modulo", Modulo.class);
+		List<CargaHoraria> cargaHorarias = q.getResultList();
 		manager.close();
-		return modulo;
+		return cargaHorarias;
+	}
+	
+	public CargaHoraria getCargaHorariaById(Long id){
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNativeQuery("SELECT * FROM apr_modulo WHERE ID_MODULO = :idModulo", CargaHoraria.class);
+		q.setParameter("idModulo", id);
+		CargaHoraria cargaHoraria = (CargaHoraria)q.getSingleResult();
+		manager.close();
+		return cargaHoraria;
 	}
 	
 	public void remove(Long id) throws ConverterException{		
 		EntityManager manager = JPAUtil.getEntityManager();
-		Modulo modulo = getModuloById(id);		
+		CargaHoraria cargaHoraria = getCargaHorariaById(id);		
 		try {
 			manager.getTransaction().begin();
-			manager.remove(manager.getReference(Modulo.class, modulo.getId()));
+			manager.remove(manager.getReference(CargaHoraria.class, cargaHoraria.getIdCargaHoraria()));
 			manager.getTransaction().commit();
 		} catch (RollbackException rbe) {
 			// TODO: handle exception
@@ -68,20 +68,4 @@ public class CargaHorariaService {
 			manager.close();
 		}
 	}
-
-	public void save(CargaHoraria cargaHoraria) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void update(CargaHoraria cargaHoraria) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-//	public List<CargaHoraria> listar(){
-//		return null;
-//	}
-//	
-
 }

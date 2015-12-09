@@ -56,9 +56,9 @@ public class CargaHorariaManager {
 		return "pretty:cargaHoraria";
 	}
 	
-//	public List<CargaHoraria> listar(){
-//		return service.listar();
-//	}
+	public List<CargaHoraria> listar(){
+		return service.listar();
+	}
 	
 	public void remove(Long id) {
 		service.remove(id);
