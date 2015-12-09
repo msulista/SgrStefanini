@@ -54,7 +54,7 @@ public class EquipeManager {
 	}
 
 	public List<Equipe> listarAtivos() {
-		return service.listarAtivos();
+		return service.listar();
 	}
 
 	public void desativar(Long id) {
