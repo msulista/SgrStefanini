@@ -55,7 +55,7 @@ public class CargoManager {
 	}
 	
 	public List<Cargo> listarAtivos(){
-		return service.listar();		
+		return service.listarAtivos();		
 	}
 	
 	public void desativar(Long id){
