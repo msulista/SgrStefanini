@@ -52,7 +52,7 @@ public class EquipeManager {
 		service.update(equipe);
 		return "pretty:equipe";
 	}
-	public List<Equipe> listar(){
+	public List<Equipe> listarAtivo(){
 		return service.listarAtivos();
 	}
 	public void desativar(long id){

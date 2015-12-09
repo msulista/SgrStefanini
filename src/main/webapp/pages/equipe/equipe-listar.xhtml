@@ -10,7 +10,7 @@
 		<h2>#{message['title.equipes']}</h2>
 		<p:growl id="growl" life="4000" globalOnly="true" sticky="true"/>
 		<h:form>
-			<p:dataTable id="gridEquipes" var="equipe" value="#{equipeManager.listar()}" emptyMessage="{message['alerta.listaVazia']}">
+			<p:dataTable id="gridEquipes" var="equipe" value="#{equipeManager.listarAtivo()}" emptyMessage="{message['alerta.listaVazia']}">
 				<p:column width="100" headerText="#{message['label.nome']}" >
 					<h:outputText value="#{equipe.nome}" />
 				</p:column>
@@ -19,7 +19,7 @@
 					<f:param value="#{equipe.idEquipe}" />
 					<p:commandButton type="button" value="#{message['button.editar']}" />
 				</pretty:link>
-				<h:commandButton value="#{message['button.excluir']}" action="#{equipeManager.desativar(equipe.idEquipe)}" update="gridEquipes">
+				<h:commandButton value="#{message['button.desativar']}" action="#{equipeManager.desativar(equipe.idEquipe)}" update="gridEquipes">
 					<p:confirm header="Excluir Contato" message="Deseja mesmo excluir?" icon="ui-icon-alert"/>
 				</h:commandButton>
 			</p:column>
