@@ -18,7 +18,7 @@ import com.stefanini.service.CargaHorariaService;
 @URLMappings(mappings = {
 		@URLMapping(id = "cargaHoraria", pattern = "/cargaHoraria", viewId = "/pages/cargaHoraria/cargaHoraria-listar.xhtml"),
 		@URLMapping(id = "cargaHoraria-incluir", pattern = "/incluir", viewId = "/pages/cargaHoraria/cargaHoraria-incluir.xhtml", parentId = "cargaHoraria"),
-		@URLMapping(id = "cargaHoraria-editar", pattern = "/#{cargaHorariaManager.cargaHoraria.idCargaHoraria}/editar", viewId = "/pages/cargaHoraria/cargaHoraria-editar.xhtml", parentId = "cargaHoraria") })
+		@URLMapping(id = "cargaHoraria-editar", pattern = "/#{cargaHorariaManager.cargaHoraria.id}/editar", viewId = "/pages/cargaHoraria/cargaHoraria-editar.xhtml", parentId = "cargaHoraria") })
 public class CargaHorariaManager {
 
 	private CargaHoraria cargaHoraria = new CargaHoraria();
@@ -63,7 +63,7 @@ public class CargaHorariaManager {
 
 	@URLActions(actions = { @URLAction(mappingId = "cargaHoraria-editar", onPostback = false) })
 	public void load() throws IOException {
-		cargaHoraria = service.getCargaHorariaById(cargaHoraria.getIdCargaHoraria());
+		cargaHoraria = service.getCargaHorariaById(cargaHoraria.getId());
 	}
 
 }
