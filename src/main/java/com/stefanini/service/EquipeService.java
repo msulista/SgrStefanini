@@ -58,7 +58,7 @@ public class EquipeService {
 		EntityManager manager = JPAUtil.getEntityManager();
 
 		Query q = manager.createNativeQuery("UPDATE sgr_equipe SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_EQUIPE = :id");
-		q.setParameter("dataFim", new Date());
+		q.setParameter("dataFim", 10/10/2015);
 		q.setParameter("id",id);
 		q.executeUpdate();
 		manager.close();
