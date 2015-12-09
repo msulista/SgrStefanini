@@ -3,6 +3,7 @@ package com.stefanini.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -53,4 +54,14 @@ public class CargoService {
 		return cargo;
 	}
 
+	public void desativar(Long id) throws ConverterException{
+		EntityManager manager = JPAUtil.getEntityManager();
+		Cargo cargo = getCargoById(id);
+		
+		Query q = manager.createNativeQuery("UPDATE sgr_cargo SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_CARGO = :id");
+		q.setParameter("dataFim", new Date());
+		q.setParameter("id", cargo.getIdCargo());
+		q.executeUpdate();
+		manager.close();		
+	}
 }
