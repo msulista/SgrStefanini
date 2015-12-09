@@ -25,11 +25,10 @@
 					<h:commandButton value="#{message['button.desativar']}"
 						action="#{equipeManager.desativar(equipe.idEquipe)}"
 						update="gridEquipes">
-						<p:confirm header="Excluir Contato"
-							message="Deseja mesmo excluir?" icon="ui-icon-alert" />
+						<p:confirm header="Desativar Cargo"
+							message="Desaja mesmo Desativar?" icon="ui-icon-alert" />
 					</h:commandButton>
 				</p:column>
-
 			</p:dataTable>
 			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 				<p:commandButton value="Sim" type="button"

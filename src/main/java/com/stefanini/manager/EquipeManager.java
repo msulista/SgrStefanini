@@ -13,18 +13,18 @@ import com.stefanini.entidade.Equipe;
 import com.stefanini.service.EquipeService;
 
 @ManagedBean
-@URLMappings(mappings = {
+@URLMappings(mappings = { 
 		@URLMapping(id = "equipe", pattern = "/equipe", viewId = "/pages/equipe/equipe-listar.xhtml"),
 		@URLMapping(id = "equipe-incluir", pattern = "/incluir", viewId = "/pages/equipe/equipe-incluir.xhtml", parentId = "equipe"),
-		@URLMapping(id = "equipe-editar", pattern = "/#{equipeManager.equipe.idEquipe}/editar", viewId = "/pages/equipe/equipe-editar.xhtml",parentId="equipe")
-})
+		@URLMapping(id = "equipe-editar", pattern = "/#{equipeManager.equipe.idEquipe}/editar", viewId = "/pages/equipe/equipe-editar.xhtml", parentId = "equipe")
+		})
 public class EquipeManager {
-	
+
 	private Equipe equipe;
 	private EquipeService service;
-	
-	public EquipeManager(){
-		
+
+	public EquipeManager() {
+
 	}
 
 	public Equipe getEquipe() {
@@ -42,25 +42,27 @@ public class EquipeManager {
 	public void setService(EquipeService service) {
 		this.service = service;
 	}
-	
-	public String save(){
+
+	public String save() {
 		service.save(equipe);
 		return "pretty:equipe";
 	}
-	
-	public String update(){
+
+	public String update() {
 		service.update(equipe);
 		return "pretty:equipe";
 	}
-	public List<Equipe> listarAtivos(){
+
+	public List<Equipe> listarAtivos() {
 		return service.listarAtivos();
 	}
-	public void desativar(long id){
-		service.Desativar(id);
+
+	public void desativar(Long id) {
+		service.desativar(id);
 	}
-	
-	@URLActions(actions = {@URLAction(mappingId = "equipe-editar", onPostback = false)})
-	public void load() throws IOException{
+
+	@URLActions(actions = { @URLAction(mappingId = "equipe-editar", onPostback = false) })
+	public void load() throws IOException {
 		equipe = service.getEquipeById(equipe.getIdEquipe());
 	}
 }

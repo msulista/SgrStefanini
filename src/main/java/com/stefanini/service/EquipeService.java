@@ -42,13 +42,12 @@ public class EquipeService {
 	@SuppressWarnings("unchecked")
 	public List<Equipe> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query query = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE REGISTRO_VALIDADE_FIM IS NULL",
-				Equipe.class);
+		Query query = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE REGISTRO_VALIDADE_FIM IS NULL", Equipe.class);
 		List<Equipe> equipes = query.getResultList();
 		return equipes;
 	}
 
-	public Equipe getEquipeById(long id) {
+	public Equipe getEquipeById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query query = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE ID_EQUIPE = :idEquipe", Equipe.class);
 		query.setParameter("idEquipe", id);
@@ -57,7 +56,7 @@ public class EquipeService {
 		return equipe;
 	}
 
-	public void Desativar(long id) {
+	public void desativar(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Equipe equipe = getEquipeById(id);
 		equipe.setRegistroValidadeFim(new Date());

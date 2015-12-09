@@ -12,16 +12,16 @@ import javax.persistence.Table;
 public class Equipe {
 
 	@Id
-	@Column(name="ID_EQUIPE", nullable=false, precision = 32)
+	@Column(name = "ID_EQUIPE", nullable = false, precision = 32)
 	private long idEquipe;
 
-	@Column(name="NOME", length=45, nullable=false)
+	@Column(name = "NOME", length = 45, nullable = false)
 	private String nome;
 
-	@Column(name="REGISTRO_VALIDADE_INICIO", nullable=false)
+	@Column(name = "REGISTRO_VALIDADE_INICIO", nullable = false)
 	private Date registroValidadeInicio;
 
-	@Column(name="REGISTRO_VALIDADE_FIM", nullable=true)
+	@Column(name = "REGISTRO_VALIDADE_FIM", nullable = true)
 	private Date registroValidadeFim;
 
 	public long getIdEquipe() {
