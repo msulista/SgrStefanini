@@ -49,18 +49,17 @@ public class CargoService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery("SELECT * FROM sgr_cargo WHERE ID_CARGO = :idCargo");
 		q.setParameter("idCargo", id);
-		Cargo cargo = (Cargo)q.getSingleResult();
+		Cargo cargo = (Cargo) q.getSingleResult();
 		manager.close();
 		return cargo;
 	}
 
 	public void desativar(Long id) throws ConverterException{
 		EntityManager manager = JPAUtil.getEntityManager();
-		Cargo cargo = getCargoById(id);
 		
-		Query q = manager.createNativeQuery("UPDATE sgr_cargo SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_CARGO = :id");
+		Query q = manager.createNativeQuery("UPDATE sgr_cargo SET REGISTRO_VALIDADE_FIM = ':dataFim' WHERE ID_CARGO = :id");
 		q.setParameter("dataFim", new Date());
-		q.setParameter("id", cargo.getId());
+		q.setParameter("id", id);
 		q.executeUpdate();
 		manager.close();		
 	}

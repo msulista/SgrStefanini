@@ -12,7 +12,7 @@
 				<p:inputText  value="#{cargoManager.cargo.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" /><br /><br />
 				<p:outputLabel value="#{message['label.data.inicio']} *" styleClass="label" />
 				<p:calendar id="button" value="#{cargoManager.cargo.registroValidadeInicio}" showOn="button"/>
-				
+				<br /><br />
 				<p:commandButton value="#{message['button.salvar']}" action="#{cargoManager.save()}" update="growl" />
 			</p:panel>
 		</h:form>

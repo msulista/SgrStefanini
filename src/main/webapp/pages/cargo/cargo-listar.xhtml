@@ -22,7 +22,7 @@
 						<f:param value="#{cargo.id}" />
 						<p:commandButton type="button" value="#{message['button.editar']}" />
 					</pretty:link>
-					<p:commandButton value="#{message['button.excluir']}" action="#{cargoManager.desativar(cargo.id)}" update="gridCargos">
+					<p:commandButton value="#{message['button.desativar']}" action="#{cargoManager.desativar(cargo.id)}" update="gridCargos">
 						<p:confirm header="Desativar Cargo" message="Deseja mesmo Desativar?" icon="ui-icon-alert" />	
 					</p:commandButton>
 				</p:column>
