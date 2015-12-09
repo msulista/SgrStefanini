@@ -35,7 +35,7 @@ public class CargaHorariaService {
 		Query query = manager.createNativeQuery(
 				"UPDATE sgr_carga_horaria SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_CARGA_HORARIA = :id");
 		query.setParameter("dataFim", cargaHoraria.getRegistroValidadeFim());
-		query.setParameter("id", cargaHoraria.getIdCargaHoraria());
+		query.setParameter("id", cargaHoraria.getId());
 		query.executeUpdate();
 		save(novaCargaHoraria);
 		manager.close();
@@ -61,16 +61,16 @@ public class CargaHorariaService {
 		return cargaHoraria;
 	}
 
-	public void remove(Long id) throws ConverterException {
+	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
 		CargaHoraria cargaHoraria = getCargaHorariaById(id);
 		try {
 			manager.getTransaction().begin();
-			manager.remove(manager.getReference(CargaHoraria.class, cargaHoraria.getIdCargaHoraria()));
+			manager.remove(manager.getReference(CargaHoraria.class, cargaHoraria.getId()));
 			manager.getTransaction().commit();
 		} catch (RollbackException rbe) {
 			// TODO: handle exception
-			FacesMessage message = new FacesMessage("Módulo esta em uso, não é possível deletar.", " O tempo acabou.");
+			FacesMessage message = new FacesMessage("Carga Horária já esta em uso, não é possível excluír.", " O tempo acabou.");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} finally {
 			manager.close();
