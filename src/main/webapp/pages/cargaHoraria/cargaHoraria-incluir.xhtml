@@ -4,15 +4,15 @@
     xmlns:pretty="http://ocpsoft.com/prettyfaces">
 
     <ui:define name="content">
-    	<h2>#{message['title.modulo']}</h2>
+    	<h2>#{message['title.cargaHoraria']}</h2>
         <h:form>
         	<p:growl id="growl" life="4000" />
-			<p:panel header="#{message['title.modulo.cadastro']}">			
-				<p:outputLabel value="#{message['label.nome']} *" styleClass="label" />
-				<p:inputText  value="#{moduloManager.modulo.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" /><br /><br />
-				<p:outputLabel value="#{message['label.mapping']} *" styleClass="label" />
-				<p:inputText value="#{moduloManager.modulo.mappingId}" required="true" requiredMessage="#{message['span.obrigatorio.mapping']}" /><br /><br />
-				<p:commandButton value="#{message['button.salvar']}" action="#{moduloManager.save()}" update="growl" />
+			<p:panel header="#{message['title.cargaHoraria.cadastro']}">			
+				<p:outputLabel value="#{message['label.cargaHoraria']} *" styleClass="label" />
+				<p:inputText  value="#{cargaHorariaManager.cargaHoraria.cargaHoraria}" required="true" requiredMessage="#{message['span.obrigatorio.cargaHoraria']}" /><br /><br />
+				<p:outputLabel for="button" value="#{message['label.inicio']} *" />
+        		<p:calendar id="button" value="#{cargaHorariaManager.cargaHoraria.registroValidadeInicio}" showOn="button" /><br/><br/>
+        		<p:commandButton value="#{message['button.salvar']}" action="#{cargaHorariaManager.save()}" update="growl" />
 			</p:panel>
 		</h:form>
     </ui:define>
