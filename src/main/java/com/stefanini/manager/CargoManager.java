@@ -3,6 +3,8 @@ package com.stefanini.manager;
 import java.io.IOException;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+
 import com.ocpsoft.pretty.faces.annotation.URLAction;
 import com.ocpsoft.pretty.faces.annotation.URLActions;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
@@ -10,6 +12,7 @@ import com.ocpsoft.pretty.faces.annotation.URLMappings;
 import com.stefanini.entidade.Cargo;
 import com.stefanini.service.CargoService;
 
+@ManagedBean
 @URLMappings(mappings = {
 		@URLMapping(id = "cargo", pattern = "/cargo", viewId = "/pages/cargo/cargo-listar.xhtml"),
 		@URLMapping(id = "cargo-incluir", pattern = "/incluir", viewId = "/pages/cargo/cargo-incluir.xhtml", parentId = "cargo"),
@@ -51,7 +54,7 @@ public class CargoManager {
 		return "pretty:cargo";
 	}
 	
-	public List<Cargo> listar(){
+	public List<Cargo> listarAtivos(){
 		return service.listar();		
 	}
 	
