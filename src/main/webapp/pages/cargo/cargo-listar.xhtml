@@ -15,7 +15,9 @@
 					<h:outputText value="#{cargo.nome}" />
 				</p:column>
 				<p:column width="200" headerText="#{message['label.data.inicio']}">
-					<h:outputText value="#{cargo.registroValidadeInicio}" />
+					<h:outputText value="#{cargo.registroValidadeInicio}">
+						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
+					</h:outputText>					
 				</p:column>
 				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 					<pretty:link mappingId="cargo-editar">
