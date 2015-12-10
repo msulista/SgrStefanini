@@ -1,5 +1,7 @@
 package com.stefanini.converter;
 
+import java.text.DecimalFormat;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -32,16 +34,21 @@ public class CargaHorariaConverter implements Converter {
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
     	
-    	String cargaHoraria = value.toString();
+    	DecimalFormat df = new DecimalFormat("#.00");
+    	double numero = Double.parseDouble(value.toString());
+    	String numeroFormatado = df.format(numero);
+    	//System.out.println(formatado);
+    	
+    	//String cargaHoraria = value.toString();
     	
     	
-        if (cargaHoraria != null && cargaHoraria.length() == 5){
-        	String cargaHorariaFormatada = cargaHoraria.replaceAll("\\.", "");
-        	cargaHorariaFormatada = cargaHorariaFormatada.substring(0, 2) + "," + cargaHorariaFormatada.substring(2,4);
-        	return cargaHorariaFormatada;
+        if (numeroFormatado != null && numeroFormatado.length() == 4){
+        	
+        	numeroFormatado = "0"+numeroFormatado;
+        	return numeroFormatado;
         }
         
-        return null;
+        return numeroFormatado;
     }
 
 }
