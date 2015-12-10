@@ -10,10 +10,13 @@
 	    	<p:panel header="#{message['title.equipe.editar']}">
 	    		<p:outputLabel value="#{message['label.nome']} *" styleClass="label"/>
 	    		<p:inputText value="#{equipeManager.equipe.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}"/><br /><br />
-	    		<p:outputLabel value="#{message['label.data.inicio']} *" styleClass="label" />
-	    		<p:calendar id="button" value="#{equipeManager.equipe.registroValidadeFim}" showOn="button"/>
-	    	
-	    	<p:commandButton value="#{message['button.salvar']}" action="#{equipeManager.save()}" update="growl" />
+	    		<p:outputLabel value="#{message['label.data.inicio']}" styleClass="label" />
+	    		<p:outputLabel value="#{equipeManager.equipe.registroValidadeInicio}" styleClass="label"/><br/> <br /> <br />
+	    		<p:outputLabel value="#{message['label.data.final']}" styleClass="label"/>
+	    		<p:calendar id="button" value="#{equipeManager.equipe.registroValidadeFim}" showOn="button"/><br /><br />
+	    		<p:outputLabel value="Digite a nova data de inicio *" styleClass="label"/>
+	    		<p:calendar id="button2" value="#{equipeManager.equipe.registroValidadeInicio}" showOn="button"/><br /><br />
+	    	<p:commandButton value="#{message['button.salvar']}" action="#{equipeManager.update()}" update="growl" />
 	    	</p:panel>
     	</h:form>
     
