@@ -40,7 +40,7 @@ public class CargoService {
 	@SuppressWarnings("unchecked")
 	public List<Cargo> listarAtivos(){
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_cargo WHERE REGISTRO_VALIDADE_FIM IS NULL", Cargo.class);
+		Query q = manager.createNativeQuery("SELECT * FROM sgr_cargo WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC", Cargo.class);
 		List<Cargo> cargos = q.getResultList();
 		return cargos;
 	}
