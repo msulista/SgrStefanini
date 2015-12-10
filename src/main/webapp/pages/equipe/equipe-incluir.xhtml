@@ -11,7 +11,7 @@
 	    		<p:outputLabel value="#{message['label.nome']} *" styleClass="label"/>
 	    		<p:inputText value="#{equipeManager.equipe.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}"/><br /><br />
 	    		<p:outputLabel value="#{message['label.data.inicio']} *" styleClass="label" />
-	    		<p:calendar id="button" value="#{equipeManager.equipe.registroValidadeInicio}" showOn="button"/>
+	    		<p:calendar id="button" value="#{equipeManager.equipe.registroValidadeInicio}" showOn="button" required="true" requiredMessage="Data inicio obrigatória"/><br /><br/>
 	    	
 	    		<p:commandButton value="#{message['button.salvar']}" action="#{equipeManager.save()}" update="growl" />
 	    	</p:panel>

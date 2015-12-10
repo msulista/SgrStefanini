@@ -13,9 +13,9 @@
 	    		<p:outputLabel value="#{message['label.data.inicio']}" styleClass="label" />
 	    		<p:outputLabel value="#{equipeManager.equipe.registroValidadeInicio}" styleClass="label"> <f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/></p:outputLabel><br/> <br />
 	    		<p:outputLabel value="#{message['label.data.final']}" styleClass="label"/>
-	    		<p:calendar id="button" value="#{equipeManager.equipe.registroValidadeFim}" showOn="button"/><br /><br />
+	    		<p:calendar id="button" value="#{equipeManager.equipe.registroValidadeFim}" showOn="button" required="true" requiredMessage="Data final obrigatória."/><br /><br />
 	    		<p:outputLabel value="Digite a nova data de inicio *" styleClass="label"/>
-	    		<p:calendar id="button2" value="#{equipeManager.equipe.registroValidadeInicio}" showOn="button"/><br /><br />
+	    		<p:calendar id="button2" value="#{equipeManager.equipe.registroValidadeInicio}" showOn="button" required="true" requiredMessage="Data inicio obrigatória"/><br /><br />
 	    	<p:commandButton value="#{message['button.salvar']}" action="#{equipeManager.update()}" update="growl" />
 	    	</p:panel>
     	</h:form>
