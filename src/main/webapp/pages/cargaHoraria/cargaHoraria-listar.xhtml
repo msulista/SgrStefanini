@@ -16,6 +16,11 @@
 						<f:convertNumber pattern="#0.00" />
 					</h:outputText>
 				</p:column>
+				<p:column width="100" headerText="#{message['label.data.inicio']}">
+					<h:outputText value="#{cargaHoraria.registroValidadeInicio}">
+						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
+					</h:outputText>
+				</p:column>
 				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 					<pretty:link mappingId="cargaHoraria-editar">
 						<f:param value="#{cargaHoraria.id}" />
