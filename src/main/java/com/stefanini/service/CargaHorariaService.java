@@ -13,7 +13,7 @@ import com.stefanini.entidade.CargaHoraria;
 import com.stefanini.util.JPAUtil;
 
 public class CargaHorariaService {
-
+	
 	public void save(CargaHoraria cargaHoraria) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
@@ -26,8 +26,10 @@ public class CargaHorariaService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
-		cargaHoraria.setRegistroValidadeFim(new Date());
-
+		
+		
+		/*cargaHoraria.setRegistroValidadeFim(new Date());
+		
 		CargaHoraria novaCargaHoraria = new CargaHoraria();
 		novaCargaHoraria.setCargaHoraria(cargaHoraria.getCargaHoraria());
 		novaCargaHoraria.setRegistroValidadeInicio(cargaHoraria.getRegistroValidadeFim());
@@ -37,7 +39,7 @@ public class CargaHorariaService {
 		query.setParameter("dataFim", cargaHoraria.getRegistroValidadeFim());
 		query.setParameter("id", cargaHoraria.getId());
 		query.executeUpdate();
-		save(novaCargaHoraria);
+		save(novaCargaHoraria);*/
 		manager.close();
 	}
 
@@ -63,16 +65,11 @@ public class CargaHorariaService {
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
 		CargaHoraria cargaHoraria = getCargaHorariaById(id);
-		try {
-			manager.getTransaction().begin();
-			manager.remove(manager.getReference(CargaHoraria.class, cargaHoraria.getId()));
-			manager.getTransaction().commit();
-		} catch (RollbackException rbe) {
-			// TODO: handle exception
-			FacesMessage message = new FacesMessage("Carga Horária já esta em uso, não é possível excluír.", " O tempo acabou.");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		} finally {
-			manager.close();
-		}
+		cargaHoraria.setRegistroValidadeFim(new Date());
+		manager.getTransaction().begin();
+		manager.remove(manager.getReference(CargaHoraria.class, cargaHoraria.getId()));
+		manager.getTransaction().commit();
+		manager.close();
+		
 	}
 }

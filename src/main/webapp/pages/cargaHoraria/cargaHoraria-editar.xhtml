@@ -11,7 +11,7 @@
 				
 				<p:outputLabel value="#{message['label.cargaHoraria']}" styleClass="label" for="cargaHoraria"/>
 				<p:inputMask id="cargaHoraria" value="#{cargaHorariaManager.cargaHoraria.cargaHoraria}" mask="99,99" converter="cargaHorariaConverter"/><br/><br/>
-				<p:outputLabel for="button" value="#{message['label.data.inicio']} *" />
+				<p:outputLabel for="button" value="#{message['label.data.inicio']} *" styleClass="label"/>
         		<p:calendar id="button" value="#{cargaHorariaManager.cargaHoraria.registroValidadeInicio}" showOn="button" /><br/><br/>
         		<p:commandButton value="#{message['button.salvar']}" action="#{cargaHorariaManager.save()}" update="growl" />
 			</p:panel>
