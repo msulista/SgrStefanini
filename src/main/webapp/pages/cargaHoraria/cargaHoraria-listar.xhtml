@@ -11,15 +11,17 @@
 		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 		<h:form>
 			<p:dataTable id="gridCargaHoraria" var="cargaHoraria" value="#{cargaHorariaManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
-				<p:column width="100" headerText="#{message['label.cargaHoraria']}">
-					<h:outputText value="#{cargaHoraria.idCargaHoraria}" />
+				<p:column width="100" headerText="#{message['label.cargaHoraria']}" for="cargaHoraria">
+					<h:outputText id="cargaHoraria" value="#{cargaHoraria.cargaHoraria}">
+						<f:convertNumber pattern="#0.00" />
+					</h:outputText>
 				</p:column>
 				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 					<pretty:link mappingId="cargaHoraria-editar">
-						<f:param value="#{cargaHoraria.idCargaHoraria}" />
+						<f:param value="#{cargaHoraria.id}" />
 						<p:commandButton type="button" value="#{message['button.editar']}" />
 					</pretty:link>
-					<p:commandButton value="#{message['button.desativar']}" action="#{cargaHorariaManager.desativar(cargaHoraria.idCargaHoraria)}" update="gridCargaHoraria" >
+					<p:commandButton value="#{message['button.desativar']}" action="#{cargaHorariaManager.desativar(cargaHoraria.id)}" update="gridCargaHoraria" >
 						<p:confirm header="#{message['button.desativar.cargaHoraria']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
 					</p:commandButton>
 				</p:column>

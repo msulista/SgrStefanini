@@ -8,8 +8,9 @@
         <h:form>
         	<p:growl id="growl" life="4000" />
 			<p:panel header="#{message['title.cargaHoraria.cadastro']}">			
-				<p:outputLabel value="#{message['label.cargaHoraria']} *" styleClass="label" />
-				<p:inputText  value="#{cargaHorariaManager.cargaHoraria.cargaHoraria}" required="true" requiredMessage="#{message['span.obrigatorio.cargaHoraria']}" /><br /><br />
+				
+				<p:outputLabel value="#{message['label.cargaHoraria']}" styleClass="label" for="cargaHoraria"/>
+				<p:inputMask id="cargaHoraria" value="#{cargaHorariaManager.cargaHoraria.cargaHoraria}" mask="99,99" converter="cargaHorariaConverter"/><br/><br/>
 				<p:outputLabel for="button" value="#{message['label.inicio']} *" />
         		<p:calendar id="button" value="#{cargaHorariaManager.cargaHoraria.registroValidadeInicio}" showOn="button" /><br/><br/>
         		<p:commandButton value="#{message['button.salvar']}" action="#{cargaHorariaManager.save()}" update="growl" />
