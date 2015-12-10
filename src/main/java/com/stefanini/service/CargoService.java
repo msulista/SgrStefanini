@@ -24,7 +24,8 @@ public class CargoService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();	
 		
-		cargo.setRegistroValidadeFim(new Date());		
+		cargo.setRegistroValidadeFim(new Date());	
+		System.out.println("########## Cargo:: " + cargo.getNome() + "Cargo:: "+ cargo.getRegistroValidadeFim());
 		Cargo cargoNovo = new Cargo();
 		cargoNovo.setNome(cargo.getNome());		
 		cargoNovo.setRegistroValidadeInicio(cargo.getRegistroValidadeFim());
@@ -47,7 +48,7 @@ public class CargoService {
 	
 	public Cargo getCargoById(Long id){
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_cargo WHERE ID_CARGO = :idCargo");
+		Query q = manager.createNativeQuery("SELECT * FROM sgr_cargo WHERE ID_CARGO = :idCargo", Cargo.class);
 		q.setParameter("idCargo", id);
 		Cargo cargo = (Cargo) q.getSingleResult();
 		manager.close();

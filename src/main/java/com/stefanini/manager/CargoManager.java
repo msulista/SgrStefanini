@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 import com.ocpsoft.pretty.faces.annotation.URLAction;
 import com.ocpsoft.pretty.faces.annotation.URLActions;
@@ -13,6 +14,7 @@ import com.stefanini.entidade.Cargo;
 import com.stefanini.service.CargoService;
 
 @ManagedBean
+@RequestScoped
 @URLMappings(mappings = {
 		@URLMapping(id = "cargo", pattern = "/cargo", viewId = "/pages/cargo/cargo-listar.xhtml"),
 		@URLMapping(id = "cargo-incluir", pattern = "/incluir", viewId = "/pages/cargo/cargo-incluir.xhtml", parentId = "cargo"),
