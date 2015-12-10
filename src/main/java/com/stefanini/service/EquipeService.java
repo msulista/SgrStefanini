@@ -42,10 +42,11 @@ public class EquipeService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC", Equipe.class);
 		List<Equipe> equipes = q.getResultList();
+		manager.close();
 		return equipes;
 	}
 
-	public Equipe getEquipeById(Long id) {
+	public Equipe getEquipeById(int id) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE ID_EQUIPE = :idEquipe");
 		q.setParameter("idEquipe", id);

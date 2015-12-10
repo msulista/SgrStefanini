@@ -13,7 +13,7 @@ public class Perfil {
 
 	@Id
 	@Column(name = "ID_PERFIL", nullable = false, precision = 32)
-	private int idPerfil;
+	private long id;
 
 	@Column(name = "NOME", length = 45, nullable = false)
 	private String nome;
@@ -24,12 +24,12 @@ public class Perfil {
 	@Column(name = "REGISTRO_VALIDADE_FIM", nullable = true)
 	private Date registroValidadeFim;
 
-	public int getIdPerfil() {
-		return idPerfil;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdPerfil(int idPerfil) {
-		this.idPerfil = idPerfil;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
