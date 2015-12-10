@@ -59,10 +59,11 @@ public class EquipeService {
 	public void desativar(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
 
-		Query q = manager.createNativeQuery("UPDATE sgr_equipe SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_EQUIPE = :id", Equipe.class);
-		q.setParameter("dataFim", new Date());
-		q.setParameter("id",id);
-		q.executeUpdate();
+		Equipe equipeDesativar = getEquipeById(id);
+		manager.getTransaction().begin();
+		equipeDesativar.setRegistroValidadeFim(new Date());
+		manager.merge(equipeDesativar);
+		manager.getTransaction().commit();
 		manager.close();
 	}
 }
