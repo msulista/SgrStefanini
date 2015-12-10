@@ -16,15 +16,14 @@ import com.stefanini.service.EquipeService;
 @URLMappings(mappings = { 
 		@URLMapping(id = "equipe", pattern = "/equipe", viewId = "/pages/equipe/equipe-listar.xhtml"),
 		@URLMapping(id = "equipe-incluir", pattern = "/incluir", viewId = "/pages/equipe/equipe-incluir.xhtml", parentId = "equipe"),
-		@URLMapping(id = "equipe-editar", pattern = "/#{equipeManager.equipe.idEquipe}/editar", viewId = "/pages/equipe/equipe-editar.xhtml", parentId = "equipe")
+		@URLMapping(id = "equipe-editar", pattern = "/#{equipeManager.equipe.id}/editar", viewId = "/pages/equipe/equipe-editar.xhtml", parentId = "equipe")
 		})
 public class EquipeManager {
 
-	private Equipe equipe;
-	private EquipeService service;
+	private Equipe equipe = new Equipe();
+	private EquipeService service = new EquipeService();
 
 	public EquipeManager() {
-
 	}
 
 	public Equipe getEquipe() {
@@ -63,6 +62,6 @@ public class EquipeManager {
 
 	@URLActions(actions = { @URLAction(mappingId = "equipe-editar", onPostback = false) })
 	public void load() throws IOException {
-		equipe = service.getEquipeById(equipe.getIdEquipe());
+		equipe = service.getEquipeById(equipe.getId());
 	}
 }
