@@ -40,7 +40,7 @@ public class EquipeService {
 	@SuppressWarnings("unchecked")
 	public List<Equipe> listar() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE REGISTRO_VALIDADE_FIM IS NULL", Equipe.class);
+		Query q = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC", Equipe.class);
 		List<Equipe> equipes = q.getResultList();
 		return equipes;
 	}
