@@ -66,8 +66,8 @@ public class Equipe {
 	@Column(name = "REGISTRO_VALIDADE_FIM", nullable = true)
 	private Date registroValidadeFim;
 
-	public int getId() {
-		return (int)id;
+	public long getId() {
+		return id;
 	}
 
 	public void setId(long idEquipe) {
