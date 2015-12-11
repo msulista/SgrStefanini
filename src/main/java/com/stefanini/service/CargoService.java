@@ -1,5 +1,6 @@
 package com.stefanini.service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.stefanini.entidade.Cargo;
+import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 
 public class CargoService {
@@ -24,17 +26,16 @@ public class CargoService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();	
 		
-		cargo.setRegistroValidadeFim(new Date());		
-		Cargo cargoNovo = new Cargo();
-		cargoNovo.setNome(cargo.getNome());		
-		cargoNovo.setRegistroValidadeInicio(cargo.getRegistroValidadeFim());
-		manager.persist(cargoNovo);
-		
-		Query q = manager.createNativeQuery("UPDATE sgr_cargo SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_CARGO = :id");
-		q.setParameter("dataFim", cargo.getRegistroValidadeFim());
-		q.setParameter("id", cargo.getId());
-		q.executeUpdate();
+		Cargo cargoMerge = (Cargo)getCargoById(cargo.getId());
+		cargoMerge.setRegistroValidadeFim(cargo.getDataManipulacao());
+		manager.merge(cargoMerge);
+		manager.getTransaction().commit();
 		manager.close();
+		
+		Cargo cargoPersist = new Cargo();
+		cargoPersist.setNome(cargo.getNome());
+		cargoPersist.setRegistroValidadeInicio(cargo.getDataManipulacao());		
+		save(cargoPersist);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -47,7 +48,7 @@ public class CargoService {
 	
 	public Cargo getCargoById(Long id){
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_cargo WHERE ID_CARGO = :idCargo");
+		Query q = manager.createNativeQuery("SELECT * FROM sgr_cargo WHERE ID_CARGO = :idCargo", Cargo.class);
 		q.setParameter("idCargo", id);
 		Cargo cargo = (Cargo) q.getSingleResult();
 		manager.close();
@@ -55,12 +56,12 @@ public class CargoService {
 	}
 
 	public void desativar(Long id) throws ConverterException{
-		EntityManager manager = JPAUtil.getEntityManager();
-		
-		Query q = manager.createNativeQuery("UPDATE sgr_cargo SET REGISTRO_VALIDADE_FIM = ':dataFim' WHERE ID_CARGO = :id");
-		q.setParameter("dataFim", new Date());
-		q.setParameter("id", id);
-		q.executeUpdate();
+		EntityManager manager = JPAUtil.getEntityManager();	
+		manager.getTransaction().begin();		
+		Cargo cargoMerge = (Cargo)getCargoById(id);
+		cargoMerge.setRegistroValidadeFim(new Date());
+		manager.merge(cargoMerge);
+		manager.getTransaction().commit();
 		manager.close();		
 	}
 }

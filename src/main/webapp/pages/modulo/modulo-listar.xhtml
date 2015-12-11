@@ -22,8 +22,8 @@
 						<f:param value="#{modulo.id}" />
 						<p:commandButton type="button" value="#{message['button.editar']}" />
 					</pretty:link>
-					<p:commandButton value="#{message['button.excluir']}" action="#{moduloManager.remove(modulo.id)}" update="gridModulos" >
-						<p:confirm header="#{message['button.excluir.modulo']}" message="#{message['questiona.excluir']}" icon="ui-icon-alert" />	
+					<p:commandButton value="#{message['button.desativar']}" action="#{moduloManager.remove(modulo.id)}" update="gridModulos" >
+						<p:confirm header="#{message['button.excluir.modulo']}" message="#{message['button.desativar']}" icon="ui-icon-alert" />	
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

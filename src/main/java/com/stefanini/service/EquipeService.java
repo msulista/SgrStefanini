@@ -1,6 +1,5 @@
 package com.stefanini.service;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -23,18 +22,16 @@ public class EquipeService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
-		equipe.setRegistroValidadeFim(new Date());
-		Equipe novaEquipe = new Equipe();
-		novaEquipe.setNome(equipe.getNome());
-		novaEquipe.setRegistroValidadeInicio(equipe.getRegistroValidadeFim());
-		manager.persist(novaEquipe);
-
-		Query q = manager.createNativeQuery(
-				"UPDATE sgr_equipe SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_EQUIPE = :id", Equipe.class);
-		q.setParameter("dataFim", equipe.getRegistroValidadeFim());
-		q.setParameter("idEquipe", equipe.getId());
-		q.executeUpdate();
+		Equipe equipeMerge = getEquipeById(equipe.getId());
+		equipeMerge.setRegistroValidadeFim(equipe.getDataManipulacao());
+		manager.merge(equipeMerge);
+		manager.getTransaction().commit();
 		manager.close();
+		
+		Equipe equipePersist = new Equipe();
+		equipePersist.setNome(equipe.getNome());
+		equipePersist.setRegistroValidadeInicio(equipe.getDataManipulacao());
+		save(equipePersist);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -42,12 +39,13 @@ public class EquipeService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC", Equipe.class);
 		List<Equipe> equipes = q.getResultList();
+		manager.close();
 		return equipes;
 	}
 
 	public Equipe getEquipeById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE ID_EQUIPE = :idEquipe");
+		Query q = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE ID_EQUIPE = :idEquipe", Equipe.class);
 		q.setParameter("idEquipe", id);
 		Equipe equipe = (Equipe) q.getSingleResult();
 		manager.close();
@@ -57,10 +55,11 @@ public class EquipeService {
 	public void desativar(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
 
-		Query q = manager.createNativeQuery("UPDATE sgr_equipe SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_EQUIPE = :id");
-		q.setParameter("dataFim", 10/10/2015);
-		q.setParameter("id",id);
-		q.executeUpdate();
+		Equipe equipeMerge = getEquipeById(id);
+		manager.getTransaction().begin();
+		equipeMerge.setRegistroValidadeFim(equipeMerge.getDataManipulacao());
+		manager.merge(equipeMerge);
+		manager.getTransaction().commit();
 		manager.close();
 	}
 }

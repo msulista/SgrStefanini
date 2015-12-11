@@ -9,11 +9,13 @@
         	<p:growl id="growl" life="4000" />
 			<p:panel header="#{message['title.cargo.cadastro']}">			
 				<p:outputLabel value="#{message['label.nome']} *" styleClass="label" />
-				<p:inputText  value="#{cargoManager.cargo.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" /><br /><br />
+				<p:inputText value="#{cargoManager.cargo.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" /><br /><br />
 				<p:outputLabel value="#{message['label.data.inicio']} *" styleClass="label" />
-				<p:calendar id="button" value="#{cargoManager.cargo.registroValidadeInicio}" showOn="button"/>
+				<p:calendar id="button" value="#{cargoManager.cargo.registroValidadeInicio}" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}"/>
 				<br /><br />
-				<p:commandButton value="#{message['button.salvar']}" action="#{cargoManager.save()}" update="growl" />
+				<p:commandButton value="#{message['button.salvar']}" action="#{cargoManager.save()}" update="growl" />				
+				<p:button  value="#{message['button.cancelar']}" outcome="pretty:cargo"/>
+				
 			</p:panel>
 		</h:form>
     </ui:define>

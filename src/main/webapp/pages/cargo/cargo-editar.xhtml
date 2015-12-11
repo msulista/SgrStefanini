@@ -8,12 +8,14 @@
         <h:form>
         	<p:growl id="growl" life="4000" />
 			<p:panel header="#{message['title.cargo.editar']}">
-				<p:outputLabel value="#{message['label.nome']}" styleClass="label" />
-				<p:inputText value="#{cargoManager.cargo.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" /><br /><br />
-				<p:outputLabel value="#{message['label.data.inicio']}" styleClass="label" />
-				<p:calendar id="button" validator="#{cargoManager.cargo.registroValidadeInicio}" showOn="button"/>
+				<p:outputLabel value="#{message['label.nome']} *" styleClass="label" />
+				<p:inputText value="#{cargoManager.cargo.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
+				<br /><br />
+				<p:outputLabel value="#{message['label.data.inicio']} *" styleClass="label" />
+				<p:calendar id="buttonIni" value="#{cargoManager.cargo.dataManipulacao}" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}"/>				
 				<br /><br />
 				<p:commandButton value="#{message['button.salvar']}" action="#{cargoManager.update()}" update="growl" />
+				<p:button  value="#{message['button.cancelar']}" outcome="pretty:cargo"/>
 			</p:panel>
 		</h:form>
     </ui:define>

@@ -13,7 +13,7 @@ import com.stefanini.entidade.CargaHoraria;
 import com.stefanini.util.JPAUtil;
 
 public class CargaHorariaService {
-
+	
 	public void save(CargaHoraria cargaHoraria) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
@@ -25,27 +25,23 @@ public class CargaHorariaService {
 	public void update(CargaHoraria cargaHoraria) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-
-		cargaHoraria.setRegistroValidadeFim(new Date());
-
-		CargaHoraria novaCargaHoraria = new CargaHoraria();
-		novaCargaHoraria.setCargaHoraria(cargaHoraria.getCargaHoraria());
-		novaCargaHoraria.setRegistroValidadeInicio(cargaHoraria.getRegistroValidadeFim());
-
-		Query query = manager.createNativeQuery(
-				"UPDATE sgr_carga_horaria SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_CARGA_HORARIA = :id");
-		query.setParameter("dataFim", cargaHoraria.getRegistroValidadeFim());
-		query.setParameter("id", cargaHoraria.getId());
-		query.executeUpdate();
-		save(novaCargaHoraria);
+		
+		CargaHoraria cargaHorariaAntiga = getCargaHorariaById(cargaHoraria.getId());
+		cargaHorariaAntiga.setRegistroValidadeFim(cargaHoraria.getDataManipulacaoFim());
+		manager.merge(cargaHorariaAntiga);
+		manager.getTransaction().commit();
 		manager.close();
+		
+		CargaHoraria cargaHorariaNova = new CargaHoraria();
+		cargaHorariaNova.setCargaHoraria(cargaHoraria.getCargaHoraria());
+		cargaHorariaNova.setRegistroValidadeInicio(cargaHoraria.getDataManipulacaoFim());
+		save(cargaHorariaNova);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<CargaHoraria> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_carga_horaria WHERE REGISTRO_VALIDADE_FIM = null",
-				CargaHoraria.class);
+		Query q = manager.createNativeQuery("SELECT * FROM sgr_carga_horaria WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC", CargaHoraria.class);
 		List<CargaHoraria> cargaHorarias = q.getResultList();
 		manager.close();
 		return cargaHorarias;
@@ -64,16 +60,11 @@ public class CargaHorariaService {
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
 		CargaHoraria cargaHoraria = getCargaHorariaById(id);
-		try {
-			manager.getTransaction().begin();
-			manager.remove(manager.getReference(CargaHoraria.class, cargaHoraria.getId()));
-			manager.getTransaction().commit();
-		} catch (RollbackException rbe) {
-			// TODO: handle exception
-			FacesMessage message = new FacesMessage("Carga Horária já esta em uso, não é possível excluír.", " O tempo acabou.");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		} finally {
-			manager.close();
-		}
+		cargaHoraria.setRegistroValidadeFim(new Date());
+		manager.getTransaction().begin();
+		manager.remove(manager.getReference(CargaHoraria.class, cargaHoraria.getId()));
+		manager.getTransaction().commit();
+		manager.close();
+		
 	}
 }
