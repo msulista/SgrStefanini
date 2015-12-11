@@ -7,8 +7,9 @@
     	<h2>#{message['title.status']}</h2>
         <h:form>
         	<p:growl id="growl" life="4000" />
-			<p:panel header="#{message['title.status.cadastro']}">			
-				<p:outputLabel for="nome" value="#{message['label.nome']} *" styleClass="label" />
+			<p:panel id="panel" header="#{message['title.status.cadastro']}">	
+				<p:focus context="panel"/>		
+				<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" />
 				<p:inputText id="nome" value="#{statusManager.status.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
 				<br /><br />
 				<p:outputLabel for="button" value="#{message['label.data.inicio']}" styleClass="label" />
