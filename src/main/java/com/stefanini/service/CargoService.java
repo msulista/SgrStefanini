@@ -56,9 +56,10 @@ public class CargoService {
 	}
 
 	public void desativar(Long id) throws ConverterException{
-		EntityManager manager = JPAUtil.getEntityManager();		
+		EntityManager manager = JPAUtil.getEntityManager();	
+		manager.getTransaction().begin();		
 		Cargo cargoMerge = (Cargo)getCargoById(id);
-		cargoMerge.setRegistroValidadeFim(cargoMerge.getDataManipulacaoFim());
+		cargoMerge.setRegistroValidadeFim(new Date());
 		manager.merge(cargoMerge);
 		manager.getTransaction().commit();
 		manager.close();		
