@@ -10,7 +10,7 @@
 	    	<p:panel header="#{message['title.equipe.editar']}">
 	    		<p:outputLabel value="#{message['label.nome']} *" styleClass="label"/>
 	    		<p:inputText value="#{equipeManager.equipe.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}"/><br /><br />
-	    		<p:outputLabel value="Digite a nova data de inicio *" styleClass="label"/>
+	    		<p:outputLabel value="#{message['label.data.inicio.nova']} *" styleClass="label"/>
 	    		<p:calendar id="button" value="#{equipeManager.equipe.dataManipulacao}" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}"/><br /><br />
 	    	<p:commandButton value="#{message['button.salvar']}" action="#{equipeManager.update()}" update="growl" />
 	    	<p:button value="#{message['button.cancelar']}"  outcome="pretty:equipe"></p:button>

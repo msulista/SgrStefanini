@@ -41,7 +41,7 @@ public class CargaHorariaService {
 	@SuppressWarnings("unchecked")
 	public List<CargaHoraria> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_carga_horaria WHERE REGISTRO_VALIDADE_FIM IS NULL", CargaHoraria.class);
+		Query q = manager.createNativeQuery("SELECT * FROM sgr_carga_horaria WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC", CargaHoraria.class);
 		List<CargaHoraria> cargaHorarias = q.getResultList();
 		manager.close();
 		return cargaHorarias;
