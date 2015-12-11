@@ -34,7 +34,7 @@ public class CargoService {
 		
 		Cargo cargoPersist = new Cargo();
 		cargoPersist.setNome(cargo.getNome());
-		cargoPersist.setRegistroValidadeInicio(cargoMerge.getRegistroValidadeInicio());		
+		cargoPersist.setRegistroValidadeInicio(cargo.getDataManipulacaoFim());		
 		save(cargoPersist);
 	}
 	
