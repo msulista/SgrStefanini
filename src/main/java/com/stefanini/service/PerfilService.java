@@ -3,6 +3,7 @@ package com.stefanini.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -53,7 +54,7 @@ public class PerfilService {
 		return perfil;
 	}
 	
-	public void desativar(Long id){
+	public void desativar(Long id)throws ConverterException{
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 		Perfil perfilMerge = getPerfilById(id);
