@@ -61,7 +61,7 @@ public class CargaHorariaService {
 		CargaHoraria cargaHoraria = getCargaHorariaById(id);
 		cargaHoraria.setRegistroValidadeFim(new Date());
 		manager.getTransaction().begin();
-		manager.remove(manager.getReference(CargaHoraria.class, cargaHoraria.getId()));
+		manager.merge(cargaHoraria);
 		manager.getTransaction().commit();
 		manager.close();
 		
