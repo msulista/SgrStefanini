@@ -11,14 +11,6 @@
 				<p:outputLabel value="#{message['label.nome']} *" styleClass="label" />
 				<p:inputText value="#{cargoManager.cargo.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
 				<br /><br />
-				<p:outputLabel value="#{message['label.data.inicio']}" styleClass="label" />
-				<h:outputText value="#{cargoManager.cargo.registroValidadeInicio}">
-					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
-				</h:outputText>	
-				<br /><br />
-				<p:outputLabel value="#{message['label.data.final']} *" styleClass="label" />
-				<p:calendar id="buttonFim" value="#{cargoManager.cargo.dataManipulacaoFim}" showOn="button"/>
-				<br /><br />
 				<p:outputLabel value="#{message['label.data.inicio']} *" styleClass="label" />
 				<p:calendar id="buttonIni" value="#{cargoManager.cargo.registroValidadeInicio}" showOn="button"/>				
 				<br /><br />
