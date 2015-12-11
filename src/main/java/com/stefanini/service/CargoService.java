@@ -1,6 +1,5 @@
 package com.stefanini.service;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.stefanini.entidade.Cargo;
-import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 
 public class CargoService {
