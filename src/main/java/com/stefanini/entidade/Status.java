@@ -20,7 +20,7 @@ public class Status {
 	private String nome;
 	
 	@Column(name = "REGISTRO_VALIDADE_INICIO", nullable = false)
-	private Date registriValidadeInicio;
+	private Date registroValidadeInicio;
 	
 	@Column(name = "REGISTRO_VALIDADE_FIM", nullable = false)
 	private Date registroValidadeFim;
@@ -50,12 +50,12 @@ public class Status {
 		this.nome = nome;
 	}
 
-	public Date getRegistriValidadeInicio() {
-		return registriValidadeInicio;
+	public Date getRegistroValidadeInicio() {
+		return registroValidadeInicio;
 	}
 
-	public void setRegistriValidadeInicio(Date registriValidadeInicio) {
-		this.registriValidadeInicio = registriValidadeInicio;
+	public void setRegistroValidadeInicio(Date registroValidadeInicio) {
+		this.registroValidadeInicio = registroValidadeInicio;
 	}
 
 	public Date getRegistroValidadeFim() {
@@ -80,7 +80,7 @@ public class Status {
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((registriValidadeInicio == null) ? 0 : registriValidadeInicio.hashCode());
+		result = prime * result + ((registroValidadeInicio == null) ? 0 : registroValidadeInicio.hashCode());
 		result = prime * result + ((registroValidadeFim == null) ? 0 : registroValidadeFim.hashCode());
 		return result;
 	}
@@ -101,10 +101,10 @@ public class Status {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (registriValidadeInicio == null) {
-			if (other.registriValidadeInicio != null)
+		if (registroValidadeInicio == null) {
+			if (other.registroValidadeInicio != null)
 				return false;
-		} else if (!registriValidadeInicio.equals(other.registriValidadeInicio))
+		} else if (!registroValidadeInicio.equals(other.registroValidadeInicio))
 			return false;
 		if (registroValidadeFim == null) {
 			if (other.registroValidadeFim != null)
