@@ -26,7 +26,11 @@ public class Cargo {
 	private Date registroValidadeFim;
 	
 	@Transient
-	private Date dataManipulacaoFim = new Date();
+	private Date dataManipulacaoFim;
+	
+	public Cargo() {
+		this.dataManipulacaoFim = new Date();
+	}
 
 	public long getId() {
 		return id;
