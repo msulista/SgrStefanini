@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "SGR_PERFIL")
@@ -23,6 +24,21 @@ public class Perfil {
 
 	@Column(name = "REGISTRO_VALIDADE_FIM", nullable = true)
 	private Date registroValidadeFim;
+
+	@Transient
+	private Date dataManipulacao;
+
+	public Perfil() {
+		this.dataManipulacao = new Date();
+	}
+
+	public Date getDataManipulacao() {
+		return dataManipulacao;
+	}
+
+	public void setDataManipulacao(Date dataManipulacao) {
+		this.dataManipulacao = dataManipulacao;
+	}
 
 	public long getId() {
 		return id;
