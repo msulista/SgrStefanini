@@ -12,7 +12,7 @@
 				<p:inputText value="#{cargoManager.cargo.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
 				<br /><br />
 				<p:outputLabel value="#{message['label.data.inicio']} *" styleClass="label" />
-				<p:calendar id="buttonIni" value="#{cargoManager.cargo.dataManipulacaoFim}" showOn="button"/>				
+				<p:calendar id="buttonIni" value="#{cargoManager.cargo.dataManipulacao}" showOn="button"/>				
 				<br /><br />
 				<p:commandButton value="#{message['button.salvar']}" action="#{cargoManager.update()}" update="growl" />
 			</p:panel>
