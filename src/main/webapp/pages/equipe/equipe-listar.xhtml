@@ -21,15 +21,12 @@
 					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
 					</h:outputText>
 				</p:column>
-				<p:column headerText="#{message['label.acoes']}"
-					styleClass="txtcenter">
+				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 					<pretty:link mappingId="equipe-editar">
 						<f:param value="#{equipe.id}" />
 						<p:commandButton type="button" value="#{message['button.editar']}" />
 					</pretty:link>
-					<p:commandButton value="#{message['button.desativar']}"
-						action="#{equipeManager.desativar(equipe.id)}"
-						update="gridEquipes">
+					<p:commandButton value="#{message['button.desativar']}"	action="#{equipeManager.desativar(equipe.id)}" update="gridEquipes">
 						<p:confirm header="Desativar Cargo"
 							message="Desaja mesmo Desativar?" icon="ui-icon-alert" />
 					</p:commandButton>

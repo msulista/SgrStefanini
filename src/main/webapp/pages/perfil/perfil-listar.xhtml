@@ -21,17 +21,13 @@
 					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
 					</h:outputText>
 				</p:column>
-				<p:column headerText="#{message['label.acoes']}"
-					styleClass="txtcenter">
+				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 					<pretty:link mappingId="perfil-editar">
 						<f:param value="#{perfil.id}" />
 						<p:commandButton type="button" value="#{message['button.editar']}" />
 					</pretty:link>
-					<p:commandButton value="#{message['button.desativar']}"
-						action="#{perfilManager.desativar(perfil.id)}"
-						update="gridPerfis">
-						<p:confirm header="Desativar Perfil"
-							message="Desaja mesmo Desativar?" icon="ui-icon-alert" />
+					<p:commandButton value="#{message['button.desativar']}"	action="#{perfilManager.desativar(perfil.id)}" update="gridPerfis">
+						<p:confirm header="Desativar Perfil" message="Desaja mesmo Desativar?" icon="ui-icon-alert" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
