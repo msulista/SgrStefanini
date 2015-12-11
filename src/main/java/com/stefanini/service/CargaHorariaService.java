@@ -3,12 +3,11 @@ package com.stefanini.service;
 import java.util.Date;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+
 import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.RollbackException;
+
 import com.stefanini.entidade.CargaHoraria;
 import com.stefanini.util.JPAUtil;
 
