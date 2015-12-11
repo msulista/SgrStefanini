@@ -25,22 +25,17 @@ public class CargaHorariaService {
 	public void update(CargaHoraria cargaHoraria) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-
 		
-		
-		/*cargaHoraria.setRegistroValidadeFim(new Date());
-		
-		CargaHoraria novaCargaHoraria = new CargaHoraria();
-		novaCargaHoraria.setCargaHoraria(cargaHoraria.getCargaHoraria());
-		novaCargaHoraria.setRegistroValidadeInicio(cargaHoraria.getRegistroValidadeFim());
-
-		Query query = manager.createNativeQuery(
-				"UPDATE sgr_carga_horaria SET REGISTRO_VALIDADE_FIM = :dataFim WHERE ID_CARGA_HORARIA = :id");
-		query.setParameter("dataFim", cargaHoraria.getRegistroValidadeFim());
-		query.setParameter("id", cargaHoraria.getId());
-		query.executeUpdate();
-		save(novaCargaHoraria);*/
+		CargaHoraria cargaHorariaAntiga = getCargaHorariaById(cargaHoraria.getId());
+		cargaHorariaAntiga.setRegistroValidadeFim(cargaHoraria.getDataManipulacaoFim());
+		manager.merge(cargaHorariaAntiga);
+		manager.getTransaction().commit();
 		manager.close();
+		
+		CargaHoraria cargaHorariaNova = new CargaHoraria();
+		cargaHorariaNova.setCargaHoraria(cargaHoraria.getCargaHoraria());
+		cargaHorariaNova.setRegistroValidadeInicio(cargaHoraria.getDataManipulacaoFim());
+		save(cargaHorariaNova);
 	}
 
 	@SuppressWarnings("unchecked")
