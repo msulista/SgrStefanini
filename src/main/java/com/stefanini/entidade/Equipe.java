@@ -27,8 +27,7 @@ public class Equipe {
 
 	@Transient
 	private Date dataManipulacaoFim = new Date();
-	
-	
+
 	public Date getDataManipulacaoFim() {
 		return dataManipulacaoFim;
 	}
@@ -68,6 +67,7 @@ public class Equipe {
 	public void setRegistroValidadeFim(Date registroValidadeFim) {
 		this.registroValidadeFim = registroValidadeFim;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

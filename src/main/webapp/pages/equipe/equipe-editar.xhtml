@@ -10,8 +10,6 @@
 	    	<p:panel header="#{message['title.equipe.editar']}">
 	    		<p:outputLabel value="#{message['label.nome']} *" styleClass="label"/>
 	    		<p:inputText value="#{equipeManager.equipe.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}"/><br /><br />
-	    		<p:outputLabel value="#{message['label.data.inicio']}" styleClass="label" />
-	    		<p:outputLabel value="#{equipeManager.equipe.registroValidadeInicio}" styleClass="label"> <f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/></p:outputLabel><br/> <br />
 	    		<p:outputLabel value="Digite a nova data de inicio *" styleClass="label"/>
 	    		<p:calendar id="button" value="#{equipeManager.equipe.dataManipulacaoFim}" showOn="button" required="true" requiredMessage="Data inicio obrigatória"/><br /><br />
 	    	<p:commandButton value="#{message['button.salvar']}" action="#{equipeManager.update()}" update="growl" />

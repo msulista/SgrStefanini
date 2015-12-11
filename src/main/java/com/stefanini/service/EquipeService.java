@@ -30,7 +30,7 @@ public class EquipeService {
 		
 		Equipe equipePersist = new Equipe();
 		equipePersist.setNome(equipe.getNome());
-		equipePersist.setRegistroValidadeInicio(equipe.getRegistroValidadeInicio());
+		equipePersist.setRegistroValidadeInicio(equipe.getDataManipulacaoFim());
 		save(equipePersist);
 	}
 
