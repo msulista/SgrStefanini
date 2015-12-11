@@ -23,14 +23,14 @@ public class EquipeService {
 		manager.getTransaction().begin();
 
 		Equipe equipeMerge = getEquipeById(equipe.getId());
-		equipeMerge.setRegistroValidadeFim(equipe.getDataManipulacaoFim());
+		equipeMerge.setRegistroValidadeFim(equipe.getDataManipulacao());
 		manager.merge(equipeMerge);
 		manager.getTransaction().commit();
 		manager.close();
 		
 		Equipe equipePersist = new Equipe();
 		equipePersist.setNome(equipe.getNome());
-		equipePersist.setRegistroValidadeInicio(equipe.getDataManipulacaoFim());
+		equipePersist.setRegistroValidadeInicio(equipe.getDataManipulacao());
 		save(equipePersist);
 	}
 
@@ -57,7 +57,7 @@ public class EquipeService {
 
 		Equipe equipeMerge = getEquipeById(id);
 		manager.getTransaction().begin();
-		equipeMerge.setRegistroValidadeFim(equipeMerge.getDataManipulacaoFim());
+		equipeMerge.setRegistroValidadeFim(equipeMerge.getDataManipulacao());
 		manager.merge(equipeMerge);
 		manager.getTransaction().commit();
 		manager.close();

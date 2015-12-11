@@ -32,11 +32,11 @@ public class Equipe {
 		this.dataManipulacao = new Date();
 	}
 
-	public Date getDataManipulacaoFim() {
+	public Date getDataManipulacao() {
 		return dataManipulacao;
 	}
 
-	public void setDataManipulacaoFim(Date dataManipulacaoFim) {
+	public void setDataManipulacao(Date dataManipulacaoFim) {
 		this.dataManipulacao = dataManipulacaoFim;
 	}
 
