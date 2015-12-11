@@ -26,7 +26,11 @@ public class Equipe {
 	private Date registroValidadeFim;
 
 	@Transient
-	private Date dataManipulacaoFim = new Date();
+	private Date dataManipulacaoFim;
+
+	public Equipe() {
+		this.dataManipulacaoFim = new Date();
+	}
 
 	public Date getDataManipulacaoFim() {
 		return dataManipulacaoFim;
