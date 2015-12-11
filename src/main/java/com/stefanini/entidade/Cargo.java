@@ -26,10 +26,10 @@ public class Cargo {
 	private Date registroValidadeFim;
 	
 	@Transient
-	private Date dataManipulacaoFim;
+	private Date dataManipulacao;
 	
 	public Cargo() {
-		this.dataManipulacaoFim = new Date();
+		this.dataManipulacao = new Date();
 	}
 
 	public long getId() {
@@ -60,16 +60,16 @@ public class Cargo {
 		return registroValidadeFim;
 	}
 
-	public void setRegistroValidadeFim(Date registroValidadeFim) {
-		this.registroValidadeFim = registroValidadeFim;
+	public void setRegistroValidadeFim(Date registroValidade) {
+		this.registroValidadeFim = registroValidade;
 	}	
 
-	public Date getDataManipulacaoFim() {
-		return dataManipulacaoFim;
+	public Date getDataManipulacao() {
+		return dataManipulacao;
 	}
 
-	public void setDataManipulacaoFim(Date dataManipulacaoFim) {
-		this.dataManipulacaoFim = dataManipulacaoFim;
+	public void setDataManipulacao(Date dataManipulacao) {
+		this.dataManipulacao = dataManipulacao;
 	}
 
 	@Override

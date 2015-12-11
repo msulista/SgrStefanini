@@ -27,14 +27,14 @@ public class CargoService {
 		manager.getTransaction().begin();	
 		
 		Cargo cargoMerge = (Cargo)getCargoById(cargo.getId());
-		cargoMerge.setRegistroValidadeFim(cargo.getDataManipulacaoFim());
+		cargoMerge.setRegistroValidadeFim(cargo.getDataManipulacao());
 		manager.merge(cargoMerge);
 		manager.getTransaction().commit();
 		manager.close();
 		
 		Cargo cargoPersist = new Cargo();
 		cargoPersist.setNome(cargo.getNome());
-		cargoPersist.setRegistroValidadeInicio(cargo.getDataManipulacaoFim());		
+		cargoPersist.setRegistroValidadeInicio(cargo.getDataManipulacao());		
 		save(cargoPersist);
 	}
 	
