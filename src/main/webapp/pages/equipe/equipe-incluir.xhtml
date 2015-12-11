@@ -14,6 +14,7 @@
 	    		<p:calendar id="button" value="#{equipeManager.equipe.registroValidadeInicio}" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}"/><br /><br/>
 	    	
 	    		<p:commandButton value="#{message['button.salvar']}" action="#{equipeManager.save()}" update="growl" />
+	    		<p:button value="#{message['button.cancelar']}"  outcome="pretty:equipe"></p:button>
 	    	</p:panel>
     	</h:form>
     
