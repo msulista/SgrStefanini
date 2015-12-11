@@ -1,6 +1,5 @@
 package com.stefanini.service;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -59,10 +58,10 @@ public class EquipeService {
 	public void desativar(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
 
-		Equipe equipeDesativar = getEquipeById(id);
+		Equipe equipeMerge = getEquipeById(id);
 		manager.getTransaction().begin();
-		equipeDesativar.setRegistroValidadeFim(new Date());
-		manager.merge(equipeDesativar);
+		equipeMerge.setRegistroValidadeFim(equipeMerge.getDataManipulacaoFim());
+		manager.merge(equipeMerge);
 		manager.getTransaction().commit();
 		manager.close();
 	}
