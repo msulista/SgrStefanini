@@ -22,13 +22,11 @@ public class Status {
 	@Column(name = "REGISTRO_VALIDADE_INICIO", nullable = false)
 	private Date registroValidadeInicio;
 	
-	@Column(name = "REGISTRO_VALIDADE_FIM", nullable = false)
+	@Column(name = "REGISTRO_VALIDADE_FIM", nullable = true)
 	private Date registroValidadeFim;
 
 	@Transient
 	private Date dataManipulacao;
-	
-	
 	
 	public Status() {
 		this.dataManipulacao = new Date();
