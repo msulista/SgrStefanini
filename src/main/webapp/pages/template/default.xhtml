@@ -13,19 +13,23 @@
 </h:head>
 <h:body>
 	<div class="ct-top">
-		<h1>#{app['title.default']}</h1>
+		<div class="container--topmenu">
+			<div class="cabecalho">
+			    <p:column rowpan="3">    
+			        <p:graphicImage url="/SgrStefanini/src/resources/img/stefanini.jpg" width="40px" height="40px" />    
+			    </p:column>  
+				<h1>#{app['title.default']}</h1>
+			</div>
+		</div>
 	</div>
 	<div class="ct-menu">
 		<ul>
 			<li><h:link outcome="pretty:cargo" >#{message['title.cargos']}</h:link></li>
-			<li><h:link outcome="pretty:modulo" >#{message['title.modulo']}</h:link></li>
-			<li><h:link outcome="pretty:submodulo">#{message['title.submodulo']}</h:link></li>
 			<li><h:link outcome="pretty:equipe">#{message['title.equipe']}</h:link></li>
-			<li><h:link outcome="pretty:timer">Teste Louco</h:link></li>
-			<li class="item-last"><a href="#">Indisponível</a></li>
+			<li><h:link outcome="pretty:cargaHoraria">#{message['title.cargahoraria']}</h:link></li>
 		</ul>
 	</div>
-	<div class="ct-content">
+	<div class="ct-content" >
 		<ui:insert name="content" />
 	</div>
 </h:body>
