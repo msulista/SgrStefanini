@@ -8,9 +8,10 @@
         <h:form>
         	<p:growl id="growl" life="4000" />
 			<p:panel header="#{message['title.cargo.cadastro']}">			
-				<p:outputLabel value="#{message['label.nome']} *" styleClass="label" />
-				<p:inputText value="#{cargoManager.cargo.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" /><br /><br />
-				<p:outputLabel value="#{message['label.data.inicio']} *" styleClass="label" />
+				<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" />
+				<p:inputText id="nome" value="#{cargoManager.cargo.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
+				<br /><br />
+				<p:outputLabel for="button" value="#{message['label.data.inicio']}" styleClass="label" />
 				<p:calendar id="button" value="#{cargoManager.cargo.registroValidadeInicio}" pattern="dd/MM/yyyy" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}"/>
 				<br /><br />
 				<p:commandButton value="#{message['button.salvar']}" action="#{cargoManager.save()}" update="growl" />				
