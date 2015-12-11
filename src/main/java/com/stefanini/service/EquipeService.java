@@ -22,19 +22,16 @@ public class EquipeService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
-		Equipe equipeEdite = getEquipeById(equipe.getId());
-		
-		
-		Equipe equipeNovo = new Equipe();
-		equipeNovo.setNome(equipe.getNome());
-		equipeNovo.setRegistroValidadeInicio(equipe.getRegistroValidadeInicio());
-		equipeEdite.setRegistroValidadeFim(equipe.getRegistroValidadeFim());
-		
-		manager.merge(equipeEdite);
-		manager.persist(equipeNovo);
+		Equipe equipeMerge = getEquipeById(equipe.getId());
+		equipeMerge.setRegistroValidadeFim(equipe.getDataManipulacaoFim());
+		manager.merge(equipeMerge);
 		manager.getTransaction().commit();
 		manager.close();
-	
+		
+		Equipe equipePersist = new Equipe();
+		equipePersist.setNome(equipe.getNome());
+		equipePersist.setRegistroValidadeInicio(equipe.getRegistroValidadeInicio());
+		save(equipePersist);
 	}
 
 	@SuppressWarnings("unchecked")
