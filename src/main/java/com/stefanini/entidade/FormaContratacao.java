@@ -9,14 +9,14 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "SGR_PERFIL")
-public class Perfil {
+@Table(name = "SGR_FORMA_CONTRATACAO")
+public class FormaContratacao {
 
 	@Id
-	@Column(name = "ID_PERFIL", nullable = false, precision = 32)
+	@Column(name = "ID_FORMA_CONTRATACAO", nullable = false, precision = 32)
 	private long id;
 
-	@Column(name = "NOME", length = 45, nullable = false)
+	@Column(name = "NOME")
 	private String nome;
 
 	@Column(name = "REGISTRO_VALIDADE_INICIO", nullable = false)
@@ -24,11 +24,11 @@ public class Perfil {
 
 	@Column(name = "REGISTRO_VALIDADE_FIM", nullable = true)
 	private Date registroValidadeFim;
-
+	
 	@Transient
 	private Date dataManipulacao;
-
-	public Perfil() {
+	
+	public FormaContratacao() {
 		this.dataManipulacao = new Date();
 	}
 
@@ -76,7 +76,6 @@ public class Perfil {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dataManipulacao == null) ? 0 : dataManipulacao.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((registroValidadeFim == null) ? 0 : registroValidadeFim.hashCode());
@@ -92,12 +91,7 @@ public class Perfil {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Perfil other = (Perfil) obj;
-		if (dataManipulacao == null) {
-			if (other.dataManipulacao != null)
-				return false;
-		} else if (!dataManipulacao.equals(other.dataManipulacao))
-			return false;
+		FormaContratacao other = (FormaContratacao) obj;
 		if (id != other.id)
 			return false;
 		if (nome == null) {
@@ -118,4 +112,5 @@ public class Perfil {
 		return true;
 	}
 
+	
 }

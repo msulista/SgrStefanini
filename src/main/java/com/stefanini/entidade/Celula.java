@@ -9,11 +9,11 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "SGR_PERFIL")
-public class Perfil {
+@Table(name = "SGR_CELULA")
+public class Celula {
 
 	@Id
-	@Column(name = "ID_PERFIL", nullable = false, precision = 32)
+	@Column(name = "ID_CELULA", nullable = false, precision = 32)
 	private long id;
 
 	@Column(name = "NOME", length = 45, nullable = false)
@@ -28,7 +28,7 @@ public class Perfil {
 	@Transient
 	private Date dataManipulacao;
 
-	public Perfil() {
+	public Celula() {
 		this.dataManipulacao = new Date();
 	}
 
@@ -92,7 +92,7 @@ public class Perfil {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Perfil other = (Perfil) obj;
+		Celula other = (Celula) obj;
 		if (dataManipulacao == null) {
 			if (other.dataManipulacao != null)
 				return false;

@@ -4,20 +4,19 @@
     xmlns:pretty="http://ocpsoft.com/prettyfaces">
 
     <ui:define name="content">
-    	<h2>#{message['title.cargos']}</h2>
+    	<h2>#{message['title.status']}</h2>
         <h:form>
         	<p:growl id="growl" life="4000" />
-			<p:panel header="#{message['title.cargo.cadastro']}" id="painel">	
-				<p:focus context="painel"/>		
+			<p:panel id="panel" header="#{message['title.status.editar']}">			
+				<p:focus context="panel" />
 				<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" />
-				<p:inputText id="nome" value="#{cargoManager.cargo.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
+				<p:inputText id="nome" value="#{statusManager.status.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
 				<br /><br />
 				<p:outputLabel for="button" value="#{message['label.data.inicio']}" styleClass="label" />
-				<p:calendar id="button" value="#{cargoManager.cargo.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}"/>
+				<p:calendar id="button" value="#{statusManager.status.dataManipulacao}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}"/>
 				<br /><br />
-				<p:commandButton value="#{message['button.salvar']}" action="#{cargoManager.save()}" update="growl" />				
-				<p:button  value="#{message['button.cancelar']}" outcome="pretty:cargo"/>
-				
+				<p:commandButton value="#{message['button.salvar']}" action="#{statusManager.update()}" update="growl" />				
+				<p:button  value="#{message['button.cancelar']}" outcome="pretty:status"/>				
 			</p:panel>
 		</h:form>
     </ui:define>

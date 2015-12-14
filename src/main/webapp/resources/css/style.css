@@ -148,6 +148,10 @@ html, body {
 }
 
 /* FORM */
+#painel-3-Colunas {
+	width:450px;
+}
+
 .label {
 	padding-top: 5px;
 	float: left;

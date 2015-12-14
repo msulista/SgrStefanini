@@ -2,6 +2,7 @@ package com.stefanini.service;
 
 import java.util.List;
 
+import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -52,7 +53,7 @@ public class EquipeService {
 		return equipe;
 	}
 
-	public void desativar(Long id) {
+	public void desativar(Long id)throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
 
 		Equipe equipeMerge = getEquipeById(id);

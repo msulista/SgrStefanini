@@ -7,28 +7,27 @@
 	xmlns:pretty="http://ocpsoft.com/prettyfaces">
 
 	<ui:define name="content">
-		<h2>#{message['title.equipes']}</h2>
+		<h2>#{message['title.perfis']}</h2>
 		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 		<h:form>
-			<p:dataTable id="gridEquipes" var="equipe"
-				value="#{equipeManager.listarAtivos()}"
-				emptyMessage="{message['alerta.listaVazia']}">
+			<p:dataTable id="gridPerfis" var="perfil"
+				value="#{perfilManager.listarAtivos()}"
+				emptyMessage="#{message['alerta.listaVazia']}">
 				<p:column width="200" headerText="#{message['label.nome']}">
-					<h:outputText value="#{equipe.nome}" />
+					<h:outputText value="#{perfil.nome}" />
 				</p:column>
 				<p:column width="200" headerText="#{message['label.data.inicio']}">
-					<h:outputText value="#{equipe.registroValidadeInicio}" >
+					<h:outputText value="#{perfil.registroValidadeInicio}" >
 					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
 					</h:outputText>
 				</p:column>
 				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
-					<pretty:link mappingId="equipe-editar">
-						<f:param value="#{equipe.id}" />
+					<pretty:link mappingId="perfil-editar">
+						<f:param value="#{perfil.id}" />
 						<p:commandButton type="button" value="#{message['button.editar']}" />
 					</pretty:link>
-					<p:commandButton value="#{message['button.desativar']}"	action="#{equipeManager.desativar(equipe.id)}" update="gridEquipes">
-						<p:confirm header="Desativar Cargo"
-							message="Desaja mesmo Desativar?" icon="ui-icon-alert" />
+					<p:commandButton value="#{message['button.desativar']}"	action="#{perfilManager.desativar(perfil.id)}" update="gridPerfis">
+						<p:confirm header="Desativar Perfil" message="Desaja mesmo Desativar?" icon="ui-icon-alert" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
@@ -40,7 +39,7 @@
 			</p:confirmDialog>
 			<br />
 			<p:button value="#{message['button.novo']}"
-				outcome="pretty:equipe-incluir" />
+				outcome="pretty:perfil-incluir" />
 		</h:form>
 	</ui:define>
 </ui:composition>
