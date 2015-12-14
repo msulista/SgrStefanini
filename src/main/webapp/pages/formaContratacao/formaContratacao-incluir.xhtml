@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+    template="/pages/template/default.xhtml"
+    xmlns:pretty="http://ocpsoft.com/prettyfaces">
+
+    <ui:define name="content">
+    	<h2>#{message['title.cargaHoraria']}</h2>
+        <h:form>
+        	<p:growl id="growl" life="4000" />
+			<p:panel header="#{message['title.cargaHoraria.cadastro']}" id="painel">			
+				<p:focus context="painel"/>
+				<p:outputLabel value="#{message['label.cargaHoraria']}" styleClass="label" for="cargaHoraria"/>
+				<p:inputMask id="cargaHoraria" value="#{cargaHorariaManager.cargaHoraria.cargaHoraria}" mask="99,99" converter="cargaHorariaConverter" required="true" requiredMessage="#{message['span.obrigatorio.cargaHoraria']}"/><br/><br/>
+				<p:outputLabel for="calendario" value="#{message['label.data.inicio']}" styleClass="label"/>
+        		<p:calendar id="calendario" value="#{cargaHorariaManager.cargaHoraria.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}"/><br/><br/>
+        		<p:commandButton value="#{message['button.salvar']}" action="#{cargaHorariaManager.save()}" update="growl" />
+        		<p:button value="#{message['button.cancelar']}" outcome="pretty:cargaHoraria"/>
+			</p:panel>
+		</h:form>
+    </ui:define>
+</ui:composition>
