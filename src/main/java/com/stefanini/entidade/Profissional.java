@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "SGR_PROFISSIONAL")
@@ -17,6 +18,7 @@ public class Profissional {
 		this.dataManipulacao = new Date();
 	}
 	
+	@Transient
 	private Date dataManipulacao;
 	
 	@Id
