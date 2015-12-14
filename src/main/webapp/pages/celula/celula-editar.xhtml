@@ -13,7 +13,7 @@
 				<p:inputText id="nome" value="#{celulaManager.celula.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
 				<br /><br />
 				<p:outputLabel for="button" value="#{message['label.data.inicio.nova']}" styleClass="label" />
-				<p:calendar id="button" value="#{celulaManager.celula.dataManipulacao}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}"/>				
+				<p:calendar id="button" value="#{celulaManager.celula.dataManipulacao}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>				
 				<br /><br />
 				<p:commandButton value="#{message['button.salvar']}" action="#{celulaManager.update()}" update="growl" />
 				<p:button  value="#{message['button.cancelar']}" outcome="pretty:celula"/>
