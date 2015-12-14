@@ -203,6 +203,14 @@ public class Profissional {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}	
+
+	public Date getDataManipulacao() {
+		return dataManipulacao;
+	}
+
+	public void setDataManipulacao(Date dataManipulacao) {
+		this.dataManipulacao = dataManipulacao;
 	}
 
 	@Override
