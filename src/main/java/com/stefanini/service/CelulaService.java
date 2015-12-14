@@ -1,5 +1,6 @@
 package com.stefanini.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -35,7 +36,7 @@ public class CelulaService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Celula> listar(){
+	public List<Celula> listarAtivo(){
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery("SELECT * FROM sgr_celula WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC", Celula.class);
 		List<Celula> celulas = q.getResultList();
@@ -54,9 +55,9 @@ public class CelulaService {
 	
 	public void desativar(Long id){
 		EntityManager manager = JPAUtil.getEntityManager();
-		
-		Celula celulaMerge = getCelulaById(id);
 		manager.getTransaction().begin();
+		Celula celulaMerge = getCelulaById(id);
+		celulaMerge.setRegistroValidadeFim(new Date());
 		manager.merge(celulaMerge);
 		manager.getTransaction().commit();
 		manager.close();
