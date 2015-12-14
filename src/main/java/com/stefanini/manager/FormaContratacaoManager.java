@@ -18,13 +18,12 @@ import com.stefanini.service.FormaContratacaoService;
 @URLMappings(mappings = {
 		@URLMapping(id = "formaContratacao", pattern = "/formaContratacao", viewId = "/pages/formaContratacao/formaContratacao-listar.xhtml"),
 		@URLMapping(id = "formaContratacao-incluir", pattern = "/incluir", viewId = "/pages/formaContratacao/formaContratacao-incluir.xhtml", parentId = "formaContratacao"),
-		@URLMapping(id = "formaContratacao-editar", pattern = "/#{formaContratacaoManager.formaContratacao.id}/editar", viewId = "/pages/formaContratacao/formaContratacao-editar.xhtml", parentId = "formaContratacao")
-})
+		@URLMapping(id = "formaContratacao-editar", pattern = "/#{formaContratacaoManager.formaContratacao.id}/editar", viewId = "/pages/formaContratacao/formaContratacao-editar.xhtml", parentId = "formaContratacao") })
 public class FormaContratacaoManager {
 
-	private FormaContratacao  formaContratacao = new FormaContratacao();
+	private FormaContratacao formaContratacao = new FormaContratacao();
 	private FormaContratacaoService service = new FormaContratacaoService();
-	
+
 	public FormaContratacaoManager() {
 	}
 
@@ -43,24 +42,33 @@ public class FormaContratacaoManager {
 	public void setService(FormaContratacaoService service) {
 		this.service = service;
 	}
-	
+
 	public String save(){
-		this.service.save(formaContratacao);
-		return "pretty:formaContratacao";
+		if(this.service.save(formaContratacao)){
+			return "pretty:formaContratacao";
+		}else{
+			return null;
+		}
 	}
-	public String update(){
-		this.service.update(formaContratacao);
-		return "pretty:formaContratacao";
+
+	public String update() {
+		if(this.service.update(formaContratacao)){
+			return "pretty:formaContratacao";
+		}else{
+			return null;
+		}
 	}
-	public List<FormaContratacao> listarAtivos(){
+
+	public List<FormaContratacao> listarAtivos() {
 		return this.service.listarAtivos();
 	}
-	public void desativar(Long id){
+
+	public void desativar(Long id) {
 		this.service.desativar(id);
 	}
-	
-	@URLActions(actions = {@URLAction(mappingId = "formaContratacao-editar", onPostback = false)})
-	public void load() throws IOException{
+
+	@URLActions(actions = { @URLAction(mappingId = "formaContratacao-editar", onPostback = false) })
+	public void load() throws IOException {
 		formaContratacao = service.getFormaContratacaoById(formaContratacao.getId());
 	}
 }

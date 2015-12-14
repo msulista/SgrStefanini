@@ -1,5 +1,7 @@
 package com.stefanini.service;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.faces.convert.ConverterException;
@@ -8,37 +10,52 @@ import javax.persistence.Query;
 
 import com.stefanini.entidade.Equipe;
 import com.stefanini.util.JPAUtil;
+import com.stefanini.util.Mensagem;
 
 public class EquipeService {
 
-	public void save(Equipe equipe) {
+	public boolean save(Equipe equipe) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		manager.persist(equipe);
-		manager.getTransaction().commit();
+		if (verificaDiaUtil(equipe.getRegistroValidadeInicio())) {
+			manager.persist(equipe);
+			manager.getTransaction().commit();
+			manager.close();
+			return true;
+		}
+		Mensagem.add("Data informada não é um dia util!");
 		manager.close();
+		return false;
 	}
 
-	public void update(Equipe equipe) {
+	public boolean update(Equipe equipe) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
+		if (verificaDiaUtil(equipe.getDataManipulacao())) {
+			Equipe equipeMerge = getEquipeById(equipe.getId());
+			equipeMerge.setRegistroValidadeFim(equipe.getDataManipulacao());
+			manager.merge(equipeMerge);
+			manager.getTransaction().commit();
+			manager.close();
 
-		Equipe equipeMerge = getEquipeById(equipe.getId());
-		equipeMerge.setRegistroValidadeFim(equipe.getDataManipulacao());
-		manager.merge(equipeMerge);
-		manager.getTransaction().commit();
-		manager.close();
-		
-		Equipe equipePersist = new Equipe();
-		equipePersist.setNome(equipe.getNome());
-		equipePersist.setRegistroValidadeInicio(equipe.getDataManipulacao());
-		save(equipePersist);
+			Equipe equipePersist = new Equipe();
+			equipePersist.setNome(equipe.getNome());
+			equipePersist.setRegistroValidadeInicio(equipe.getDataManipulacao());
+			save(equipePersist);
+			return true;
+		} else {
+			Mensagem.add("Data informada não é um dia util!");
+			manager.close();
+			return false;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Equipe> listar() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC", Equipe.class);
+		Query q = manager.createNativeQuery(
+				"SELECT * FROM sgr_equipe WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
+				Equipe.class);
 		List<Equipe> equipes = q.getResultList();
 		manager.close();
 		return equipes;
@@ -53,7 +70,7 @@ public class EquipeService {
 		return equipe;
 	}
 
-	public void desativar(Long id)throws ConverterException {
+	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
 
 		Equipe equipeMerge = getEquipeById(id);
@@ -62,5 +79,18 @@ public class EquipeService {
 		manager.merge(equipeMerge);
 		manager.getTransaction().commit();
 		manager.close();
+	}
+
+	public boolean verificaDiaUtil(Date data) {
+		GregorianCalendar calendar = new GregorianCalendar();
+
+		calendar.setTime(data);
+
+		if (calendar.get(GregorianCalendar.DAY_OF_WEEK) == 1 || calendar.get(GregorianCalendar.DAY_OF_WEEK) == 7) {
+			return false;
+		} else {
+			return true;
+
+		}
 	}
 }

@@ -47,13 +47,19 @@ public class PerfilManager {
 	}
 	
 	public String save(){
-		service.save(perfil);
-		return "pretty:perfil";
+		if(service.save(perfil)){
+			return "pretty:perfil";
+		}else{
+			return null;
+		}
 	}
 	
 	public String update(){
-		service.update(perfil);
-		return "pretty:perfil";
+		if(service.update(perfil)){
+			return "pretty:perfil";
+		}else{
+			return null;
+		}
 	}
 	
 	public List<Perfil> listarAtivos(){

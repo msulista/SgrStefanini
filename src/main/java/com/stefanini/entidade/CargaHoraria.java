@@ -32,11 +32,11 @@ public class CargaHoraria {
 		this.dataManipulacaoFim = new Date();
 	}
 
-	public Date getDataManipulacaoFim() {
+	public Date getDataManipulacao() {
 		return dataManipulacaoFim;
 	}
 
-	public void setDataManipulacaoFim(Date dataManipulacaoFim) {
+	public void setDataManipulacao(Date dataManipulacaoFim) {
 		this.dataManipulacaoFim = dataManipulacaoFim;
 	}
 
@@ -72,4 +72,44 @@ public class CargaHoraria {
 		this.registroValidadeFim = registroValidadeFim;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(cargaHoraria);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((registroValidadeFim == null) ? 0 : registroValidadeFim.hashCode());
+		result = prime * result + ((registroValidadeInicio == null) ? 0 : registroValidadeInicio.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CargaHoraria other = (CargaHoraria) obj;
+		if (Double.doubleToLongBits(cargaHoraria) != Double.doubleToLongBits(other.cargaHoraria))
+			return false;
+		if (id != other.id)
+			return false;
+		if (registroValidadeFim == null) {
+			if (other.registroValidadeFim != null)
+				return false;
+		} else if (!registroValidadeFim.equals(other.registroValidadeFim))
+			return false;
+		if (registroValidadeInicio == null) {
+			if (other.registroValidadeInicio != null)
+				return false;
+		} else if (!registroValidadeInicio.equals(other.registroValidadeInicio))
+			return false;
+		return true;
+	}
+
+	
 }

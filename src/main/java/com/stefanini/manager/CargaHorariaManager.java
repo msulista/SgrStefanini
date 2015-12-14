@@ -44,13 +44,20 @@ public class CargaHorariaManager {
 	}
 
 	public String save() {
-		service.save(cargaHoraria);
-		return "pretty:cargaHoraria";
+		if (service.save(cargaHoraria)) {
+			return "pretty:cargaHoraria";
+		} else {
+			return null;
+		}
+
 	}
 
 	public String update() {
-		service.update(cargaHoraria);
-		return "pretty:cargaHoraria";
+		if (service.update(cargaHoraria)) {
+			return "pretty:cargaHoraria";
+		} else {
+			return null;
+		}
 	}
 
 	public List<CargaHoraria> listarAtivos() {

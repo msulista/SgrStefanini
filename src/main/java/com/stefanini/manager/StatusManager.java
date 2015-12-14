@@ -38,13 +38,19 @@ public class StatusManager {
 	}
 	
 	public String save(){
-		this.service.save(status);
-		return "pretty:status";
+		if(this.service.save(status)){
+			return "pretty:status";
+		}else{
+			return null;
+		}
 	}
 	
 	public String update(){
-		this.service.update(status);
-		return "pretty:status";
+		if(this.service.update(status)){
+			return "pretty:status";
+		}else{
+			return null;
+		}
 	}
 	public List<Status> listarAtivos(){
 		return this.service.listarAtivos();
