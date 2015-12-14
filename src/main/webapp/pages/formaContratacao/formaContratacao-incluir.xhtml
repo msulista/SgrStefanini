@@ -4,17 +4,21 @@
     xmlns:pretty="http://ocpsoft.com/prettyfaces">
 
     <ui:define name="content">
-    	<h2>#{message['title.cargaHoraria']}</h2>
+    	<h2>#{message['title.formaContratacao']}</h2>
         <h:form>
         	<p:growl id="growl" life="4000" />
-			<p:panel header="#{message['title.cargaHoraria.cadastro']}" id="painel">			
-				<p:focus context="painel"/>
-				<p:outputLabel value="#{message['label.cargaHoraria']}" styleClass="label" for="cargaHoraria"/>
-				<p:inputMask id="cargaHoraria" value="#{cargaHorariaManager.cargaHoraria.cargaHoraria}" mask="99,99" converter="cargaHorariaConverter" required="true" requiredMessage="#{message['span.obrigatorio.cargaHoraria']}"/><br/><br/>
-				<p:outputLabel for="calendario" value="#{message['label.data.inicio']}" styleClass="label"/>
-        		<p:calendar id="calendario" value="#{cargaHorariaManager.cargaHoraria.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}"/><br/><br/>
-        		<p:commandButton value="#{message['button.salvar']}" action="#{cargaHorariaManager.save()}" update="growl" />
-        		<p:button value="#{message['button.cancelar']}" outcome="pretty:cargaHoraria"/>
+			<p:panel header="#{message['title.formaContratacao.cadastro']}" id="painel">	
+			
+				<p:focus context="painel"/>		
+				<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" />
+				<p:inputText id="nome" value="#{formaContratacaoManager.formaContratacao.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
+				<br /><br />
+				<p:outputLabel for="button" value="#{message['label.data.inicio']}" styleClass="label" />
+				<p:calendar id="button" value="#{formaContratacaoManager.formaContratacao.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}"/>
+				<br /><br />
+				<p:commandButton value="#{message['button.salvar']}" action="#{formaContratacaoManager.save()}" update="growl" />				
+				<p:button  value="#{message['button.cancelar']}" outcome="pretty:formaContratacao"/>
+				
 			</p:panel>
 		</h:form>
     </ui:define>
