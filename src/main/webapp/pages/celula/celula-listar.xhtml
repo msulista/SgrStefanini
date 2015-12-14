@@ -7,7 +7,7 @@
 	xmlns:pretty="http://ocpsoft.com/prettyfaces">
 
 	<ui:define name="content">
-		<h2>#{message['title.celuas']}</h2>
+		<h2>#{message['title.celulas']}</h2>
 		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 		<h:form>
 			<p:dataTable id="gridCelula" var="celula" value="#{celulaManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
