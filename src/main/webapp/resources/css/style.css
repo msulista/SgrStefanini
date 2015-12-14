@@ -230,6 +230,10 @@ input[type=text] {
 	display:inline;
 }
 
+.rodape-descricao h1{
+	font-size:12px;
+}
+
 .rodape-descricao h2{
     margin-left: 100px;
 }
@@ -238,4 +242,10 @@ input[type=text] {
 	display: inline;
     float: right;
     bottom: 20px;
+}
+
+
+.container{
+	margin: auto;
+    width: 80%;	
 }

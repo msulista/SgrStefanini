@@ -16,9 +16,9 @@
 		<div class="container--topmenu">
 			<div class="cabecalho">
 				<div class="img-logo"></div>
-				<p:clock id="horario" pattern="HH:mm:ss" mode="server" />
 				<p:clock id="calendario" pattern="dd.MM.yyyy" mode="server" />
-				<a href="topo" name="topo"/>
+				<p:clock id="horario" pattern="HH:mm:ss" mode="server" />				
+				<a href="#topo" name="topo"/>
 			</div>
 		</div>
 	</div>
@@ -31,8 +31,10 @@
 			<li class="item-last"><a href="#">Indisponível</a></li>
 		</ul>
 	</div>
-	<div class="ct-content" >
-		<ui:insert name="content" />
+	<div class="container">
+		<div class="ct-content" >
+			<ui:insert name="content" />
+		</div>
 	</div>
 	<div class="ct-bottom">
 		<div class="rodape">
@@ -40,7 +42,9 @@
 				<h1>2015 - Stefanini - Todos os direitos Reservados</h1>
 				<h2>SGR STEFANINI</h2>
 			</div>
-			<p:commandButton icon="fa-chevron-up" type="button" href="#"/>
+			<p:commandButton icon="fa-chevron-up" type="button">
+				<a href="#top"/>
+			</p:commandButton>
 		</div>		
 	</div>
 </h:body>
