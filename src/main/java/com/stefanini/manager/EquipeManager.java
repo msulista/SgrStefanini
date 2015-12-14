@@ -13,11 +13,9 @@ import com.stefanini.entidade.Equipe;
 import com.stefanini.service.EquipeService;
 
 @ManagedBean
-@URLMappings(mappings = { 
-		@URLMapping(id = "equipe", pattern = "/equipe", viewId = "/pages/equipe/equipe-listar.xhtml"),
+@URLMappings(mappings = { @URLMapping(id = "equipe", pattern = "/equipe", viewId = "/pages/equipe/equipe-listar.xhtml"),
 		@URLMapping(id = "equipe-incluir", pattern = "/incluir", viewId = "/pages/equipe/equipe-incluir.xhtml", parentId = "equipe"),
-		@URLMapping(id = "equipe-editar", pattern = "/#{equipeManager.equipe.id}/editar", viewId = "/pages/equipe/equipe-editar.xhtml", parentId = "equipe")
-		})
+		@URLMapping(id = "equipe-editar", pattern = "/#{equipeManager.equipe.id}/editar", viewId = "/pages/equipe/equipe-editar.xhtml", parentId = "equipe") })
 public class EquipeManager {
 
 	private Equipe equipe = new Equipe();
@@ -43,13 +41,20 @@ public class EquipeManager {
 	}
 
 	public String save() {
-		service.save(equipe);
-		return "pretty:equipe";
+		if(service.save(equipe)){
+			return "pretty:equipe";
+		}else{
+			return null;
+		}
 	}
 
 	public String update() {
-		service.update(equipe);
-		return "pretty:equipe";
+		if(service.update(equipe)){
+			return "pretty:equipe";
+		}else{
+			return null;
+		}
+	
 	}
 
 	public List<Equipe> listarAtivos() {
