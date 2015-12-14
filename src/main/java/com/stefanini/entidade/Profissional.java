@@ -1,5 +1,6 @@
 package com.stefanini.entidade;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,8 +13,10 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "SGR_PROFISSIONAL")
-public class Profissional {
+public class Profissional implements BaseEntity, Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	public Profissional() {
 		this.dataManipulacao = new Date();
 	}
@@ -77,11 +80,11 @@ public class Profissional {
 	@ManyToOne
 	private Status status;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
