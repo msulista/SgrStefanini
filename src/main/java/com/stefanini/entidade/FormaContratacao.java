@@ -26,18 +26,18 @@ public class FormaContratacao {
 	private Date registroValidadeFim;
 	
 	@Transient
-	private Date dataManipulacaoFim;
+	private Date dataManipulacao;
 	
 	public FormaContratacao() {
-		this.dataManipulacaoFim = new Date();
+		this.dataManipulacao = new Date();
 	}
 
-	public Date getDataManipulacaoFim() {
-		return dataManipulacaoFim;
+	public Date getDataManipulacao() {
+		return dataManipulacao;
 	}
 
-	public void setDataManipulacaoFim(Date dataManipulacaoFim) {
-		this.dataManipulacaoFim = dataManipulacaoFim;
+	public void setDataManipulacao(Date dataManipulacao) {
+		this.dataManipulacao = dataManipulacao;
 	}
 
 	public long getId() {
