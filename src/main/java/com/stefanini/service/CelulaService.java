@@ -46,7 +46,7 @@ public class CelulaService {
 	
 	public Celula getCelulaById(Long id){
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_celula WHERE ID_CELULA = :idCelula",Celula.class);
+		Query q = manager.createNativeQuery("SELECT * FROM sgr_celula WHERE ID_CELULA = :idCelula", Celula.class);
 		q.setParameter("idCelula", id);
 		Celula celula = (Celula) q.getSingleResult();
 		manager.close();

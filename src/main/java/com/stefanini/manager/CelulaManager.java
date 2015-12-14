@@ -18,7 +18,7 @@ import com.stefanini.service.CelulaService;
 @URLMappings(mappings = {
 		@URLMapping(id = "celula", pattern = "/celula", viewId = "/pages/celula/celula-listar.xhtml"),
 		@URLMapping(id = "celula-incluir", pattern = "/incluir", viewId = "/pages/celula/celula-incluir.xhtml", parentId = "celula"),
-		@URLMapping(id = "celula-editar", pattern = "#{celulaManager.celula.id}/editar", viewId = "/pages/celula/celula-editar.xhtml", parentId = "celula")
+		@URLMapping(id = "celula-editar", pattern = "/#{celulaManager.celula.id}/editar", viewId = "/pages/celula/celula-editar.xhtml", parentId = "celula")
 })
 public class CelulaManager {
 
