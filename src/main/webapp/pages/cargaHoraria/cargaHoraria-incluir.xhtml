@@ -7,8 +7,8 @@
     	<h2>#{message['title.cargaHoraria']}</h2>
         <h:form>
         	<p:growl id="growl" life="4000" />
-			<p:panel header="#{message['title.cargaHoraria.cadastro']}">			
-				
+			<p:panel header="#{message['title.cargaHoraria.cadastro']}" id="painel">			
+				<p:focus context="painel"/>
 				<p:outputLabel value="#{message['label.cargaHoraria']}" styleClass="label" for="cargaHoraria"/>
 				<p:inputMask id="cargaHoraria" value="#{cargaHorariaManager.cargaHoraria.cargaHoraria}" mask="99,99" converter="cargaHorariaConverter" required="true" requiredMessage="#{message['span.obrigatorio.cargaHoraria']}"/><br/><br/>
 				<p:outputLabel for="calendario" value="#{message['label.data.inicio']}" styleClass="label"/>

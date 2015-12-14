@@ -7,7 +7,8 @@
     	<h2>#{message['title.perfis']}</h2>
     	<h:form>
 	    	<p:growl id="growl" life="4000" />
-	    	<p:panel header="#{message['title.perfil.cadastro']}">
+	    	<p:panel header="#{message['title.perfil.cadastro']}" id="painel">	
+				<p:focus context="painel"/>		
 	    		<p:outputLabel value="#{message['label.nome']} *" styleClass="label"/>
 	    		<p:inputText value="#{perfilManager.perfil.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}"/><br /><br />
 	    		<p:outputLabel for="button" value="#{message['label.data.inicio']}" styleClass="label" />
