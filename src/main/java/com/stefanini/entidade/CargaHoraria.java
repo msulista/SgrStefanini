@@ -32,11 +32,11 @@ public class CargaHoraria {
 		this.dataManipulacaoFim = new Date();
 	}
 
-	public Date getDataManipulacaoFim() {
+	public Date getDataManipulacao() {
 		return dataManipulacaoFim;
 	}
 
-	public void setDataManipulacaoFim(Date dataManipulacaoFim) {
+	public void setDataManipulacao(Date dataManipulacaoFim) {
 		this.dataManipulacaoFim = dataManipulacaoFim;
 	}
 
