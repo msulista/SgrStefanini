@@ -18,15 +18,14 @@ import com.stefanini.service.CelulaService;
 @URLMappings(mappings = {
 		@URLMapping(id = "celula", pattern = "/celula", viewId = "/pages/celula/celula-listar.xhtml"),
 		@URLMapping(id = "celula-incluir", pattern = "/incluir", viewId = "/pages/celula/celula-incluir.xhtml", parentId = "celula"),
-		@URLMapping(id = "celula-editar", pattern = "/#{celulaManager.celula.id}/editar", viewId = "/pages/celula/celula-editar.xhtml", parentId = "celula")
-})
+		@URLMapping(id = "celula-editar", pattern = "/#{celulaManager.celula.id}/editar", viewId = "/pages/celula/celula-editar.xhtml", parentId = "celula") })
 public class CelulaManager {
 
 	private Celula celula = new Celula();
 	private CelulaService service = new CelulaService();
-	
-	public CelulaManager(){
-		
+
+	public CelulaManager() {
+
 	}
 
 	public Celula getCelula() {
@@ -44,24 +43,33 @@ public class CelulaManager {
 	public void setService(CelulaService service) {
 		this.service = service;
 	}
-	
-	public String save(){
-		service.save(celula);
-		return "pretty:celula";
+
+	public String save() {
+		if (service.save(celula)) {
+			return "pretty:celula";
+		} else {
+			return null;
+		}
 	}
-	public String update(){
-		service.update(celula);
-		return "pretty:celula";
+
+	public String update() {
+		if (service.update(celula)) {
+			return "pretty:celula";
+		} else {
+			return null;
+		}
 	}
-	public List<Celula> listarAtivos(){
+
+	public List<Celula> listarAtivos() {
 		return service.listarAtivo();
 	}
-	public void desativar(Long id){
+
+	public void desativar(Long id) {
 		service.desativar(id);
 	}
-	
-	@URLActions(actions = {@URLAction(mappingId = "celula-editar", onPostback = false)})
-	public void load() throws IOException{
+
+	@URLActions(actions = { @URLAction(mappingId = "celula-editar", onPostback = false) })
+	public void load() throws IOException {
 		celula = service.getCelulaById(celula.getId());
 	}
 }
