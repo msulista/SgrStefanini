@@ -12,6 +12,7 @@ import com.ocpsoft.pretty.faces.annotation.URLMappings;
 import com.stefanini.entidade.Equipe;
 import com.stefanini.entidade.Profissional;
 import com.stefanini.service.EquipeService;
+import com.stefanini.service.ProfissionalService;
 
 @ManagedBean
 @URLMappings(mappings = { @URLMapping(id = "profissional", pattern = "/profissional", viewId = "/pages/profissional/profissional-listar.xhtml"),
@@ -59,7 +60,7 @@ public class ProfissionalManager {
 	}
 
 	public List<Profissional> listarAtivos() {
-		return service.listar();
+		return service.listarAtivos();
 	}
 
 	public void desativar(Long id) {
