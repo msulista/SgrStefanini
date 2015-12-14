@@ -45,13 +45,19 @@ public class CargoManager {
 	}
 	
 	public String save(){
-		service.save(cargo);
+		if(service.save(cargo)){
 		return "pretty:cargo";
+		}else{
+			return null;
+		}
 	}
 	
 	public String update(){
-		service.update(cargo);
+		if(service.update(cargo)){
 		return "pretty:cargo";
+		}else{
+			return null;
+		}
 	}
 	
 	public List<Cargo> listarAtivos(){
