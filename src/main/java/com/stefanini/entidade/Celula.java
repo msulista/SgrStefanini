@@ -1,5 +1,6 @@
 package com.stefanini.entidade;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,11 +11,13 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "SGR_CELULA")
-public class Celula {
+public class Celula implements BaseEntity, Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "ID_CELULA", nullable = false, precision = 32)
-	private long id;
+	private Long id;
 
 	@Column(name = "NOME", length = 45, nullable = false)
 	private String nome;
@@ -40,11 +43,11 @@ public class Celula {
 		this.dataManipulacao = dataManipulacao;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -76,8 +79,7 @@ public class Celula {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dataManipulacao == null) ? 0 : dataManipulacao.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((registroValidadeFim == null) ? 0 : registroValidadeFim.hashCode());
 		result = prime * result + ((registroValidadeInicio == null) ? 0 : registroValidadeInicio.hashCode());
@@ -93,12 +95,10 @@ public class Celula {
 		if (getClass() != obj.getClass())
 			return false;
 		Celula other = (Celula) obj;
-		if (dataManipulacao == null) {
-			if (other.dataManipulacao != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!dataManipulacao.equals(other.dataManipulacao))
-			return false;
-		if (id != other.id)
+		} else if (!id.equals(other.id))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
