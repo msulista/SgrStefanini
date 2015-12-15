@@ -107,8 +107,9 @@ html, body {
 
 .ct-menu ul li a {
     text-decoration: none;
-    color: #FFFCFC;
+    color: #FFF;
     font-weight: 600;
+    font-size: 12px;
 }
 .ct-menu ul li a:hover{
 	color:#fff;	
