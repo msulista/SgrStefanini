@@ -12,7 +12,7 @@
 		<h:form>
 			<p:dataTable id="gridEquipes" var="equipe"
 				value="#{equipeManager.listarAtivos()}"
-				emptyMessage="{message['alerta.listaVazia']}">
+				emptyMessage="#{message['alerta.listaVazia']}">
 				<p:column width="200" headerText="#{message['label.nome']}">
 					<h:outputText value="#{equipe.nome}" />
 				</p:column>
