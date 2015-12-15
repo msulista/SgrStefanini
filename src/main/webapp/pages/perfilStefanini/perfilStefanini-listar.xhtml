@@ -16,11 +16,15 @@
 				</p:column>
 				
 				<p:column width="100" headerText="#{message['label.perfilStefanini.valorInicial']}" >
-					<h:outputText value="#{perfilStefanini.valorInicial}"/>
+					<h:outputText value="#{perfilStefanini.valorInicial}">
+						<f:converter converterId="cargaHorariaConverter"/>
+					</h:outputText>
 				</p:column>
 				
 				<p:column width="100" headerText="#{message['label.perfilStefanini.valorFinal']}" >
-					<h:outputText value="#{perfilStefanini.valorFinal}"/>
+					<h:outputText value="#{perfilStefanini.valorFinal}">
+						<f:converter converterId="cargaHorariaConverter"/>
+					</h:outputText>
 				</p:column>
 				
 				<p:column width="100" headerText="#{message['label.data.inicio']}">

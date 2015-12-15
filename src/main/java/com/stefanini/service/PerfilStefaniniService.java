@@ -17,40 +17,43 @@ public class PerfilStefaniniService {
 
 	public boolean save(PerfilStefanini perfilStefanini) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		manager.getTransaction().begin();
+
 		if (verificaDiaUtil(perfilStefanini.getRegistroValidadeInicio())) {
+			manager.getTransaction().begin();
 			manager.persist(perfilStefanini);
 			manager.getTransaction().commit();
 			manager.close();
 			return true;
+		} else {
+			Mensagem.add("Data informada não é um dia util!");
+			manager.close();
+			return false;
 		}
-		Mensagem.add("Data informada não é um dia util!");
-		manager.close();
-		return false;
 	}
 
 	public boolean update(PerfilStefanini perfilStefanini) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
-		if(verificaDiaUtil(perfilStefanini.getDataManipulacaoFim())){
-		PerfilStefanini perfilStefaniniAntigo = getPerfilStefaniniById(perfilStefanini.getId());
-		perfilStefaniniAntigo.setRegistroValidadeFim(perfilStefanini.getDataManipulacaoFim());
-		manager.merge(perfilStefaniniAntigo);
-		manager.getTransaction().commit();
-		manager.close();
+		if (verificaDiaUtil(perfilStefanini.getDataManipulacaoFim())) {
+			PerfilStefanini perfilStefaniniAntigo = getPerfilStefaniniById(perfilStefanini.getId());
+			perfilStefaniniAntigo.setRegistroValidadeFim(perfilStefanini.getDataManipulacaoFim());
+			manager.merge(perfilStefaniniAntigo);
+			manager.getTransaction().commit();
+			manager.close();
 
-		PerfilStefanini perfilStefaniniNova = new PerfilStefanini();
-		perfilStefaniniNova.setNome(perfilStefanini.getNome());
-		perfilStefaniniNova.setValorInicial(perfilStefanini.getValorInicial());
-		perfilStefaniniNova.setValorFinal(perfilStefanini.getValorFinal());
-		perfilStefaniniNova.setRegistroValidadeInicio(perfilStefanini.getDataManipulacaoFim());
-		save(perfilStefaniniNova);
-		return true;
+			PerfilStefanini perfilStefaniniNova = new PerfilStefanini();
+			perfilStefaniniNova.setNome(perfilStefanini.getNome());
+			perfilStefaniniNova.setValorInicial(perfilStefanini.getValorInicial());
+			perfilStefaniniNova.setValorFinal(perfilStefanini.getValorFinal());
+			perfilStefaniniNova.setRegistroValidadeInicio(perfilStefanini.getDataManipulacaoFim());
+			save(perfilStefaniniNova);
+			return true;
+		} else {
+			Mensagem.add("Data informada não é um dia util!");
+			manager.close();
+			return false;
 		}
-		Mensagem.add("Data informada não é um dia util!");
-		manager.close();
-		return false;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -58,7 +61,7 @@ public class PerfilStefaniniService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery(
 				"SELECT * FROM sgr_perfil_stefanini WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
-				CargaHoraria.class);
+				PerfilStefanini.class);
 		List<PerfilStefanini> perfisStefanini = q.getResultList();
 		manager.close();
 		return perfisStefanini;
