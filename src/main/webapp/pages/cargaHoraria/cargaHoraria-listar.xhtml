@@ -15,17 +15,17 @@
 		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 		<h:form>
 			<p:dataTable id="gridCargaHoraria" var="cargaHoraria" value="#{cargaHorariaManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
-				<p:column width="100" headerText="#{message['label.cargaHoraria']}" for="cargaHoraria">
+				<p:column  headerText="#{message['label.cargaHoraria']}" for="cargaHoraria">
 					<h:outputText id="cargaHoraria" value="#{cargaHoraria.cargaHoraria}">
 						<f:converter converterId="cargaHorariaConverter"/>
 					</h:outputText>
 				</p:column>
-				<p:column width="100" headerText="#{message['label.data.inicio']}">
+				<p:column headerText="#{message['label.data.inicio']}">
 					<h:outputText value="#{cargaHoraria.registroValidadeInicio}">
 						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
 					</h:outputText>
 				</p:column>
-				<p:column width="100" headerText="#{message['label.acoes']}" styleClass="txtCenter">
+				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 					<pretty:link mappingId="cargaHoraria-editar">
 						<f:param value="#{cargaHoraria.id}" />
 						<p:commandButton type="button" value="#{message['button.editar']}" />
