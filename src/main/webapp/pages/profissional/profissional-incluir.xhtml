@@ -38,43 +38,44 @@
 					<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
 					<f:selectItems value="#{equipeManager.listarAtivos()}" var="equipe" itemLabel="#{equipe.nome}" itemValue="#{equipe}"/>
 				</p:selectOneMenu>
-				<br /><br />
-				<p:outputLabel for="cargo" value="#{message['label.profissional.cargo']}" styleClass="label" />
-				<p:selectOneMenu id="cargo" value="#{profissionalManager.profissional.cargo}" converter="simpleEntityConverter" required="true">
-					<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
-					<f:selectItems value="#{cargoManager.listarAtivos()}" var="cargo" itemLabel="#{cargo.nome}" itemValue="#{cargo}"/>
-				</p:selectOneMenu>
-				<br /><br />
-				<p:outputLabel for="perfil" value="#{message['label.profissional.perfil']}" styleClass="label" />
-				<p:selectOneMenu id="perfil" value="#{profissionalManager.profissional.perfil}" converter="simpleEntityConverter" required="true">
-					<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
-					<f:selectItems value="#{perfilManager.listarAtivos()}" var="perfil" itemLabel="#{perfil.nome}" itemValue="#{perfil}"/>
-				</p:selectOneMenu>
-				<br /><br />
-				<p:outputLabel for="cargaH" value="#{message['label.cargaHoraria']}" styleClass="label" />
-				<p:selectOneMenu id="cargaH" value="#{profissionalManager.profissional.cargaHoraria}" converter="simpleEntityConverter" required="true">
-					<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
-					<f:selectItems value="#{cargaHorariaManager.listarAtivos()}" var="cargaHora" itemLabel="#{cargaHora.cargaHoraria}" itemValue="#{cargaHora}"/>
-				</p:selectOneMenu>
-				<br /><br />
-				<p:outputLabel for="fContratacao" value="#{message['label.profissional.formaContratacao']}" styleClass="label" />
-				<p:selectOneMenu id="fContratacao" value="#{profissionalManager.profissional.formaContratacao}" converter="simpleEntityConverter" required="true">
-					<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
-					<f:selectItems value="#{formaContratacaoManager.listarAtivos()}" var="fContratacao" itemLabel="#{fContratacao.nome}" itemValue="#{fContratacao}"/>
-				</p:selectOneMenu>
-				<br /><br />
-				<p:outputLabel for="status" value="#{message['label.profissional.status']}" styleClass="label" />
-				<p:selectOneMenu id="status" value="#{profissionalManager.profissional.status}" converter="simpleEntityConverter" required="true">
-					<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
-					<f:selectItems value="#{statusManager.listarAtivos()}" var="status" itemLabel="#{status.nome}" itemValue="#{status}"/>
-				</p:selectOneMenu>
-				<br /><br />
-				<p:outputLabel for="inicio" value="#{message['label.data.inicio']}" styleClass="label"/>
-        		<p:calendar id="inicio" value="#{profissionalManager.profissional.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
-        		<br/><br/>
-        		<p:commandButton value="#{message['button.salvar']}" action="#{cargaHorariaManager.save()}" update="growl" />
-        		<p:button value="#{message['button.cancelar']}" outcome="pretty:cargaHoraria"/>
-			</p:panel>
+				<br/><br/>
+				  <p:outputLabel for="cargo" value="#{message['label.profissional.cargo']}" styleClass="label" />
+                <p:selectOneMenu id="cargo" value="#{profissionalManager.profissional.cargo}" converter="simpleEntityConverter" required="true">
+                    <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
+                    <f:selectItems value="#{cargoManager.listarAtivos()}" var="cargo" itemLabel="#{cargo.nome}" itemValue="#{cargo}"/>
+                </p:selectOneMenu>
+                <br /><br />
+                <p:outputLabel for="perfil" value="#{message['label.profissional.perfil']}" styleClass="label" />
+                <p:selectOneMenu id="perfil" value="#{profissionalManager.profissional.perfil}" converter="simpleEntityConverter" required="true">
+                    <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
+                    <f:selectItems value="#{perfilManager.listarAtivos()}" var="perfil" itemLabel="#{perfil.nome}" itemValue="#{perfil}"/>
+                </p:selectOneMenu>
+                <br /><br />
+                <p:outputLabel for="cargaH" value="#{message['label.cargaHoraria']}" styleClass="label" />
+                <p:selectOneMenu id="cargaH" value="#{profissionalManager.profissional.cargaHoraria}" converter="simpleEntityConverter" required="true">
+                    <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
+                    <f:selectItems value="#{cargaHorariaManager.listarAtivos()}" var="cargaHora" itemLabel="#{cargaHora.cargaHoraria}" itemValue="#{cargaHora}"/>
+                </p:selectOneMenu>
+                <br /><br />
+                <p:outputLabel for="fContratacao" value="#{message['label.profissional.formaContratacao']}" styleClass="label" />
+                <p:selectOneMenu id="fContratacao" value="#{profissionalManager.profissional.formaContratacao}" converter="simpleEntityConverter" required="true">
+                    <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
+                    <f:selectItems value="#{formaContratacaoManager.listarAtivos()}" var="fContratacao" itemLabel="#{fContratacao.nome}" itemValue="#{fContratacao}"/>
+                </p:selectOneMenu>
+                <br /><br />
+                <p:outputLabel for="status" value="#{message['label.profissional.status']}" styleClass="label" />
+                <p:selectOneMenu id="status" value="#{profissionalManager.profissional.status}"  required="true">
+                   <f:converter converterId="simpleEntityConverter"/>
+                    <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
+                    <f:selectItems value="#{statusManager.listarAtivos()}" var="status" itemLabel="#{status.nome}" itemValue="#{status}"/>
+                </p:selectOneMenu>
+                <br /><br />
+                <p:outputLabel for="inicio" value="#{message['label.data.inicio']}" styleClass="label"/>
+                <p:calendar id="inicio" value="#{profissionalManager.profissional.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
+                <br/><br/>
+                <p:commandButton value="#{message['button.salvar']}" action="#{profissionalManager.save()}" update="growl" />
+                <p:button value="#{message['button.cancelar']}" outcome="pretty:cargaHoraria"/>
+            </p:panel>
 		</h:form>
     </ui:define>
 </ui:composition>

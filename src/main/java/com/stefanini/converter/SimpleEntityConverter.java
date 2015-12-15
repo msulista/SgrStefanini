@@ -7,6 +7,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+import com.stefanini.entidade.BaseEntity;
+
 @FacesConverter("simpleEntityConverter")
 public class SimpleEntityConverter implements Converter{
 

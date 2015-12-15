@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -16,6 +18,7 @@ public class Equipe implements BaseEntity, Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_EQUIPE", nullable = false, precision = 32)
 	private Long id;
 
@@ -47,8 +50,8 @@ public class Equipe implements BaseEntity, Serializable{
 		return id;
 	}
 
-	public void setId(Long idEquipe) {
-		this.id = idEquipe;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -79,7 +82,7 @@ public class Equipe implements BaseEntity, Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((registroValidadeFim == null) ? 0 : registroValidadeFim.hashCode());
 		result = prime * result + ((registroValidadeInicio == null) ? 0 : registroValidadeInicio.hashCode());
@@ -95,7 +98,10 @@ public class Equipe implements BaseEntity, Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Equipe other = (Equipe) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -115,4 +121,5 @@ public class Equipe implements BaseEntity, Serializable{
 		return true;
 	}
 
+	
 }

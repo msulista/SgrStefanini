@@ -55,12 +55,7 @@ public class CelulaService {
 	@SuppressWarnings("unchecked")
 	public List<Celula> listarAtivo() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery(
-<<<<<<< HEAD
-				"SELECT * FROM sgr_celula WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",Celula.class);
-=======
-				"SELECT * FROM sgr_celula WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC", Celula.class);
->>>>>>> 40f84400b2fc629035f4305b3e1cc0c1ee8541a9
+		Query q = manager.createNativeQuery("SELECT * FROM sgr_celula WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",Celula.class);
 		List<Celula> celulas = q.getResultList();
 		manager.close();
 		return celulas;

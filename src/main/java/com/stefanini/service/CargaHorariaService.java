@@ -21,11 +21,13 @@ public class CargaHorariaService {
 			manager.persist(cargaHoraria);
 			manager.getTransaction().commit();
 			manager.close();
+			System.out.println("teste print");
 			return true;
-		}
+		}else{
 		Mensagem.add("Data informada não é um dia util!");
 		manager.close();
 		return false;
+		}
 	}
 
 	public boolean update(CargaHoraria cargaHoraria) {
@@ -88,8 +90,10 @@ public class CargaHorariaService {
 		calendar.setTime(data);
 
 		if (calendar.get(GregorianCalendar.DAY_OF_WEEK) == 1 || calendar.get(GregorianCalendar.DAY_OF_WEEK) == 7) {
+			System.out.println("print teste verifica data !!!!!!!!!!!!!!!!!!!!!!!!");
 			return false;
 		} else {
+			System.out.println("print teste verifica data ??????????????????");
 			return true;
 
 		}

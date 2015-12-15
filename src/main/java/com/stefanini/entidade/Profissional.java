@@ -1,9 +1,12 @@
 package com.stefanini.entidade;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,8 +15,8 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "SGR_PROFISSIONAL")
-public class Profissional {
-	
+public class Profissional implements BaseEntity, Serializable {
+	private static final long serialVersionUID = 1L;
 	public Profissional() {
 		this.dataManipulacao = new Date();
 	}
@@ -22,8 +25,9 @@ public class Profissional {
 	private Date dataManipulacao;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_PROFISSIONAL", nullable = false, precision = 32)
-	private long id;
+	private Long id;
 	
 	@Column(name = "NOME", nullable = false)
 	private String nome;
@@ -81,7 +85,7 @@ public class Profissional {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -227,7 +231,7 @@ public class Profissional {
 		result = prime * result + ((dataDemissao == null) ? 0 : dataDemissao.hashCode());
 		result = prime * result + ((equipe == null) ? 0 : equipe.hashCode());
 		result = prime * result + ((formaContratacao == null) ? 0 : formaContratacao.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((perfil == null) ? 0 : perfil.hashCode());
 		result = prime * result + ((registroValidadeInicio == null) ? 0 : registroValidadeInicio.hashCode());
@@ -286,7 +290,10 @@ public class Profissional {
 				return false;
 		} else if (!formaContratacao.equals(other.formaContratacao))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -319,8 +326,6 @@ public class Profissional {
 			return false;
 		return true;
 	}
-	
-	
-	
+
 	
 }

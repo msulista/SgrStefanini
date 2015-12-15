@@ -9,9 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.stefanini.converter.BaseEntity;
-
-
 @Entity
 @Table(name = "apr_modulo")
 public class Modulo implements BaseEntity, Serializable{

@@ -55,9 +55,7 @@ public class StatusService {
 	@SuppressWarnings("unchecked")
 	public List<Status> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_status WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
-				Status.class);
+		Query q = manager.createNativeQuery("SELECT * FROM sgr_status WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",Status.class);
 		List<Status> listStatus = q.getResultList();
 		return listStatus;
 	}
@@ -66,7 +64,7 @@ public class StatusService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery("SELECT * FROM sgr_status WHERE ID_STATUS = :idStatus", Status.class);
 		q.setParameter("idStatus", id);
-		Status status = (Status) q.getSingleResult();
+		Status status = (Status)q.getSingleResult();
 		manager.close();
 		return status;
 	}
