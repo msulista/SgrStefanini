@@ -92,7 +92,7 @@ public class ProfissionalService {
 		Query q = manager.createNativeQuery("SELECT * FROM sgr_profissional WHERE ID_PROFISSIONAL = :idProfissional",
 				Profissional.class);
 		q.setParameter("idProfissional", id);
-		Profissional profissional = (Profissional) q.getSingleResult();
+		Profissional profissional = (Profissional)q.getSingleResult();
 		manager.close();
 		return profissional;
 	}
