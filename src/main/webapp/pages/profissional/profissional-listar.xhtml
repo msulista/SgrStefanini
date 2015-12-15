@@ -52,14 +52,16 @@
 				</p:column>
 				
 				<p:column width="100" headerText="#{message['label.data.inicio']}">
-					<h:outputText value="#{profissional.registroValidadeInicio}"/>			
+					<h:outputText value="#{profissional.registroValidadeInicio}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
+					</h:outputText>			
 				</p:column>
 				<p:column width="100" headerText="#{message['label.acoes']}" styleClass="txtCenter">
 					<pretty:link mappingId="profissional-editar">
 						<f:param value="#{profissional.id}" />
 						<p:commandButton type="button" value="#{message['button.editar']}" />
 					</pretty:link>
-					<p:commandButton value="#{message['button.desativar']}" action="#{cargaHorariaManager.desativar(cargaHoraria.id)}" update="gridprofissional" >
+					<p:commandButton value="#{message['button.desativar']}" action="#{cargaHorariaManager.desativar(cargaHoraria.id)}" update="gridProfissional" >
 						<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
 					</p:commandButton>
 				</p:column>

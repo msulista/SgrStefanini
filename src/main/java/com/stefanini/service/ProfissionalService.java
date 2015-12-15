@@ -8,7 +8,6 @@ import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import com.stefanini.entidade.Cargo;
 import com.stefanini.entidade.Profissional;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
@@ -83,7 +82,7 @@ public class ProfissionalService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery(
 				"SELECT * FROM sgr_profissional WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
-				Cargo.class);
+				Profissional.class);
 		List<Profissional> profissionais = q.getResultList();
 		return profissionais;
 	}

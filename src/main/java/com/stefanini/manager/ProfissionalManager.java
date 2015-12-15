@@ -9,9 +9,7 @@ import com.ocpsoft.pretty.faces.annotation.URLAction;
 import com.ocpsoft.pretty.faces.annotation.URLActions;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
-import com.stefanini.entidade.Equipe;
 import com.stefanini.entidade.Profissional;
-import com.stefanini.service.EquipeService;
 import com.stefanini.service.ProfissionalService;
 
 @ManagedBean
