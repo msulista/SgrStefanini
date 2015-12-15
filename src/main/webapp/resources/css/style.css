@@ -162,7 +162,6 @@ html, body {
 
 /* CONTENT */
 .ct-content {
-	height: 500px;
 	padding: 20px;
 	float: left;
 }
@@ -209,10 +208,10 @@ input[type=text] {
 	width: 230px;
 }
 
-/*Rodape*/
+/* RODAPE */
 .ct-bottom{
     bottom: 0;
-    position: absolute;
+    position: fixed;
     color: #fff;
     background-color: #201B55;
     width: 100%;
@@ -226,12 +225,12 @@ input[type=text] {
     width: 80%;
 }
 
-.rodape-descricao H1,
+.rodape-descricao p,
 .rodape-descricao h2{
 	display:inline;
 }
 
-.rodape-descricao h1{
+.rodape-descricao p{
 	font-size:12px;
 }
 
