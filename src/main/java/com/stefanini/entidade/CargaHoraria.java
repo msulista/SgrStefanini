@@ -1,5 +1,6 @@
 package com.stefanini.entidade;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,11 +11,13 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "SGR_CARGA_HORARIA")
-public class CargaHoraria {
+public class CargaHoraria implements BaseEntity, Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "ID_CARGA_HORARIA", nullable = false, precision = 32)
-	private long id;
+	private Long id;
 
 	@Column(name = "CARGA_HORARIA")
 	private double cargaHoraria;
@@ -40,11 +43,11 @@ public class CargaHoraria {
 		this.dataManipulacaoFim = dataManipulacaoFim;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

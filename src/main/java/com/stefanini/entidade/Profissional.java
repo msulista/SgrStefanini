@@ -1,6 +1,5 @@
 package com.stefanini.entidade;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,9 +12,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "SGR_PROFISSIONAL")
-public class Profissional implements BaseEntity, Serializable{
-
-	private static final long serialVersionUID = 1L;
+public class Profissional {
 	
 	public Profissional() {
 		this.dataManipulacao = new Date();
