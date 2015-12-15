@@ -7,8 +7,6 @@ import java.util.List;
 import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import com.stefanini.entidade.CargaHoraria;
 import com.stefanini.entidade.PerfilStefanini;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
@@ -33,11 +31,12 @@ public class PerfilStefaniniService {
 
 	public boolean update(PerfilStefanini perfilStefanini) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		manager.getTransaction().begin();
+		
 
-		if (verificaDiaUtil(perfilStefanini.getDataManipulacaoFim())) {
+		if (verificaDiaUtil(perfilStefanini.getDataManipulacao())) {
+			manager.getTransaction().begin();
 			PerfilStefanini perfilStefaniniAntigo = getPerfilStefaniniById(perfilStefanini.getId());
-			perfilStefaniniAntigo.setRegistroValidadeFim(perfilStefanini.getDataManipulacaoFim());
+			perfilStefaniniAntigo.setRegistroValidade(perfilStefanini.getDataManipulacao());
 			manager.merge(perfilStefaniniAntigo);
 			manager.getTransaction().commit();
 			manager.close();
@@ -46,7 +45,7 @@ public class PerfilStefaniniService {
 			perfilStefaniniNova.setNome(perfilStefanini.getNome());
 			perfilStefaniniNova.setValorInicial(perfilStefanini.getValorInicial());
 			perfilStefaniniNova.setValorFinal(perfilStefanini.getValorFinal());
-			perfilStefaniniNova.setRegistroValidadeInicio(perfilStefanini.getDataManipulacaoFim());
+			perfilStefaniniNova.setRegistroValidadeInicio(perfilStefanini.getDataManipulacao());
 			save(perfilStefaniniNova);
 			return true;
 		} else {
@@ -80,7 +79,7 @@ public class PerfilStefaniniService {
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
 		PerfilStefanini perfilStefanini = getPerfilStefaniniById(id);
-		perfilStefanini.setRegistroValidadeFim(new Date());
+		perfilStefanini.setRegistroValidade(new Date());
 		manager.getTransaction().begin();
 		manager.merge(perfilStefanini);
 		manager.getTransaction().commit();

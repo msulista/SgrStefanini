@@ -4,10 +4,10 @@
     xmlns:pretty="http://ocpsoft.com/prettyfaces">
 
     <ui:define name="content">
-    	<h2>#{message['title.modulo']}</h2>
+    	<h2>#{message['title.perfilStefanini']}</h2>
         <h:form>
         	<p:growl id="growl" life="4000" />
-			<p:panel header="#{message['title.perfilStefanini']}" id="painel">			
+			<p:panel header="#{message['title.perfilStefanini.editar']}" id="painel">			
 				<p:focus context="painel"/>
 				<p:outputLabel value="#{message['label.nome']}" styleClass="label"/>
 				<p:inputText value="#{perfilStefaniniManager.perfilStefanini.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}"/><br/><br/>
@@ -19,7 +19,7 @@
         		<p:inputMask id="valorFinal" value="#{perfilStefaniniManager.perfilStefanini.valorFinal}" mask="99,99" converter="cargaHorariaConverter" required="true" requiredMessage="#{message['span.obrigatorio.valorFinal']}"/><br/><br/>
         		
         		<p:outputLabel for="calendario" value="#{message['label.data.inicio']}" styleClass="label"/>
-        		<p:calendar id="calendario" value="#{perfilStefaniniManager.perfilStefanini.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/><br/><br/>
+        		<p:calendar id="calendario" value="#{perfilStefaniniManager.perfilStefanini.dataManipulacao}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/><br/><br/>
         		
         		<p:commandButton value="#{message['button.salvar']}" action="#{perfilStefaniniManager.update()}" update="growl" />
         		<p:button value="#{message['button.cancelar']}" outcome="pretty:perfilStefanini"/>

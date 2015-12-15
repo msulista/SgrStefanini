@@ -38,7 +38,11 @@ public class PerfilStefanini implements Serializable{
 	private Date registroValidadeFim;
 
 	@Transient
-	private Date dataManipulacaoFim;
+	private Date dataManipulacao;
+	
+	public PerfilStefanini() {
+		this.dataManipulacao = new Date();
+	}
 
 	public Long getId() {
 		return id;
@@ -84,16 +88,16 @@ public class PerfilStefanini implements Serializable{
 		return registroValidadeFim;
 	}
 
-	public void setRegistroValidadeFim(Date registroValidadeFim) {
-		this.registroValidadeFim = registroValidadeFim;
+	public void setRegistroValidade(Date registroValidade) {
+		this.registroValidadeFim = registroValidade;
 	}
 
-	public Date getDataManipulacaoFim() {
-		return dataManipulacaoFim;
+	public Date getDataManipulacao() {
+		return dataManipulacao;
 	}
 
-	public void setDataManipulacaoFim(Date dataManipulacaoFim) {
-		this.dataManipulacaoFim = dataManipulacaoFim;
+	public void setDataManipulacaoFim(Date dataManipulacao) {
+		this.dataManipulacao = dataManipulacao;
 	}
 
 	@Override
