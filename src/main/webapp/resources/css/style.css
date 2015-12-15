@@ -167,9 +167,18 @@ html, body {
 	float: left;
 }
 
+.ct-content *{
+	font-size:12px;
+}
+
 .ct-content h2 {
 	font-size: 20px;
 	margin-bottom: 20px;
+}
+
+.container{
+	margin: auto;
+    width: 85%;	
 }
 
 /* FORM */
@@ -243,10 +252,4 @@ input[type=text] {
 	display: inline;
     float: right;
     bottom: 20px;
-}
-
-
-.container{
-	margin: auto;
-    width: 80%;	
 }
