@@ -10,9 +10,9 @@ import com.ocpsoft.pretty.faces.annotation.URLAction;
 import com.ocpsoft.pretty.faces.annotation.URLActions;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
-import com.stefanini.entidade.CargaHoraria;
+
 import com.stefanini.entidade.PerfilStefanini;
-import com.stefanini.service.CargaHorariaService;
+
 import com.stefanini.service.PerfilStefaniniService;
 
 @ManagedBean
@@ -28,7 +28,7 @@ public class PerfilStefaniniManager {
 
 	public PerfilStefaniniManager() {
 	}
-	
+
 	public PerfilStefanini getPerfilStefanini() {
 		return perfilStefanini;
 	}
