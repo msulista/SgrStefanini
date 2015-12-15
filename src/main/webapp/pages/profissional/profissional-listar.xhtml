@@ -24,10 +24,14 @@
 					<h:outputText value="#{profissional.valorHora}"/>			
 				</p:column>
 				<p:column width="100" headerText="#{message['label.profissional.dataAdmissao']}">
-					<h:outputText value="#{profissional.dataAdmissao}"/>			
+					<h:outputText value="#{profissional.dataAdmissao}">	
+					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
+					</h:outputText>		
 				</p:column>
 				<p:column width="100" headerText="#{message['label.profissional.dataDemissao']}">
-					<h:outputText value="#{profissional.dataDemissao}"/>			
+					<h:outputText value="#{profissional.dataDemissao}">	
+					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>	
+					</h:outputText>	
 				</p:column>				
 				<p:column width="100" headerText="#{message['label.profissional.celula']}">
 					<h:outputText value="#{profissional.celula.nome}"/>			
