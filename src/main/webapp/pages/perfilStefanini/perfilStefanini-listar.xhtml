@@ -11,15 +11,15 @@
 		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 		<h:form>
 			<p:dataTable id="gridPerfilStefanini" var="perfilStefanini" value="#{perfilStefaniniManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
-				<p:column width="100" headerText="#{message['label.nome']}" />
+				<p:column width="100" headerText="#{message['label.nome']}">
 					<h:outputText value="#{perfilStefanini.nome}"/>
 				</p:column>
 				
-				<p:column width="100" headerText="#{message['label.perfilStefanini.valorInicial']}" />
+				<p:column width="100" headerText="#{message['label.perfilStefanini.valorInicial']}" >
 					<h:outputText value="#{perfilStefanini.valorInicial}"/>
 				</p:column>
 				
-				<p:column width="100" headerText="#{message['label.perfilStefanini.valorFinal']}" />
+				<p:column width="100" headerText="#{message['label.perfilStefanini.valorFinal']}" >
 					<h:outputText value="#{perfilStefanini.valorFinal}"/>
 				</p:column>
 				
