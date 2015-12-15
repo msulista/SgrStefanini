@@ -37,10 +37,7 @@ public class CargaHorariaConverter implements Converter {
     	DecimalFormat df = new DecimalFormat("#.00");
     	double numero = Double.parseDouble(value.toString());
     	String numeroFormatado = df.format(numero);
-    	//System.out.println(formatado);
-    	
-    	//String cargaHoraria = value.toString();
-    	
+ 	
     	
         if (numeroFormatado != null && numeroFormatado.length() == 4){
         	
