@@ -11,7 +11,7 @@
 				<p:focus context="painel"/>
 				<p:outputLabel for="celula" value="#{message['label.profissional.celula']}" styleClass="label" />
 				<p:selectOneMenu id="celula" value="#{profissionalManager.profissional.celula}" converter="simpleEntityConverter" required="true">
-					<f:selectItem itemLabel="Selecione uma célula" noSelectionOption="true"/>
+					<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
 					<f:selectItems value="#{celulaManager.listarAtivos()}" var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}"/>
 				</p:selectOneMenu>
 				<br /><br />				
@@ -19,12 +19,12 @@
 				<p:inputText id="nome" value="#{profissionalManager.profissional.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
 				<br /><br />				
 				<p:outputLabel for="salario" value="#{message['label.profissional.salario']}" styleClass="label" />
-				<p:inputText id="nome" value="#{profissionalManager.profissional.salario}" required="true" requiredMessage="#{message['span.obrigatorio.salario']}" />
+				<p:inputText id="salario" value="#{profissionalManager.profissional.salario}" required="true" requiredMessage="#{message['span.obrigatorio.salario']}" />
 				<br /><br />
 				<p:outputLabel for="beneficio" value="#{message['label.profissional.beneficios']}" styleClass="label" />
-				<p:inputText id="nome" value="#{profissionalManager.profissional.beneficios}" />
+				<p:inputText id="beneficio" value="#{profissionalManager.profissional.beneficios}" />
 				<br /><br />
-				<p:outputLabel value="#{message['label.profissional.valorHora']}" styleClass="label" for="valorHora"/>
+				<p:outputLabel for="valorHora" value="#{message['label.profissional.valorHora']}" styleClass="label"/>
 				<p:inputMask id="valorHora" value="#{profissionalManager.profissional.valorHora}" mask="99,99" converter="cargaHorariaConverter" required="true" requiredMessage="#{message['span.obrigatorio.valorHora']}"/>
 				<br/><br/>
 				<p:outputLabel for="admissao" value="#{message['label.profissional.dataAdmissao']}" styleClass="label"/>
