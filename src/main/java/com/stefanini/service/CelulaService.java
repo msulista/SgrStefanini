@@ -56,8 +56,7 @@ public class CelulaService {
 	public List<Celula> listarAtivo() {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_celula WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
-				Celula.class);
+				"SELECT * FROM sgr_celula WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC", Celula.class);
 		List<Celula> celulas = q.getResultList();
 		manager.close();
 		return celulas;
@@ -67,7 +66,7 @@ public class CelulaService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery("SELECT * FROM sgr_celula WHERE ID_CELULA = :idCelula", Celula.class);
 		q.setParameter("idCelula", id);
-		Celula celula = (Celula) q.getSingleResult();
+		Celula celula = (Celula)q.getSingleResult();
 		manager.close();
 		return celula;
 	}
