@@ -138,8 +138,17 @@ html, body {
 
 .ui-breadcrumb{
 	position: absolute;
-    right: 230px;
-    top: 135px;
+	top: 171px;
+	background: #fff;
+	border: none;
+}
+
+.ui-breadcrumb a{
+	color: #333;
+}
+.ui-breadcrumb a:hover{
+	font-weight: 600;
+	text-decoration: underline;
 }
 
 /* PRIME */
@@ -163,7 +172,7 @@ html, body {
 
 /* CONTENT */
 .ct-content {
-	padding: 20px;
+	padding: 50px 0px 0px 0px;
 	float: left;
 }
 
