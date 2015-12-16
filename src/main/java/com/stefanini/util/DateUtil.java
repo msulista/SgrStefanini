@@ -112,6 +112,19 @@ public class DateUtil {
     	data = calendar.getTime();
     	return data;
     }
+    
+    public static boolean verificaDiaUtil(Date data) {
+		GregorianCalendar calendar = new GregorianCalendar();
+
+		calendar.setTime(data);
+
+		if (calendar.get(GregorianCalendar.DAY_OF_WEEK) == 1 || calendar.get(GregorianCalendar.DAY_OF_WEEK) == 7) {
+			return false;
+		} else {
+			return true;
+
+		}
+	}
 //    public static Date DataDoSistemaMySql(){
 //    	SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");    	
 //    	Date dataAtual = new Date();

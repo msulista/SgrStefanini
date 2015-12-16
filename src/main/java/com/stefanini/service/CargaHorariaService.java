@@ -1,7 +1,6 @@
 package com.stefanini.service;
 
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.faces.convert.ConverterException;
@@ -9,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.stefanini.entidade.CargaHoraria;
+import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
 
@@ -17,7 +17,7 @@ public class CargaHorariaService {
 	public boolean save(CargaHoraria cargaHoraria) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		if (verificaDiaUtil(cargaHoraria.getRegistroValidadeInicio())) {
+		if (DateUtil.verificaDiaUtil(cargaHoraria.getRegistroValidadeInicio())) {
 			manager.persist(cargaHoraria);
 			manager.getTransaction().commit();
 			manager.close();
@@ -33,7 +33,7 @@ public class CargaHorariaService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
-		if(verificaDiaUtil(cargaHoraria.getDataManipulacao())){
+		if(DateUtil.verificaDiaUtil(cargaHoraria.getDataManipulacao())){
 		CargaHoraria cargaHorariaAntiga = getCargaHorariaById(cargaHoraria.getId());
 		cargaHorariaAntiga.setRegistroValidadeFim(cargaHoraria.getDataManipulacao());
 		manager.merge(cargaHorariaAntiga);
@@ -81,18 +81,5 @@ public class CargaHorariaService {
 		manager.getTransaction().commit();
 		manager.close();
 
-	}
-
-	public boolean verificaDiaUtil(Date data) {
-		GregorianCalendar calendar = new GregorianCalendar();
-
-		calendar.setTime(data);
-
-		if (calendar.get(GregorianCalendar.DAY_OF_WEEK) == 1 || calendar.get(GregorianCalendar.DAY_OF_WEEK) == 7) {
-			return false;
-		} else {
-			return true;
-
-		}
 	}
 }
