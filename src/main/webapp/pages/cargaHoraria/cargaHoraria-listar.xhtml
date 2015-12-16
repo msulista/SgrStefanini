@@ -31,7 +31,7 @@
 						<p:commandButton type="button" value="#{message['button.editar']}" />
 					</pretty:link>
 					<p:commandButton value="#{message['button.desativar']}" action="#{cargaHorariaManager.desativar(cargaHoraria.id)}" update="gridCargaHoraria" >
-						<p:confirm header="#{message['button.desativar.cargaHoraria']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
+						<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
