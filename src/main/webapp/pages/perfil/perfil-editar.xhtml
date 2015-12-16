@@ -4,6 +4,11 @@
     xmlns:pretty="http://ocpsoft.com/prettyfaces">
 
     <ui:define name="content">
+    	<p:breadCrumb>
+		    <p:menuitem value="Home" url="#" />
+		    <p:menuitem value="Perfil" outcome="pretty:perfil"/>
+		    <p:menuitem value="Perfil Editar" outcome="pretty:perfil-editar" disabled="true"/>
+		</p:breadCrumb>
     	<h2>#{message['title.perfis']}</h2>
     	<h:form>
 	    	<p:growl id="growl" life="4000" />
