@@ -39,9 +39,9 @@
 				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 					<pretty:link mappingId="perfilStefanini-editar">
 						<f:param value="#{perfilStefanini.id}" />
-						<p:commandButton type="button" value="#{message['button.editar']}" />
+						<p:commandButton styleClass="btn-acao" type="button" value="#{message['button.editar']}" />
 					</pretty:link>
-					<p:commandButton value="#{message['button.desativar']}" action="#{perfilStefaniniManager.desativar(perfilStefanini.id)}" update="gridPerfilStefanini" >
+					<p:commandButton styleClass="btn-acao" value="#{message['button.desativar']}" action="#{perfilStefaniniManager.desativar(perfilStefanini.id)}" update="gridPerfilStefanini" >
 						<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
 					</p:commandButton>
 				</p:column>

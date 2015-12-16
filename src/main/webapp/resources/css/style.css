@@ -277,8 +277,6 @@ input[type=text] {
     bottom: 20px;
 }
  */
-  .ui-state-default,
-  .ui-widget-content .ui-state-default,
-  .ui-widget-header .ui-state-default{
+  .btn-acao{
     width: 70px;
   }

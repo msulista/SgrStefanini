@@ -67,9 +67,9 @@
 				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 					<pretty:link mappingId="profissional-editar">
 						<f:param value="#{profissional.id}" />
-						<p:commandButton type="button" value="#{message['button.editar']}" />
+						<p:commandButton styleClass="btn-acao" type="button" value="#{message['button.editar']}" />
 					</pretty:link>
-					<p:commandButton value="#{message['button.desativar']}" action="#{cargaHorariaManager.desativar(cargaHoraria.id)}" update="gridProfissional" >
+					<p:commandButton styleClass="btn-acao" value="#{message['button.desativar']}" action="#{cargaHorariaManager.desativar(cargaHoraria.id)}" update="gridProfissional" >
 						<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
 					</p:commandButton>
 				</p:column>

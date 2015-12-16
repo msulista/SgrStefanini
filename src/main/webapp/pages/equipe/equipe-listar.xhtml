@@ -28,9 +28,9 @@
 				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 					<pretty:link mappingId="equipe-editar">
 						<f:param value="#{equipe.id}" />
-						<p:commandButton type="button" value="#{message['button.editar']}" />
+						<p:commandButton styleClass="btn-acao" type="button" value="#{message['button.editar']}" />
 					</pretty:link>
-					<p:commandButton value="#{message['button.desativar']}"	action="#{equipeManager.desativar(equipe.id)}" update="gridEquipes">
+					<p:commandButton styleClass="btn-acao" value="#{message['button.desativar']}"	action="#{equipeManager.desativar(equipe.id)}" update="gridEquipes">
 						<p:confirm header="Desativar Cargo"
 							message="Desaja mesmo Desativar?" icon="ui-icon-alert" />
 					</p:commandButton>
