@@ -34,18 +34,25 @@ public class FormaContratacaoService {
 		manager.getTransaction().begin();
 
 		if (DateUtil.verificaDiaUtil(formaContratacao.getDataManipulacao())) {
-			FormaContratacao formaContratacaoMerge = (FormaContratacao) getFormaContratacaoById(
-					formaContratacao.getId());
-			formaContratacaoMerge.setRegistroValidadeFim(formaContratacao.getDataManipulacao());
-			manager.merge(formaContratacaoMerge);
-			manager.getTransaction().commit();
-			manager.close();
+			if (DateUtil.verificaNovaDataInicio(formaContratacao.getRegistroValidadeInicio(),
+					formaContratacao.getDataManipulacao())) {
+				FormaContratacao formaContratacaoMerge = (FormaContratacao) getFormaContratacaoById(
+						formaContratacao.getId());
+				formaContratacaoMerge.setRegistroValidadeFim(formaContratacao.getDataManipulacao());
+				manager.merge(formaContratacaoMerge);
+				manager.getTransaction().commit();
+				manager.close();
 
-			FormaContratacao formaContratacaoPersist = new FormaContratacao();
-			formaContratacaoPersist.setNome(formaContratacao.getNome());
-			formaContratacaoPersist.setRegistroValidadeInicio(formaContratacao.getDataManipulacao());
-			save(formaContratacaoPersist);
-			return true;
+				FormaContratacao formaContratacaoPersist = new FormaContratacao();
+				formaContratacaoPersist.setNome(formaContratacao.getNome());
+				formaContratacaoPersist.setRegistroValidadeInicio(formaContratacao.getDataManipulacao());
+				save(formaContratacaoPersist);
+				return true;
+			} else {
+				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
+				manager.close();
+				return false;
+			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();

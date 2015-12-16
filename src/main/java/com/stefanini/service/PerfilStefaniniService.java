@@ -31,23 +31,29 @@ public class PerfilStefaniniService {
 
 	public boolean update(PerfilStefanini perfilStefanini) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		
 
 		if (DateUtil.verificaDiaUtil(perfilStefanini.getDataManipulacao())) {
-			manager.getTransaction().begin();
-			PerfilStefanini perfilStefaniniAntigo = getPerfilStefaniniById(perfilStefanini.getId());
-			perfilStefaniniAntigo.setRegistroValidade(perfilStefanini.getDataManipulacao());
-			manager.merge(perfilStefaniniAntigo);
-			manager.getTransaction().commit();
-			manager.close();
+			if (DateUtil.verificaNovaDataInicio(perfilStefanini.getRegistroValidadeInicio(),
+					perfilStefanini.getDataManipulacao())) {
+				manager.getTransaction().begin();
+				PerfilStefanini perfilStefaniniAntigo = getPerfilStefaniniById(perfilStefanini.getId());
+				perfilStefaniniAntigo.setRegistroValidade(perfilStefanini.getDataManipulacao());
+				manager.merge(perfilStefaniniAntigo);
+				manager.getTransaction().commit();
+				manager.close();
 
-			PerfilStefanini perfilStefaniniNova = new PerfilStefanini();
-			perfilStefaniniNova.setNome(perfilStefanini.getNome());
-			perfilStefaniniNova.setValorInicial(perfilStefanini.getValorInicial());
-			perfilStefaniniNova.setValorFinal(perfilStefanini.getValorFinal());
-			perfilStefaniniNova.setRegistroValidadeInicio(perfilStefanini.getDataManipulacao());
-			save(perfilStefaniniNova);
-			return true;
+				PerfilStefanini perfilStefaniniNova = new PerfilStefanini();
+				perfilStefaniniNova.setNome(perfilStefanini.getNome());
+				perfilStefaniniNova.setValorInicial(perfilStefanini.getValorInicial());
+				perfilStefaniniNova.setValorFinal(perfilStefanini.getValorFinal());
+				perfilStefaniniNova.setRegistroValidadeInicio(perfilStefanini.getDataManipulacao());
+				save(perfilStefaniniNova);
+				return true;
+			} else {
+				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
+				manager.close();
+				return false;
+			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();

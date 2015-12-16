@@ -45,7 +45,7 @@ public class EquipeService {
 			return true;
 			
 			}else{
-				Mensagem.add("Nova data é anterior a cadastrada originalmente!");
+				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
 				manager.close();
 				return false;
 			}

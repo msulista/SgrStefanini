@@ -34,6 +34,7 @@ public class CargaHorariaService {
 		manager.getTransaction().begin();
 
 		if(DateUtil.verificaDiaUtil(cargaHoraria.getDataManipulacao())){
+			if(DateUtil.verificaNovaDataInicio(cargaHoraria.getRegistroValidadeInicio(), cargaHoraria.getDataManipulacao())){
 		CargaHoraria cargaHorariaAntiga = getCargaHorariaById(cargaHoraria.getId());
 		cargaHorariaAntiga.setRegistroValidadeFim(cargaHoraria.getDataManipulacao());
 		manager.merge(cargaHorariaAntiga);
@@ -45,10 +46,16 @@ public class CargaHorariaService {
 		cargaHorariaNova.setRegistroValidadeInicio(cargaHoraria.getDataManipulacao());
 		save(cargaHorariaNova);
 		return true;
+		}else{
+			Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
+			manager.close();
+			return false;
 		}
+		}else{
 		Mensagem.add("Data informada não é um dia util!");
 		manager.close();
-		return false;
+			return false;
+		}
 	}
 
 	@SuppressWarnings("unchecked")

@@ -34,17 +34,23 @@ public class StatusService {
 		manager.getTransaction().begin();
 
 		if (DateUtil.verificaDiaUtil(status.getDataManipulacao())) {
-			Status statusMerge = (Status) getStatusById(status.getId());
-			statusMerge.setRegistroValidadeFim(status.getDataManipulacao());
-			manager.merge(statusMerge);
-			manager.getTransaction().commit();
-			manager.close();
+			if (DateUtil.verificaNovaDataInicio(status.getRegistroValidadeInicio(), status.getDataManipulacao())) {
+				Status statusMerge = (Status) getStatusById(status.getId());
+				statusMerge.setRegistroValidadeFim(status.getDataManipulacao());
+				manager.merge(statusMerge);
+				manager.getTransaction().commit();
+				manager.close();
 
-			Status statusPersist = new Status();
-			statusPersist.setNome(status.getNome());
-			statusPersist.setRegistroValidadeInicio(status.getDataManipulacao());
-			save(statusPersist);
-			return true;
+				Status statusPersist = new Status();
+				statusPersist.setNome(status.getNome());
+				statusPersist.setRegistroValidadeInicio(status.getDataManipulacao());
+				save(statusPersist);
+				return true;
+			} else {
+				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
+				manager.close();
+				return false;
+			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();
@@ -55,7 +61,9 @@ public class StatusService {
 	@SuppressWarnings("unchecked")
 	public List<Status> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_status WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",Status.class);
+		Query q = manager.createNativeQuery(
+				"SELECT * FROM sgr_status WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
+				Status.class);
 		List<Status> listStatus = q.getResultList();
 		return listStatus;
 	}
@@ -64,7 +72,7 @@ public class StatusService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery("SELECT * FROM sgr_status WHERE ID_STATUS = :idStatus", Status.class);
 		q.setParameter("idStatus", id);
-		Status status = (Status)q.getSingleResult();
+		Status status = (Status) q.getSingleResult();
 		manager.close();
 		return status;
 	}
