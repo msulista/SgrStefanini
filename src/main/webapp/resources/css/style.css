@@ -12,7 +12,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 	padding: 0;
 	border: 0;
 	font-size: 16px;
-	font: verdana;
+	font-family: sans-serif;
 	vertical-align: baseline;
 }
 
@@ -77,17 +77,37 @@ html, body {
     margin-top: 10px;
 }
 
-#horario{
+/* #horario{
 	margin-left:200px
-}
+} */
 
+.calendario-data{
+	float: left;
+	width: 160px;
+	margin-top: 30px;
+	margin-left: 150px;
+	
+	
+}
+.relogio-hora{
+	float: left;
+	width: 160px;
+	margin-top: 30px;
+	
+}
+.ui-clock{
+	/* position: absolute; */
+	
+	background-color:#fff;
+	border:none;
+} 
 /* MENU */
 .ct-menu {
     width: 85%;
     height: 25px;
     z-index: 80;
     position: absolute;
-    top: 140px;
+    top: 133px;
     color: #FFF;
     left: 120px;
 }
@@ -121,20 +141,14 @@ html, body {
 }
 
 .img-logo {
-    width: 250px;
-    height: 80px;
+    width: 208px;
+    height: 47px;
     background-image: url("../img/logo.jpg");
     float: left;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
-.ui-clock{
-	position: absolute;
-	top: 55px;
-	margin-left: 55px;
-	background-color:#fff;
-	border:none;
-} 
+
 
 .ui-breadcrumb{
 	position: absolute;
