@@ -68,7 +68,7 @@ html, body {
 
 .cabecalho {
     margin: auto;
-	width: 90%;
+	width: 85%;
 	height: 100%;
 }
 
@@ -105,13 +105,13 @@ html, body {
 
 /* MENU */
 .ct-menu {
-    width: 90%;
+    width: 85%;
     height: 25px;
     z-index: 80;
     position: absolute;
     top: 133px;
     color: #FFF;
-    left: 60px;
+    left: 100px;
 }
 
 .ct-menu ul {
@@ -203,7 +203,7 @@ html, body {
 
 .container{
 	margin: auto;
-    width: 90%;	
+    width: 85%;	
 }
 
 /* FORM */
