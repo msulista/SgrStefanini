@@ -125,6 +125,14 @@ public class DateUtil {
 
 		}
 	}
+    
+    public static boolean verificaNovaDataInicio(Date dataInicial, Date novaDataInicial ){
+    	if(dataInicial.before(novaDataInicial)){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    }
 //    public static Date DataDoSistemaMySql(){
 //    	SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");    	
 //    	Date dataAtual = new Date();
