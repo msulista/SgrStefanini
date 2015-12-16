@@ -34,8 +34,8 @@ public class CelulaService {
 		manager.getTransaction().begin();
 
 		if (DateUtil.verificaDiaUtil(celula.getDataManipulacao())) {
-			if (DateUtil.verificaDataValida(celula.getRegistroValidadeInicio(), celula.getDataManipulacao())) {
-				Celula celulaMerge = getCelulaById(celula.getId());
+			Celula celulaMerge = getCelulaById(celula.getId());
+			if (DateUtil.verificaDataValida(celulaMerge.getRegistroValidadeInicio(), celula.getDataManipulacao())) {
 				celulaMerge.setRegistroValidadeFim(celula.getDataManipulacao());
 				manager.merge(celulaMerge);
 				manager.getTransaction().commit();

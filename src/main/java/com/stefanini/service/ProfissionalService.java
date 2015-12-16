@@ -46,32 +46,32 @@ public class ProfissionalService {
 		if (DateUtil.verificaDiaUtil(profissional.getRegistroValidadeInicio())) {
 			if (DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),
 					profissional.getDataManipulacao())) {
-				Profissional profissionalMerge = (Profissional) getProfissionalById(profissional.getId());
-				profissionalMerge.setRegistroValidaeFim(profissional.getDataManipulacao());
-				manager.merge(profissionalMerge);
-				manager.getTransaction().commit();
-				manager.close();
+						Profissional profissionalMerge = (Profissional) getProfissionalById(profissional.getId());
+						profissionalMerge.setRegistroValidaeFim(profissional.getDataManipulacao());
+						manager.merge(profissionalMerge);
+						manager.getTransaction().commit();
+						manager.close();
 
-				Profissional profissionalPersist = new Profissional();
-				profissionalPersist.setNome(profissional.getNome());
-				profissionalPersist.setSalario(profissional.getSalario());
-				profissionalPersist.setBeneficios(profissional.getBeneficios());
-				profissionalPersist.setValorHora(profissional.getValorHora());
-				profissionalPersist.setDataAdmissao(profissional.getDataAdmissao());
-				profissionalPersist.setDataDemissao(profissional.getDataDemissao());
-				profissionalPersist.setRegistroValidadeInicio(profissional.getDataManipulacao());
-				profissionalPersist.setCelula(celulaService.getCelulaById(profissional.getCelula().getId()));
-				profissionalPersist.setCargo(cargoService.getCargoById(profissional.getCargo().getId()));
-				profissionalPersist.setEquipe(equipeService.getEquipeById(profissional.getEquipe().getId()));
-				profissionalPersist.setPerfil(perfilService.getPerfilById(profissional.getPerfil().getId()));
-				profissionalPersist.setCargaHoraria(
-						cargaHorariaService.getCargaHorariaById(profissional.getCargaHoraria().getId()));
-				profissionalPersist.setFormaContratacao(
-						formaContratacaoService.getFormaContratacaoById(profissional.getFormaContratacao().getId()));
-				profissionalPersist.setStatus(statusService.getStatusById(profissional.getStatus().getId()));
+						Profissional profissionalPersist = new Profissional();
+						profissionalPersist.setNome(profissional.getNome());
+						profissionalPersist.setSalario(profissional.getSalario());
+						profissionalPersist.setBeneficios(profissional.getBeneficios());
+						profissionalPersist.setValorHora(profissional.getValorHora());
+						profissionalPersist.setDataAdmissao(profissional.getDataAdmissao());
+						profissionalPersist.setDataDemissao(profissional.getDataDemissao());
+						profissionalPersist.setRegistroValidadeInicio(profissional.getDataManipulacao());
+						profissionalPersist.setCelula(celulaService.getCelulaById(profissional.getCelula().getId()));
+						profissionalPersist.setCargo(cargoService.getCargoById(profissional.getCargo().getId()));
+						profissionalPersist.setEquipe(equipeService.getEquipeById(profissional.getEquipe().getId()));
+						profissionalPersist.setPerfil(perfilService.getPerfilById(profissional.getPerfil().getId()));
+						profissionalPersist.setCargaHoraria(
+								cargaHorariaService.getCargaHorariaById(profissional.getCargaHoraria().getId()));
+						profissionalPersist.setFormaContratacao(formaContratacaoService
+								.getFormaContratacaoById(profissional.getFormaContratacao().getId()));
+						profissionalPersist.setStatus(statusService.getStatusById(profissional.getStatus().getId()));
 
-				save(profissionalPersist);
-				return true;
+						save(profissionalPersist);
+						return true;
 			} else {
 				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
 				manager.close();
