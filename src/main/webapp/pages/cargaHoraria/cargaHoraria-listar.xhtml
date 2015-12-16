@@ -17,7 +17,7 @@
 			<p:dataTable id="gridCargaHoraria" var="cargaHoraria" value="#{cargaHorariaManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
 				<p:column  headerText="#{message['label.cargaHoraria']}" for="cargaHoraria">
 					<h:outputText id="cargaHoraria" value="#{cargaHoraria.cargaHoraria}">
-						<f:converter converterId="cargaHorariaConverter"/>
+						<f:converter converterId="moedaConverter"/>
 					</h:outputText>
 				</p:column>
 				<p:column headerText="#{message['label.data.inicio']}">
