@@ -33,7 +33,7 @@ public class PerfilStefaniniService {
 		EntityManager manager = JPAUtil.getEntityManager();
 
 		if (DateUtil.verificaDiaUtil(perfilStefanini.getDataManipulacao())) {
-			if (DateUtil.verificaNovaDataInicio(perfilStefanini.getRegistroValidadeInicio(),
+			if (DateUtil.verificaDataValida(perfilStefanini.getRegistroValidadeInicio(),
 					perfilStefanini.getDataManipulacao())) {
 				manager.getTransaction().begin();
 				PerfilStefanini perfilStefaniniAntigo = getPerfilStefaniniById(perfilStefanini.getId());

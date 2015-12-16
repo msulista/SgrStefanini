@@ -126,8 +126,8 @@ public class DateUtil {
 		}
 	}
     
-    public static boolean verificaNovaDataInicio(Date dataInicial, Date novaDataInicial ){
-    	if(dataInicial.before(novaDataInicial)){
+    public static boolean verificaDataValida(Date dataInicial, Date novaDataInicial ){
+    	if(dataInicial.before(novaDataInicial)||dataInicial.compareTo(novaDataInicial)==0){
     		return true;
     	}else{
     		return false;
