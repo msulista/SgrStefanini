@@ -16,11 +16,11 @@
 		<h:form>
 			<p:dataTable id="gridStatus" var="status" value="#{statusManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
 				
-				<p:column width="200" headerText="#{message['label.nome']}">
+				<p:column headerText="#{message['label.nome']}">
 					<h:outputText value="#{status.nome}" />
 				</p:column>
 				
-				<p:column width="200" headerText="#{message['label.data.inicio']}">
+				<p:column headerText="#{message['label.data.inicio']}">
 					<h:outputText value="#{status.registroValidadeInicio}">
 						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
 					</h:outputText>					

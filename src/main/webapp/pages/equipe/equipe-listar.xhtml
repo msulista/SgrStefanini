@@ -17,10 +17,10 @@
 			<p:dataTable id="gridEquipes" var="equipe"
 				value="#{equipeManager.listarAtivos()}"
 				emptyMessage="#{message['alerta.listaVazia']}">
-				<p:column width="200" headerText="#{message['label.nome']}">
+				<p:column headerText="#{message['label.nome']}">
 					<h:outputText value="#{equipe.nome}" />
 				</p:column>
-				<p:column width="200" headerText="#{message['label.data.inicio']}">
+				<p:column headerText="#{message['label.data.inicio']}">
 					<h:outputText value="#{equipe.registroValidadeInicio}" >
 					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
 					</h:outputText>

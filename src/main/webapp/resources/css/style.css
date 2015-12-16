@@ -84,7 +84,7 @@ html, body {
 .calendario-data{
 	float: left;
 	width: 160px;
-	margin-top: 30px;
+	margin-top: 45px;
 	margin-left: 150px;
 	
 	
@@ -92,7 +92,7 @@ html, body {
 .relogio-hora{
 	float: left;
 	width: 160px;
-	margin-top: 30px;
+	margin-top: 45px;
 	
 }
 .ui-clock{
@@ -241,7 +241,7 @@ input[type=text] {
 	width: 230px;
 }
 
-/* RODAPE */
+/* RODAPE
 .ct-bottom{
     bottom: 0;
     position: fixed;
@@ -276,3 +276,9 @@ input[type=text] {
     float: right;
     bottom: 20px;
 }
+ */
+  .ui-state-default,
+  .ui-widget-content .ui-state-default,
+  .ui-widget-header .ui-state-default{
+    width: 70px;
+  }

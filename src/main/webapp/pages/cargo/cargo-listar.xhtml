@@ -16,10 +16,10 @@
 		<h:form>
 			<p:dataTable id="gridCargos" var="cargo" value="#{cargoManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
 
-				<p:column width="200" headerText="#{message['label.nome']}" sortBy="#{cargo.nome}">
+				<p:column headerText="#{message['label.nome']}" sortBy="#{cargo.nome}">
 					<h:outputText value="#{cargo.nome}" />
 				</p:column>
-				<p:column width="200" headerText="#{message['label.data.inicio']}" sortBy="#{cargo.registroValidadeInicio}">
+				<p:column headerText="#{message['label.data.inicio']}" sortBy="#{cargo.registroValidadeInicio}">
 
 					<h:outputText value="#{cargo.registroValidadeInicio}">
 						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>

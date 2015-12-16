@@ -15,56 +15,56 @@
 		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 		<h:form>
 			<p:dataTable id="gridProfissional" var="profissional" value="#{profissionalManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
-				<p:column width="100" headerText="#{message['label.nome']}">
+				<p:column headerText="#{message['label.nome']}">
 					<h:outputText value="#{profissional.nome}"/>
 				</p:column>
-				<p:column width="100" headerText="#{message['label.profissional.salario']}">
+				<p:column headerText="#{message['label.profissional.salario']}">
 					<h:outputText value="#{profissional.salario}"/>			
 				</p:column>
-				<p:column width="100" headerText="#{message['label.profissional.beneficios']}">
+				<p:column headerText="#{message['label.profissional.beneficios']}">
 					<h:outputText value="#{profissional.beneficios}"/>			
 				</p:column>
-				<p:column width="100" headerText="#{message['label.profissional.valorHora']}">
+				<p:column headerText="#{message['label.profissional.valorHora']}">
 					<h:outputText value="#{profissional.valorHora}"/>			
 				</p:column>
-				<p:column width="100" headerText="#{message['label.profissional.dataAdmissao']}">
+				<p:column headerText="#{message['label.profissional.dataAdmissao']}">
 					<h:outputText value="#{profissional.dataAdmissao}">	
 					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
 					</h:outputText>		
 				</p:column>
-				<p:column width="100" headerText="#{message['label.profissional.dataDemissao']}">
+				<p:column headerText="#{message['label.profissional.dataDemissao']}">
 					<h:outputText value="#{profissional.dataDemissao}">	
 					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>	
 					</h:outputText>	
 				</p:column>				
-				<p:column width="100" headerText="#{message['label.profissional.celula']}">
+				<p:column headerText="#{message['label.profissional.celula']}">
 					<h:outputText value="#{profissional.celula.nome}"/>			
 				</p:column>				
-				<p:column width="100" headerText="#{message['label.profissional.equipe']}">
+				<p:column headerText="#{message['label.profissional.equipe']}">
 					<h:outputText value="#{profissional.equipe.nome}"/>			
 				</p:column>
-				<p:column width="100" headerText="#{message['label.profissional.cargo']}">
+				<p:column headerText="#{message['label.profissional.cargo']}">
 					<h:outputText value="#{profissional.cargo.nome}"/>			
 				</p:column>
-				<p:column width="100" headerText="#{message['label.profissional.perfil']}">
+				<p:column  headerText="#{message['label.profissional.perfil']}">
 					<h:outputText value="#{profissional.perfil.nome}"/>			
 				</p:column>
-				<p:column width="100" headerText="#{message['label.cargaHoraria']}">
+				<p:column headerText="#{message['label.cargaHoraria']}">
 					<h:outputText value="#{profissional.cargaHoraria.cargaHoraria}"/>			
 				</p:column>
-				<p:column width="100" headerText="#{message['label.profissional.formaContratacao']}">
+				<p:column headerText="#{message['label.profissional.formaContratacao']}">
 					<h:outputText value="#{profissional.formaContratacao.nome}"/>			
 				</p:column>
-				<p:column width="100" headerText="#{message['label.profissional.status']}">
+				<p:column headerText="#{message['label.profissional.status']}">
 					<h:outputText value="#{profissional.status.nome}"/>			
 				</p:column>
 				
-				<p:column width="100" headerText="#{message['label.data.inicio']}">
+				<p:column headerText="#{message['label.data.inicio']}">
 					<h:outputText value="#{profissional.registroValidadeInicio}" >
 					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
 					</h:outputText>			
 				</p:column>
-				<p:column width="100" headerText="#{message['label.acoes']}" styleClass="txtCenter">
+				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 					<pretty:link mappingId="profissional-editar">
 						<f:param value="#{profissional.id}" />
 						<p:commandButton type="button" value="#{message['button.editar']}" />
