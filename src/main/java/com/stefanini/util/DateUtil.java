@@ -96,6 +96,20 @@ public class DateUtil {
         String data = out.format(calendar.getTime());
         return data;
     }
+    
+    public static Date proximoDiaUtil(){
+    	Date data = new Date();
+    	GregorianCalendar calendar = new GregorianCalendar();
+    	
+    	calendar.setTime(data);
+    	if ( calendar.get(GregorianCalendar.DAY_OF_WEEK)==6){
+    		calendar.set(GregorianCalendar.DAY_OF_WEEK, +2);
+    	}else{
+    		calendar.set(GregorianCalendar.DAY_OF_WEEK, +1);
+    	}
+    	data = calendar.getTime();
+    	return data;
+    }
 //    public static Date DataDoSistemaMySql(){
 //    	SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");    	
 //    	Date dataAtual = new Date();
