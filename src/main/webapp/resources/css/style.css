@@ -68,9 +68,10 @@ html, body {
 
 .cabecalho {
     margin: auto;
-	width: 85%;
+	width: 90%;
 	height: 100%;
 }
+
 .container--topmenu {
     background-color: rgb(255, 255, 255);
     height: 115px;
@@ -89,27 +90,28 @@ html, body {
 	
 	
 }
+
 .relogio-hora{
 	float: left;
 	width: 160px;
 	margin-top: 45px;
 	
 }
+
 .ui-clock{
-	/* position: absolute; */
-	
 	background-color:#fff;
 	border:none;
 } 
+
 /* MENU */
 .ct-menu {
-    width: 85%;
+    width: 90%;
     height: 25px;
     z-index: 80;
     position: absolute;
     top: 133px;
     color: #FFF;
-    left: 120px;
+    left: 60px;
 }
 
 .ct-menu ul {
@@ -201,7 +203,7 @@ html, body {
 
 .container{
 	margin: auto;
-    width: 85%;	
+    width: 90%;	
 }
 
 /* FORM */
