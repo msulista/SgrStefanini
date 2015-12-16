@@ -11,49 +11,50 @@
 		    <p:menuitem value="Home" url="#" />
 		    <p:menuitem value="Perfil Stefanini" outcome="pretty:perfilStefanini" disabled="true"/>
 		</p:breadCrumb>
-		<h2>#{message['title.perfilStefanini']}</h2>
-		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
-		<h:form>
-			<p:dataTable id="gridPerfilStefanini" var="perfilStefanini" value="#{perfilStefaniniManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
-				<p:column headerText="#{message['label.nome']}">
-					<h:outputText value="#{perfilStefanini.nome}"/>
-				</p:column>
-				
-				<p:column headerText="#{message['label.perfilStefanini.valorInicial']}" >
-					<h:outputText value="#{perfilStefanini.valorInicial}">
-						<f:converter converterId="moedaConverter"/>
-					</h:outputText>
-				</p:column>
-				
-				<p:column headerText="#{message['label.perfilStefanini.valorFinal']}" >
-					<h:outputText value="#{perfilStefanini.valorFinal}">
-						<f:converter converterId="moedaConverter"/>
-					</h:outputText>
-				</p:column>
-				
-				<p:column headerText="#{message['label.data.inicio']}">
-					<h:outputText value="#{perfilStefanini.registroValidadeInicio}">
-						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
-					</h:outputText>
-				</p:column>
-				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
-					<pretty:link mappingId="perfilStefanini-editar">
-						<f:param value="#{perfilStefanini.id}" />
-						<p:commandButton styleClass="btn-acao" type="button" value="#{message['button.editar']}" />
-					</pretty:link>
-					<p:commandButton styleClass="btn-acao" value="#{message['button.desativar']}" action="#{perfilStefaniniManager.desativar(perfilStefanini.id)}" update="gridPerfilStefanini" >
-						<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
-					</p:commandButton>
-				</p:column>
-			</p:dataTable>
-			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-				<p:commandButton value="#{message['button.sim']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="growl"/>
-				<p:commandButton value="#{message['button.nao']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-			</p:confirmDialog>
-			<br />
-			<p:button value="#{message['button.novo']}" outcome="pretty:perfilStefanini-incluir" />
-		</h:form>
-		
+		<div class="panel-formulario">
+			<h2>#{message['title.perfilStefanini']}</h2>
+			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
+			<h:form>
+				<p:dataTable id="gridPerfilStefanini" var="perfilStefanini" value="#{perfilStefaniniManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
+					<p:column headerText="#{message['label.nome']}">
+						<h:outputText value="#{perfilStefanini.nome}"/>
+					</p:column>
+					
+					<p:column headerText="#{message['label.perfilStefanini.valorInicial']}" >
+						<h:outputText value="#{perfilStefanini.valorInicial}">
+							<f:converter converterId="moedaConverter"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="#{message['label.perfilStefanini.valorFinal']}" >
+						<h:outputText value="#{perfilStefanini.valorFinal}">
+							<f:converter converterId="moedaConverter"/>
+						</h:outputText>
+					</p:column>
+					
+					<!--  <p:column headerText="#{message['label.data.inicio']}">
+						<h:outputText value="#{perfilStefanini.registroValidadeInicio}">
+							<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
+						</h:outputText>
+					</p:column> -->
+					<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
+						<pretty:link mappingId="perfilStefanini-editar">
+							<f:param value="#{perfilStefanini.id}" />
+							<p:commandButton styleClass="btn-acao" type="button" value="#{message['button.editar']}" />
+						</pretty:link>
+						<p:commandButton styleClass="btn-acao" value="#{message['button.desativar']}" action="#{perfilStefaniniManager.desativar(perfilStefanini.id)}" update="gridPerfilStefanini" >
+							<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="#{message['button.sim']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="growl"/>
+					<p:commandButton value="#{message['button.nao']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+				<br />
+				<p:button value="#{message['button.novo']}" outcome="pretty:perfilStefanini-incluir" />
+			</h:form>
+		</div>
 	</ui:define>
 
 </ui:composition>

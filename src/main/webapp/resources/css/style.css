@@ -279,6 +279,10 @@ input[type=text] {
     bottom: 20px;
 }
  */
-  .btn-acao{
-    width: 70px;
-  }
+.btn-acao{
+	width: 70px;
+}
+
+.panel-formulario{
+	width: 50%;
+}
