@@ -10,7 +10,7 @@ import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
 @FacesConverter(value="cargaHorariaConverter") 
-public class CargaHorariaConverter implements Converter {
+public class moedaConverter implements Converter {
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,

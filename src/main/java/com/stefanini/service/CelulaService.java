@@ -34,17 +34,23 @@ public class CelulaService {
 		manager.getTransaction().begin();
 
 		if (DateUtil.verificaDiaUtil(celula.getDataManipulacao())) {
-			Celula celulaMerge = getCelulaById(celula.getId());
-			celulaMerge.setRegistroValidadeFim(celula.getDataManipulacao());
-			manager.merge(celulaMerge);
-			manager.getTransaction().commit();
-			manager.close();
+			if (DateUtil.verificaNovaDataInicio(celula.getRegistroValidadeInicio(), celula.getDataManipulacao())) {
+				Celula celulaMerge = getCelulaById(celula.getId());
+				celulaMerge.setRegistroValidadeFim(celula.getDataManipulacao());
+				manager.merge(celulaMerge);
+				manager.getTransaction().commit();
+				manager.close();
 
-			Celula celulaPersist = new Celula();
-			celulaPersist.setNome(celula.getNome());
-			celulaPersist.setRegistroValidadeInicio(celula.getDataManipulacao());
-			save(celulaPersist);
-			return true;
+				Celula celulaPersist = new Celula();
+				celulaPersist.setNome(celula.getNome());
+				celulaPersist.setRegistroValidadeInicio(celula.getDataManipulacao());
+				save(celulaPersist);
+				return true;
+			} else {
+				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
+				manager.close();
+				return false;
+			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();
@@ -55,7 +61,9 @@ public class CelulaService {
 	@SuppressWarnings("unchecked")
 	public List<Celula> listarAtivo() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_celula WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",Celula.class);
+		Query q = manager.createNativeQuery(
+				"SELECT * FROM sgr_celula WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
+				Celula.class);
 		List<Celula> celulas = q.getResultList();
 		manager.close();
 		return celulas;
@@ -65,7 +73,7 @@ public class CelulaService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery("SELECT * FROM sgr_celula WHERE ID_CELULA = :idCelula", Celula.class);
 		q.setParameter("idCelula", id);
-		Celula celula = (Celula)q.getSingleResult();
+		Celula celula = (Celula) q.getSingleResult();
 		manager.close();
 		return celula;
 	}

@@ -15,7 +15,7 @@
 			<p:panel header="#{message['title.cargaHoraria.editar']}" id="painel">			
 				<p:focus context="painel"/>
 				<p:outputLabel value="#{message['label.cargaHoraria']}" styleClass="label" for="cargaHoraria"/>
-				<p:inputMask id="cargaHoraria" value="#{cargaHorariaManager.cargaHoraria.cargaHoraria}" mask="99,99" converter="cargaHorariaConverter" required="true" requiredMessage="#{message['span.obrigatorio.cargaHoraria']}"/><br/><br/>
+				<p:inputMask id="cargaHoraria" value="#{cargaHorariaManager.cargaHoraria.cargaHoraria}" mask="99,99" converter="moedaConverter" required="true" requiredMessage="#{message['span.obrigatorio.cargaHoraria']}"/><br/><br/>
 				<p:outputLabel for="button" value="#{message['label.data.inicio.nova']}" styleClass="label"/>
         		<p:calendar id="button" value="#{cargaHorariaManager.cargaHoraria.dataManipulacao}" pattern="dd/MM/yyyy" mask="true" showOn="button"  required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/><br/><br/>
         		<p:commandButton value="#{message['button.salvar']}" action="#{cargaHorariaManager.update()}" update="growl" />

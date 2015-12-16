@@ -35,17 +35,23 @@ public class PerfilService {
 		manager.getTransaction().begin();
 
 		if (DateUtil.verificaDiaUtil(perfil.getDataManipulacao())) {
-			Perfil perfilMerge = getPerfilById(perfil.getId());
-			perfilMerge.setRegistroValidadeFim(perfil.getDataManipulacao());
-			manager.merge(perfilMerge);
-			manager.getTransaction().commit();
-			manager.close();
+			if (DateUtil.verificaNovaDataInicio(perfil.getRegistroValidadeInicio(), perfil.getDataManipulacao())) {
+				Perfil perfilMerge = getPerfilById(perfil.getId());
+				perfilMerge.setRegistroValidadeFim(perfil.getDataManipulacao());
+				manager.merge(perfilMerge);
+				manager.getTransaction().commit();
+				manager.close();
 
-			Perfil perfilPersist = new Perfil();
-			perfilPersist.setNome(perfil.getNome());
-			perfilPersist.setRegistroValidadeInicio(perfil.getDataManipulacao());
-			save(perfilPersist);
-			return true;
+				Perfil perfilPersist = new Perfil();
+				perfilPersist.setNome(perfil.getNome());
+				perfilPersist.setRegistroValidadeInicio(perfil.getDataManipulacao());
+				save(perfilPersist);
+				return true;
+			} else {
+				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
+				manager.close();
+				return false;
+			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();
