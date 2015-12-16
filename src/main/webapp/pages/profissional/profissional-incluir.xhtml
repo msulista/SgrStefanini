@@ -30,7 +30,7 @@
 				<p:inputText id="beneficio" value="#{profissionalManager.profissional.beneficios}" />
 				<br /><br />
 				<p:outputLabel for="valorHora" value="#{message['label.profissional.valorHora']}" styleClass="label"/>
-				<p:inputMask id="valorHora" value="#{profissionalManager.profissional.valorHora}" mask="99,99" converter="cargaHorariaConverter" required="true" requiredMessage="#{message['span.obrigatorio.valorHora']}"/>
+				<p:inputMask id="valorHora" value="#{profissionalManager.profissional.valorHora}" mask="99,99" converter="moedaConverter" required="true" requiredMessage="#{message['span.obrigatorio.valorHora']}"/>
 				<br/><br/>
 				<p:outputLabel for="admissao" value="#{message['label.profissional.dataAdmissao']}" styleClass="label"/>
         		<p:calendar id="admissao" value="#{profissionalManager.profissional.dataAdmissao}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataAdimissao']}" disabledWeekends="true"/>
