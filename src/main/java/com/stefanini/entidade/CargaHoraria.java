@@ -37,6 +37,7 @@ public class CargaHoraria implements BaseEntity, Serializable{
 	private Date dataManipulacaoFim;
 	
 	public CargaHoraria() {
+		this.registroValidadeInicio = DateUtil.getProximoDiaUtil();
 		this.dataManipulacaoFim = DateUtil.getProximoDiaUtil();
 	}
 

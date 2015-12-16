@@ -102,10 +102,12 @@ public class DateUtil {
     	GregorianCalendar calendar = new GregorianCalendar();
     	
     	calendar.setTime(data);
-    	if ( calendar.get(GregorianCalendar.DAY_OF_WEEK)==6){
-    		calendar.set(GregorianCalendar.DAY_OF_WEEK, +2);
+    	if (calendar.get(GregorianCalendar.DAY_OF_WEEK)==6){
+    		calendar.add(GregorianCalendar.DAY_OF_MONTH,3);
+    	}else if(calendar.get(GregorianCalendar.DAY_OF_WEEK)==7){
+    		calendar.add(GregorianCalendar.DAY_OF_MONTH,2);
     	}else{
-    		calendar.set(GregorianCalendar.DAY_OF_WEEK, +1);
+    		calendar.add(GregorianCalendar.DAY_OF_MONTH,1);
     	}
     	data = calendar.getTime();
     	return data;
