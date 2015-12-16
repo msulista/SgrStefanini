@@ -31,6 +31,7 @@ public class EquipeService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 		if (DateUtil.verificaDiaUtil(equipe.getDataManipulacao())) {
+			if(DateUtil.verificaNovaDataInicio(equipe.getRegistroValidadeInicio(), equipe.getDataManipulacao())){
 			Equipe equipeMerge = getEquipeById(equipe.getId());
 			equipeMerge.setRegistroValidadeFim(equipe.getDataManipulacao());
 			manager.merge(equipeMerge);
@@ -42,6 +43,12 @@ public class EquipeService {
 			equipePersist.setRegistroValidadeInicio(equipe.getDataManipulacao());
 			save(equipePersist);
 			return true;
+			
+			}else{
+				Mensagem.add("Nova data é anterior a cadastrada originalmente!");
+				manager.close();
+				return false;
+			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();
