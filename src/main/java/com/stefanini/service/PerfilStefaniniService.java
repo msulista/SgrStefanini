@@ -1,13 +1,13 @@
 package com.stefanini.service;
 
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import com.stefanini.entidade.PerfilStefanini;
+import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
 
@@ -16,7 +16,7 @@ public class PerfilStefaniniService {
 	public boolean save(PerfilStefanini perfilStefanini) {
 		EntityManager manager = JPAUtil.getEntityManager();
 
-		if (verificaDiaUtil(perfilStefanini.getRegistroValidadeInicio())) {
+		if (DateUtil.verificaDiaUtil(perfilStefanini.getRegistroValidadeInicio())) {
 			manager.getTransaction().begin();
 			manager.persist(perfilStefanini);
 			manager.getTransaction().commit();
@@ -33,7 +33,7 @@ public class PerfilStefaniniService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		
 
-		if (verificaDiaUtil(perfilStefanini.getDataManipulacao())) {
+		if (DateUtil.verificaDiaUtil(perfilStefanini.getDataManipulacao())) {
 			manager.getTransaction().begin();
 			PerfilStefanini perfilStefaniniAntigo = getPerfilStefaniniById(perfilStefanini.getId());
 			perfilStefaniniAntigo.setRegistroValidade(perfilStefanini.getDataManipulacao());
@@ -85,18 +85,5 @@ public class PerfilStefaniniService {
 		manager.getTransaction().commit();
 		manager.close();
 
-	}
-
-	public boolean verificaDiaUtil(Date data) {
-		GregorianCalendar calendar = new GregorianCalendar();
-
-		calendar.setTime(data);
-
-		if (calendar.get(GregorianCalendar.DAY_OF_WEEK) == 1 || calendar.get(GregorianCalendar.DAY_OF_WEEK) == 7) {
-			return false;
-		} else {
-			return true;
-
-		}
 	}
 }

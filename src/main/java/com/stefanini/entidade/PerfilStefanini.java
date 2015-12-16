@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.stefanini.util.DateUtil;
+
 @Entity
 @Table(name = "SGR_PERFIL_STEFANINI")
 public class PerfilStefanini implements Serializable{
@@ -41,7 +43,8 @@ public class PerfilStefanini implements Serializable{
 	private Date dataManipulacao;
 	
 	public PerfilStefanini() {
-		this.dataManipulacao = new Date();
+		this.registroValidadeInicio = DateUtil.getProximoDiaUtil();
+		this.dataManipulacao = DateUtil.getProximoDiaUtil();
 	}
 
 	public Long getId() {

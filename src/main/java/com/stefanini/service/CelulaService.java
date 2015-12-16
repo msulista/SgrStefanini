@@ -1,13 +1,13 @@
 package com.stefanini.service;
 
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.stefanini.entidade.Celula;
+import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
 
@@ -16,7 +16,7 @@ public class CelulaService {
 	public boolean save(Celula celula) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		if (verificaDiaUtil(celula.getRegistroValidadeInicio())) {
+		if (DateUtil.verificaDiaUtil(celula.getRegistroValidadeInicio())) {
 			manager.persist(celula);
 			manager.getTransaction().commit();
 			manager.close();
@@ -33,7 +33,7 @@ public class CelulaService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
-		if (verificaDiaUtil(celula.getDataManipulacao())) {
+		if (DateUtil.verificaDiaUtil(celula.getDataManipulacao())) {
 			Celula celulaMerge = getCelulaById(celula.getId());
 			celulaMerge.setRegistroValidadeFim(celula.getDataManipulacao());
 			manager.merge(celulaMerge);
@@ -78,18 +78,5 @@ public class CelulaService {
 		manager.merge(celulaMerge);
 		manager.getTransaction().commit();
 		manager.close();
-	}
-
-	public boolean verificaDiaUtil(Date data) {
-		GregorianCalendar calendar = new GregorianCalendar();
-
-		calendar.setTime(data);
-
-		if (calendar.get(GregorianCalendar.DAY_OF_WEEK) == 1 || calendar.get(GregorianCalendar.DAY_OF_WEEK) == 7) {
-			return false;
-		} else {
-			return true;
-
-		}
 	}
 }

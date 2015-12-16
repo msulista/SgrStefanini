@@ -13,12 +13,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.stefanini.util.DateUtil;
+
 @Entity
 @Table(name = "SGR_PROFISSIONAL")
 public class Profissional implements BaseEntity, Serializable {
 	private static final long serialVersionUID = 1L;
 	public Profissional() {
-		this.dataManipulacao = new Date();
+		this.registroValidadeInicio = DateUtil.getProximoDiaUtil();
+		this.dataManipulacao = DateUtil.getProximoDiaUtil();
 	}
 	
 	@Transient

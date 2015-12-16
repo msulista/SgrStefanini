@@ -34,19 +34,19 @@ public class CargaHoraria implements BaseEntity, Serializable{
 	private Date registroValidadeFim;
 	
 	@Transient
-	private Date dataManipulacaoFim;
+	private Date dataManipulacao;
 	
 	public CargaHoraria() {
 		this.registroValidadeInicio = DateUtil.getProximoDiaUtil();
-		this.dataManipulacaoFim = DateUtil.getProximoDiaUtil();
+		this.dataManipulacao = DateUtil.getProximoDiaUtil();
 	}
 
 	public Date getDataManipulacao() {
-		return dataManipulacaoFim;
+		return dataManipulacao;
 	}
 
-	public void setDataManipulacao(Date dataManipulacaoFim) {
-		this.dataManipulacaoFim = dataManipulacaoFim;
+	public void setDataManipulacao(Date dataManipulacao) {
+		this.dataManipulacao = dataManipulacao;
 	}
 
 	public Long getId() {

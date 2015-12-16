@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.stefanini.util.DateUtil;
+
 @Entity
 @Table(name = "SGR_FORMA_CONTRATACAO")
 public class FormaContratacao implements BaseEntity, Serializable{
@@ -35,7 +37,8 @@ public class FormaContratacao implements BaseEntity, Serializable{
 	private Date dataManipulacao;
 	
 	public FormaContratacao() {
-		this.dataManipulacao = new Date();
+		this.registroValidadeInicio = DateUtil.getProximoDiaUtil();
+		this.dataManipulacao = DateUtil.getProximoDiaUtil();
 	}
 
 	public Date getDataManipulacao() {

@@ -1,7 +1,6 @@
 package com.stefanini.service;
 
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.faces.convert.ConverterException;
@@ -9,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.stefanini.entidade.FormaContratacao;
+import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
 
@@ -17,7 +17,7 @@ public class FormaContratacaoService {
 	public boolean save(FormaContratacao formaContratacao) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		if (verificaDiaUtil(formaContratacao.getRegistroValidadeInicio())) {
+		if (DateUtil.verificaDiaUtil(formaContratacao.getRegistroValidadeInicio())) {
 			manager.persist(formaContratacao);
 			manager.getTransaction().commit();
 			manager.close();
@@ -33,7 +33,7 @@ public class FormaContratacaoService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
-		if (verificaDiaUtil(formaContratacao.getDataManipulacao())) {
+		if (DateUtil.verificaDiaUtil(formaContratacao.getDataManipulacao())) {
 			FormaContratacao formaContratacaoMerge = (FormaContratacao) getFormaContratacaoById(
 					formaContratacao.getId());
 			formaContratacaoMerge.setRegistroValidadeFim(formaContratacao.getDataManipulacao());
@@ -82,18 +82,5 @@ public class FormaContratacaoService {
 		manager.merge(formaContratacao);
 		manager.getTransaction().commit();
 		manager.close();
-	}
-
-	public boolean verificaDiaUtil(Date data) {
-		GregorianCalendar calendar = new GregorianCalendar();
-
-		calendar.setTime(data);
-
-		if (calendar.get(GregorianCalendar.DAY_OF_WEEK) == 1 || calendar.get(GregorianCalendar.DAY_OF_WEEK) == 7) {
-			return false;
-		} else {
-			return true;
-
-		}
 	}
 }
