@@ -97,7 +97,7 @@ public class DateUtil {
         return data;
     }
     
-    public static Date proximoDiaUtil(){
+    public static Date getProximoDiaUtil(){
     	Date data = new Date();
     	GregorianCalendar calendar = new GregorianCalendar();
     	

@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.stefanini.util.DateUtil;
+
 @Entity
 @Table(name = "SGR_CARGA_HORARIA")
 public class CargaHoraria implements BaseEntity, Serializable{
@@ -35,7 +37,7 @@ public class CargaHoraria implements BaseEntity, Serializable{
 	private Date dataManipulacaoFim;
 	
 	public CargaHoraria() {
-		this.dataManipulacaoFim = new Date();
+		this.dataManipulacaoFim = DateUtil.getProximoDiaUtil();
 	}
 
 	public Date getDataManipulacao() {
