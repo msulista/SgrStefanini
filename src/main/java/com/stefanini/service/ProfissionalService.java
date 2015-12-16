@@ -44,7 +44,7 @@ public class ProfissionalService {
 		manager.getTransaction().begin();
 
 		if (DateUtil.verificaDiaUtil(profissional.getRegistroValidadeInicio())) {
-			if (DateUtil.verificaNovaDataInicio(profissional.getRegistroValidadeInicio(),
+			if (DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),
 					profissional.getDataManipulacao())) {
 				Profissional profissionalMerge = (Profissional) getProfissionalById(profissional.getId());
 				profissionalMerge.setRegistroValidaeFim(profissional.getDataManipulacao());

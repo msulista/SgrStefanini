@@ -34,7 +34,7 @@ public class StatusService {
 		manager.getTransaction().begin();
 
 		if (DateUtil.verificaDiaUtil(status.getDataManipulacao())) {
-			if (DateUtil.verificaNovaDataInicio(status.getRegistroValidadeInicio(), status.getDataManipulacao())) {
+			if (DateUtil.verificaDataValida(status.getRegistroValidadeInicio(), status.getDataManipulacao())) {
 				Status statusMerge = (Status) getStatusById(status.getId());
 				statusMerge.setRegistroValidadeFim(status.getDataManipulacao());
 				manager.merge(statusMerge);
