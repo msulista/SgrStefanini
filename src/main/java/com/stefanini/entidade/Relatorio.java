@@ -8,7 +8,7 @@ public class Relatorio {
 	public Relatorio() {
 	}
 	
-	public Relatorio(Long quantidade, String nome) {
+	public Relatorio(String nome, Long quantidade) {
 		this.quantidade = quantidade;
 		this.nome = nome;
 	}

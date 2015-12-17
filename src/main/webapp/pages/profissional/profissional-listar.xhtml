@@ -15,51 +15,81 @@
 		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 		<h:form>
 			<p:dataTable id="gridProfissional" var="profissional" value="#{profissionalManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
-				<p:column headerText="#{message['label.nome']}">
+								
+	            <f:facet name="header">
+		            <p:outputPanel>
+		                <h:outputText value="Pesquisar:" />
+		                <p:inputText  id="globalFilter" onkeyup="PF('carsTable').filter()"  placeholder="Enter keyword"/>
+		            </p:outputPanel>
+		        </f:facet> 
+				
+				<p:column filterBy="#{profissional.nome}" filterMatchMode="contains" headerText="#{message['label.nome']} " sortBy="#{profissional.nome}">
 					<h:outputText value="#{profissional.nome}"/>
 				</p:column>
-				
-				<!-- <p:column headerText="#{message['label.profissional.salario']}">
-					<h:outputText value="#{profissional.salario}"/>			
-				</p:column>
-				<p:column headerText="#{message['label.profissional.beneficios']}">
-					<h:outputText value="#{profissional.beneficios}"/>			
-				</p:column>
-				<p:column headerText="#{message['label.profissional.valorHora']}">
-					<h:outputText value="#{profissional.valorHora}"/>			
-				</p:column>
-				<p:column headerText="#{message['label.profissional.dataAdmissao']}">
-					<h:outputText value="#{profissional.dataAdmissao}">	
-					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
-					</h:outputText>		
-				</p:column>
-				<p:column headerText="#{message['label.profissional.dataDemissao']}">
-					<h:outputText value="#{profissional.dataDemissao}">	
-					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>	
-					</h:outputText>	
-				</p:column>	 -->
 							
-				<p:column headerText="#{message['label.profissional.celula']}">
+				<p:column filterBy="#{profissional.celula.nome}" headerText="#{message['label.profissional.celula']}" sortBy="#{profisional.celula.nome}">	
+					<f:facet name="filter">
+		                <p:selectCheckboxMenu label="Células" onchange="PF('carsTable').filter()">
+		                    <f:selectItems value="#{celulaManager.listarAtivos()}" var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}" />
+		                </p:selectCheckboxMenu>
+		            </f:facet>	
 					<h:outputText value="#{profissional.celula.nome}"/>			
-				</p:column>				
-				<p:column headerText="#{message['label.profissional.equipe']}">
+				</p:column>	
+							
+				<p:column filterBy="#{profissional.equipe.nome}" headerText="#{message['label.profissional.equipe']}" sortBy="#{profisional.equipe.nome}">
+					<f:facet name="filter">
+		                <p:selectCheckboxMenu label="Equipes" onchange="PF('carsTable').filter()">
+		                    <f:selectItems value="#{equipeManager.listarAtivos()}" var="equipe" itemLabel="#{equipe.nome}" itemValue="#{equipe}" />
+		                </p:selectCheckboxMenu>
+		            </f:facet>
 					<h:outputText value="#{profissional.equipe.nome}"/>			
-				</p:column>
-				<p:column headerText="#{message['label.profissional.cargo']}">
+				</p:column>  
+				 
+				<p:column filterBy="#{profissional.cargo.nome}" headerText="#{message['label.profissional.cargo']}" sortBy="#{profisional.cargo.nome}">
+		            <f:facet name="filter">
+		                <p:selectCheckboxMenu label="Cargos" onchange="PF('carsTable').filter()">
+		                    <f:selectItems value="#{cargoManager.listarAtivos()}" var="cargo" itemLabel="#{cargo.nome}" itemValue="#{cargo}" />
+		                </p:selectCheckboxMenu>
+		            </f:facet>
 					<h:outputText value="#{profissional.cargo.nome}"/>			
 				</p:column>
-				<p:column  headerText="#{message['label.profissional.perfil']}">
-					<h:outputText value="#{profissional.perfil.nome}"/>			
+				
+				<p:column  filterBy="#{profissional.perfil.nome}"  headerText="#{message['label.profissional.perfil']}" sortBy="#{proffisional.perfil.nome}">
+					<f:facet name="filter">
+		                <p:selectCheckboxMenu label="Perfis" onchange="PF('carsTable').filter()">
+		                    <f:selectItems value="#{perfilManager.listarAtivos()}" var="perfil" itemLabel="#{perfil.nome}" itemValue="#{perfil}" />
+		                </p:selectCheckboxMenu>
+		            </f:facet>
+					<h:outputText value="#{profissional.perfil.nome}"/>	
 				</p:column>
-				<p:column headerText="#{message['label.cargaHoraria']}">
+				
+				<p:column filterBy="#{profissional.cargaHoraria.cargaHoraria}" headerText="#{message['label.cargaHoraria']}">
+					<f:facet name="filter">
+		                <p:selectCheckboxMenu label="Carga Horarias" onchange="PF('carsTable').filter()">
+		                    <f:selectItems value="#{cargaHorariaManager.listarAtivos()}" var="cargaHoraria" itemLabel="#{cargaHoraria.cargaHoraria}" itemValue="#{cargaHoraria}" />
+		                </p:selectCheckboxMenu>
+		            </f:facet>
 					<h:outputText value="#{profissional.cargaHoraria.cargaHoraria}"/>			
 				</p:column>
-				<p:column headerText="#{message['label.profissional.formaContratacao']}">
+				
+				<p:column filterBy="#{profissional.formaContratacao.nome}" headerText="#{message['label.profissional.formaContratacao']}" sortBy="#{profisional.formaContratacao.nome}">
+					<f:facet name="filter">
+		                <p:selectCheckboxMenu label="Contratações" onchange="PF('carsTable').filter()">
+		                    <f:selectItems value="#{formaContratacao.listarAtivos()}" var="formaContratacao" itemLabel="#{formaContratacao.nome}" itemValue="#{formaContratacao}" />
+		                </p:selectCheckboxMenu>
+		            </f:facet>
 					<h:outputText value="#{profissional.formaContratacao.nome}"/>			
 				</p:column>
-				<p:column headerText="#{message['label.profissional.status']}">
+				
+				<p:column filterBy="#{profissional.status.nome}" headerText="#{message['label.profissional.status']}" sortBy="#{profisional.status.nome}">
+					<f:facet name="filter">
+		                <p:selectCheckboxMenu label="Status" onchange="PF('carsTable').filter()">
+		                    <f:selectItems value="#{statusManager.listarAtivos()}" var="status" itemLabel="#{status.nome}" itemValue="#{status}" />
+		                </p:selectCheckboxMenu>
+		            </f:facet>
 					<h:outputText value="#{profissional.status.nome}"/>			
 				</p:column>
+				
 				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 					<pretty:link mappingId="profissional-editar">
 						<f:param value="#{profissional.id}" />
@@ -69,13 +99,16 @@
 						<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
 					</p:commandButton>
 				</p:column>
+				
 			</p:dataTable>
+			
 			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 				<p:commandButton value="#{message['button.sim']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="growl"/>
 				<p:commandButton value="#{message['button.nao']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 			</p:confirmDialog>
+			
 			<br />
-			<p:button value="#{message['button.novo']}" outcome="pretty:profissional-incluir" />
+			<p:button styleClass="btn-default" value="#{message['button.novo']}" outcome="pretty:profissional-incluir" />
 		</h:form>
 		
 	</ui:define>

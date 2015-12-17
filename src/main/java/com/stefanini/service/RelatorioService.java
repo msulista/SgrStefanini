@@ -15,42 +15,42 @@ import com.stefanini.util.JPAUtil;
 
 public class RelatorioService {
 	
-	    private BarChartModel profissionalPorEquipe;
-	    
-	    public void criaGrafico(){
-	    	createBarModel();
-	    }
-	    
-	    public BarChartModel getProfissionalPorEquipe() {
-	        return profissionalPorEquipe;
-	    }
-	 
-	    private BarChartModel initBarModel() {
-	        BarChartModel model = new BarChartModel();
-	 
-	        ChartSeries grafico = new ChartSeries();
-	        for (Relatorio relatorio : profissionaisPorEquipe()) {
-				grafico.set(relatorio.getNome(), relatorio.getQuantidade());
-			}	 
-	        model.addSeries(grafico);
-	         
-	        return model;
-	    }
-	     
-	    private void createBarModel() {
-	        profissionalPorEquipe = initBarModel();
-	         
-	        profissionalPorEquipe.setTitle("Profissionais por equipe");
-	        profissionalPorEquipe.setLegendPosition("ne");
-	         
-	        Axis xAxis = profissionalPorEquipe.getAxis(AxisType.X);
-	        xAxis.setLabel("Equipes");
-	         
-	        Axis yAxis = profissionalPorEquipe.getAxis(AxisType.Y);
-	        yAxis.setLabel("N° Profissionais");
-	        yAxis.setMin(0);
-	        yAxis.setMax(50);
-	    }
+//	    private BarChartModel profissionalPorEquipe;
+//	    
+//	    public void criaGrafico(){
+//	    	createBarModel();
+//	    }
+//	    
+//	    public BarChartModel getProfissionalPorEquipe() {
+//	        return profissionalPorEquipe;
+//	    }
+//	 
+//	    private BarChartModel initBarModel() {
+//	        BarChartModel model = new BarChartModel();
+//	 
+//	        ChartSeries grafico = new ChartSeries();
+//	        for (Relatorio relatorio : profissionaisPorEquipe()) {
+//				grafico.set(relatorio.getNome(), relatorio.getQuantidade());
+//			}	 
+//	        model.addSeries(grafico);
+//	         
+//	        return model;
+//	    }
+//	     
+//	    private void createBarModel() {
+//	        profissionalPorEquipe = initBarModel();
+//	         
+//	        profissionalPorEquipe.setTitle("Profissionais por equipe");
+//	        profissionalPorEquipe.setLegendPosition("ne");
+//	         
+//	        Axis xAxis = profissionalPorEquipe.getAxis(AxisType.X);
+//	        xAxis.setLabel("Equipes");
+//	         
+//	        Axis yAxis = profissionalPorEquipe.getAxis(AxisType.Y);
+//	        yAxis.setLabel("N° Profissionais");
+//	        yAxis.setMin(0);
+//	        yAxis.setMax(50);
+//	    }
 	
 //	@SuppressWarnings("unchecked")
 //	public List<Relatorio> profissionaisPorEquipe(){
@@ -71,8 +71,8 @@ public class RelatorioService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		String profisionalPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome, COUNT(p)) FROM Profissional p "
 									+ "GROUP BY p.equipe.nome";
-		Query q = manager.createQuery(profisionalPorEquipe);		
-		List<Relatorio> relatorioProfissionalPorEquipe =  q.getResultList();
+		Query q = manager.createQuery(profisionalPorEquipe, Relatorio.class);		
+		List<Relatorio> relatorioProfissionalPorEquipe = (List<Relatorio>)q.getResultList();
 		return relatorioProfissionalPorEquipe;		
 	}
 	
