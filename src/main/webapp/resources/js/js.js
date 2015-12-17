@@ -9,7 +9,7 @@ function execmascara() {
 }
 
 function limpaDoubleVazio(obj){
-	if(obj.value == '0.0') obj.value = '';
+	if(obj.value == '0.0' || obj.value == '0,0') obj.value = '';
 	
 }
 
