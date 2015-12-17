@@ -24,10 +24,10 @@
 				<p:inputText id="nome" value="#{profissionalManager.profissional.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
 				<br /><br />				
 				<p:outputLabel for="salario" value="#{message['label.profissional.salario']}" styleClass="label" />
-				<p:inputText id="salario" value="#{profissionalManager.profissional.salario}" required="true" requiredMessage="#{message['span.obrigatorio.salario']}" onkeypress="mascara(this,moeda)" maxlength="14" />
+				<p:inputMask id="salario" value="#{profissionalManager.profissional.salario}" required="true" requiredMessage="#{message['span.obrigatorio.salario']}" onblur="mensagem(#{profissionalManager.profissional.salario})"/>
 				<br /><br />
 				<p:outputLabel for="beneficio" value="#{message['label.profissional.beneficios']}" styleClass="label" />
-				<p:inputText id="beneficio" value="#{profissionalManager.profissional.beneficios}" onkeypress="mascara(this,moeda)" maxlength="14"/>
+				<p:inputText id="beneficio" value="#{profissionalManager.profissional.beneficios}"/>
 				<br /><br />
 				<p:outputLabel for="valorHora" value="#{message['label.profissional.valorHora']}" styleClass="label"/>
 				<p:inputMask id="valorHora" value="#{profissionalManager.profissional.valorHora}" mask="99,99" converter="moedaConverter" required="true" requiredMessage="#{message['span.obrigatorio.valorHora']}"/>

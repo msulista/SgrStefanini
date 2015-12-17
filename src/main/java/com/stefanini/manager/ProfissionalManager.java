@@ -22,6 +22,7 @@ public class ProfissionalManager {
 	private ProfissionalService service = new ProfissionalService();
 
 	public ProfissionalManager() {
+		
 	}
 
 	public Profissional getProfissional() {
