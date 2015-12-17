@@ -8,13 +8,21 @@ function execmascara() {
 	v_obj.value = v_fun(v_obj.value)
 }
 
+function mensagem(){
+	alert("oi");
+}
+
+function teste(obj){
+	alert('obj.value');
+}
+
 function limpaDoubleVazio(obj){
-	if(obj.value == '0.0' || obj.value == '0,0') obj.value = '';
+	if(obj.value == '0') obj.value = '';
 	
 }
 
 function retornaPadrao(obj){
-	if(obj.value == '') obj.value = '0.0';
+	if(obj.value == '') obj.value = '0';
 }
 
 function moeda(v) {

@@ -99,7 +99,7 @@ public class PerfilStefanini implements Serializable{
 		return dataManipulacao;
 	}
 
-	public void setDataManipulacaoFim(Date dataManipulacao) {
+	public void setDataManipulacao(Date dataManipulacao) {
 		this.dataManipulacao = dataManipulacao;
 	}
 

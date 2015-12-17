@@ -22,13 +22,13 @@
 					
 					<p:column headerText="#{message['label.perfilStefanini.valorInicial']}" >
 						<h:outputText value="#{perfilStefanini.valorInicial}">
-							<f:converter converterId="cargaHorariaConverter"/>
+							<f:convertNumber minFractionDigits="2" type="currency" currencySymbol="R$" />
 						</h:outputText>
 					</p:column>
 					
 					<p:column headerText="#{message['label.perfilStefanini.valorFinal']}" >
 						<h:outputText value="#{perfilStefanini.valorFinal}">
-							<f:converter converterId="cargaHorariaConverter"/>
+							<f:convertNumber minFractionDigits="2" type="currency" currencySymbol="R$"/>
 						</h:outputText>
 					</p:column>
 					
