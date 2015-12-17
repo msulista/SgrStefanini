@@ -295,3 +295,16 @@ input[type=text] {
 .ui-button-text-only .ui-button-text {
     padding: 3px;
 }
+
+.ui-datatable-header.ui-widget-header.ui-corner-top{
+	text-align:right;
+}
+
+.ui-widget .ui-widget {
+    margin-top: 2px;
+}
+
+.ui-selectcheckboxmenu .ui-selectcheckboxmenu-label {
+    width: 100px;
+    height: 15px;
+}
