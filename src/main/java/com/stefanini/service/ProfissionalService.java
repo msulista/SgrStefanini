@@ -26,12 +26,17 @@ public class ProfissionalService {
 		EntityManager manager = JPAUtil.getEntityManager();
 
 		if (DateUtil.verificaDiaUtil(profissional.getRegistroValidadeInicio())) {
-
+			if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(), profissional.getDataAdmissao())){
 			manager.getTransaction().begin();
 			manager.persist(profissional);
 			manager.getTransaction().commit();
 			manager.close();
 			return true;
+			}else{
+				Mensagem.add("Erro, data admissão e anterior a de inicio!");
+				manager.close();
+				return false;
+			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();
@@ -44,9 +49,14 @@ public class ProfissionalService {
 		manager.getTransaction().begin();
 
 		if (DateUtil.verificaDiaUtil(profissional.getRegistroValidadeInicio())) {
-			if (DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),
-					profissional.getDataManipulacao())) {
-						Profissional profissionalMerge = (Profissional) getProfissionalById(profissional.getId());
+			
+			Profissional profissionalMerge = (Profissional) getProfissionalById(profissional.getId());
+			
+			if (DateUtil.verificaDataValida(profissionalMerge.getRegistroValidadeInicio(), profissional.getDataManipulacao())) {
+				
+				if(DateUtil.verificaDataValida(profissionalMerge.getRegistroValidadeInicio(), profissional.getDataAdmissao())){
+					
+					if(DateUtil.verificaDataValida(profissionalMerge.getDataAdmissao(), profissional.getDataDemissao())||profissional.getDataDemissao()==null){
 						profissionalMerge.setRegistroValidaeFim(profissional.getDataManipulacao());
 						manager.merge(profissionalMerge);
 						manager.getTransaction().commit();
@@ -72,6 +82,16 @@ public class ProfissionalService {
 
 						save(profissionalPersist);
 						return true;
+					}else{
+						Mensagem.add("Erro, data demissão e anterior a de admissão!");
+						manager.close();
+						return false;
+					}
+				}else{
+					Mensagem.add("Erro, data admissão anterior a inicio!");
+					manager.close();
+					return false;
+				}
 			} else {
 				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
 				manager.close();
