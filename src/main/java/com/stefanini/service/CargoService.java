@@ -33,8 +33,9 @@ public class CargoService {
 		manager.getTransaction().begin();
 
 		if (DateUtil.verificaDiaUtil(cargo.getDataManipulacao())) {
-			if(DateUtil.verificaDataValida(cargo.getRegistroValidadeInicio(), cargo.getDataManipulacao())){
 			Cargo cargoMerge = (Cargo) getCargoById(cargo.getId());
+			if(DateUtil.verificaDataValida(cargoMerge.getRegistroValidadeInicio(), cargo.getDataManipulacao())){
+		
 			cargoMerge.setRegistroValidadeFim(cargo.getDataManipulacao());
 			manager.merge(cargoMerge);
 			manager.getTransaction().commit();

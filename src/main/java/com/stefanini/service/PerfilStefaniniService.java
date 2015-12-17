@@ -33,10 +33,11 @@ public class PerfilStefaniniService {
 		EntityManager manager = JPAUtil.getEntityManager();
 
 		if (DateUtil.verificaDiaUtil(perfilStefanini.getDataManipulacao())) {
-			if (DateUtil.verificaDataValida(perfilStefanini.getRegistroValidadeInicio(),
+			PerfilStefanini perfilStefaniniAntigo = getPerfilStefaniniById(perfilStefanini.getId());
+			if (DateUtil.verificaDataValida(perfilStefaniniAntigo.getRegistroValidadeInicio(),
 					perfilStefanini.getDataManipulacao())) {
 				manager.getTransaction().begin();
-				PerfilStefanini perfilStefaniniAntigo = getPerfilStefaniniById(perfilStefanini.getId());
+			
 				perfilStefaniniAntigo.setRegistroValidade(perfilStefanini.getDataManipulacao());
 				manager.merge(perfilStefaniniAntigo);
 				manager.getTransaction().commit();

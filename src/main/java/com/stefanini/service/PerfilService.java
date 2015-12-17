@@ -35,8 +35,9 @@ public class PerfilService {
 		manager.getTransaction().begin();
 
 		if (DateUtil.verificaDiaUtil(perfil.getDataManipulacao())) {
-			if (DateUtil.verificaDataValida(perfil.getRegistroValidadeInicio(), perfil.getDataManipulacao())) {
-				Perfil perfilMerge = getPerfilById(perfil.getId());
+			Perfil perfilMerge = getPerfilById(perfil.getId());
+			if (DateUtil.verificaDataValida(perfilMerge.getRegistroValidadeInicio(), perfil.getDataManipulacao())) {
+		
 				perfilMerge.setRegistroValidadeFim(perfil.getDataManipulacao());
 				manager.merge(perfilMerge);
 				manager.getTransaction().commit();

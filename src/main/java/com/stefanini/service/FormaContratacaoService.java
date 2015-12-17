@@ -34,10 +34,11 @@ public class FormaContratacaoService {
 		manager.getTransaction().begin();
 
 		if (DateUtil.verificaDiaUtil(formaContratacao.getDataManipulacao())) {
-			if (DateUtil.verificaDataValida(formaContratacao.getRegistroValidadeInicio(),
+			FormaContratacao formaContratacaoMerge = (FormaContratacao) getFormaContratacaoById(
+					formaContratacao.getId());
+			if (DateUtil.verificaDataValida(formaContratacaoMerge.getRegistroValidadeInicio(),
 					formaContratacao.getDataManipulacao())) {
-				FormaContratacao formaContratacaoMerge = (FormaContratacao) getFormaContratacaoById(
-						formaContratacao.getId());
+				
 				formaContratacaoMerge.setRegistroValidadeFim(formaContratacao.getDataManipulacao());
 				manager.merge(formaContratacaoMerge);
 				manager.getTransaction().commit();

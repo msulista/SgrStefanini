@@ -31,8 +31,9 @@ public class EquipeService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 		if (DateUtil.verificaDiaUtil(equipe.getDataManipulacao())) {
-			if(DateUtil.verificaDataValida(equipe.getRegistroValidadeInicio(), equipe.getDataManipulacao())){
 			Equipe equipeMerge = getEquipeById(equipe.getId());
+			if(DateUtil.verificaDataValida(equipeMerge.getRegistroValidadeInicio(), equipe.getDataManipulacao())){
+			
 			equipeMerge.setRegistroValidadeFim(equipe.getDataManipulacao());
 			manager.merge(equipeMerge);
 			manager.getTransaction().commit();

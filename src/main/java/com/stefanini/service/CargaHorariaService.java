@@ -34,8 +34,8 @@ public class CargaHorariaService {
 		manager.getTransaction().begin();
 
 		if(DateUtil.verificaDiaUtil(cargaHoraria.getDataManipulacao())){
-			if(DateUtil.verificaDataValida(cargaHoraria.getRegistroValidadeInicio(), cargaHoraria.getDataManipulacao())){
-		CargaHoraria cargaHorariaAntiga = getCargaHorariaById(cargaHoraria.getId());
+			CargaHoraria cargaHorariaAntiga = getCargaHorariaById(cargaHoraria.getId());
+			if(DateUtil.verificaDataValida(cargaHorariaAntiga.getRegistroValidadeInicio(), cargaHoraria.getDataManipulacao())){
 		cargaHorariaAntiga.setRegistroValidadeFim(cargaHoraria.getDataManipulacao());
 		manager.merge(cargaHorariaAntiga);
 		manager.getTransaction().commit();
