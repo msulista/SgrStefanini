@@ -18,10 +18,10 @@
 				<p:inputText value="#{perfilStefaniniManager.perfilStefanini.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}"/><br/><br/>
 				
 				<p:outputLabel value="#{message['label.perfilStefanini.valorInicial']}" styleClass="label" for="valorInicial"/>
-				<p:inputMask id="valorInicial" value="#{perfilStefaniniManager.perfilStefanini.valorInicial}" mask="99,99" converter="moedaConverter" required="true" requiredMessage="#{message['span.obrigatorio.valorInicial']}"/><br/><br/>
+				<p:inputText id="valorInicial" value="#{perfilStefaniniManager.perfilStefanini.valorInicial}" onblur="retornaPadrao(this)" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/><br/><br/>
 				
 				<p:outputLabel for="valorFinal" value="#{message['label.perfilStefanini.valorFinal']}" styleClass="label"/>
-        		<p:inputMask id="valorFinal" value="#{perfilStefaniniManager.perfilStefanini.valorFinal}" mask="99,99" converter="moedaConverter" required="true" requiredMessage="#{message['span.obrigatorio.valorFinal']}"/><br/><br/>
+        		<p:inputText id="valorFinal" value="#{perfilStefaniniManager.perfilStefanini.valorFinal}" onblur="retornaPadrao(this)" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/><br/><br/>
         		
         		<p:outputLabel for="calendario" value="#{message['label.data.inicio']}" styleClass="label"/>
         		<p:calendar id="calendario" value="#{perfilStefaniniManager.perfilStefanini.dataManipulacao}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/><br/><br/>
