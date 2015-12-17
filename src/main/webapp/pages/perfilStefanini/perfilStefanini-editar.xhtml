@@ -26,7 +26,7 @@
         		<p:outputLabel for="calendario" value="#{message['label.data.inicio']}" styleClass="label"/>
         		<p:calendar id="calendario" value="#{perfilStefaniniManager.perfilStefanini.dataManipulacao}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/><br/><br/>
         		
-        		<p:commandButton value="#{message['button.salvar']}" action="#{perfilStefaniniManager.update()}" update="growl" />
+        		<p:commandButton value="#{message['button.salvar']}" action="#{perfilStefaniniManager.update()}"  update="growl" />
         		<p:button value="#{message['button.cancelar']}" outcome="pretty:perfilStefanini"/>
 			</p:panel>
 		</h:form>
