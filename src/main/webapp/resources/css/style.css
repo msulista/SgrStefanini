@@ -157,6 +157,7 @@ html, body {
 	top: 171px;
 	background: #fff;
 	border: none;
+	padding: 5px 0px 7px;
 }
 
 .ui-breadcrumb a{
@@ -174,7 +175,7 @@ html, body {
 
 .ui-panel-titlebar {
 	color: #FFF;
-	background-color: #5F9EA0;
+	background-image: linear-gradient(to right,#85B65A, #00AFCC ,#005189);
 }
 
 .ui-growl {
@@ -285,4 +286,8 @@ input[type=text] {
 
 .panel-formulario{
 	width: 50%;
+}
+
+.ui-button-text-only .ui-button-text {
+    padding: 3px;
 }

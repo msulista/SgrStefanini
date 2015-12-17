@@ -15,6 +15,12 @@
 		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 		<h:form>
 			<p:dataTable id="gridProfissional" var="profissional" value="#{profissionalManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
+				<f:facet name="filtro">
+					<p:selectOneMenu >
+	                    <f:selectItem itemLabel="Perfil..." itemValue="#{null}" noSelectionOption="true" />
+	                    <f:selectItems value="#{label.profissional.perfil}" />
+	               	</p:selectOneMenu>
+               	</f:facet>
 				<p:column headerText="#{message['label.nome']}">
 					<h:outputText value="#{profissional.nome}"/>
 				</p:column>
@@ -40,16 +46,40 @@
 				</p:column>	 -->
 							
 				<p:column headerText="#{message['label.profissional.celula']}">
+					<f:facet name="filtro">
+						<p:selectOneMenu >
+		                    <f:selectItem itemLabel="Perfil..." itemValue="#{null}" noSelectionOption="true" />
+		                    <f:selectItems value="#{label.profissional.perfil}" />
+		               	</p:selectOneMenu>
+	               	</f:facet>				
 					<h:outputText value="#{profissional.celula.nome}"/>			
 				</p:column>				
 				<p:column headerText="#{message['label.profissional.equipe']}">
+					<f:facet name="filtro">
+						<p:selectOneMenu >
+		                    <f:selectItem itemLabel="Perfil..." itemValue="#{null}" noSelectionOption="true" />
+		                    <f:selectItems value="#{label.profissional.perfil}" />
+		               	</p:selectOneMenu>
+	               	</f:facet>
 					<h:outputText value="#{profissional.equipe.nome}"/>			
 				</p:column>
 				<p:column headerText="#{message['label.profissional.cargo']}">
+					<f:facet name="filtro">
+						<p:selectOneMenu >
+		                    <f:selectItem itemLabel="Perfil..." itemValue="#{null}" noSelectionOption="true" />
+		                    <f:selectItems value="#{label.profissional.perfil}" />
+		               	</p:selectOneMenu>
+	               	</f:facet>
 					<h:outputText value="#{profissional.cargo.nome}"/>			
 				</p:column>
 				<p:column  headerText="#{message['label.profissional.perfil']}">
-					<h:outputText value="#{profissional.perfil.nome}"/>			
+					<f:facet name="filtro">
+						<p:selectOneMenu >
+		                    <f:selectItem itemLabel="Perfil..." itemValue="#{null}" noSelectionOption="true" />
+		                    <f:selectItems value="#{label.profissional.perfil}" />
+	                	</p:selectOneMenu>
+                	</f:facet>
+					<h:outputText value="#{profissional.perfil.nome}"/>	
 				</p:column>
 				<p:column headerText="#{message['label.cargaHoraria']}">
 					<h:outputText value="#{profissional.cargaHoraria.cargaHoraria}"/>			
