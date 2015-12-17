@@ -8,7 +8,13 @@ public class JPAUtil {
 	
 	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("sgr"); 
 
-	public static EntityManager getEntityManager() {		
+	public static EntityManager getEntityManager() {	
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return emf.createEntityManager();
 	}
 

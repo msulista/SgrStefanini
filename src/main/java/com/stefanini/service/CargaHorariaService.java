@@ -35,17 +35,24 @@ public class CargaHorariaService {
 
 		if(DateUtil.verificaDiaUtil(cargaHoraria.getDataManipulacao())){
 			CargaHoraria cargaHorariaAntiga = getCargaHorariaById(cargaHoraria.getId());
-			if(DateUtil.verificaDataValida(cargaHorariaAntiga.getRegistroValidadeInicio(), cargaHoraria.getDataManipulacao())){
-		cargaHorariaAntiga.setRegistroValidadeFim(cargaHoraria.getDataManipulacao());
+			if(DateUtil.verificaDataValida(cargaHorariaAntiga.getRegistroValidadeInicio(), cargaHoraria.getRegistroValidadeInicio())){
+				if(DateUtil.verificaDataValida(cargaHoraria.getRegistroValidadeInicio(), cargaHoraria.getRegistroValidadeFim())||cargaHoraria.getRegistroValidadeFim()==null){
+		cargaHorariaAntiga.setRegistroValidadeFim(cargaHoraria.getRegistroValidadeInicio());
 		manager.merge(cargaHorariaAntiga);
 		manager.getTransaction().commit();
 		manager.close();
 
 		CargaHoraria cargaHorariaNova = new CargaHoraria();
 		cargaHorariaNova.setCargaHoraria(cargaHoraria.getCargaHoraria());
-		cargaHorariaNova.setRegistroValidadeInicio(cargaHoraria.getDataManipulacao());
+		cargaHorariaNova.setRegistroValidadeInicio(cargaHoraria.getRegistroValidadeInicio());
+		cargaHorariaNova.setRegistroValidadeFim(cargaHoraria.getRegistroValidadeFim());
 		save(cargaHorariaNova);
 		return true;
+				}else{
+					Mensagem.add("Erro, data final menor que a inicial!");
+					manager.close();
+					return false;
+				}
 		}else{
 			Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
 			manager.close();
@@ -62,7 +69,7 @@ public class CargaHorariaService {
 	public List<CargaHoraria> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_carga_horaria WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
+				"SELECT * FROM sgr_carga_horaria WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
 				CargaHoraria.class);
 		List<CargaHoraria> cargaHorarias = q.getResultList();
 		manager.close();

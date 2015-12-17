@@ -71,8 +71,8 @@ public class RelatorioService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		String profisionalPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome, COUNT(p)) FROM Profissional p "
 									+ "GROUP BY p.equipe.nome";
-		Query q = manager.createQuery(profisionalPorEquipe);		
-		List<Relatorio> relatorioProfissionalPorEquipe =  q.getResultList();
+		Query q = manager.createQuery(profisionalPorEquipe, Relatorio.class);		
+		List<Relatorio> relatorioProfissionalPorEquipe = (List<Relatorio>)q.getResultList();
 		return relatorioProfissionalPorEquipe;		
 	}
 	
