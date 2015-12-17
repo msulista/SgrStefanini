@@ -18,7 +18,7 @@
 				<p:inputText value="#{perfilStefaniniManager.perfilStefanini.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}"/><br/><br/>
 				
 				<p:outputLabel value="#{message['label.perfilStefanini.valorInicial']}" styleClass="label" for="valorInicial"/>
-				<p:inputText id="valorInicial" value="#{perfilStefaniniManager.perfilStefanini.valorInicial}" onblur="retornaPadrao(this)" converter="moedaConverter" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/><br/><br/>
+				<p:inputText id="valorInicial" value="#{perfilStefaniniManager.perfilStefanini.valorInicial}" onblur="retornaPadrao(this)" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/><br/><br/>
 				
 				<p:outputLabel for="valorFinal" value="#{message['label.perfilStefanini.valorFinal']}" styleClass="label"/>
         		<p:inputText id="valorFinal" value="#{perfilStefaniniManager.perfilStefanini.valorFinal}" onblur="retornaPadrao(this)" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/><br/><br/>
