@@ -284,6 +284,10 @@ input[type=text] {
 	width: 70px;
 }
 
+.btn-default{
+	width: 50px;
+}
+
 .panel-formulario{
 	width: 50%;
 }
