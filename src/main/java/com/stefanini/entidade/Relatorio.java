@@ -2,21 +2,21 @@ package com.stefanini.entidade;
 
 public class Relatorio {
 	
-	private int quantidade;
+	private Long quantidade;
 	private String nome;
 		
 	public Relatorio() {
 	}
-
-	public Relatorio(int quantidade, String nome) {
+	
+	public Relatorio(Long quantidade, String nome) {
 		this.quantidade = quantidade;
 		this.nome = nome;
 	}
 
-	public int getQuantidade() {
+	public Long getQuantidade() {
 		return quantidade;
 	}
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(Long quantidade) {
 		this.quantidade = quantidade;
 	}
 	public String getNome() {
@@ -24,6 +24,37 @@ public class Relatorio {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((quantidade == null) ? 0 : quantidade.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Relatorio other = (Relatorio) obj;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (quantidade == null) {
+			if (other.quantidade != null)
+				return false;
+		} else if (!quantidade.equals(other.quantidade))
+			return false;
+		return true;
 	}
 	
 	
