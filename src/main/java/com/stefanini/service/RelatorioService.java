@@ -37,10 +37,6 @@ public class RelatorioService {
 	        return model;
 	    }
 	     
-	    private void createBarModels() {
-	        createBarModel();
-	    }
-	     
 	    private void createBarModel() {
 	        profissionalPorEquipe = initBarModel();
 	         
@@ -56,18 +52,29 @@ public class RelatorioService {
 	        yAxis.setMax(50);
 	    }
 	
+//	@SuppressWarnings("unchecked")
+//	public List<Relatorio> profissionaisPorEquipe(){
+//		EntityManager manager = JPAUtil.getEntityManager();
+//		Query q = manager.createNativeQuery(
+//				"SELECT COUNT(PROF.ID_EQUIPE), EQUI.NOME "
+//				+ "FROM  SGR_PROFISSIONAL PROF "
+//				+ "LEFT JOIN SGR_EQUIPE EQUI "
+//				+ "ON PROF.ID_EQUIPE = EQUI.ID_EQUIPE "
+//				+ "GROUP BY PROF.ID_EQUIPE", Relatorio.class);
+//		
+//		List<Relatorio> relatorioProfissionalPorEquipe =  q.getResultList();
+//		return relatorioProfissionalPorEquipe;		
+//	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Relatorio> profissionaisPorEquipe(){
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery(
-				"SELECT COUNT(PROF.ID_EQUIPE), EQUI.NOME "
-				+ "FROM  SGR_PROFISSIONAL PROF "
-				+ "LEFT JOIN SGR_EQUIPE EQUI "
-				+ "ON PROF.ID_EQUIPE = EQUI.ID_EQUIPE "
-				+ "GROUP BY PROF.ID_EQUIPE", Relatorio.class);
-		
+		String profisionalPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome, COUNT(p)) FROM Profissional p "
+									+ "GROUP BY p.equipe.nome";
+		Query q = manager.createQuery(profisionalPorEquipe);		
 		List<Relatorio> relatorioProfissionalPorEquipe =  q.getResultList();
 		return relatorioProfissionalPorEquipe;		
 	}
+	
 
 }
