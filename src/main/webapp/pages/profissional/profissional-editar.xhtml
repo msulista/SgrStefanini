@@ -24,13 +24,13 @@
 				<p:inputText id="nome" value="#{profissionalManager.profissional.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
 				<br /><br />				
 				<p:outputLabel for="salario" value="#{message['label.profissional.salario']}" styleClass="label" />
-				<p:inputText id="salario" value="#{profissionalManager.profissional.salario}" required="true" requiredMessage="#{message['span.obrigatorio.salario']}"/>
+				<p:inputMask id="salario" value="#{profissionalManager.profissional.salario}" onblur="retornaPadrao(this)" converter="salarioConverter" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/>
 				<br /><br />
 				<p:outputLabel for="beneficio" value="#{message['label.profissional.beneficios']}" styleClass="label" />
-				<p:inputText id="beneficio" value="#{profissionalManager.profissional.beneficios}"/>
+				<p:inputText id="beneficio" value="#{profissionalManager.profissional.beneficios}" onblur="retornaPadrao(this)" converter="beneficioConverter" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/>
 				<br /><br />
 				<p:outputLabel for="valorHora" value="#{message['label.profissional.valorHora']}" styleClass="label"/>
-				<p:inputMask id="valorHora" value="#{profissionalManager.profissional.valorHora}" mask="99,99" converter="cargaHorariaConverter" required="true" requiredMessage="#{message['span.obrigatorio.valorHora']}"/>
+				<p:inputMask id="valorHora" value="#{profissionalManager.profissional.valorHora}" onblur="retornaPadrao(this)" converter="valorHoraConverter" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/>
 				<br/><br/>
 				<p:outputLabel for="admissao" value="#{message['label.profissional.dataAdmissao']}" styleClass="label"/>
         		<p:calendar id="admissao" value="#{profissionalManager.profissional.dataAdmissao}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataAdimissao']}" disabledWeekends="true"/>

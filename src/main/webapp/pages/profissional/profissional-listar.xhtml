@@ -69,7 +69,9 @@
 		                    <f:selectItems value="#{cargaHorariaManager.listarAtivos()}" var="cargaHoraria" itemLabel="#{cargaHoraria.cargaHoraria}" itemValue="#{cargaHoraria}" />
 		                </p:selectCheckboxMenu>
 		            </f:facet>
-					<h:outputText value="#{profissional.cargaHoraria.cargaHoraria}"/>			
+					<h:outputText value="#{profissional.cargaHoraria.cargaHoraria}">
+						<f:converter converterId="cargaHorariaConverter"/>
+					</h:outputText>			
 				</p:column>
 				
 				<p:column filterBy="#{profissional.formaContratacao.nome}" headerText="#{message['label.profissional.formaContratacao']}" sortBy="#{profisional.formaContratacao.nome}">
