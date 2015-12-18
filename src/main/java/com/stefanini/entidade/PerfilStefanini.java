@@ -91,7 +91,7 @@ public class PerfilStefanini implements Serializable{
 		return registroValidadeFim;
 	}
 
-	public void setRegistroValidade(Date registroValidade) {
+	public void setRegistroValidadeFim(Date registroValidade) {
 		this.registroValidadeFim = registroValidade;
 	}
 

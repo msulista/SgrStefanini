@@ -32,13 +32,14 @@ public class PerfilStefaniniService {
 	public boolean update(PerfilStefanini perfilStefanini) {
 		EntityManager manager = JPAUtil.getEntityManager();
 
-		if (DateUtil.verificaDiaUtil(perfilStefanini.getDataManipulacao())) {
+		if (DateUtil.verificaDiaUtil(perfilStefanini.getRegistroValidadeInicio())) {
 			PerfilStefanini perfilStefaniniAntigo = getPerfilStefaniniById(perfilStefanini.getId());
 			if (DateUtil.verificaDataValida(perfilStefaniniAntigo.getRegistroValidadeInicio(),
-					perfilStefanini.getDataManipulacao())) {
+					perfilStefanini.getRegistroValidadeInicio())) {
+				if(DateUtil.verificaDataValida(perfilStefanini.getRegistroValidadeInicio(), perfilStefanini.getRegistroValidadeFim())||perfilStefanini.getRegistroValidadeFim()==null){
 				manager.getTransaction().begin();
 			
-				perfilStefaniniAntigo.setRegistroValidade(perfilStefanini.getDataManipulacao());
+				perfilStefaniniAntigo.setRegistroValidadeFim(new Date());
 				manager.merge(perfilStefaniniAntigo);
 				manager.getTransaction().commit();
 				manager.close();
@@ -47,9 +48,15 @@ public class PerfilStefaniniService {
 				perfilStefaniniNova.setNome(perfilStefanini.getNome());
 				perfilStefaniniNova.setValorInicial(perfilStefanini.getValorInicial());
 				perfilStefaniniNova.setValorFinal(perfilStefanini.getValorFinal());
-				perfilStefaniniNova.setRegistroValidadeInicio(perfilStefanini.getDataManipulacao());
+				perfilStefaniniNova.setRegistroValidadeInicio(perfilStefanini.getRegistroValidadeInicio());
+				perfilStefaniniNova.setRegistroValidadeFim(perfilStefanini.getRegistroValidadeFim());
 				save(perfilStefaniniNova);
 				return true;
+				}else{
+					Mensagem.add("Erro, data final menor que a inicial!");
+					manager.close();
+					return false;
+				}
 			} else {
 				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
 				manager.close();
@@ -66,7 +73,7 @@ public class PerfilStefaniniService {
 	public List<PerfilStefanini> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_perfil_stefanini WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
+				"SELECT * FROM sgr_perfil_stefanini WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
 				PerfilStefanini.class);
 		List<PerfilStefanini> perfisStefanini = q.getResultList();
 		manager.close();
@@ -86,7 +93,7 @@ public class PerfilStefaniniService {
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
 		PerfilStefanini perfilStefanini = getPerfilStefaniniById(id);
-		perfilStefanini.setRegistroValidade(new Date());
+		perfilStefanini.setRegistroValidadeFim(new Date());
 		manager.getTransaction().begin();
 		manager.merge(perfilStefanini);
 		manager.getTransaction().commit();
