@@ -75,9 +75,6 @@
                     <f:selectItems value="#{statusManager.listarAtivos()}" var="status" itemLabel="#{status.nome}" itemValue="#{status}"/>
                 </p:selectOneMenu>
                 <br /><br />
-                <p:outputLabel for="inicio" value="#{message['label.data.inicio']}" styleClass="label"/>
-                <p:calendar id="inicio" value="#{profissionalManager.profissional.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
-                <br/><br/>
                 <p:commandButton value="#{message['button.salvar']}" action="#{profissionalManager.save()}" update="growl" />
                 <p:button value="#{message['button.cancelar']}" outcome="pretty:profissional"/>
             </p:panel>

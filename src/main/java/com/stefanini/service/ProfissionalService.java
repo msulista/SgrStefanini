@@ -25,18 +25,13 @@ public class ProfissionalService {
 	public boolean save(Profissional profissional) {
 		EntityManager manager = JPAUtil.getEntityManager();
 
-		if (DateUtil.verificaDiaUtil(profissional.getRegistroValidadeInicio())) {
-			if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(), profissional.getDataAdmissao())){
-			manager.getTransaction().begin();
-			manager.persist(profissional);
-			manager.getTransaction().commit();
-			manager.close();
-			return true;
-			}else{
-				Mensagem.add("Erro, data admissão e anterior a de inicio!");
+		if (DateUtil.verificaDiaUtil(profissional.getDataAdmissao())) {
+				profissional.setRegistroValidadeInicio(profissional.getDataAdmissao());
+				manager.getTransaction().begin();
+				manager.persist(profissional);
+				manager.getTransaction().commit();
 				manager.close();
-				return false;
-			}
+				return true;
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();
@@ -52,11 +47,11 @@ public class ProfissionalService {
 			
 			Profissional profissionalMerge = (Profissional) getProfissionalById(profissional.getId());
 			
-			if (DateUtil.verificaDataValida(profissionalMerge.getRegistroValidadeInicio(), profissional.getDataManipulacao())) {
+			if (DateUtil.verificaDataValida(profissionalMerge.getDataAdmissao(), profissional.getDataAdmissao())) {
 				
-				if(DateUtil.verificaDataValida(profissional.getDataManipulacao(), profissional.getDataAdmissao())){
+				if(DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())||profissional.getDataDemissao()==null){
 					
-						profissionalMerge.setRegistroValidaeFim(profissional.getDataManipulacao());
+						profissionalMerge.setRegistroValidaeFim(new Date());
 						manager.merge(profissionalMerge);
 						manager.getTransaction().commit();
 						manager.close();
@@ -68,7 +63,8 @@ public class ProfissionalService {
 						profissionalPersist.setValorHora(profissional.getValorHora());
 						profissionalPersist.setDataAdmissao(profissional.getDataAdmissao());
 						profissionalPersist.setDataDemissao(profissional.getDataDemissao());
-						profissionalPersist.setRegistroValidadeInicio(profissional.getDataManipulacao());
+						profissionalPersist.setRegistroValidadeInicio(profissional.getDataAdmissao());
+						profissionalPersist.setRegistroValidaeFim(profissional.getDataDemissao());
 						profissionalPersist.setCelula(celulaService.getCelulaById(profissional.getCelula().getId()));
 						profissionalPersist.setCargo(cargoService.getCargoById(profissional.getCargo().getId()));
 						profissionalPersist.setEquipe(equipeService.getEquipeById(profissional.getEquipe().getId()));
@@ -83,7 +79,7 @@ public class ProfissionalService {
 						return true;
 				
 				}else{
-					Mensagem.add("Erro, data admissão anterior a inicio!");
+					Mensagem.add("Erro, data demissão anterior a admissão!");
 					manager.close();
 					return false;
 				}
@@ -103,7 +99,7 @@ public class ProfissionalService {
 	public List<Profissional> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_profissional WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
+				"SELECT * FROM sgr_profissional WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
 				Profissional.class);
 		List<Profissional> profissionais = q.getResultList();
 		return profissionais;
