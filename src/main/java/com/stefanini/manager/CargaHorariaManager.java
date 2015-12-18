@@ -34,7 +34,7 @@ public class CargaHorariaManager {
 	
 	public void populaLista(){
 		lista = new ArrayList<CargaHoraria>();
-		lista = service.listarAtivos();
+		this.lista = service.listarAtivos();
 	}
 		
 	public List<CargaHoraria> getLista() {
