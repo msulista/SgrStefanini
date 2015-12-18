@@ -16,25 +16,19 @@
 			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 			<h:form>
 				<p:dataTable id="gridStatus" var="status" value="#{statusManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
-					
 					<p:column headerText="#{message['label.nome']}">
 						<h:outputText value="#{status.nome}" />
 					</p:column>
-					
-					<!-- <p:column headerText="#{message['label.data.inicio']}">
-						<h:outputText value="#{status.registroValidadeInicio}">
-							<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
-						</h:outputText>					
-					</p:column> -->
-					
 					<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 						<pretty:link mappingId="status-editar">
 							<f:param value="#{status.id}" />
-							<p:commandButton styleClass="btn-acao" type="button" value="#{message['button.editar']}" />
+							<p:commandButton id="editar" styleClass="btn-acao" type="button" icon="ui-icon-pencil" />
 						</pretty:link>
-						<p:commandButton styleClass="btn-acao" value="#{message['button.desativar']}" action="#{statusManager.desativar(status.id)}" update="gridStatus">
+						<p:commandButton id="desativar" styleClass="btn-acao" icon="ui-icon-closethick"  action="#{statusManager.desativar(status.id)}" update="gridStatus">
 							<p:confirm header="Desativar Status" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
 						</p:commandButton>
+						<p:tooltip id="alt-editar" for="editar" value="Editar" styleClass="alt"/>
+						<p:tooltip id="alt-desativar" for="desativar" value="Desativar" styleClass="alt"/>
 					</p:column>
 				</p:dataTable>
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
