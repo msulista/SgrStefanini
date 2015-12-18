@@ -22,9 +22,11 @@ public class ProfissionalManager {
 
 	private Profissional profissional = new Profissional();
 	private ProfissionalService service = new ProfissionalService();
+	private List<Profissional> lista;
+	private String nome;
 
 	public ProfissionalManager() {
-		
+		populaLista();
 	}
 
 	public Profissional getProfissional() {
@@ -41,6 +43,22 @@ public class ProfissionalManager {
 
 	public void setService(ProfissionalService service) {
 		this.service = service;
+	}
+
+	public List<Profissional> getLista() {
+		return lista;
+	}
+
+	public void setLista(List<Profissional> lista) {
+		this.lista = lista;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String save() {
@@ -60,12 +78,18 @@ public class ProfissionalManager {
 	
 	}
 
-	public List<Profissional> listarAtivos() {
+	private List<Profissional> listarAtivos() {
 		return service.listarAtivos();
 	}
 
-	public List<Profissional> buscarPorNome(String nome){
-		return this.service.buscaPorNome(nome);
+	public String buscarPorNome(){
+		this.lista = this.service.buscaPorNome(this.nome);
+		return "pretty:profissional";
+	}
+	
+	public void populaLista(){	
+		this.nome = "";
+		this.lista = service.listarAtivos();
 	}
 	
 	public void desativar(Long id) {
