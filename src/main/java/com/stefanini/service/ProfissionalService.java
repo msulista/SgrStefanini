@@ -126,4 +126,20 @@ public class ProfissionalService {
 		manager.close();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Profissional> buscaPorNome(String nome){
+		EntityManager manager = JPAUtil.getEntityManager();
+		
+		Query q = manager.createNativeQuery(
+				"SELECT * FROM sgr_profissional "
+				+ "WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() "
+				+ "AND NOME LIKE '% :nome %'"
+				+ "ORDER BY REGISTRO_VALIDADE_INICIO ASC",
+				Profissional.class);
+		q.setParameter("nome", nome);
+		
+		List<Profissional> profissionais = q.getResultList();
+		return profissionais;
+	}
+	
 }
