@@ -33,11 +33,11 @@ public class CargaHorariaService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
-		if(DateUtil.verificaDiaUtil(cargaHoraria.getDataManipulacao())){
+		if(DateUtil.verificaDiaUtil(cargaHoraria.getRegistroValidadeInicio())){
 			CargaHoraria cargaHorariaAntiga = getCargaHorariaById(cargaHoraria.getId());
 			if(DateUtil.verificaDataValida(cargaHorariaAntiga.getRegistroValidadeInicio(), cargaHoraria.getRegistroValidadeInicio())){
 				if(DateUtil.verificaDataValida(cargaHoraria.getRegistroValidadeInicio(), cargaHoraria.getRegistroValidadeFim())||cargaHoraria.getRegistroValidadeFim()==null){
-		cargaHorariaAntiga.setRegistroValidadeFim(cargaHoraria.getRegistroValidadeInicio());
+		cargaHorariaAntiga.setRegistroValidadeFim(new Date());
 		manager.merge(cargaHorariaAntiga);
 		manager.getTransaction().commit();
 		manager.close();

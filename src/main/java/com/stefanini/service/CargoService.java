@@ -32,20 +32,26 @@ public class CargoService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
-		if (DateUtil.verificaDiaUtil(cargo.getDataManipulacao())) {
+		if (DateUtil.verificaDiaUtil(cargo.getRegistroValidadeInicio())) {
 			Cargo cargoMerge = (Cargo) getCargoById(cargo.getId());
-			if(DateUtil.verificaDataValida(cargoMerge.getRegistroValidadeInicio(), cargo.getDataManipulacao())){
-		
-			cargoMerge.setRegistroValidadeFim(cargo.getDataManipulacao());
+			if(DateUtil.verificaDataValida(cargoMerge.getRegistroValidadeInicio(), cargo.getRegistroValidadeInicio())){
+				if(DateUtil.verificaDataValida(cargo.getRegistroValidadeInicio(), cargo.getRegistroValidadeFim())|| cargo.getRegistroValidadeFim()==null){
+			cargoMerge.setRegistroValidadeFim(new Date());
 			manager.merge(cargoMerge);
 			manager.getTransaction().commit();
 			manager.close();
 
 			Cargo cargoPersist = new Cargo();
 			cargoPersist.setNome(cargo.getNome());
-			cargoPersist.setRegistroValidadeInicio(cargo.getDataManipulacao());
+			cargoPersist.setRegistroValidadeInicio(cargo.getRegistroValidadeInicio());
+			cargoPersist.setRegistroValidadeFim(cargo.getRegistroValidadeFim());
 			save(cargoPersist);
 			return true;
+				}else{
+					Mensagem.add("Erro, data final menor que a inicial!");
+					manager.close();
+					return false;
+				}
 		}else{
 			Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
 			manager.close();
@@ -62,7 +68,7 @@ public class CargoService {
 	public List<Cargo> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_cargo WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
+				"SELECT * FROM sgr_cargo WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
 				Cargo.class);
 		List<Cargo> cargos = q.getResultList();
 		return cargos;
