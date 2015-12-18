@@ -34,20 +34,26 @@ public class PerfilService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
-		if (DateUtil.verificaDiaUtil(perfil.getDataManipulacao())) {
+		if (DateUtil.verificaDiaUtil(perfil.getRegistroValidadeInicio())) {
 			Perfil perfilMerge = getPerfilById(perfil.getId());
-			if (DateUtil.verificaDataValida(perfilMerge.getRegistroValidadeInicio(), perfil.getDataManipulacao())) {
-		
-				perfilMerge.setRegistroValidadeFim(perfil.getDataManipulacao());
+			if (DateUtil.verificaDataValida(perfilMerge.getRegistroValidadeInicio(), perfil.getRegistroValidadeInicio())) {
+				if(DateUtil.verificaDataValida(perfil.getRegistroValidadeInicio(), perfil.getRegistroValidadeFim())||perfil.getRegistroValidadeFim()==null){
+				perfilMerge.setRegistroValidadeFim(new Date());
 				manager.merge(perfilMerge);
 				manager.getTransaction().commit();
 				manager.close();
 
 				Perfil perfilPersist = new Perfil();
 				perfilPersist.setNome(perfil.getNome());
-				perfilPersist.setRegistroValidadeInicio(perfil.getDataManipulacao());
+				perfilPersist.setRegistroValidadeInicio(perfil.getRegistroValidadeInicio());
+				perfilPersist.setRegistroValidadeFim(perfil.getRegistroValidadeFim());
 				save(perfilPersist);
 				return true;
+				}else{
+					Mensagem.add("Erro, data final menor que a inicial!");
+					manager.close();
+					return false;
+				}
 			} else {
 				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
 				manager.close();
@@ -64,7 +70,7 @@ public class PerfilService {
 	public List<Perfil> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_perfil WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
+				"SELECT * FROM sgr_perfil WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
 				Perfil.class);
 		List<Perfil> perfis = q.getResultList();
 		return perfis;
