@@ -321,7 +321,13 @@ input[type=text] {
 }
 
 #relatorio{
+	left: 140px;
+	float: right;
+}
+
+#profissionais{
 	left: 100px;
+	float: left;
 }
 
 .text-painel{
