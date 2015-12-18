@@ -33,20 +33,26 @@ public class StatusService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
-		if (DateUtil.verificaDiaUtil(status.getDataManipulacao())) {
+		if (DateUtil.verificaDiaUtil(status.getRegistroValidadeInicio())) {
 			Status statusMerge = (Status) getStatusById(status.getId());
-			if (DateUtil.verificaDataValida(statusMerge.getRegistroValidadeInicio(), status.getDataManipulacao())) {
-				
-				statusMerge.setRegistroValidadeFim(status.getDataManipulacao());
+			if (DateUtil.verificaDataValida(statusMerge.getRegistroValidadeInicio(), status.getRegistroValidadeInicio())) {
+				if(DateUtil.verificaDataValida(status.getRegistroValidadeInicio(), status.getRegistroValidadeFim())||status.getRegistroValidadeFim()==null){
+				statusMerge.setRegistroValidadeFim(new Date());
 				manager.merge(statusMerge);
 				manager.getTransaction().commit();
 				manager.close();
 
 				Status statusPersist = new Status();
 				statusPersist.setNome(status.getNome());
-				statusPersist.setRegistroValidadeInicio(status.getDataManipulacao());
+				statusPersist.setRegistroValidadeInicio(status.getRegistroValidadeInicio());
+				statusPersist.setRegistroValidadeFim(status.getRegistroValidadeFim());
 				save(statusPersist);
 				return true;
+				}else{
+					Mensagem.add("Erro, data final menor que a inicial!");
+					manager.close();
+					return false;
+				}
 			} else {
 				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
 				manager.close();
@@ -63,7 +69,7 @@ public class StatusService {
 	public List<Status> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_status WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
+				"SELECT * FROM sgr_status WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
 				Status.class);
 		List<Status> listStatus = q.getResultList();
 		return listStatus;
