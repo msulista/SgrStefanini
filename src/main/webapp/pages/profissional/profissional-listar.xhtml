@@ -18,10 +18,11 @@
 			
 			<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" />
 			<p:inputText id="nome" value="#{profissionalManager.nome}" />
-			<br />
-			<p:commandButton value="#{BUSCAR}-por lupinha" action="#{profissionalManager.buscarPorNome()}" immediate="false"/>
-			<p:commandButton value="Lixeirinha" action="#{profissionalManager.populaLista()}" immediate="false"/>
-		
+			<p:commandButton id="pesquisar" icon="ui-icon-search" action="#{profissionalManager.buscarPorNome()}" immediate="false"/>
+			<p:commandButton id="limpar" icon="ui-icon-arrowreturnthick-1-w" action="#{profissionalManager.populaLista()}" update="gridProfissional"/>
+			<p:tooltip id="alt-pesquisar" for="pesquisar" value="Pesquisar" styleClass="alt"/>
+			<p:tooltip id="alt-limpar" for="limpar" value="Limpar" styleClass="alt"/>
+			<br/><br/>
 			
 			<p:dataTable id="gridProfissional" var="profissional" value="#{profissionalManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
 				
@@ -97,13 +98,14 @@
 				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 					<pretty:link mappingId="profissional-editar">
 						<f:param value="#{profissional.id}" />
-						<p:commandButton styleClass="btn-acao" type="button" icon="ui-icon-pencil" />
+						<p:commandButton id="editar" styleClass="btn-acao" type="button" icon="ui-icon-pencil" />
 					</pretty:link>
-					<p:commandButton styleClass="btn-acao" icon="ui-icon-closethick" action="#{profissionalManager.desativar(profissional.id)}" update="gridProfissional" >
+					<p:commandButton id="desativar" styleClass="btn-acao" icon="ui-icon-closethick" action="#{profissionalManager.desativar(profissional.id)}" update="gridProfissional" >
 						<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
 					</p:commandButton>
 				</p:column>
-				
+						<p:tooltip id="alt-editarr" for="editar" value="Editar" styleClass="alt"/>
+						<p:tooltip id="alt-desativarr" for="desativar" value="Desativar" styleClass="alt"/>
 			</p:dataTable>
 			
 			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
