@@ -12,7 +12,9 @@ import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
 
+
 public class CargaHorariaService {
+	
 
 	public boolean save(CargaHoraria cargaHoraria) {
 		EntityManager manager = JPAUtil.getEntityManager();
