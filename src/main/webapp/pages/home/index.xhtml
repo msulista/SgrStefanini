@@ -3,7 +3,16 @@
     template="/pages/template/default.xhtml">
 
     <ui:define name="content">
-        Selecione o módulo!
+        <div id="relatorio" class="painel">
+        	<h:link outcome="pretty:relatorio">
+        		<div class="img-painel">
+        			<h:graphicImage styleClass="img-relatorio" value="/resources/img/relatorio.png" />
+        		</div>
+        		<div class="text-painel">
+        			Relátorios
+        		</div>
+       		</h:link>
+        </div>
     </ui:define>
 
 </ui:composition>
