@@ -21,6 +21,7 @@ public class ProfissionalService {
 	private FormaContratacaoService formaContratacaoService = new FormaContratacaoService();
 	private StatusService statusService = new StatusService();
 	private CelulaService celulaService = new CelulaService();
+	
 
 	public boolean save(Profissional profissional) {
 		EntityManager manager = JPAUtil.getEntityManager();
@@ -124,4 +125,5 @@ public class ProfissionalService {
 		manager.getTransaction().commit();
 		manager.close();
 	}
+	
 }
