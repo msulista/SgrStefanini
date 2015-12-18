@@ -30,11 +30,15 @@
 					<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 						<pretty:link mappingId="cargo-editar">
 							<f:param value="#{cargo.id}" />
-							<p:commandButton styleClass="btn-acao" type="button" value="#{message['button.editar']}" />
+							<p:commandButton id="editar" styleClass="btn-acao" type="button" icon="ui-icon-pencil"  />
 						</pretty:link>
-						<p:commandButton styleClass="btn-acao" value="#{message['button.desativar']}" action="#{cargoManager.desativar(cargo.id)}" update="gridCargos">
+						<p:commandButton id="desativar" styleClass="btn-acao" icon="ui-icon-closethick" action="#{cargoManager.desativar(cargo.id)}" update="gridCargos">
 							<p:confirm header="Desativar Cargo" message="Deseja mesmo Desativar?" icon="ui-icon-alert" />	
 						</p:commandButton>
+						
+						<p:tooltip id="alt-editar" for="editar" value="Editar" styleClass="alt"/>
+						<p:tooltip id="alt-desativar" for="desativar" value="Desativar" styleClass="alt"/>
+						
 					</p:column>
 				</p:dataTable>
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
