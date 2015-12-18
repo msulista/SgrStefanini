@@ -13,17 +13,17 @@
 		</p:breadCrumb>		
 		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 		
-		<h3>Buscas</h3>
-		<h:form>			
-			<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" />
-			<p:inputText id="nome" value="#{profissionalManager.profissional.nome}" />
-			<br />
-			<p:commandButton value="#{BUSCAR}-por lupinha" action="#{profissionalManager.buscarPorNome()}" update="growl" />
-		</h:form>
-		
 		<h2>#{message['title.profissional']}</h2>
 		<h:form>
-			<p:dataTable id="gridProfissional" var="profissional" value="#{profissionalManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
+			
+			<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" />
+			<p:inputText id="nome" value="#{profissionalManager.nome}" />
+			<br />
+			<p:commandButton value="#{BUSCAR}-por lupinha" action="#{profissionalManager.buscarPorNome()}" immediate="false"/>
+			<p:commandButton value="Lixeirinha" action="#{profissionalManager.populaLista()}" immediate="false"/>
+		
+			
+			<p:dataTable id="gridProfissional" var="profissional" value="#{profissionalManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
 				
 				<p:column filterBy="#{profissional.nome}" filterMatchMode="contains" headerText="#{message['label.nome']} " sortBy="#{profissional.nome}">
 					<h:outputText value="#{profissional.nome}"/>
