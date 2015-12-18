@@ -1,8 +1,11 @@
 package com.stefanini.manager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -23,8 +26,19 @@ public class CargaHorariaManager {
 
 	private CargaHoraria cargaHoraria = new CargaHoraria();
 	private CargaHorariaService service = new CargaHorariaService();
+	private List<CargaHoraria> lista;
 
 	public CargaHorariaManager() {
+		populaLista();
+	}
+	
+	public void populaLista(){
+		lista = new ArrayList<CargaHoraria>();
+		lista = service.listarAtivos();
+	}
+		
+	public List<CargaHoraria> getLista() {
+		return lista;
 	}
 
 	public CargaHoraria getCargaHoraria() {
@@ -61,7 +75,9 @@ public class CargaHorariaManager {
 	}
 
 	public List<CargaHoraria> listarAtivos() {
-		return service.listarAtivos();
+		List<CargaHoraria> lista = new ArrayList<>();
+		lista = service.listarAtivos();
+		return lista;
 	}
 
 	public void desativar(Long id) {
