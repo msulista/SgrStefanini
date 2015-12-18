@@ -1,5 +1,6 @@
 package com.stefanini.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.convert.ConverterException;
@@ -30,21 +31,26 @@ public class EquipeService {
 	public boolean update(Equipe equipe) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		if (DateUtil.verificaDiaUtil(equipe.getDataManipulacao())) {
+		if (DateUtil.verificaDiaUtil(equipe.getRegistroValidadeInicio())) {
 			Equipe equipeMerge = getEquipeById(equipe.getId());
-			if(DateUtil.verificaDataValida(equipeMerge.getRegistroValidadeInicio(), equipe.getDataManipulacao())){
-			
-			equipeMerge.setRegistroValidadeFim(equipe.getDataManipulacao());
+			if(DateUtil.verificaDataValida(equipeMerge.getRegistroValidadeInicio(), equipe.getRegistroValidadeInicio())){
+				if(DateUtil.verificaDataValida(equipe.getRegistroValidadeInicio(), equipe.getRegistroValidadeFim())||equipe.getRegistroValidadeFim()==null){
+			equipeMerge.setRegistroValidadeFim(new Date());
 			manager.merge(equipeMerge);
 			manager.getTransaction().commit();
 			manager.close();
 
 			Equipe equipePersist = new Equipe();
 			equipePersist.setNome(equipe.getNome());
-			equipePersist.setRegistroValidadeInicio(equipe.getDataManipulacao());
+			equipePersist.setRegistroValidadeInicio(equipe.getRegistroValidadeInicio());
+			equipePersist.setRegistroValidadeFim(equipe.getRegistroValidadeFim());
 			save(equipePersist);
 			return true;
-			
+				}else{
+					Mensagem.add("Erro, data final menor que a inicial!");
+					manager.close();
+					return false;
+				}
 			}else{
 				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
 				manager.close();
@@ -61,7 +67,7 @@ public class EquipeService {
 	public List<Equipe> listar() {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_equipe WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
+				"SELECT * FROM sgr_equipe WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
 				Equipe.class);
 		List<Equipe> equipes = q.getResultList();
 		manager.close();
