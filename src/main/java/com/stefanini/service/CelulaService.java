@@ -33,19 +33,26 @@ public class CelulaService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
-		if (DateUtil.verificaDiaUtil(celula.getDataManipulacao())) {
+		if (DateUtil.verificaDiaUtil(celula.getRegistroValidadeInicio())) {
 			Celula celulaMerge = getCelulaById(celula.getId());
-			if (DateUtil.verificaDataValida(celulaMerge.getRegistroValidadeInicio(), celula.getDataManipulacao())) {
-				celulaMerge.setRegistroValidadeFim(celula.getDataManipulacao());
+			if (DateUtil.verificaDataValida(celulaMerge.getRegistroValidadeInicio(), celula.getRegistroValidadeInicio())) {
+				if(DateUtil.verificaDataValida(celula.getRegistroValidadeInicio(), celula.getRegistroValidadeFim())||celula.getRegistroValidadeFim()==null){
+				celulaMerge.setRegistroValidadeFim(new Date());
 				manager.merge(celulaMerge);
 				manager.getTransaction().commit();
 				manager.close();
 
 				Celula celulaPersist = new Celula();
 				celulaPersist.setNome(celula.getNome());
-				celulaPersist.setRegistroValidadeInicio(celula.getDataManipulacao());
+				celulaPersist.setRegistroValidadeInicio(celula.getRegistroValidadeInicio());
+				celulaPersist.setRegistroValidadeFim(celula.getRegistroValidadeFim());
 				save(celulaPersist);
 				return true;
+				}else{
+					Mensagem.add("Erro, data final menor que a inicial!");
+					manager.close();
+					return false;
+				}
 			} else {
 				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
 				manager.close();
@@ -62,7 +69,7 @@ public class CelulaService {
 	public List<Celula> listarAtivo() {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_celula WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
+				"SELECT * FROM sgr_celula WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
 				Celula.class);
 		List<Celula> celulas = q.getResultList();
 		manager.close();
