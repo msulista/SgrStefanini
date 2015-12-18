@@ -15,11 +15,12 @@
 			<h2>#{message['title.cargaHoraria']}</h2>
 			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 			<h:form>
-				<p:dataTable id="gridCargaHoraria" var="cargaHoraria" value="#{cargaHorariaManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
-					<p:column  headerText="#{message['label.cargaHoraria']}" for="cargaHoraria">
+				<p:dataTable id="gridCargaHoraria" var="cargaHoraria" value="#{cargaHorariaManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
+					<p:column headerText="#{message['label.cargaHoraria']}" for="cargaHoraria" sortBy="#{cargaHoraria.cargaHoraria}">
 						<h:outputText id="cargaHoraria" value="#{cargaHoraria.cargaHoraria}">
 							<f:converter converterId="cargaHorariaConverter"/>
 						</h:outputText>
+						
 					</p:column>
 					<!-- <p:column headerText="#{message['label.data.inicio']}">
 						<h:outputText value="#{cargaHoraria.registroValidadeInicio}">
@@ -29,10 +30,10 @@
 					<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 						<pretty:link mappingId="cargaHoraria-editar">
 							<f:param value="#{cargaHoraria.id}" />
-							<p:commandButton id="editar" styleClass="btn-acao" type="button" value="#{message['button.editar']}" />
+							<p:commandButton id="editar" styleClass="btn-acao" type="button" icon="ui-icon-pencil" />
 						</pretty:link>
 						
-						<p:commandButton id="desativar" styleClass="btn-acao" value="#{message['button.desativar']}" action="#{cargaHorariaManager.desativar(cargaHoraria.id)}" update="gridCargaHoraria" >
+						<p:commandButton id="desativar" styleClass="btn-acao" icon="ui-icon-closethick" action="#{cargaHorariaManager.desativar(cargaHoraria.id)}" update="gridCargaHoraria" >
 							<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
 						</p:commandButton>
 						

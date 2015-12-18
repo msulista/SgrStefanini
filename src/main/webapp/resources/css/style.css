@@ -289,7 +289,7 @@ input[type=text] {
 }
 
 .panel-formulario{
-	width: 50%;
+	width: 35%;
 }
 
 .ui-button-text-only .ui-button-text {
@@ -311,4 +311,41 @@ input[type=text] {
 
 .alt{
 	font-size: 12px;
+}
+
+.painel{
+	border: 3px solid #0f4d40;
+	height: 140px;
+	width: 300px;
+	position: relative;	
+}
+
+#relatorio{
+	left: 100px;
+}
+
+.text-painel{
+	font-size: 25px;
+	position: relative;
+	right: 50px;
+	float: right;
+	top: 50px;
+}
+
+.painel a{
+	color:#333;
+}
+
+.text-painel:hover{
+	text-decoration:underline;
+	font-weight: 600;
+}
+
+.img-painel{
+	left: 30px;
+	position: relative;
+	top: 30px;
+	width: 50px;
+	height: auto;
+	float:left;
 }

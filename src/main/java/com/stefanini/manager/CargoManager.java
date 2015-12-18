@@ -1,6 +1,7 @@
 package com.stefanini.manager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -10,6 +11,7 @@ import com.ocpsoft.pretty.faces.annotation.URLAction;
 import com.ocpsoft.pretty.faces.annotation.URLActions;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
+import com.stefanini.entidade.CargaHoraria;
 import com.stefanini.entidade.Cargo;
 import com.stefanini.service.CargoService;
 
@@ -24,8 +26,24 @@ public class CargoManager {
 
 	private Cargo cargo = new Cargo();
 	private CargoService service = new CargoService();
+	private List<Cargo> lista;
 	
-	public CargoManager() {		
+	public CargoManager() {	
+		populaLista();
+	}
+		
+	public void populaLista(){
+		
+		lista = new ArrayList<Cargo>();
+		lista = service.listarAtivos();
+	}
+	
+	public List<Cargo> getLista() {
+		return lista;
+	}
+
+	public void setLista(List<Cargo> lista) {
+		this.lista = lista;
 	}
 
 	public Cargo getCargo() {
