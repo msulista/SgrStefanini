@@ -33,22 +33,28 @@ public class FormaContratacaoService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
-		if (DateUtil.verificaDiaUtil(formaContratacao.getDataManipulacao())) {
+		if (DateUtil.verificaDiaUtil(formaContratacao.getRegistroValidadeInicio())) {
 			FormaContratacao formaContratacaoMerge = (FormaContratacao) getFormaContratacaoById(
 					formaContratacao.getId());
 			if (DateUtil.verificaDataValida(formaContratacaoMerge.getRegistroValidadeInicio(),
-					formaContratacao.getDataManipulacao())) {
-				
-				formaContratacaoMerge.setRegistroValidadeFim(formaContratacao.getDataManipulacao());
+					formaContratacao.getRegistroValidadeInicio())) {
+				if(DateUtil.verificaDataValida(formaContratacao.getRegistroValidadeInicio(), formaContratacao.getRegistroValidadeFim())||formaContratacao.getRegistroValidadeFim()==null){
+				formaContratacaoMerge.setRegistroValidadeFim(new Date());
 				manager.merge(formaContratacaoMerge);
 				manager.getTransaction().commit();
 				manager.close();
 
 				FormaContratacao formaContratacaoPersist = new FormaContratacao();
 				formaContratacaoPersist.setNome(formaContratacao.getNome());
-				formaContratacaoPersist.setRegistroValidadeInicio(formaContratacao.getDataManipulacao());
+				formaContratacaoPersist.setRegistroValidadeInicio(formaContratacao.getRegistroValidadeInicio());
+				formaContratacaoPersist.setRegistroValidadeFim(formaContratacao.getRegistroValidadeFim());
 				save(formaContratacaoPersist);
 				return true;
+				}else{
+					Mensagem.add("Erro, data final menor que a inicial!");
+					manager.close();
+					return false;
+				}
 			} else {
 				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
 				manager.close();
@@ -65,7 +71,7 @@ public class FormaContratacaoService {
 	public List<FormaContratacao> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_forma_contratacao WHERE REGISTRO_VALIDADE_FIM IS NULL ORDER BY REGISTRO_VALIDADE_INICIO ASC",
+				"SELECT * FROM sgr_forma_contratacao WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
 				FormaContratacao.class);
 		List<FormaContratacao> formaContratacoes = q.getResultList();
 		return formaContratacoes;
