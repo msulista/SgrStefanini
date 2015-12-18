@@ -3,6 +3,7 @@ package com.stefanini.manager;
 import java.io.IOException;
 import java.util.List;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 import com.ocpsoft.pretty.faces.annotation.URLAction;
@@ -13,6 +14,7 @@ import com.stefanini.entidade.Profissional;
 import com.stefanini.service.ProfissionalService;
 
 @ManagedBean
+@ApplicationScoped
 @URLMappings(mappings = { @URLMapping(id = "profissional", pattern = "/profissional", viewId = "/pages/profissional/profissional-listar.xhtml"),
 		@URLMapping(id = "profissional-incluir", pattern = "/incluir", viewId = "/pages/profissional/profissional-incluir.xhtml", parentId = "profissional"),
 		@URLMapping(id = "profissional-editar", pattern = "/#{profissionalManager.profissional.id}/editar", viewId = "/pages/profissional/profissional-editar.xhtml", parentId = "profissional") })
@@ -70,4 +72,7 @@ public class ProfissionalManager {
 	public void load() throws IOException {
 		profissional = service.getProfissionalById(profissional.getId());
 	}
+	
+	
+	
 }
