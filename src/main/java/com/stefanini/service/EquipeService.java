@@ -64,7 +64,7 @@ public class EquipeService {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Equipe> listar() {
+	public List<Equipe> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNativeQuery(
 				"SELECT * FROM sgr_equipe WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",

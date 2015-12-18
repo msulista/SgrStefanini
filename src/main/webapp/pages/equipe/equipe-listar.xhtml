@@ -16,9 +16,9 @@
 			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 			<h:form>
 				<p:dataTable id="gridEquipes" var="equipe"
-					value="#{equipeManager.listarAtivos()}"
+					value="#{equipeManager.lista}"
 					emptyMessage="#{message['alerta.listaVazia']}">
-					<p:column headerText="#{message['label.nome']}">
+					<p:column headerText="#{message['label.nome']}" sortBy="#{equipe.nome}">
 						<h:outputText value="#{equipe.nome}" />
 					</p:column>
 					<!--  <p:column headerText="#{message['label.data.inicio']}">

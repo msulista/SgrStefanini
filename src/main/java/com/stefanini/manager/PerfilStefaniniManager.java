@@ -1,6 +1,7 @@
 package com.stefanini.manager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -10,7 +11,7 @@ import com.ocpsoft.pretty.faces.annotation.URLAction;
 import com.ocpsoft.pretty.faces.annotation.URLActions;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
-
+import com.stefanini.entidade.CargaHoraria;
 import com.stefanini.entidade.PerfilStefanini;
 
 import com.stefanini.service.PerfilStefaniniService;
@@ -25,8 +26,23 @@ public class PerfilStefaniniManager {
 
 	private PerfilStefanini perfilStefanini = new PerfilStefanini();
 	private PerfilStefaniniService service = new PerfilStefaniniService();
+	private List<PerfilStefanini> lista;
 
 	public PerfilStefaniniManager() {
+		populaLista();
+	}
+
+	public void populaLista() {
+		lista = new ArrayList<PerfilStefanini>();
+		lista = service.listarAtivos();
+	}
+
+	public List<PerfilStefanini> getLista() {
+		return lista;
+	}
+
+	public void setLista(List<PerfilStefanini> lista) {
+		this.lista = lista;
 	}
 
 	public PerfilStefanini getPerfilStefanini() {

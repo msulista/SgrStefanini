@@ -1,6 +1,7 @@
 package com.stefanini.manager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -9,6 +10,7 @@ import com.ocpsoft.pretty.faces.annotation.URLAction;
 import com.ocpsoft.pretty.faces.annotation.URLActions;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
+import com.stefanini.entidade.CargaHoraria;
 import com.stefanini.entidade.Equipe;
 import com.stefanini.service.EquipeService;
 
@@ -20,8 +22,23 @@ public class EquipeManager {
 
 	private Equipe equipe = new Equipe();
 	private EquipeService service = new EquipeService();
+	private List<Equipe> lista;
 
 	public EquipeManager() {
+		populaLista();
+	}
+
+	public void populaLista() {
+		lista = new ArrayList<Equipe>();
+		lista = service.listarAtivos();
+	}
+
+	public List<Equipe> getLista() {
+		return lista;
+	}
+
+	public void setLista(List<Equipe> lista) {
+		this.lista = lista;
 	}
 
 	public Equipe getEquipe() {
@@ -41,24 +58,24 @@ public class EquipeManager {
 	}
 
 	public String save() {
-		if(service.save(equipe)){
+		if (service.save(equipe)) {
 			return "pretty:equipe";
-		}else{
+		} else {
 			return null;
 		}
 	}
 
 	public String update() {
-		if(service.update(equipe)){
+		if (service.update(equipe)) {
 			return "pretty:equipe";
-		}else{
+		} else {
 			return null;
 		}
-	
+
 	}
 
 	public List<Equipe> listarAtivos() {
-		return service.listar();
+		return service.listarAtivos();
 	}
 
 	public void desativar(Long id) {

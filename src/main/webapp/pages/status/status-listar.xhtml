@@ -15,8 +15,8 @@
 			<h2>#{message['title.status']}</h2>
 			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 			<h:form>
-				<p:dataTable id="gridStatus" var="status" value="#{statusManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
-					<p:column headerText="#{message['label.nome']}">
+				<p:dataTable id="gridStatus" var="status" value="#{statusManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
+					<p:column headerText="#{message['label.nome']}" sortBy="#{status.nome}">
 						<h:outputText value="#{status.nome}" />
 					</p:column>
 					<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">

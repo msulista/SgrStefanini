@@ -1,6 +1,7 @@
 package com.stefanini.manager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -10,6 +11,7 @@ import com.ocpsoft.pretty.faces.annotation.URLAction;
 import com.ocpsoft.pretty.faces.annotation.URLActions;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
+import com.stefanini.entidade.CargaHoraria;
 import com.stefanini.entidade.FormaContratacao;
 import com.stefanini.service.FormaContratacaoService;
 
@@ -23,8 +25,23 @@ public class FormaContratacaoManager {
 
 	private FormaContratacao formaContratacao = new FormaContratacao();
 	private FormaContratacaoService service = new FormaContratacaoService();
+	private List<FormaContratacao> lista;
 
 	public FormaContratacaoManager() {
+		populaLista();
+	}
+
+	public void populaLista() {
+		lista = new ArrayList<FormaContratacao>();
+		lista = service.listarAtivos();
+	}
+
+	public List<FormaContratacao> getLista() {
+		return lista;
+	}
+
+	public void setLista(List<FormaContratacao> lista) {
+		this.lista = lista;
 	}
 
 	public FormaContratacao getFormaContratacao() {
@@ -43,18 +60,18 @@ public class FormaContratacaoManager {
 		this.service = service;
 	}
 
-	public String save(){
-		if(this.service.save(formaContratacao)){
+	public String save() {
+		if (this.service.save(formaContratacao)) {
 			return "pretty:formaContratacao";
-		}else{
+		} else {
 			return null;
 		}
 	}
 
 	public String update() {
-		if(this.service.update(formaContratacao)){
+		if (this.service.update(formaContratacao)) {
 			return "pretty:formaContratacao";
-		}else{
+		} else {
 			return null;
 		}
 	}

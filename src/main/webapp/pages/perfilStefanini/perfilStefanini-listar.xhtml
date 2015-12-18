@@ -15,18 +15,18 @@
 			<h2>#{message['title.perfilStefanini']}</h2>
 			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 			<h:form>
-				<p:dataTable id="gridPerfilStefanini" var="perfilStefanini" value="#{perfilStefaniniManager.listarAtivos()}" emptyMessage="#{message['alerta.listaVazia']}" >
-					<p:column headerText="#{message['label.nome']}">
+				<p:dataTable id="gridPerfilStefanini" var="perfilStefanini" value="#{perfilStefaniniManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
+					<p:column headerText="#{message['label.nome']}" sortBy="#{perfilStefanini.nome}">
 						<h:outputText value="#{perfilStefanini.nome}"/>
 					</p:column>
 					
-					<p:column headerText="#{message['label.perfilStefanini.valorInicial']}" >
+					<p:column headerText="#{message['label.perfilStefanini.valorInicial']}" sortBy="#{perfilStefanini.valorInicial}">
 						<h:outputText value="#{perfilStefanini.valorInicial}">
 							<f:convertNumber minFractionDigits="2" type="currency" currencySymbol="R$" />
 						</h:outputText>
 					</p:column>
 					
-					<p:column headerText="#{message['label.perfilStefanini.valorFinal']}" >
+					<p:column headerText="#{message['label.perfilStefanini.valorFinal']}" sortBy="#{perfilStefanini.valorFinal}" >
 						<h:outputText value="#{perfilStefanini.valorFinal}">
 							<f:convertNumber minFractionDigits="2" type="currency" currencySymbol="R$"/>
 						</h:outputText>
