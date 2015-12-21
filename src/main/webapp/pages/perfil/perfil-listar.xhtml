@@ -8,8 +8,8 @@
 
 	<ui:define name="content">
 	<p:breadCrumb>
-		    <p:menuitem value="#{message.pao['pao.home']}" url="#" />
-		    <p:menuitem value="#{message.pao['pao.perfil']}" outcome="pretty:perfil" disabled="true"/>
+		    <p:menuitem value="#{message['pao.home']}" url="#" />
+		    <p:menuitem value="#{message['pao.perfil']}" outcome="pretty:perfil" disabled="true"/>
 		</p:breadCrumb>
 		<div class="panel-formulario">
 			<h2>#{message['title.perfis']}</h2>
@@ -27,10 +27,10 @@
 							<p:commandButton id="editar" styleClass="btn-acao" type="button" icon="ui-icon-pencil" />
 						</pretty:link>
 						<p:commandButton id="desativar" styleClass="btn-acao" icon="ui-icon-closethick"	action="#{perfilManager.desativar(perfil.id)}" update="gridPerfis">
-							<p:confirm header="#{message.label['label.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />
+							<p:confirm header="#{message['label.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />
 						</p:commandButton>
 						<p:tooltip id="alt-editar" for="editar" value="#{message['label.editar']}" styleClass="alt"/>
-						<p:tooltip id="alt-desativar" for="desativar" value="#{message.label['label.desativar']}" styleClass="alt"/>						
+						<p:tooltip id="alt-desativar" for="desativar" value="#{message['label.desativar']}" styleClass="alt"/>						
 					</p:column>
 				</p:dataTable>
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
