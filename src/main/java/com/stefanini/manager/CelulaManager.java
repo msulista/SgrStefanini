@@ -78,8 +78,9 @@ public class CelulaManager {
 		return service.listarAtivo();
 	}
 
-	public void desativar(Long id) {
+	public String desativar(Long id) {
 		service.desativar(id);
+		return "pretty:celula";
 	}
 
 	@URLActions(actions = { @URLAction(mappingId = "celula-editar", onPostback = false) })
