@@ -5,9 +5,9 @@
 
     <ui:define name="content">
     	<p:breadCrumb>
-		    <p:menuitem value="Home" url="#" />
-		    <p:menuitem value="Carga Horaria" outcome="pretty:cargaHoraria"/>
-		    <p:menuitem value="Carga Horaria Incluir" outcome="pretty:cargaHoraria-incluir" disabled="true"/>
+		    <p:menuitem value="#{message['pao.home']}" url="#" />
+		    <p:menuitem value="#{message['pao.cargaHoraria']}" outcome="pretty:cargaHoraria"/>
+		    <p:menuitem value="#{message['pao.cargaHoraria.incluir']}" outcome="pretty:cargaHoraria-incluir" disabled="true"/>
 		</p:breadCrumb>
     	<h2>#{message['title.cargaHoraria']}</h2>
         <h:form>
