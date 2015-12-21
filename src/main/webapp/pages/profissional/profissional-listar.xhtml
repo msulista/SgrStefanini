@@ -4,7 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/pages/template/default.xhtml"
-	xmlns:pretty="http://ocpsoft.com/prettyfaces">
+	xmlns:pretty="http://ocpsoft.com/prettyfaces"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 	<ui:define name="content">
 		<p:breadCrumb>
@@ -17,8 +18,8 @@
 		<h:form>
 			
 			<div class="pesquisa">
-				<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" />
-				<p:inputText id="nome" value="#{profissionalManager.nome}" />
+				<!-- <p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" /> -->
+				<p:inputText id="nome" value="#{profissionalManager.nome}" pt:placeholder="Pesquisar por Nome..."/>
 				<p:commandButton id="pesquisar" icon="ui-icon-search" action="#{profissionalManager.buscarPorNome()}" immediate="false"/>
 				<p:commandButton id="limpar" icon="ui-icon-arrowreturnthick-1-w" action="#{profissionalManager.populaLista()}" update="gridProfissional"/>
 				<p:tooltip id="alt-pesquisar" for="pesquisar" value="Pesquisar" styleClass="alt"/>
