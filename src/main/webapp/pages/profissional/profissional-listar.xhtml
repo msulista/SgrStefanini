@@ -103,9 +103,10 @@
 					<p:commandButton id="desativar" styleClass="btn-acao" icon="ui-icon-closethick" action="#{profissionalManager.desativar(profissional.id)}" update="gridProfissional" >
 						<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
 					</p:commandButton>
-				</p:column>
-						<p:tooltip id="alt-editarr" for="editar" value="Editar" styleClass="alt"/>
+					<p:tooltip id="alt-editarr" for="editar" value="Editar" styleClass="alt"/>
 						<p:tooltip id="alt-desativarr" for="desativar" value="Desativar" styleClass="alt"/>
+				</p:column>
+						
 			</p:dataTable>
 			
 			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
