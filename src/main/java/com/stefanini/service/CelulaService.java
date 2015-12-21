@@ -35,8 +35,7 @@ public class CelulaService {
 
 		if (DateUtil.verificaDiaUtil(celula.getRegistroValidadeInicio())) {
 			Celula celulaMerge = getCelulaById(celula.getId());
-			if (DateUtil.verificaDataValida(celulaMerge.getRegistroValidadeInicio(), celula.getRegistroValidadeInicio())) {
-				if(DateUtil.verificaDataValida(celula.getRegistroValidadeInicio(), celula.getRegistroValidadeFim())||celula.getRegistroValidadeFim()==null){
+				if(DateUtil.verificaDataValida(celula.getRegistroValidadeInicio(), celula.getRegistroValidadeFim())){
 				celulaMerge.setRegistroValidadeFim(new Date());
 				manager.merge(celulaMerge);
 				manager.getTransaction().commit();
@@ -53,11 +52,6 @@ public class CelulaService {
 					manager.close();
 					return false;
 				}
-			} else {
-				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
-				manager.close();
-				return false;
-			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();

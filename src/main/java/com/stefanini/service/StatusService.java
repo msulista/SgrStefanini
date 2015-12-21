@@ -35,7 +35,6 @@ public class StatusService {
 
 		if (DateUtil.verificaDiaUtil(status.getRegistroValidadeInicio())) {
 			Status statusMerge = (Status) getStatusById(status.getId());
-			if (DateUtil.verificaDataValida(statusMerge.getRegistroValidadeInicio(), status.getRegistroValidadeInicio())) {
 				if(DateUtil.verificaDataValida(status.getRegistroValidadeInicio(), status.getRegistroValidadeFim())||status.getRegistroValidadeFim()==null){
 				statusMerge.setRegistroValidadeFim(new Date());
 				manager.merge(statusMerge);
@@ -53,11 +52,6 @@ public class StatusService {
 					manager.close();
 					return false;
 				}
-			} else {
-				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
-				manager.close();
-				return false;
-			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();

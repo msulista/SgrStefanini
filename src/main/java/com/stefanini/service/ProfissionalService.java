@@ -48,7 +48,6 @@ public class ProfissionalService {
 			
 			Profissional profissionalMerge = (Profissional) getProfissionalById(profissional.getId());
 			
-			if (DateUtil.verificaDataValida(profissionalMerge.getDataAdmissao(), profissional.getDataAdmissao())) {
 				
 				if(DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())||profissional.getDataDemissao()==null){
 					
@@ -84,11 +83,6 @@ public class ProfissionalService {
 					manager.close();
 					return false;
 				}
-			} else {
-				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
-				manager.close();
-				return false;
-			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();

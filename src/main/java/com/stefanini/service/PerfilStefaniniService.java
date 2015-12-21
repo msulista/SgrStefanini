@@ -34,8 +34,6 @@ public class PerfilStefaniniService {
 
 		if (DateUtil.verificaDiaUtil(perfilStefanini.getRegistroValidadeInicio())) {
 			PerfilStefanini perfilStefaniniAntigo = getPerfilStefaniniById(perfilStefanini.getId());
-			if (DateUtil.verificaDataValida(perfilStefaniniAntigo.getRegistroValidadeInicio(),
-					perfilStefanini.getRegistroValidadeInicio())) {
 				if(DateUtil.verificaDataValida(perfilStefanini.getRegistroValidadeInicio(), perfilStefanini.getRegistroValidadeFim())||perfilStefanini.getRegistroValidadeFim()==null){
 				manager.getTransaction().begin();
 			
@@ -57,11 +55,6 @@ public class PerfilStefaniniService {
 					manager.close();
 					return false;
 				}
-			} else {
-				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
-				manager.close();
-				return false;
-			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();

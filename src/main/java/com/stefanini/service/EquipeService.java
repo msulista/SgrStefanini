@@ -33,8 +33,7 @@ public class EquipeService {
 		manager.getTransaction().begin();
 		if (DateUtil.verificaDiaUtil(equipe.getRegistroValidadeInicio())) {
 			Equipe equipeMerge = getEquipeById(equipe.getId());
-			if(DateUtil.verificaDataValida(equipeMerge.getRegistroValidadeInicio(), equipe.getRegistroValidadeInicio())){
-				if(DateUtil.verificaDataValida(equipe.getRegistroValidadeInicio(), equipe.getRegistroValidadeFim())||equipe.getRegistroValidadeFim()==null){
+				if(DateUtil.verificaDataValida(equipe.getRegistroValidadeInicio(), equipe.getRegistroValidadeFim())){
 			equipeMerge.setRegistroValidadeFim(new Date());
 			manager.merge(equipeMerge);
 			manager.getTransaction().commit();
@@ -51,11 +50,6 @@ public class EquipeService {
 					manager.close();
 					return false;
 				}
-			}else{
-				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
-				manager.close();
-				return false;
-			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();

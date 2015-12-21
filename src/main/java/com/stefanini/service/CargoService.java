@@ -34,34 +34,28 @@ public class CargoService {
 
 		if (DateUtil.verificaDiaUtil(cargo.getRegistroValidadeInicio())) {
 			Cargo cargoMerge = (Cargo) getCargoById(cargo.getId());
-			if(DateUtil.verificaDataValida(cargoMerge.getRegistroValidadeInicio(), cargo.getRegistroValidadeInicio())){
-				if(DateUtil.verificaDataValida(cargo.getRegistroValidadeInicio(), cargo.getRegistroValidadeFim())|| cargo.getRegistroValidadeFim()==null){
-			cargoMerge.setRegistroValidadeFim(new Date());
-			manager.merge(cargoMerge);
-			manager.getTransaction().commit();
-			manager.close();
+			if (DateUtil.verificaDataValida(cargo.getRegistroValidadeInicio(), cargo.getRegistroValidadeFim())) {
+				cargoMerge.setRegistroValidadeFim(new Date());
+				manager.merge(cargoMerge);
+				manager.getTransaction().commit();
+				manager.close();
 
-			Cargo cargoPersist = new Cargo();
-			cargoPersist.setNome(cargo.getNome());
-			cargoPersist.setRegistroValidadeInicio(cargo.getRegistroValidadeInicio());
-			cargoPersist.setRegistroValidadeFim(cargo.getRegistroValidadeFim());
-			save(cargoPersist);
-			return true;
-				}else{
-					Mensagem.add("Erro, data final menor que a inicial!");
-					manager.close();
-					return false;
-				}
-		}else{
-			Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
+				Cargo cargoPersist = new Cargo();
+				cargoPersist.setNome(cargo.getNome());
+				cargoPersist.setRegistroValidadeInicio(cargo.getRegistroValidadeInicio());
+				cargoPersist.setRegistroValidadeFim(cargo.getRegistroValidadeFim());
+				save(cargoPersist);
+				return true;
+			} else {
+				Mensagem.add("Erro, data final menor que a inicial!");
+				manager.close();
+				return false;
+			}
+		} else {
+			Mensagem.add("Data informada não é um dia util!");
 			manager.close();
 			return false;
 		}
-	}else {
-		Mensagem.add("Data informada não é um dia util!");
-		manager.close();
-		return false;
-	}
 	}
 
 	@SuppressWarnings("unchecked")

@@ -36,7 +36,6 @@ public class PerfilService {
 
 		if (DateUtil.verificaDiaUtil(perfil.getRegistroValidadeInicio())) {
 			Perfil perfilMerge = getPerfilById(perfil.getId());
-			if (DateUtil.verificaDataValida(perfilMerge.getRegistroValidadeInicio(), perfil.getRegistroValidadeInicio())) {
 				if(DateUtil.verificaDataValida(perfil.getRegistroValidadeInicio(), perfil.getRegistroValidadeFim())||perfil.getRegistroValidadeFim()==null){
 				perfilMerge.setRegistroValidadeFim(new Date());
 				manager.merge(perfilMerge);
@@ -54,11 +53,6 @@ public class PerfilService {
 					manager.close();
 					return false;
 				}
-			} else {
-				Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
-				manager.close();
-				return false;
-			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();

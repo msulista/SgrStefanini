@@ -11,7 +11,6 @@ import com.stefanini.entidade.CargaHoraria;
 import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
-import com.sun.faces.config.Verifier;
 
 
 public class CargaHorariaService {
