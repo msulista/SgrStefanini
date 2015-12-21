@@ -20,7 +20,7 @@
 			<div class="pesquisa">
 				
 				<p:inputText id="nome" value="#{profissionalManager.nome}" pt:placeholder="Pesquisar por Nome..."/>
-				<p:commandButton id="pesquisar" icon="ui-icon-search" action="#{profissionalManager.buscarPorNome()}" immediate="false"/>
+				<p:commandButton id="pesquisar" icon="ui-icon-search" action="#{profissionalManager.buscarPorNome()}" update="gridProfissional"/>
 				<p:commandButton id="limpar" icon="ui-icon-arrowreturnthick-1-w" action="#{profissionalManager.populaLista()}" update="gridProfissional"/>
 				<p:tooltip id="alt-pesquisar" for="pesquisar" value="Pesquisar" styleClass="alt"/>
 				<p:tooltip id="alt-limpar" for="limpar" value="Limpar" styleClass="alt"/>
@@ -28,7 +28,7 @@
 			</div>
 
 			
-			<p:dataTable id="gridProfissional" var="profissional" value="#{profissionalManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
+			<p:dataTable id="gridProfissional" var="profissional" value="#{profissionalManager.lista()}" emptyMessage="#{message['alerta.listaVazia']}" >
 				
 				<p:column headerText="#{message['label.nome']} " sortBy="#{profissional.nome}">
 					<h:outputText value="#{profissional.nome}"/>
