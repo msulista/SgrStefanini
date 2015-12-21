@@ -82,7 +82,7 @@ public class EquipeService {
 
 		Equipe equipeMerge = getEquipeById(id);
 		manager.getTransaction().begin();
-		equipeMerge.setRegistroValidadeFim(equipeMerge.getDataManipulacao());
+		equipeMerge.setRegistroValidadeFim(new Date());
 		manager.merge(equipeMerge);
 		manager.getTransaction().commit();
 		manager.close();
