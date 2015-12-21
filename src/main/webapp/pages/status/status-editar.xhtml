@@ -5,9 +5,9 @@
 
     <ui:define name="content">
     	<p:breadCrumb>
-		    <p:menuitem value="Home" url="#" />
-		    <p:menuitem value="Status" outcome="pretty:status"/>
-		    <p:menuitem value="Statur Editar" outcome="pretty:status-editar" disabled="true"/>
+		    <p:menuitem value="#{message['pao.home']}" url="#" />
+		    <p:menuitem value="#{message['pao.status']}" outcome="pretty:status"/>
+		    <p:menuitem value="#{message['pao.status.editar']}" outcome="pretty:status-editar" disabled="true"/>
 		</p:breadCrumb>
     	<h2>#{message['title.status']}</h2>
         <h:form>
