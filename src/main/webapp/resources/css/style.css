@@ -87,9 +87,15 @@ html, body {
 	width: 160px;
 	margin-top: 45px;
 	margin-left: 150px;
-	
-	
+
 }
+
+.calendario-data span,
+.relogio-hora span {
+	color: rgb(51, 51, 51);
+	font-weight: 300;	
+}
+
 
 .relogio-hora{
 	float: left;
