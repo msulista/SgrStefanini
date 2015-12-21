@@ -8,8 +8,8 @@
 
 	<ui:define name="content">
 		<p:breadCrumb>
-		    <p:menuitem value="Home" url="#" />
-		    <p:menuitem value="Cargo" outcome="pretty:cargo"  disabled="true"/>
+		    <p:menuitem value="#{message['pao.home']}" url="#" />
+		    <p:menuitem value="#{message['pao.cargo']}" outcome="pretty:cargo"  disabled="true"/>
 		</p:breadCrumb>
 		<div class="panel-formulario">
 			<h2>#{message['title.cargos']}</h2>
@@ -21,29 +21,23 @@
 						<h:outputText value="#{cargo.nome}" />
 					</p:column>
 					
-					<!--  <p:column headerText="#{message['label.data.inicio']}" sortBy="#{cargo.registroValidadeInicio}">	
-						<h:outputText value="#{cargo.registroValidadeInicio}">
-							<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
-						</h:outputText>					
-					</p:column> -->
-					
 					<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 						<pretty:link mappingId="cargo-editar">
 							<f:param value="#{cargo.id}" />
 							<p:commandButton id="editar" styleClass="btn-acao" type="button" icon="ui-icon-pencil"  />
 						</pretty:link>
 						<p:commandButton id="desativar" styleClass="btn-acao" icon="ui-icon-closethick" action="#{cargoManager.desativar(cargo.id)}" update="gridCargos">
-							<p:confirm header="Desativar Cargo" message="Deseja mesmo Desativar?" icon="ui-icon-alert" />	
+							<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
 						</p:commandButton>
 						
-						<p:tooltip id="alt-editar" for="editar" value="Editar" styleClass="alt"/>
-						<p:tooltip id="alt-desativar" for="desativar" value="Desativar" styleClass="alt"/>
+						<p:tooltip id="alt-editar" for="editar" value="#{message['button.editar']}" styleClass="alt"/>
+						<p:tooltip id="alt-desativar" for="desativar" value="#{message['button.desativar']}" styleClass="alt"/>
 						
 					</p:column>
 				</p:dataTable>
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-					<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					<p:commandButton value="#{message['button.sim']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="#{message['button.nao']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 				</p:confirmDialog>
 				<br />
 				<p:button styleClass="btn-default" value="#{message['button.novo']}" outcome="pretty:cargo-incluir" />
