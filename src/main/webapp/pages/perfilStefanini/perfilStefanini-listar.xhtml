@@ -8,8 +8,8 @@
 
 	<ui:define name="content">
 		<p:breadCrumb>
-		    <p:menuitem value="Home" url="#" />
-		    <p:menuitem value="Perfil Stefanini" outcome="pretty:perfilStefanini" disabled="true"/>
+		    <p:menuitem value="#{message.pao['pao.home']}" url="#" />
+		    <p:menuitem value="#{message.pao['pao.perfilStefanini']}" outcome="pretty:perfilStefanini" disabled="true"/>
 		</p:breadCrumb>
 		<div class="panel-formulario">
 			<h2>#{message['title.perfilStefanini']}</h2>
@@ -39,8 +39,8 @@
 						<p:commandButton id="desativar" styleClass="btn-acao" icon="ui-icon-closethick" action="#{perfilStefaniniManager.desativar(perfilStefanini.id)}" update="gridPerfilStefanini" >
 							<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
 						</p:commandButton>
-						<p:tooltip id="alt-editar" for="editar" value="Editar" styleClass="alt"/>
-						<p:tooltip id="alt-desativar" for="desativar" value="Desativar" styleClass="alt"/>
+						<p:tooltip id="alt-editar" for="editar" value="#{message.label['label.editar']}" styleClass="alt"/>
+						<p:tooltip id="alt-desativar" for="desativar" value="#{message.label['label.desativar']}" styleClass="alt"/>
 					</p:column>
 				</p:dataTable>
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

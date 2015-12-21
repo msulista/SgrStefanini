@@ -5,9 +5,9 @@
 
     <ui:define name="content">
     	<p:breadCrumb>
-		    <p:menuitem value="Home" url="#" />
-		    <p:menuitem value="Forma de Contratação" outcome="pretty:formaContratacao"/>
-		    <p:menuitem value="Forma de Contratação Incluir" outcome="pretty:formaContratacao-incluir" disabled="true"/>
+		    <p:menuitem value="#{message.pao['pao.home']}" url="#" />
+		    <p:menuitem value="#{message.pao['pao.formaContratacao']}" outcome="pretty:formaContratacao"/>
+		    <p:menuitem value="#{message.pao['pao.formaContratacao.incluir']}" outcome="pretty:formaContratacao-incluir" disabled="true"/>
 		</p:breadCrumb>
     	<h2>#{message['title.formaContratacao']}</h2>
         <h:form>

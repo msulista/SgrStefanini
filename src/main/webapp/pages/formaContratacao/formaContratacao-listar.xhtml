@@ -8,8 +8,8 @@
 
 	<ui:define name="content">
        	<p:breadCrumb>
-		    <p:menuitem value="Home" url="#" />
-		    <p:menuitem value="Forma de Contratação" outcome="pretty:formaContratacao" disabled="true"/>
+		    <p:menuitem value="#{message['pao.home']}" url="#" />
+		    <p:menuitem value="#{message.pao['pao.formaContratacao']}" outcome="pretty:formaContratacao" disabled="true"/>
 		</p:breadCrumb>
 		<div class="panel-formulario">
 			<h2>#{message['title.formaContratacao']}</h2>
@@ -20,24 +20,18 @@
 					<p:column headerText="#{message['label.nome']}" sortBy="#{formaContratacao.nome}">
 						<h:outputText value="#{formaContratacao.nome}" />
 					</p:column>
-					
-					<!--  <p:column headerText="#{message['label.data.inicio']}">
-						<h:outputText value="#{formaContratacao.registroValidadeInicio}">
-							<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR"/>
-						</h:outputText>					
-					</p:column> -->
-					
+										
 					<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 						<pretty:link mappingId="formaContratacao-editar">
 							<f:param value="#{formaContratacao.id}" />
 							<p:commandButton id="editar" styleClass="btn-acao" type="button" icon="ui-icon-pencil" />
 						</pretty:link>
 						<p:commandButton id="desativar" styleClass="btn-acao" icon="ui-icon-closethick" action="#{formaContratacaoManager.desativar(formaContratacao.id)}" update="gridFormaContratacao">
-							<p:confirm header="Desativar Forma de Contratação" message="Deseja mesmo Desativar?" icon="ui-icon-alert" />	
+							<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
 						</p:commandButton>
 						
-						<p:tooltip id="alt-editar" for="editar" value="Editar" styleClass="alt"/>
-						<p:tooltip id="alt-desativar" for="desativar" value="Desativar" styleClass="alt"/>
+						<p:tooltip id="alt-editar" for="editar" value="#{message.label['label.editar']}" styleClass="alt"/>
+						<p:tooltip id="alt-desativar" for="desativar" value="#{message.label['label.desativar']}" styleClass="alt"/>
 						
 					</p:column>
 				</p:dataTable>

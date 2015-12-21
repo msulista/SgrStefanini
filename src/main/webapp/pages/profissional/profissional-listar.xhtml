@@ -8,8 +8,8 @@
 
 	<ui:define name="content">
 		<p:breadCrumb>
-		    <p:menuitem value="Home" url="#" />
-		    <p:menuitem value="Profissional" outcome="pretty:profissional" disabled="true"/>
+		    <p:menuitem value="#{message['pao.home']}" url="#" />
+		    <p:menuitem value="#{message['pao.profissional']}" outcome="pretty:profissional" disabled="true"/>
 		</p:breadCrumb>		
 		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 		
@@ -20,8 +20,8 @@
 			<p:inputText id="nome" value="#{profissionalManager.nome}" />
 			<p:commandButton id="pesquisar" icon="ui-icon-search" action="#{profissionalManager.buscarPorNome()}" immediate="false"/>
 			<p:commandButton id="limpar" icon="ui-icon-arrowreturnthick-1-w" action="#{profissionalManager.populaLista()}" update="gridProfissional"/>
-			<p:tooltip id="alt-pesquisar" for="pesquisar" value="Pesquisar" styleClass="alt"/>
-			<p:tooltip id="alt-limpar" for="limpar" value="Limpar" styleClass="alt"/>
+			<p:tooltip id="alt-pesquisar" for="pesquisar" value="#{message['label.pesquisar']}" styleClass="alt"/>
+			<p:tooltip id="alt-limpar" for="limpar" value="#{message['label.pesquisar']}" styleClass="alt"/>
 			<br/><br/>
 			
 			<p:dataTable id="gridProfissional" var="profissional" value="#{profissionalManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
@@ -103,8 +103,8 @@
 					<p:commandButton id="desativar" styleClass="btn-acao" icon="ui-icon-closethick" action="#{profissionalManager.desativar(profissional.id)}" update="gridProfissional" >
 						<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
 					</p:commandButton>
-					<p:tooltip id="alt-editarr" for="editar" value="Editar" styleClass="alt"/>
-						<p:tooltip id="alt-desativarr" for="desativar" value="Desativar" styleClass="alt"/>
+					<p:tooltip id="alt-editarr" for="editar" value="#{message['label.editar']}" styleClass="alt"/>
+						<p:tooltip id="alt-desativarr" for="desativar" value="#{message['label.desativar']}" styleClass="alt"/>
 				</p:column>
 						
 			</p:dataTable>
