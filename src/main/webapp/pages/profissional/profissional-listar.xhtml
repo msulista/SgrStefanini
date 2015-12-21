@@ -18,7 +18,7 @@
 		<h:form>
 			
 			<div class="pesquisa">
-				<!-- <p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" /> -->
+				
 				<p:inputText id="nome" value="#{profissionalManager.nome}" pt:placeholder="Pesquisar por Nome..."/>
 				<p:commandButton id="pesquisar" icon="ui-icon-search" action="#{profissionalManager.buscarPorNome()}" immediate="false"/>
 				<p:commandButton id="limpar" icon="ui-icon-arrowreturnthick-1-w" action="#{profissionalManager.populaLista()}" update="gridProfissional"/>
@@ -46,7 +46,7 @@
 					<h:outputText value="#{profissional.cargo.nome}"/>			
 				</p:column>
 				
-				<p:column headerText="#{message['label.profissional.perfil']}" sortBy="#{proffissional.perfil.nome}">
+				<p:column headerText="#{message['label.profissional.perfil']}" sortBy="#{profissional.perfil.nome}">
 					<h:outputText value="#{profissional.perfil.nome}"/>	
 				</p:column>
 				
