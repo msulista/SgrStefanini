@@ -23,8 +23,8 @@
 	    		<p:outputLabel for="buttonFim" value="#{message['label.data.final']}" styleClass="label"/>
 	    		<p:calendar id="buttonFim" value="#{perfilManager.perfil.registroValidadeFim}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>
 	    		<br /><br />
-	    	<p:commandButton value="#{message['button.salvar']}" action="#{perfilManager.update()}" update="growl" />
-	    	<p:button value="#{message['button.cancelar']}"  outcome="pretty:perfil"></p:button>
+	    	<p:commandButton value="#{message['button.salvar']}" action="#{perfilManager.update()}" update="growl" styleClass="btn"/>
+	    	<p:button value="#{message['button.cancelar']}"  outcome="pretty:perfil" styleClass="btn"/>
 	    	</p:panel>
     	</h:form>
     

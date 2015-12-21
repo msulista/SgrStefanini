@@ -44,7 +44,7 @@
 					<f:selectItems value="#{confirmaCheckManager.confirmaCheck}" var="check" itemLabel="#{message[check.label]}" itemValue="#{check}"/>					
 				</p:selectOneMenu>
 				<br /><br />						
-				<p:commandButton value="Salvar" action="#{usuarioManager.update()}" update="growl" />
+				<p:commandButton value="Salvar" action="#{usuarioManager.update()}" update="growl" styleClass="btn"/>
 			</p:panel>
 		</h:form>
     </ui:define>
