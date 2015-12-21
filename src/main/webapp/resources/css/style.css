@@ -355,3 +355,7 @@ input[type=text] {
 	height: auto;
 	float:left;
 }
+
+.pesquisar{
+	margin-bottom: 15px;
+}
