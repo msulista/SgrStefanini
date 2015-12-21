@@ -50,6 +50,9 @@ public class RelatorioManager {
 	public void setProfissionalPorEquipe(BarChartModel profissionalPorEquipe) {
 		this.profissionalPorEquipe = profissionalPorEquipe;
 	}
+	public List<Relatorio> listar(){
+		return this.service.profissionaisPorEquipe();
+	}
 	public List<Relatorio> relatorioProfissionalPorEquipe(){
 		return this.service.profissionaisPorEquipe();
 	}
