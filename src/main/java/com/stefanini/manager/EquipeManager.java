@@ -77,8 +77,9 @@ public class EquipeManager {
 		return service.listarAtivos();
 	}
 
-	public void desativar(Long id) {
+	public String desativar(Long id) {
 		service.desativar(id);
+		return "pretty:equipe";
 	}
 
 	@URLActions(actions = { @URLAction(mappingId = "equipe-editar", onPostback = false) })
