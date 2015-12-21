@@ -4,12 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import org.primefaces.model.chart.Axis;
-import org.primefaces.model.chart.AxisType;
-import org.primefaces.model.chart.BarChartModel;
-import org.primefaces.model.chart.ChartSeries;
-
 import com.stefanini.entidade.Relatorio;
 import com.stefanini.util.JPAUtil;
 

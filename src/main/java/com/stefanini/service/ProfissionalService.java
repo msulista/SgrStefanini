@@ -123,10 +123,6 @@ public class ProfissionalService {
 	@SuppressWarnings("unchecked")
 	public List<Profissional> buscaPorNome(String nome){
 		EntityManager manager = JPAUtil.getEntityManager();
-		String antigo = "SELECT * FROM sgr_profissional "
-				+ "WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() "
-				+ "AND NOME LIKE '% :nome %'"
-				+ "ORDER BY NOME ASC";
 		
 		String sql = "SELECT * FROM sgr_profissional"
 				+ " WHERE NOME LIKE :nome"
