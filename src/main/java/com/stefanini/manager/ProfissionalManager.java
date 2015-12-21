@@ -85,14 +85,20 @@ public class ProfissionalManager {
 		return service.listarAtivos();
 	}
 
-	public String buscarPorNome(){
+	public void buscarPorNome(){
 		this.lista = this.service.buscaPorNome(this.nome);
-		return "pretty:profissional";
+		
 	}
 	
 	public void populaLista(){	
 		this.nome = "";
-		this.lista = service.listarAtivos();
+		this.lista = listarAtivos();
+	}
+	
+	public List<Profissional>lista(){
+		
+		
+		return this.lista;
 	}
 	
 	public void desativar(Long id) {
