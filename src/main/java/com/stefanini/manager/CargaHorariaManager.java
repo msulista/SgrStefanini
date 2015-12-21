@@ -77,8 +77,9 @@ public class CargaHorariaManager {
 		return lista;
 	}
 
-	public void desativar(Long id) {
+	public String desativar(Long id) {
 		service.desativar(id);
+		return "pretty:cargaHoraria";
 	}
 
 	@URLActions(actions = { @URLAction(mappingId = "cargaHoraria-editar", onPostback = false) })
