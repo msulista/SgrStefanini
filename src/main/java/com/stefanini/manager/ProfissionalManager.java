@@ -97,8 +97,9 @@ public class ProfissionalManager {
 		return this.lista;
 	}
 	
-	public void desativar(Long id) {
+	public String desativar(Long id) {
 		service.desativar(id);
+		return "pretty:profissional";
 	}
 
 	@URLActions(actions = { @URLAction(mappingId = "profissional-editar", onPostback = false) })

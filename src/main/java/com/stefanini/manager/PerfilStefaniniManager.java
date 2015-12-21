@@ -81,8 +81,9 @@ public class PerfilStefaniniManager {
 		return service.listarAtivos();
 	}
 
-	public void desativar(Long id) {
+	public String desativar(Long id) {
 		service.desativar(id);
+		return "pretty:perfilStefanini";
 	}
 
 	@URLActions(actions = { @URLAction(mappingId = "perfilStefanini-editar", onPostback = false) })

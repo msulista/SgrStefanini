@@ -79,8 +79,9 @@ public class StatusManager {
 		return this.service.listarAtivos();
 	}
 
-	public void desativar(Long id) {
+	public String desativar(Long id) {
 		this.service.desativar(id);
+		return "pretty:status";
 	}
 
 	@URLActions(actions = { @URLAction(mappingId = "status-editar", onPostback = false) })

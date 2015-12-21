@@ -80,8 +80,9 @@ public class PerfilManager {
 		return service.listarAtivos();
 	}
 
-	public void desativar(Long id) {
+	public String desativar(Long id) {
 		service.desativar(id);
+		return "pretty:perfil";
 	}
 
 	@URLActions(actions = { @URLAction(mappingId = "perfil-editar", onPostback = false) })

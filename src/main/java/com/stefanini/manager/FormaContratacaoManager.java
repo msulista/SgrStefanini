@@ -79,8 +79,9 @@ public class FormaContratacaoManager {
 		return this.service.listarAtivos();
 	}
 
-	public void desativar(Long id) {
+	public String desativar(Long id) {
 		this.service.desativar(id);
+		return "pretty:formaContratacao";
 	}
 
 	@URLActions(actions = { @URLAction(mappingId = "formaContratacao-editar", onPostback = false) })
