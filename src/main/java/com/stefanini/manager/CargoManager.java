@@ -81,8 +81,9 @@ public class CargoManager {
 		return service.listarAtivos();		
 	}
 	
-	public void desativar(Long id){
+	public String desativar(Long id){
 		service.desativar(id);
+		return "pretty:cargo";
 	}
 	
 	@URLActions(actions = {@URLAction(mappingId = "cargo-editar", onPostback = false)})
