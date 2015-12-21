@@ -115,6 +115,7 @@ public class ProfissionalService {
 		manager.getTransaction().begin();
 		Profissional profissionalDesativar = (Profissional) getProfissionalById(id);
 		profissionalDesativar.setRegistroValidaeFim(new Date());
+		profissionalDesativar.setDataDemissao(profissionalDesativar.getRegistroValidaeFim());
 		manager.merge(profissionalDesativar);
 		manager.getTransaction().commit();
 		manager.close();
