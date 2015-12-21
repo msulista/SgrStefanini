@@ -20,7 +20,7 @@ import com.stefanini.util.DateUtil;
 public class Profissional implements BaseEntity, Serializable {
 	private static final long serialVersionUID = 1L;
 	public Profissional() {
-		this.registroValidadeInicio = DateUtil.getProximoDiaUtil();
+		this.dataAdmissao = DateUtil.getProximoDiaUtil();
 		this.dataManipulacao = DateUtil.getProximoDiaUtil();
 	}
 	
