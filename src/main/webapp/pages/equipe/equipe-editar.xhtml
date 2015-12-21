@@ -5,17 +5,17 @@
 
     <ui:define name="content">
        	<p:breadCrumb>
-		    <p:menuitem value="Home" url="#" />
-		    <p:menuitem value="Equipe" outcome="pretty:equipe"/>
-		    <p:menuitem value="Equipe Editar" outcome="pretty:equipe-editar" disabled="true"/>
+		    <p:menuitem value="#{message['pao.home']}" url="#" />
+		    <p:menuitem value="#{message['pao.equipe']}" outcome="pretty:equipe"/>
+		    <p:menuitem value="#{message['pao.equipe.editar']}" outcome="pretty:equipe-editar" disabled="true"/>
 		</p:breadCrumb>
     	<h2>#{message['title.equipes']}</h2>
     	<h:form>
 	    	<p:growl id="growl" life="4000" />
 	    	<p:panel header="#{message['title.equipe.editar']}" id="painel">	
 				<p:focus context="painel"/>		
-	    		<p:outputLabel value="#{message['label.nome']} *" styleClass="label"/>
-	    		<p:inputText value="#{equipeManager.equipe.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}"/>
+	    		<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label"/>
+	    		<p:inputText id="nome" value="#{equipeManager.equipe.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}"/>
 	    		<br /><br />
 	    		<p:outputLabel for="button" value="#{message['label.data.inicio.nova']}" styleClass="label"/>
 	    		<p:calendar id="button" value="#{equipeManager.equipe.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
