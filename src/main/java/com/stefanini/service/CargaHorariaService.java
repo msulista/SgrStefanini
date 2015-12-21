@@ -11,6 +11,7 @@ import com.stefanini.entidade.CargaHoraria;
 import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
+import com.sun.faces.config.Verifier;
 
 
 public class CargaHorariaService {
@@ -34,11 +35,12 @@ public class CargaHorariaService {
 	public boolean update(CargaHoraria cargaHoraria) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-
 		if(DateUtil.verificaDiaUtil(cargaHoraria.getRegistroValidadeInicio())){
 			CargaHoraria cargaHorariaAntiga = getCargaHorariaById(cargaHoraria.getId());
-			if(DateUtil.verificaDataValida(cargaHorariaAntiga.getRegistroValidadeInicio(), cargaHoraria.getRegistroValidadeInicio())){
-				if(DateUtil.verificaDataValida(cargaHoraria.getRegistroValidadeInicio(), cargaHoraria.getRegistroValidadeFim())||cargaHoraria.getRegistroValidadeFim()==null){
+			
+				if (DateUtil.verificaDataValida(cargaHoraria.getRegistroValidadeInicio(),
+						cargaHoraria.getRegistroValidadeFim())) {
+					
 		cargaHorariaAntiga.setRegistroValidadeFim(new Date());
 		manager.merge(cargaHorariaAntiga);
 		manager.getTransaction().commit();
@@ -55,11 +57,7 @@ public class CargaHorariaService {
 					manager.close();
 					return false;
 				}
-		}else{
-			Mensagem.add("Erro, nova data é anterior a cadastrada originalmente!");
-			manager.close();
-			return false;
-		}
+	
 		}else{
 		Mensagem.add("Data informada não é um dia util!");
 		manager.close();

@@ -44,7 +44,7 @@ public class ProfissionalService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
-		if (DateUtil.verificaDiaUtil(profissional.getRegistroValidadeInicio())) {
+		if (DateUtil.verificaDiaUtil(profissional.getDataAdmissao())) {
 			
 			Profissional profissionalMerge = (Profissional) getProfissionalById(profissional.getId());
 			
