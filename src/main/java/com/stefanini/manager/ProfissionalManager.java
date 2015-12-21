@@ -29,6 +29,7 @@ public class ProfissionalManager {
 
 	public ProfissionalManager() {
 		populaLista();
+		this.nome = "";
 	}
 
 	public Profissional getProfissional() {
@@ -96,8 +97,6 @@ public class ProfissionalManager {
 	}
 	
 	public List<Profissional>lista(){
-		
-		
 		return this.lista;
 	}
 	
