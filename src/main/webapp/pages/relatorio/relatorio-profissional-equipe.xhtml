@@ -15,6 +15,19 @@
 		
 		<p:chart type="bar" model="#{relatorioManager.profissionalPorEquipe}" style="height:300px"/>
 		
+		<br /><br />
+		
+		<p:dataTable id="gridCargos" var="rel" value="#{relatorioManager.relatorios}" emptyMessage="#{message['alerta.listaVazia']}" >
+	
+			<p:column headerText="#{message['label.nome']}" >
+				<h:outputText value="#{rel.nome}" />
+			</p:column>
+			<p:column headerText="#{message['label.nome']}" >
+				<h:outputText value="#{rel.quantidade}" />
+			</p:column>
+			
+		</p:dataTable>
+		
 	</ui:define>
 
 </ui:composition>
