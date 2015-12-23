@@ -21,6 +21,10 @@
 						<h:outputText value="#{celula.nome}" />
 					</p:column>
 					
+					<p:column headerText="#{message['label.descricao']}" sortBy="#{celula.descricao}">
+						<h:outputText value="#{celula.descricao}" />
+					</p:column>
+					
 					<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
 						<pretty:link mappingId="celula-editar">
 							<f:param value="#{celula.id}" />
