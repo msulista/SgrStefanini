@@ -26,6 +26,9 @@ public class Celula implements BaseEntity, Serializable{
 
 	@Column(name = "NOME", length = 45, nullable = false)
 	private String nome;
+	
+	@Column(name = "DESCRICAO", length = 45, nullable = false)
+	private String descricao;
 
 	@Column(name = "REGISTRO_VALIDADE_INICIO", nullable = false)
 	private Date registroValidadeInicio;
@@ -65,6 +68,14 @@ public class Celula implements BaseEntity, Serializable{
 		this.nome = nome;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	public Date getRegistroValidadeInicio() {
 		return registroValidadeInicio;
 	}
@@ -85,6 +96,7 @@ public class Celula implements BaseEntity, Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((registroValidadeFim == null) ? 0 : registroValidadeFim.hashCode());
@@ -101,6 +113,11 @@ public class Celula implements BaseEntity, Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Celula other = (Celula) obj;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -124,4 +141,6 @@ public class Celula implements BaseEntity, Serializable{
 		return true;
 	}
 
+	
+	
 }
