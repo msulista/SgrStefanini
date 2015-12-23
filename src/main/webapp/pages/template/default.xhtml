@@ -31,7 +31,28 @@
 			</div>
 		</div>
 	</div>
+	
 	<div class="ct-menu">
+		<h:form>
+		    <p:growl id="messages" showDetail="true"/>		 
+		    <p:menuButton styleClass="btn-menu" value="Cadastro">
+		        <p:menuitem value="#{message['title.cargaHoraria']}"     outcome="pretty:cargaHoraria"/>
+		        <p:menuitem value="#{message['title.cargos']}"           outcome="pretty:cargo"/>
+		        <p:menuitem value="#{message['title.celulas']}"          outcome="pretty:celula"/>
+		        <p:menuitem value="#{message['title.equipes']}"          outcome="pretty:equipe"/>
+		        <p:menuitem value="#{message['title.formaContratacao']}" outcome="pretty:formaContratacao"/>
+		        <p:menuitem value="#{message['title.perfis']}"           outcome="pretty:perfil"/>
+		        <p:menuitem value="#{message['title.perfilStefanini']}"  outcome="pretty:perfilStefanini"/>
+		        <p:menuitem value="#{message['title.status']}"           outcome="pretty:status"/>		        
+		        <p:separator/>
+		        <p:menuitem value="#{message['title.profissional']}"     outcome="pretty:profissional"/>
+		        <p:menuitem value="Homepage" url="#" icon="ui-icon-extlink"/>
+		    </p:menuButton>
+		</h:form>
+		
+	</div>
+	
+	<!--  <div class="ct-menu">
 		<ul>
 			<li><h:link outcome="pretty:cargaHoraria">#{message['title.cargaHoraria']}</h:link></li>
 			<li><h:link outcome="pretty:cargo" >#{message['title.cargos']}</h:link></li>			
@@ -43,7 +64,7 @@
 			<li><h:link outcome="pretty:profissional">#{message['title.profissional']}</h:link></li>
 			<li  class="item-last"><h:link outcome="pretty:status">#{message['title.status']}</h:link></li>	
 		</ul>
-	</div>	
+	</div>	-->
 	<div class="container">
 		<div class="ct-content" >
 			<ui:insert name="content" />

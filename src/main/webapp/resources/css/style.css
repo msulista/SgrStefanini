@@ -66,6 +66,17 @@ html, body {
 	color: #FFF;
 }
 
+.btn-menu .ui-state-default{
+	background-color: #fff;
+	background-image: none;
+	color:#333;
+}
+
+.btn-menu .ui-state-default:hover{
+	background-color: #ddd;
+	color:#333;
+}
+
 .cabecalho {
     margin: auto;
 	width: 85%;
@@ -117,7 +128,7 @@ html, body {
     position: absolute;
     top: 133px;
     color: #FFF;
-    left: 100px;
+    left: 118px;
 }
 
 .ct-menu ul {
