@@ -89,15 +89,20 @@ html, body {
     margin-top: 10px;
 }
 
-/* #horario{
-	margin-left:200px
-} */
+.nome-sistema h1{
+    position: absolute;
+    left: 23%;
+    top: 8%;
+    text-shadow: 0.1em 0.1em 0.2em #000;
+    font-size: 60px;
+    color: rgb(51, 51, 51);
+}
 
 .calendario-data{
 	float: left;
 	width: 160px;
 	margin-top: 45px;
-	margin-left: 150px;
+	margin-left: 270px;
 
 }
 
@@ -128,7 +133,7 @@ html, body {
     position: absolute;
     top: 133px;
     color: #FFF;
-    left: 118px;
+    left: 7.5%;
 }
 
 .ct-menu ul {
