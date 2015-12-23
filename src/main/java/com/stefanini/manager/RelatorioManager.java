@@ -1,10 +1,12 @@
 package com.stefanini.manager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
@@ -17,7 +19,7 @@ import com.stefanini.entidade.Relatorio;
 import com.stefanini.service.RelatorioService;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 @URLMappings(mappings = {
 		@URLMapping(id = "relatorio", pattern = "/profissional-por-equipe", viewId = "/pages/relatorio/relatorio-profissional-equipe.xhtml")
 })
@@ -26,6 +28,11 @@ public class RelatorioManager {
 	private Relatorio relatorio = new Relatorio();
 	private RelatorioService service = new RelatorioService();
 	private BarChartModel profissionalPorEquipe;
+	private List<Relatorio> relatorios = new ArrayList<>();
+
+	public RelatorioManager() {
+	}
+	
 	
 	@PostConstruct
 	public void init() {
@@ -35,6 +42,7 @@ public class RelatorioManager {
 	public Relatorio getRelatorio() {
 		return relatorio;
 	}		
+	
 	public void setRelatorio(Relatorio relatorio) {
 		this.relatorio = relatorio;
 	}
@@ -49,12 +57,18 @@ public class RelatorioManager {
 	}
 	public void setProfissionalPorEquipe(BarChartModel profissionalPorEquipe) {
 		this.profissionalPorEquipe = profissionalPorEquipe;
+	}	
+	public List<Relatorio> getRelatorios() {
+		relatorios = this.service.profissionaisPorEquipe();
+		return relatorios;
 	}
-	public List<Relatorio> listar(){
-		return this.service.profissionaisPorEquipe();
+	public void setRelatorios(List<Relatorio> relatorios) {
+		this.relatorios = relatorios;
 	}
-	public List<Relatorio> relatorioProfissionalPorEquipe(){
-		return this.service.profissionaisPorEquipe();
+
+
+	public List<Relatorio> relatorioProfissionalPorEquipeView(){
+		return this.service.profissionaisPorEquipeView();
 	}
 	    
 	    public void criaGrafico(){
@@ -64,6 +78,7 @@ public class RelatorioManager {
 	        BarChartModel model = new BarChartModel();
 	 
 	        ChartSeries grafico = new ChartSeries();
+	        grafico.setLabel("Equipe");
 	        for (Relatorio relatorio : this.service.profissionaisPorEquipe()) {
 				grafico.set(relatorio.getNome(), relatorio.getQuantidade());
 			}	 
