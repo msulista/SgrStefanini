@@ -10,66 +10,67 @@
 	<title>#{app.title}</title>
 	<base href="#{request.contextPath}/" />
 	<link rel="stylesheet" type="text/css" href="resources/css/style.css" />
-	
+
 	<h:outputScript library="js" name="js.js"></h:outputScript>
 </h:head>
 <h:body>
 	<div class="ct-top">
 		<div class="container--topmenu">
 			<div class="cabecalho">
-				<a href="#">
-					<img class="img-logo"/>
+				<a href="#"> <img class="img-logo" />
 				</a>
 				<div class="nome-sistema">
 					<h1>S.G.R</h1>
 				</div>
 				<div class="calendario-data">
-					<h:graphicImage value="/resources/img/calendar.png" styleClass="date-time-icon"/>
+					<h:graphicImage value="/resources/img/calendar.png"
+						styleClass="date-time-icon" />
 					<p:clock id="calendario" pattern="dd.MM.yyyy" mode="server" />
 				</div>
 				<div class="relogio-hora">
-					<h:graphicImage value="/resources/img/clock.png" styleClass="date-time-icon"/>
-					<p:clock id="horario" pattern="HH:mm:ss" mode="server"/>
+					<h:graphicImage value="/resources/img/clock.png"
+						styleClass="date-time-icon" />
+					<p:clock id="horario" pattern="HH:mm:ss" mode="server" />
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="ct-menu">
-		<h:form>
-		    <p:growl id="messages" showDetail="true"/>		 
-		    <p:menuButton styleClass="btn-menu" value="Cadastro">
-		        <p:menuitem value="#{message['title.cargaHoraria']}"     outcome="pretty:cargaHoraria"/>
-		        <p:menuitem value="#{message['title.cargos']}"           outcome="pretty:cargo"/>
-		        <p:menuitem value="#{message['title.celulas']}"          outcome="pretty:celula"/>
-		        <p:menuitem value="#{message['title.equipes']}"          outcome="pretty:equipe"/>
-		        <p:menuitem value="#{message['title.formaContratacao']}" outcome="pretty:formaContratacao"/>
-		        <p:menuitem value="#{message['title.perfis']}"           outcome="pretty:perfil"/>
-		        <p:menuitem value="#{message['title.perfilStefanini']}"  outcome="pretty:perfilStefanini"/>
-		        <p:menuitem value="#{message['title.status']}"           outcome="pretty:status"/>		        
-		        <p:separator/>
-		        <p:menuitem value="#{message['title.profissional']}"     outcome="pretty:profissional"/>
-		        <p:menuitem value="Homepage" url="#" icon="ui-icon-extlink"/>
-		    </p:menuButton>
-		</h:form>
-		
+		<nav class="menu">
+			<ul class="clearfix">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Cadastros<span class="arrow">&#9660;</span></a>
+					<ul class="sub-menu">
+						<li><h:link outcome="pretty:profissional">#{message['title.profissional']}</h:link></li>
+						<p:separator />
+						<li><h:link outcome="pretty:cargaHoraria">#{message['title.cargaHoraria']}</h:link></li>
+						<li><h:link outcome="pretty:cargo">#{message['title.cargos']}</h:link></li>
+						<li><h:link outcome="pretty:celula">#{message['title.celulas']}</h:link></li>
+						<li><h:link outcome="pretty:equipe">#{message['title.equipes']}</h:link></li>
+						<li><h:link outcome="pretty:formaContratacao">#{message['title.formaContratacao']}</h:link></li>
+						<li><h:link outcome="pretty:perfil">#{message['title.perfis']}</h:link></li>
+						<li><h:link outcome="pretty:perfilStefanini">#{message['title.perfilStefanini']}</h:link></li>
+						<li class="item-last"><h:link outcome="pretty:status">#{message['title.status']}</h:link></li>
+					</ul></li>
+				<li><a href="#">Relatorios</a><span class="arrow">&#9660;</span></li>
+					<ul class="sub-menu">
+						<li><h:link outcome="pretty:profissional">#{message['title.profissional']}</h:link></li>
+						<p:separator />
+						<li><h:link outcome="pretty:cargaHoraria">#{message['title.cargaHoraria']}</h:link></li>
+						<li><h:link outcome="pretty:cargo">#{message['title.cargos']}</h:link></li>
+						<li><h:link outcome="pretty:celula">#{message['title.celulas']}</h:link></li>
+						<li><h:link outcome="pretty:equipe">#{message['title.equipes']}</h:link></li>
+						<li><h:link outcome="pretty:formaContratacao">#{message['title.formaContratacao']}</h:link></li>
+						<li><h:link outcome="pretty:perfil">#{message['title.perfis']}</h:link></li>
+						<li><h:link outcome="pretty:perfilStefanini">#{message['title.perfilStefanini']}</h:link></li>
+						<li class="item-last"><h:link outcome="pretty:status">#{message['title.status']}</h:link></li>
+					</ul>
+			</ul>
+		</nav>
 	</div>
-	
-	<!--  <div class="ct-menu">
-		<ul>
-			<li><h:link outcome="pretty:cargaHoraria">#{message['title.cargaHoraria']}</h:link></li>
-			<li><h:link outcome="pretty:cargo" >#{message['title.cargos']}</h:link></li>			
-			<li><h:link outcome="pretty:celula">#{message['title.celulas']}</h:link></li>
-			<li><h:link outcome="pretty:equipe">#{message['title.equipes']}</h:link></li>
-			<li><h:link outcome="pretty:formaContratacao">#{message['title.formaContratacao']}</h:link></li>
-			<li><h:link outcome="pretty:perfil">#{message['title.perfis']}</h:link></li>
-			<li><h:link outcome="pretty:perfilStefanini">#{message['title.perfilStefanini']}</h:link></li>
-			<li><h:link outcome="pretty:profissional">#{message['title.profissional']}</h:link></li>
-			<li  class="item-last"><h:link outcome="pretty:status">#{message['title.status']}</h:link></li>	
-		</ul>
-	</div>	-->
 	<div class="container">
-		<div class="ct-content" >
+		<div class="ct-content">
 			<ui:insert name="content" />
 		</div>
 	</div>
