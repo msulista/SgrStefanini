@@ -67,9 +67,7 @@ public class CargaHorariaService {
 	@SuppressWarnings("unchecked")
 	public List<CargaHoraria> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_carga_horaria WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
-				CargaHoraria.class);
+		Query q = manager.createNamedQuery("CargaHoraria.findAtivos");
 		List<CargaHoraria> cargaHorarias = q.getResultList();
 		manager.close();
 		return cargaHorarias;
@@ -77,9 +75,8 @@ public class CargaHorariaService {
 
 	public CargaHoraria getCargaHorariaById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_carga_horaria WHERE ID_CARGA_HORARIA = :id",
-				CargaHoraria.class);
-		q.setParameter("id", id);
+		Query q = manager.createNamedQuery("CargaHoraria.findId");
+		q.setParameter("value", id);
 		CargaHoraria cargaHoraria = (CargaHoraria) q.getSingleResult();
 		manager.close();
 		return cargaHoraria;
