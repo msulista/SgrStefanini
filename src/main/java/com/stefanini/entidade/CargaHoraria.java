@@ -18,7 +18,7 @@ import com.stefanini.util.DateUtil;
 @Entity
 @Table(name = "SGR_CARGA_HORARIA")
 @NamedQueries({
-	@NamedQuery(name = "CargaHoraria.findAll", query = "SELECT cg FROM CargaHoraria cg"),
+	@NamedQuery(name = "CargaHoraria.findAll", query = "SELECT cg FROM CargaHoraria cg ORDER BY cg.cargaHoraria ASC"),
 	@NamedQuery(name = "CargaHoraria.findAtivos", query = "SELECT cg FROM CargaHoraria cg WHERE cg.registroValidadeFim IS NULL OR cg.registroValidadeFim > CURRENT_DATE ORDER BY cg.cargaHoraria ASC "),
 	@NamedQuery(name = "CargaHoraria.findNome", query = "SELECT cg FROM CargaHoraria cg WHERE cg.cargaHoraria = :nome"),
 	@NamedQuery(name = "CargaHoraria.findId", query = "SELECT cg FROM CargaHoraria cg WHERE cg.id = :id")
