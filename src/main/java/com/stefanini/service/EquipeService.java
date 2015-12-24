@@ -60,9 +60,7 @@ public class EquipeService {
 	@SuppressWarnings("unchecked")
 	public List<Equipe> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_equipe WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
-				Equipe.class);
+		Query q = manager.createNamedQuery("Equipe.findAtivos");
 		List<Equipe> equipes = q.getResultList();
 		manager.close();
 		return equipes;
@@ -70,7 +68,7 @@ public class EquipeService {
 
 	public Equipe getEquipeById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_equipe WHERE ID_EQUIPE = :idEquipe", Equipe.class);
+		Query q = manager.createNamedQuery("Equipe.findId");
 		q.setParameter("idEquipe", id);
 		Equipe equipe = (Equipe) q.getSingleResult();
 		manager.close();
