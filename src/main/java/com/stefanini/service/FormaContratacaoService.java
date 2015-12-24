@@ -63,18 +63,14 @@ public class FormaContratacaoService {
 	@SuppressWarnings("unchecked")
 	public List<FormaContratacao> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_forma_contratacao WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
-				FormaContratacao.class);
+		Query q = manager.createNamedQuery("FormaContratacao.findAtivos");
 		List<FormaContratacao> formaContratacoes = q.getResultList();
 		return formaContratacoes;
 	}
 
 	public FormaContratacao getFormaContratacaoById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_forma_contratacao WHERE ID_FORMA_CONTRATACAO = :idFormaContratacao",
-				FormaContratacao.class);
+		Query q = manager.createNamedQuery("FormaContratacao.findId");
 		q.setParameter("idFormaContratacao", id);
 		FormaContratacao formaContratacao = (FormaContratacao) q.getSingleResult();
 		manager.close();
