@@ -76,7 +76,7 @@ public class CargaHorariaService {
 	public CargaHoraria getCargaHorariaById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("CargaHoraria.findId");
-		q.setParameter("value", id);
+		q.setParameter("id", id);
 		CargaHoraria cargaHoraria = (CargaHoraria) q.getSingleResult();
 		manager.close();
 		return cargaHoraria;
