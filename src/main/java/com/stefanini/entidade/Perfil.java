@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -15,6 +17,12 @@ import com.stefanini.util.DateUtil;
 
 @Entity
 @Table(name = "SGR_PERFIL")
+@NamedQueries({
+	@NamedQuery(name = "Perfil.findAll", query = "SELECT p FROM Perfil p ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Perfil.findAtivos", query = "SELECT p FROM Perfil p WHERE p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Perfil.findNome", query = "SELECT p FROM Perfil p WHERE p.nome = :nome"),
+	@NamedQuery(name = "Perfil.findId", query = "SELECT p FROM Perfil p WHERE p.id = :id"),
+})
 public class Perfil implements BaseEntity, Serializable{
 
 	private static final long serialVersionUID = 1L;
