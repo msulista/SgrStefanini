@@ -17,8 +17,8 @@ import com.stefanini.service.StatusService;
 @ManagedBean
 @RequestScoped
 @URLMappings(mappings = { @URLMapping(id = "status", pattern = "/status", viewId = "/pages/status/status-listar.xhtml"),
-		@URLMapping(id = "status-incluir", pattern = "/incluir", viewId = "/pages/status/status-incluir.xhtml", parentId = "status"),
-		@URLMapping(id = "status-editar", pattern = "/#{statusManager.status.id}/editar", viewId = "/pages/status/status-editar.xhtml", parentId = "status") })
+		@URLMapping(id = "status-incluir", pattern = "/incluir", viewId = "/pages/status/status-incluir.xhtml", parentId = "status")
+})
 public class StatusManager {
 
 	private Status status = new Status();
@@ -67,14 +67,6 @@ public class StatusManager {
 		}
 	}
 
-	public String update() {
-		if (this.service.update(status)) {
-			return "pretty:status";
-		} else {
-			return null;
-		}
-	}
-
 	public List<Status> listarAtivos() {
 		return this.service.listarAtivos();
 	}
@@ -82,11 +74,6 @@ public class StatusManager {
 	public String desativar(Long id) {
 		this.service.desativar(id);
 		return "pretty:status";
-	}
-
-	@URLActions(actions = { @URLAction(mappingId = "status-editar", onPostback = false) })
-	public void load() throws IOException {
-		status = service.getStatusById(status.getId());
 	}
 
 }
