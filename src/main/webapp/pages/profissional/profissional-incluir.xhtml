@@ -79,7 +79,7 @@
                 <p:outputLabel for="status" value="#{message['label.profissional.status']}" styleClass="label" />
                 <p:selectOneMenu id="status" value="#{profissionalManager.profissional.status}"  required="true" requiredMessage="#{message['span.obrigatorio.status']}">
                    <f:converter converterId="simpleEntityConverter"/>
-                    <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
+                    
                     <f:selectItems value="#{statusManager.listarAtivos()}" var="status" itemLabel="#{status.nome}" itemValue="#{status}"/>
                 </p:selectOneMenu>
                 <br /><br />
