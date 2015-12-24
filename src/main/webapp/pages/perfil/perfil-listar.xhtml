@@ -22,14 +22,10 @@
 						<h:outputText value="#{perfil.nome}" />
 					</p:column>
 					<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
-						<pretty:link mappingId="perfil-editar">
-							<f:param value="#{perfil.id}" />
-							<p:commandButton id="editar" styleClass="btn-acao" type="button" icon="ui-icon-pencil" />
-						</pretty:link>
+						
 						<p:commandButton id="desativar" styleClass="btn-acao" icon="ui-icon-closethick"	action="#{perfilManager.desativar(perfil.id)}" update="gridPerfis">
 							<p:confirm header="#{message['label.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />
 						</p:commandButton>
-						<p:tooltip id="alt-editar" for="editar" value="#{message['label.editar']}" styleClass="alt"/>
 						<p:tooltip id="alt-desativar" for="desativar" value="#{message['label.desativar']}" styleClass="alt"/>						
 					</p:column>
 				</p:dataTable>

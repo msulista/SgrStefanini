@@ -17,8 +17,8 @@ import com.stefanini.service.PerfilService;
 @ManagedBean
 @RequestScoped
 @URLMappings(mappings = { @URLMapping(id = "perfil", pattern = "/perfil", viewId = "/pages/perfil/perfil-listar.xhtml"),
-		@URLMapping(id = "perfil-incluir", pattern = "/incluir", viewId = "/pages/perfil/perfil-incluir.xhtml", parentId = "perfil"),
-		@URLMapping(id = "perfil-editar", pattern = "#{perfilManager.perfil.id}/editar", viewId = "/pages/perfil/perfil-editar.xhtml", parentId = "perfil") })
+		@URLMapping(id = "perfil-incluir", pattern = "/incluir", viewId = "/pages/perfil/perfil-incluir.xhtml", parentId = "perfil")
+})
 
 public class PerfilManager {
 
@@ -68,14 +68,6 @@ public class PerfilManager {
 		}
 	}
 
-	public String update() {
-		if (service.update(perfil)) {
-			return "pretty:perfil";
-		} else {
-			return null;
-		}
-	}
-
 	public List<Perfil> listarAtivos() {
 		return service.listarAtivos();
 	}
@@ -85,8 +77,4 @@ public class PerfilManager {
 		return "pretty:perfil";
 	}
 
-	@URLActions(actions = { @URLAction(mappingId = "perfil-editar", onPostback = false) })
-	public void load() throws IOException {
-		perfil = service.getPerfilById(perfil.getId());
-	}
 }
