@@ -61,17 +61,15 @@ public class CargoService {
 	@SuppressWarnings("unchecked")
 	public List<Cargo> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_cargo WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
-				Cargo.class);
+		Query q = manager.createNamedQuery("Cargo.findAtivos");
 		List<Cargo> cargos = q.getResultList();
 		return cargos;
 	}
 
 	public Cargo getCargoById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_cargo WHERE ID_CARGO = :idCargo", Cargo.class);
-		q.setParameter("idCargo", id);
+		Query q = manager.createNamedQuery("Cargo.findId");
+		q.setParameter("id", id);
 		Cargo cargo = (Cargo) q.getSingleResult();
 		manager.close();
 		return cargo;
