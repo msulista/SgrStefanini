@@ -18,8 +18,7 @@ import com.stefanini.service.CargoService;
 @RequestScoped
 @URLMappings(mappings = {
 		@URLMapping(id = "cargo", pattern = "/cargo", viewId = "/pages/cargo/cargo-listar.xhtml"),
-		@URLMapping(id = "cargo-incluir", pattern = "/incluir", viewId = "/pages/cargo/cargo-incluir.xhtml", parentId = "cargo"),
-		@URLMapping(id = "cargo-editar", pattern = "/#{cargoManager.cargo.id}/editar", viewId = "/pages/cargo/cargo-editar.xhtml", parentId = "cargo")
+		@URLMapping(id = "cargo-incluir", pattern = "/incluir", viewId = "/pages/cargo/cargo-incluir.xhtml", parentId = "cargo")
 })
 public class CargoManager {
 
@@ -69,13 +68,6 @@ public class CargoManager {
 		}
 	}
 	
-	public String update(){
-		if(service.update(cargo)){
-		return "pretty:cargo";
-		}else{
-			return null;
-		}
-	}
 	
 	public List<Cargo> listarAtivos(){
 		return service.listarAtivos();		
@@ -86,8 +78,4 @@ public class CargoManager {
 		return "pretty:cargo";
 	}
 	
-	@URLActions(actions = {@URLAction(mappingId = "cargo-editar", onPostback = false)})
-	public void load() throws IOException{
-		cargo = service.getCargoById(cargo.getId());		
-	}
 }
