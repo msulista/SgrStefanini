@@ -65,9 +65,7 @@ public class PerfilStefaniniService {
 	@SuppressWarnings("unchecked")
 	public List<PerfilStefanini> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_perfil_stefanini WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
-				PerfilStefanini.class);
+		Query q = manager.createNamedQuery("PerfilStefanini.findAtivos");
 		List<PerfilStefanini> perfisStefanini = q.getResultList();
 		manager.close();
 		return perfisStefanini;
@@ -75,8 +73,7 @@ public class PerfilStefaniniService {
 
 	public PerfilStefanini getPerfilStefaniniById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_perfil_stefanini WHERE ID_PERFIL_STEFANINI = :id",
-				PerfilStefanini.class);
+		Query q = manager.createNamedQuery("PerfilStefanini.findId");
 		q.setParameter("id", id);
 		PerfilStefanini perfilStefanini = (PerfilStefanini) q.getSingleResult();
 		manager.close();
