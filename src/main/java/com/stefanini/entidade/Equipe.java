@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -15,6 +17,12 @@ import com.stefanini.util.DateUtil;
 
 @Entity
 @Table(name = "sgr_equipe")
+@NamedQueries({
+	@NamedQuery(name = "Equipe.findAll", query = "SELECT e FROM Equipe e"),
+	@NamedQuery(name = "Equipe.findAtivos", query = "SELECT e FROM Equipe e WHERE e.registroValidadeFim IS NULL OR e.registroValidadeFim = CURRENT_DATE ORDER BY e.nome ASC"),
+	@NamedQuery(name = "Equipe.findNome", query = "SELECT e FROM Equipe e WHERE e.nome = :nome"),
+	@NamedQuery(name = "Equipe.findId", query = "SELECT e FROM Equipe e WHERE e.id = :id"),	
+})
 public class Equipe implements BaseEntity, Serializable{
 
 	private static final long serialVersionUID = 1L;

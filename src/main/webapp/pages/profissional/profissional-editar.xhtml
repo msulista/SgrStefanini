@@ -21,56 +21,60 @@
 				</p:selectOneMenu>
 				<br /><br />
 				<p:outputLabel for="matricula" value="#{message['label.profissional.matricula']}" styleClass="label" />
-				<p:inputText id="matricula" value="#{profissionalManager.profissional.matricula}" required="true" requiredMessage="#{message['span.obrigatorio.Matricula']}" />
+				<p:inputText id="matricula" value="#{profissionalManager.profissional.matricula}" required="true" requiredMessage="#{message['span.obrigatorio.Matricula']}" disabled="true" />
+				<h:inputHidden value="#{profissionalManager.profissional.matricula}" />
 				<br /><br />				
 				<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" />
 				<p:inputText id="nome" value="#{profissionalManager.profissional.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
-				<br /><br />				
+				<br /><br />
+				
+				<p:outputLabel for="fContratacao" value="#{message['label.profissional.formaContratacao']}" styleClass="label" />
+                <p:selectOneMenu id="fContratacao" value="#{profissionalManager.profissional.formaContratacao}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.foramaContratacao']}">
+                    <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
+                    <f:selectItems value="#{formaContratacaoManager.listarAtivos()}" var="fContratacao" itemLabel="#{fContratacao.nome}" itemValue="#{fContratacao}"/>
+                </p:selectOneMenu>
+                <br /><br />
+								
 				<p:outputLabel for="salario" value="#{message['label.profissional.salario']}" styleClass="label" />
 				<p:inputMask id="salario" value="#{profissionalManager.profissional.salario}" onblur="retornaPadrao(this)" converter="salarioConverter" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/>
 				<br /><br />
+				
 				<p:outputLabel for="beneficio" value="#{message['label.profissional.beneficios']}" styleClass="label" />
 				<p:inputText id="beneficio" value="#{profissionalManager.profissional.beneficios}" onblur="retornaPadrao(this)" converter="beneficioConverter" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/>
 				<br /><br />
+				
+				<p:outputLabel for="cargaH" value="#{message['label.cargaHoraria']}" styleClass="label" />
+                <p:selectOneMenu id="cargaH" value="#{profissionalManager.profissional.cargaHoraria}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.cargaHoraria']}">
+                    <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
+                    <f:selectItems value="#{cargaHorariaManager.listarAtivos()}" var="cargaHora" itemLabel="#{cargaHora.cargaHoraria}" itemValue="#{cargaHora}"/>
+                </p:selectOneMenu>
+                <br /><br />
+				
 				<p:outputLabel for="valorHora" value="#{message['label.profissional.valorHora']}" styleClass="label"/>
 				<p:inputMask id="valorHora" value="#{profissionalManager.profissional.valorHora}" onblur="retornaPadrao(this)" converter="valorHoraConverter" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/>
 				<br/><br/>
-				<p:outputLabel for="admissao" value="#{message['label.profissional.dataAdmissao']}" styleClass="label"/>
-        		<p:calendar id="admissao" value="#{profissionalManager.profissional.dataAdmissao}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataAdimissao']}" disabledWeekends="true"/>
-        		<br/><br/>
-        		<p:outputLabel for="demissao" value="#{message['label.profissional.dataDemissao']}" styleClass="label"/>
-        		<p:calendar id="demissao" value="#{profissionalManager.profissional.dataDemissao}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>
-        		<br/><br/>
+											
 				<p:outputLabel for="equipe" value="#{message['label.profissional.equipe']}" styleClass="label" />
 				<p:selectOneMenu id="equipe" value="#{profissionalManager.profissional.equipe}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.equipe']}">
 					<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
 					<f:selectItems value="#{equipeManager.listarAtivos()}" var="equipe" itemLabel="#{equipe.nome}" itemValue="#{equipe}"/>
 				</p:selectOneMenu>
 				<br/><br/>
-				  <p:outputLabel for="cargo" value="#{message['label.profissional.cargo']}" styleClass="label" />
+				
+				<p:outputLabel for="cargo" value="#{message['label.profissional.cargo']}" styleClass="label" />
                 <p:selectOneMenu id="cargo" value="#{profissionalManager.profissional.cargo}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.cargo']}">
                     <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
                     <f:selectItems value="#{cargoManager.listarAtivos()}" var="cargo" itemLabel="#{cargo.nome}" itemValue="#{cargo}"/>
                 </p:selectOneMenu>
                 <br /><br />
+                
                 <p:outputLabel for="perfil" value="#{message['label.profissional.perfil']}" styleClass="label" />
                 <p:selectOneMenu id="perfil" value="#{profissionalManager.profissional.perfil}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.perfil']}">
                     <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
                     <f:selectItems value="#{perfilManager.listarAtivos()}" var="perfil" itemLabel="#{perfil.nome}" itemValue="#{perfil}"/>
                 </p:selectOneMenu>
                 <br /><br />
-                <p:outputLabel for="cargaH" value="#{message['label.cargaHoraria']}" styleClass="label" />
-                <p:selectOneMenu id="cargaH" value="#{profissionalManager.profissional.cargaHoraria}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.cargaHoraria']}">
-                    <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
-                    <f:selectItems value="#{cargaHorariaManager.listarAtivos()}" var="cargaHora" itemLabel="#{cargaHora.cargaHoraria}" itemValue="#{cargaHora}"/>
-                </p:selectOneMenu>
-                <br /><br />
-                <p:outputLabel for="fContratacao" value="#{message['label.profissional.formaContratacao']}" styleClass="label" />
-                <p:selectOneMenu id="fContratacao" value="#{profissionalManager.profissional.formaContratacao}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.foramaContratacao']}">
-                    <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
-                    <f:selectItems value="#{formaContratacaoManager.listarAtivos()}" var="fContratacao" itemLabel="#{fContratacao.nome}" itemValue="#{fContratacao}"/>
-                </p:selectOneMenu>
-                <br /><br />
+                                
                 <p:outputLabel for="status" value="#{message['label.profissional.status']}" styleClass="label" />
                 <p:selectOneMenu id="status" value="#{profissionalManager.profissional.status}"  required="true" requiredMessage="#{message['span.obrigatorio.status']}">
                    <f:converter converterId="simpleEntityConverter"/>
@@ -78,6 +82,15 @@
                     <f:selectItems value="#{statusManager.listarAtivos()}" var="status" itemLabel="#{status.nome}" itemValue="#{status}"/>
                 </p:selectOneMenu>
                 <br /><br />
+                
+                <p:outputLabel for="admissao" value="#{message['label.profissional.dataAdmissao']}" styleClass="label"/>
+        		<p:calendar id="admissao" value="#{profissionalManager.profissional.dataAdmissao}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataAdimissao']}" disabledWeekends="true"/>
+        		<br/><br/>
+        		
+        		<p:outputLabel for="demissao" value="#{message['label.profissional.dataDemissao']}" styleClass="label"/>
+        		<p:calendar id="demissao" value="#{profissionalManager.profissional.dataDemissao}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>
+        		<br/><br/>
+                
                 <p:commandButton value="#{message['button.salvar']}" action="#{profissionalManager.update()}" update="growl" styleClass="btn"/>
                 <p:button value="#{message['button.cancelar']}" outcome="pretty:profissional" styleClass="btn"/>
             </p:panel>

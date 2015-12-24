@@ -63,17 +63,15 @@ public class PerfilService {
 	@SuppressWarnings("unchecked")
 	public List<Perfil> listarAtivos() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_perfil WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
-				Perfil.class);
+		Query q = manager.createNamedQuery("Perfil.findAtivos");
 		List<Perfil> perfis = q.getResultList();
 		return perfis;
 	}
 
 	public Perfil getPerfilById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_perfil WHERE ID_PERFIL = :idPerfil", Perfil.class);
-		q.setParameter("idPerfil", id);
+		Query q = manager.createNamedQuery("Perfil.findId");
+		q.setParameter("id", id);
 		Perfil perfil = (Perfil) q.getSingleResult();
 		manager.close();
 		return perfil;

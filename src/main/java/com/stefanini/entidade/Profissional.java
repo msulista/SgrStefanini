@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -17,6 +19,9 @@ import com.stefanini.util.DateUtil;
 
 @Entity
 @Table(name = "SGR_PROFISSIONAL")
+@NamedQueries({
+	@NamedQuery(name = "Profissional.findMatricula", query = "SELECT p FROM Profissional p WHERE p.matricula = :matricula")
+})
 public class Profissional implements BaseEntity, Serializable {
 	private static final long serialVersionUID = 1L;
 	public Profissional() {

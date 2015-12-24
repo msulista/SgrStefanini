@@ -63,6 +63,7 @@ public class CargoService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("Cargo.findAtivos");
 		List<Cargo> cargos = q.getResultList();
+		manager.close();
 		return cargos;
 	}
 
