@@ -30,6 +30,10 @@
 			
 			<p:dataTable id="gridProfissional" var="profissional" value="#{profissionalManager.lista()}" emptyMessage="#{message['alerta.listaVazia']}" >
 				
+				<p:column headerText="#{message['label.profissional.matricula']} " sortBy="#{profissional.matricula}">
+					<h:outputText value="#{profissional.matricula}"/>
+				</p:column>
+				
 				<p:column headerText="#{message['label.nome']} " sortBy="#{profissional.nome}">
 					<h:outputText value="#{profissional.nome}"/>
 				</p:column>

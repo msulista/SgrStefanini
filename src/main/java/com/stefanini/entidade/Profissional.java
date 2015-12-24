@@ -35,6 +35,9 @@ public class Profissional implements BaseEntity, Serializable {
 	@Column(name = "NOME", nullable = false)
 	private String nome;
 	
+	@Column(name = "MATRICULA", nullable = false)
+	private int matricula;
+	
 	@Column(name = "SALARIO", nullable = false)
 	private double salario;
 	
@@ -84,12 +87,22 @@ public class Profissional implements BaseEntity, Serializable {
 	@ManyToOne
 	private Status status;
 
+	
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	
+	public int getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(int matricula) {
+		this.matricula = matricula;
 	}
 
 	public String getNome() {
@@ -235,6 +248,7 @@ public class Profissional implements BaseEntity, Serializable {
 		result = prime * result + ((equipe == null) ? 0 : equipe.hashCode());
 		result = prime * result + ((formaContratacao == null) ? 0 : formaContratacao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + matricula;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((perfil == null) ? 0 : perfil.hashCode());
 		result = prime * result + ((registroValidadeInicio == null) ? 0 : registroValidadeInicio.hashCode());
@@ -298,6 +312,8 @@ public class Profissional implements BaseEntity, Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (matricula != other.matricula)
+			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
@@ -330,5 +346,6 @@ public class Profissional implements BaseEntity, Serializable {
 		return true;
 	}
 
+	
 	
 }

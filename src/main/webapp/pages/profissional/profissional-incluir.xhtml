@@ -19,7 +19,10 @@
 					<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
 					<f:selectItems value="#{celulaManager.listarAtivos()}" var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}"/>
 				</p:selectOneMenu>
-				<br /><br />				
+				<br /><br />		
+				<p:outputLabel for="matricula" value="#{message['label.profissional.matricula']}" styleClass="label" />
+				<p:inputText id="matricula" value="#{profissionalManager.profissional.matricula}" required="true" requiredMessage="#{message['span.obrigatorio.Matricula']}" />
+				<br /><br />			
 				<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" />
 				<p:inputText id="nome" value="#{profissionalManager.profissional.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
 				<br /><br />				
