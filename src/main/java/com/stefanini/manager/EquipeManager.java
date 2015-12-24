@@ -15,8 +15,7 @@ import com.stefanini.service.EquipeService;
 
 @ManagedBean
 @URLMappings(mappings = { @URLMapping(id = "equipe", pattern = "/equipe", viewId = "/pages/equipe/equipe-listar.xhtml"),
-		@URLMapping(id = "equipe-incluir", pattern = "/incluir", viewId = "/pages/equipe/equipe-incluir.xhtml", parentId = "equipe"),
-		@URLMapping(id = "equipe-editar", pattern = "/#{equipeManager.equipe.id}/editar", viewId = "/pages/equipe/equipe-editar.xhtml", parentId = "equipe") })
+		@URLMapping(id = "equipe-incluir", pattern = "/incluir", viewId = "/pages/equipe/equipe-incluir.xhtml", parentId = "equipe") })
 public class EquipeManager {
 
 	private Equipe equipe = new Equipe();
@@ -64,15 +63,6 @@ public class EquipeManager {
 		}
 	}
 
-	public String update() {
-		if (service.update(equipe)) {
-			return "pretty:equipe";
-		} else {
-			return null;
-		}
-
-	}
-
 	public List<Equipe> listarAtivos() {
 		return service.listarAtivos();
 	}
@@ -82,8 +72,4 @@ public class EquipeManager {
 		return "pretty:equipe";
 	}
 
-	@URLActions(actions = { @URLAction(mappingId = "equipe-editar", onPostback = false) })
-	public void load() throws IOException {
-		equipe = service.getEquipeById(equipe.getId());
-	}
 }
