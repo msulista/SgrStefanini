@@ -71,7 +71,7 @@ public class FormaContratacaoService {
 	public FormaContratacao getFormaContratacaoById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("FormaContratacao.findId");
-		q.setParameter("idFormaContratacao", id);
+		q.setParameter("id", id);
 		FormaContratacao formaContratacao = (FormaContratacao) q.getSingleResult();
 		manager.close();
 		return formaContratacao;
