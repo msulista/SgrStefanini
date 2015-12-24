@@ -17,8 +17,7 @@ import com.stefanini.service.CelulaService;
 @ManagedBean
 @RequestScoped
 @URLMappings(mappings = { @URLMapping(id = "celula", pattern = "/celula", viewId = "/pages/celula/celula-listar.xhtml"),
-		@URLMapping(id = "celula-incluir", pattern = "/incluir", viewId = "/pages/celula/celula-incluir.xhtml", parentId = "celula"),
-		@URLMapping(id = "celula-editar", pattern = "/#{celulaManager.celula.id}/editar", viewId = "/pages/celula/celula-editar.xhtml", parentId = "celula") })
+		@URLMapping(id = "celula-incluir", pattern = "/incluir", viewId = "/pages/celula/celula-incluir.xhtml", parentId = "celula") })
 public class CelulaManager {
 
 	private Celula celula = new Celula();
@@ -66,14 +65,6 @@ public class CelulaManager {
 		}
 	}
 
-	public String update() {
-		if (service.update(celula)) {
-			return "pretty:celula";
-		} else {
-			return null;
-		}
-	}
-
 	public List<Celula> listarAtivos() {
 		return service.listarAtivo();
 	}
@@ -83,8 +74,4 @@ public class CelulaManager {
 		return "pretty:celula";
 	}
 
-	@URLActions(actions = { @URLAction(mappingId = "celula-editar", onPostback = false) })
-	public void load() throws IOException {
-		celula = service.getCelulaById(celula.getId());
-	}
 }
