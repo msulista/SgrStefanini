@@ -71,7 +71,7 @@ public class CelulaService {
 	public Celula getCelulaById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("Celula.findId");
-		q.setParameter("idCelula", id);
+		q.setParameter("id", id);
 		Celula celula = (Celula) q.getSingleResult();
 		manager.close();
 		return celula;
