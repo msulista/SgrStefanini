@@ -18,8 +18,7 @@ import com.stefanini.service.FormaContratacaoService;
 @RequestScoped
 @URLMappings(mappings = {
 		@URLMapping(id = "formaContratacao", pattern = "/formaContratacao", viewId = "/pages/formaContratacao/formaContratacao-listar.xhtml"),
-		@URLMapping(id = "formaContratacao-incluir", pattern = "/incluir", viewId = "/pages/formaContratacao/formaContratacao-incluir.xhtml", parentId = "formaContratacao"),
-		@URLMapping(id = "formaContratacao-editar", pattern = "/#{formaContratacaoManager.formaContratacao.id}/editar", viewId = "/pages/formaContratacao/formaContratacao-editar.xhtml", parentId = "formaContratacao") })
+		@URLMapping(id = "formaContratacao-incluir", pattern = "/incluir", viewId = "/pages/formaContratacao/formaContratacao-incluir.xhtml", parentId = "formaContratacao") })
 public class FormaContratacaoManager {
 
 	private FormaContratacao formaContratacao = new FormaContratacao();
@@ -67,14 +66,6 @@ public class FormaContratacaoManager {
 		}
 	}
 
-	public String update() {
-		if (this.service.update(formaContratacao)) {
-			return "pretty:formaContratacao";
-		} else {
-			return null;
-		}
-	}
-
 	public List<FormaContratacao> listarAtivos() {
 		return this.service.listarAtivos();
 	}
@@ -84,8 +75,4 @@ public class FormaContratacaoManager {
 		return "pretty:formaContratacao";
 	}
 
-	@URLActions(actions = { @URLAction(mappingId = "formaContratacao-editar", onPostback = false) })
-	public void load() throws IOException {
-		formaContratacao = service.getFormaContratacaoById(formaContratacao.getId());
-	}
 }
