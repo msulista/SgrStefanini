@@ -69,7 +69,7 @@ public class EquipeService {
 	public Equipe getEquipeById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("Equipe.findId");
-		q.setParameter("idEquipe", id);
+		q.setParameter("id", id);
 		Equipe equipe = (Equipe) q.getSingleResult();
 		manager.close();
 		return equipe;
