@@ -156,6 +156,7 @@ html, body {
 	border: none;
 }
 
+
 .img-logo {
     width: 208px;
     height: 47px;
@@ -412,10 +413,18 @@ input[type=text] {
     position:relative;
     font-size:19px;
 }
- 
+
+.menu-categoria{
+	padding: 17px 10px;
+}
+
 .menu > ul > li > a {
-    padding:17px 40px;
+    
     display:inline-block;
+}
+
+.menu-categoria{
+	padding: 17px 10px;
 }
  
 .menu > ul > li:hover > a, .menu > ul > .current-item > a {
@@ -428,10 +437,11 @@ input[type=text] {
     z-index:1;
     opacity:1;
     display: inline;
+    width: 270%;
 }
  
 .sub-menu {
-    width:160%;
+
     padding:5px 0px;
     position:absolute;
     top:100%;
@@ -450,7 +460,7 @@ input[type=text] {
 }
  
 .sub-menu li a {
-    padding:10px 30px;
+    padding:10px 20px;
     display:block;
     color: #333;
 }
