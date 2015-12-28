@@ -17,11 +17,17 @@ public class PerfilService {
 	public boolean save(Perfil perfil) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		if (DateUtil.verificaDiaUtil(perfil.getRegistroValidadeInicio())) {
+		if (DateUtil.verificaDiaUtil(perfil.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(perfil.getRegistroValidadeFim())) {
+			if(DateUtil.verificaDataValida(perfil.getRegistroValidadeInicio(), perfil.getRegistroValidadeFim())){
 			manager.persist(perfil);
 			manager.getTransaction().commit();
 			manager.close();
 			return true;
+			}else{
+				Mensagem.add("Data final do registro anterior a data inicial!");
+				manager.close();
+				return false;
+			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();
