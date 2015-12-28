@@ -24,7 +24,8 @@ import com.stefanini.util.DateUtil;
 	@NamedQuery(name = "Profissional.findAtivos", query = "SELECT p FROM Profissional p WHERE p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Profissional.findNome", query = "SELECT p FROM Profissional p WHERE p.nome LIKE :nome AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Profissional.findId", query = "SELECT p FROM Profissional p WHERE p.id = :id"),
-	@NamedQuery(name = "Profissional.findMatricula", query = "SELECT p FROM Profissional p WHERE p.matricula = :matricula")
+	@NamedQuery(name = "Profissional.findMatricula", query = "SELECT p FROM Profissional p WHERE p.matricula = :matricula"),
+	@NamedQuery(name = "Profissional.findProfissionalByCargaHoraria", query = "SELECT p FROM Profissional p WHERE p.cargaHoraria.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)")	
 })
 public class Profissional implements BaseEntity, Serializable {
 	private static final long serialVersionUID = 1L;

@@ -17,11 +17,17 @@ public class FormaContratacaoService {
 	public boolean save(FormaContratacao formaContratacao) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		if (DateUtil.verificaDiaUtil(formaContratacao.getRegistroValidadeInicio())) {
+		if (DateUtil.verificaDiaUtil(formaContratacao.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(formaContratacao.getRegistroValidadeFim())) {
+			if(DateUtil.verificaDataValida(formaContratacao.getRegistroValidadeInicio(), formaContratacao.getRegistroValidadeFim())){
 			manager.persist(formaContratacao);
 			manager.getTransaction().commit();
 			manager.close();
 			return true;
+		}else{
+			Mensagem.add("Data final do registro anterior a data inicial!");
+			manager.close();
+			return false;
+		}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();

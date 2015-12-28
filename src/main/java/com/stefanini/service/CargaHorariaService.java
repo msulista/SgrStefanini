@@ -19,11 +19,17 @@ public class CargaHorariaService {
 	public boolean save(CargaHoraria cargaHoraria) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		if (DateUtil.verificaDiaUtil(cargaHoraria.getRegistroValidadeInicio())) {
+		if(DateUtil.verificaDiaUtil(cargaHoraria.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(cargaHoraria.getRegistroValidadeFim())) {
+			if(DateUtil.verificaDataValida(cargaHoraria.getRegistroValidadeInicio(), cargaHoraria.getRegistroValidadeFim())){
 			manager.persist(cargaHoraria);
 			manager.getTransaction().commit();
 			manager.close();
 			return true;
+			}else{
+				Mensagem.add("Data final do registro anterior a data inicial!");
+				manager.close();
+				return false;
+			}
 		}else{
 		Mensagem.add("Data informada não é um dia util!");
 		manager.close();
@@ -34,7 +40,7 @@ public class CargaHorariaService {
 	public boolean update(CargaHoraria cargaHoraria) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		if(DateUtil.verificaDiaUtil(cargaHoraria.getRegistroValidadeInicio())){
+		if(DateUtil.verificaDiaUtil(cargaHoraria.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(cargaHoraria.getRegistroValidadeFim())){
 			CargaHoraria cargaHorariaAntiga = getCargaHorariaById(cargaHoraria.getId());
 			
 				if (DateUtil.verificaDataValida(cargaHoraria.getRegistroValidadeInicio(),
@@ -84,12 +90,18 @@ public class CargaHorariaService {
 
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
-		CargaHoraria cargaHoraria = getCargaHorariaById(id);
-		cargaHoraria.setRegistroValidadeFim(new Date());
-		manager.getTransaction().begin();
-		manager.merge(cargaHoraria);
-		manager.getTransaction().commit();
-		manager.close();
-
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByCargaHoraria");
+		q.setParameter("id", id);
+		if(q.getResultList().isEmpty()){
+			CargaHoraria cargaHoraria = getCargaHorariaById(id);		
+			cargaHoraria.setRegistroValidadeFim(new Date());
+			manager.getTransaction().begin();
+			manager.merge(cargaHoraria);
+			manager.getTransaction().commit();
+			manager.close();
+		}else {
+			Mensagem.add("Existem profissionais ativos vinculados a esta Carga Horária, não pode ser excluída.");
+			manager.close();
+		}		
 	}
 }

@@ -17,16 +17,24 @@ public class EquipeService {
 	public boolean save(Equipe equipe) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		if (DateUtil.verificaDiaUtil(equipe.getRegistroValidadeInicio())) {
+		if (DateUtil.verificaDiaUtil(equipe.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(equipe.getRegistroValidadeFim())) {
+			if(DateUtil.verificaDataValida(equipe.getRegistroValidadeInicio(), equipe.getRegistroValidadeFim())){
 			manager.persist(equipe);
 			manager.getTransaction().commit();
 			manager.close();
 			return true;
-		}
+			}else{
+				Mensagem.add("Data final do registro anterior a data inicial!");
+				manager.close();
+				return false;
+			}
+		}else{
 		Mensagem.add("Data informada não é um dia util!");
 		manager.close();
 		return false;
+		}
 	}
+			
 
 	public boolean update(Equipe equipe) {
 		EntityManager manager = JPAUtil.getEntityManager();
