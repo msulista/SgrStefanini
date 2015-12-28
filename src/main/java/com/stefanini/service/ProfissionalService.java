@@ -121,11 +121,6 @@ public class ProfissionalService {
 	@SuppressWarnings("unchecked")
 	public List<Profissional> buscaPorNome(String nome) {
 		EntityManager manager = JPAUtil.getEntityManager();
-//		String sql = "SELECT * FROM sgr_profissional WHERE NOME LIKE :nome AND DATA_DEMISSAO IS NULL"
-//				+ " AND (REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE())"
-//				+ " ORDER BY NOME ASC";
-//
-//		Query q = manager.createNativeQuery(sql, Profissional.class);
 		Query q = manager.createNamedQuery("Profissional.findNome");
 		q.setParameter("nome", "%" + nome + "%");
 		List<Profissional> profissionais = q.getResultList();
