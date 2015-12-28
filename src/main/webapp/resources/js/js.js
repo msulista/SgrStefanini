@@ -17,12 +17,12 @@ function teste(obj){
 }
 
 function limpaDoubleVazio(obj){
-	if(obj.value == '0') obj.value = '';
+	if(obj.value == '0,00') obj.value = '';
 	
 }
 
 function retornaPadrao(obj){
-	if(obj.value == '') obj.value = '0';
+	if(obj.value == '') obj.value = '0,00';
 }
 
 function moeda(v) {
