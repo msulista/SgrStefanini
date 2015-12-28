@@ -7,7 +7,6 @@ import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import com.stefanini.entidade.Perfil;
 import com.stefanini.entidade.Status;
 import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
@@ -85,7 +84,7 @@ public class StatusService {
 
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNamedQuery("Profissional.findProfissionalByCargo");
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByStatus");
 		q.setParameter("id", id);
 		if(q.getResultList().isEmpty()){
 			manager.getTransaction().begin();

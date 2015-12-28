@@ -85,7 +85,7 @@ public class EquipeService {
 
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNamedQuery("Profissional.findProfissionalByCargo");
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByEquipe");
 		q.setParameter("id", id);
 		if(q.getResultList().isEmpty()){
 			Equipe equipeMerge = getEquipeById(id);

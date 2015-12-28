@@ -85,7 +85,7 @@ public class PerfilService {
 
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNamedQuery("Profissional.findProfissionalByCargo");
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByPerfil");
 		q.setParameter("id", id);
 		if(q.getResultList().isEmpty()){
 			manager.getTransaction().begin();

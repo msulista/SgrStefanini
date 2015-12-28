@@ -85,7 +85,7 @@ public class CelulaService {
 
 	public void desativar(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNamedQuery("Profissional.findProfissionalByCargo");
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByCelula");
 		q.setParameter("id", id);
 		if(q.getResultList().isEmpty()){
 			Celula celulaMerge = getCelulaById(id);
