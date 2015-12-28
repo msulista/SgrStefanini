@@ -85,11 +85,18 @@ public class CargoService {
 
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
-		manager.getTransaction().begin();
-		Cargo cargoMerge = (Cargo) getCargoById(id);
-		cargoMerge.setRegistroValidadeFim(new Date());
-		manager.merge(cargoMerge);
-		manager.getTransaction().commit();
-		manager.close();
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByCargo");
+		q.setParameter("id", id);
+		if(q.getResultList().isEmpty()){
+			Cargo cargoMerge = (Cargo) getCargoById(id);
+			cargoMerge.setRegistroValidadeFim(new Date());
+			manager.getTransaction().begin();
+			manager.merge(cargoMerge);
+			manager.getTransaction().commit();
+			manager.close();
+		}else {
+			Mensagem.add("Existem profissionais ativos vinculados a este Cargo, não pode ser excluída.");
+			manager.close();
+		}
 	}
 }

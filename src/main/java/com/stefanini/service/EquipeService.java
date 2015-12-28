@@ -85,12 +85,18 @@ public class EquipeService {
 
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
-
-		Equipe equipeMerge = getEquipeById(id);
-		manager.getTransaction().begin();
-		equipeMerge.setRegistroValidadeFim(new Date());
-		manager.merge(equipeMerge);
-		manager.getTransaction().commit();
-		manager.close();
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByEquipe");
+		q.setParameter("id", id);
+		if(q.getResultList().isEmpty()){
+			Equipe equipeMerge = getEquipeById(id);
+			manager.getTransaction().begin();
+			equipeMerge.setRegistroValidadeFim(new Date());
+			manager.merge(equipeMerge);
+			manager.getTransaction().commit();
+			manager.close();
+		}else {
+			Mensagem.add("Existem profissionais ativos vinculados a esta Equipe, não pode ser excluída.");
+			manager.close();
+		}
 	}
 }

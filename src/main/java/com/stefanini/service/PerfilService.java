@@ -17,11 +17,17 @@ public class PerfilService {
 	public boolean save(Perfil perfil) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		if (DateUtil.verificaDiaUtil(perfil.getRegistroValidadeInicio())) {
+		if (DateUtil.verificaDiaUtil(perfil.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(perfil.getRegistroValidadeFim())) {
+			if(DateUtil.verificaDataValida(perfil.getRegistroValidadeInicio(), perfil.getRegistroValidadeFim())){
 			manager.persist(perfil);
 			manager.getTransaction().commit();
 			manager.close();
 			return true;
+			}else{
+				Mensagem.add("Data final do registro anterior a data inicial!");
+				manager.close();
+				return false;
+			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();
@@ -79,11 +85,18 @@ public class PerfilService {
 
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
-		manager.getTransaction().begin();
-		Perfil perfilMerge = getPerfilById(id);
-		perfilMerge.setRegistroValidadeFim(new Date());
-		manager.merge(perfilMerge);
-		manager.getTransaction().commit();
-		manager.close();
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByPerfil");
+		q.setParameter("id", id);
+		if(q.getResultList().isEmpty()){
+			manager.getTransaction().begin();
+			Perfil perfilMerge = getPerfilById(id);
+			perfilMerge.setRegistroValidadeFim(new Date());
+			manager.merge(perfilMerge);
+			manager.getTransaction().commit();
+			manager.close();
+		}else {
+			Mensagem.add("Existem profissionais ativos vinculados a este Perfil, não pode ser excluída.");
+			manager.close();
+		}
 	}
 }

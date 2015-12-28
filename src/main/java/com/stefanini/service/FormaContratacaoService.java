@@ -85,11 +85,18 @@ public class FormaContratacaoService {
 
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
-		manager.getTransaction().begin();
-		FormaContratacao formaContratacao = (FormaContratacao) getFormaContratacaoById(id);
-		formaContratacao.setRegistroValidadeFim(new Date());
-		manager.merge(formaContratacao);
-		manager.getTransaction().commit();
-		manager.close();
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByFormaContratacao");
+		q.setParameter("id", id);
+		if(q.getResultList().isEmpty()){
+			manager.getTransaction().begin();
+			FormaContratacao formaContratacao = (FormaContratacao) getFormaContratacaoById(id);
+			formaContratacao.setRegistroValidadeFim(new Date());
+			manager.merge(formaContratacao);
+			manager.getTransaction().commit();
+			manager.close();
+		}else {
+			Mensagem.add("Existem profissionais ativos vinculados a esta Forma de Contratação, não pode ser excluída.");
+			manager.close();
+		}
 	}
 }

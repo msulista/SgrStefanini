@@ -85,11 +85,18 @@ public class CelulaService {
 
 	public void desativar(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		manager.getTransaction().begin();
-		Celula celulaMerge = getCelulaById(id);
-		celulaMerge.setRegistroValidadeFim(new Date());
-		manager.merge(celulaMerge);
-		manager.getTransaction().commit();
-		manager.close();
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByCelula");
+		q.setParameter("id", id);
+		if(q.getResultList().isEmpty()){
+			Celula celulaMerge = getCelulaById(id);
+			celulaMerge.setRegistroValidadeFim(new Date());
+			manager.getTransaction().begin();
+			manager.merge(celulaMerge);
+			manager.getTransaction().commit();
+			manager.close();
+		}else {
+			Mensagem.add("Existem profissionais ativos vinculados a este Cargo, não pode ser excluída.");
+			manager.close();
+		}
 	}
 }
