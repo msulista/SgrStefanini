@@ -20,6 +20,10 @@ import com.stefanini.util.DateUtil;
 @Entity
 @Table(name = "SGR_PROFISSIONAL")
 @NamedQueries({
+	@NamedQuery(name = "Profissional.findAll", query = "SELECT p FROM Profissional p ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Profissional.findAtivos", query = "SELECT p FROM Profissional p WHERE p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Profissional.findNome", query = "SELECT p FROM Profissional p WHERE p.nome LIKE :nome AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Profissional.findId", query = "SELECT p FROM Profissional p WHERE p.id = :id"),
 	@NamedQuery(name = "Profissional.findMatricula", query = "SELECT p FROM Profissional p WHERE p.matricula = :matricula")
 })
 public class Profissional implements BaseEntity, Serializable {
