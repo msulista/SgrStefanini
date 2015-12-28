@@ -25,7 +25,13 @@ import com.stefanini.util.DateUtil;
 	@NamedQuery(name = "Profissional.findNome", query = "SELECT p FROM Profissional p WHERE p.nome LIKE :nome AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Profissional.findId", query = "SELECT p FROM Profissional p WHERE p.id = :id"),
 	@NamedQuery(name = "Profissional.findMatricula", query = "SELECT p FROM Profissional p WHERE p.matricula = :matricula"),
-	@NamedQuery(name = "Profissional.findProfissionalByCargaHoraria", query = "SELECT p FROM Profissional p WHERE p.cargaHoraria.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)")	
+	@NamedQuery(name = "Profissional.findProfissionalByCargaHoraria", query = "SELECT p FROM Profissional p WHERE p.cargaHoraria.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)"),	
+	@NamedQuery(name = "Profissional.findProfissionalByCargo", query = "SELECT p FROM Profissional p WHERE p.cargo.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)"),	
+	@NamedQuery(name = "Profissional.findProfissionalByCelula", query = "SELECT p FROM Profissional p WHERE p.celula.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)"),	
+	@NamedQuery(name = "Profissional.findProfissionalByEquipe", query = "SELECT p FROM Profissional p WHERE p.equipe.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)"),	
+	@NamedQuery(name = "Profissional.findProfissionalByFormaContratacao", query = "SELECT p FROM Profissional p WHERE p.formaContratacao.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)"),	
+	@NamedQuery(name = "Profissional.findProfissionalByPerfil", query = "SELECT p FROM Profissional p WHERE p.perfil.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)"),	
+	@NamedQuery(name = "Profissional.findProfissionalByStatus", query = "SELECT p FROM Profissional p WHERE p.status.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)"),	
 })
 public class Profissional implements BaseEntity, Serializable {
 	private static final long serialVersionUID = 1L;
