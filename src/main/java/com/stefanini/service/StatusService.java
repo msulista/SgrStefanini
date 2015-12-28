@@ -17,11 +17,17 @@ public class StatusService {
 	public boolean save(Status status) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		if (DateUtil.verificaDiaUtil(status.getRegistroValidadeInicio())) {
+		if (DateUtil.verificaDiaUtil(status.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(status.getRegistroValidadeFim())) {
+			if(DateUtil.verificaDataValida(status.getRegistroValidadeInicio(), status.getRegistroValidadeFim())){
 			manager.persist(status);
 			manager.getTransaction().commit();
 			manager.close();
 			return true;
+			}else{
+				Mensagem.add("Data final do registro anterior a data inicial!");
+				manager.close();
+				return false;
+			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();
