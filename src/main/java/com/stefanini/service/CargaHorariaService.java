@@ -90,12 +90,18 @@ public class CargaHorariaService {
 
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
-		CargaHoraria cargaHoraria = getCargaHorariaById(id);
-		cargaHoraria.setRegistroValidadeFim(new Date());
-		manager.getTransaction().begin();
-		manager.merge(cargaHoraria);
-		manager.getTransaction().commit();
-		manager.close();
-
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByCargaHoraria");
+		q.setParameter("id", id);
+		if(q.getResultList().isEmpty()){
+			CargaHoraria cargaHoraria = getCargaHorariaById(id);		
+			cargaHoraria.setRegistroValidadeFim(new Date());
+			manager.getTransaction().begin();
+			manager.merge(cargaHoraria);
+			manager.getTransaction().commit();
+			manager.close();
+		}else {
+			Mensagem.add("Existem profissionais ativos vinculados a esta Carga Horária, não pode ser excluída.");
+			manager.close();
+		}		
 	}
 }
