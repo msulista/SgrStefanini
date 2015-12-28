@@ -16,11 +16,17 @@ public class CelulaService {
 	public boolean save(Celula celula) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		if (DateUtil.verificaDiaUtil(celula.getRegistroValidadeInicio())) {
+		if (DateUtil.verificaDiaUtil(celula.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(celula.getRegistroValidadeFim())) {
+			if(DateUtil.verificaDataValida(celula.getRegistroValidadeInicio(), celula.getRegistroValidadeFim())){
 			manager.persist(celula);
 			manager.getTransaction().commit();
 			manager.close();
 			return true;
+			}else{
+				Mensagem.add("Data final do registro anterior a data inicial!");
+				manager.close();
+				return false;
+			}
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();
