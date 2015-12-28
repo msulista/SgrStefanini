@@ -30,13 +30,35 @@ public class ProfissionalService {
 		List<Profissional> profissionais = q.getResultList();
 		if (profissionais.isEmpty()) {
 
-			if (DateUtil.verificaDiaUtil(profissional.getDataAdmissao())) {
-				profissional.setRegistroValidadeInicio(profissional.getDataAdmissao());
+			if (DateUtil.verificaDiaUtil(profissional.getDataAdmissao())&&DateUtil.verificaDiaUtil(profissional.getDataDemissao())&&DateUtil.verificaDiaUtil(profissional.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(profissional.getRegistroValidaeFim())) {
+				
+				if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(), profissional.getDataAdmissao())){
+					
+					if(DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())){
+						
+						if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())&&DateUtil.verificaDataValida(profissional.getDataAdmissao() ,profissional.getRegistroValidaeFim())&&DateUtil.verificaDataValida(profissional.getDataDemissao(),profissional.getRegistroValidaeFim())){
+				
+							profissional.setRegistroValidadeInicio(profissional.getDataAdmissao());
 				manager.getTransaction().begin();
 				manager.persist(profissional);
 				manager.getTransaction().commit();
 				manager.close();
 				return true;
+						}else{
+							Mensagem.add("Data final do registro não pode ser anterior as outras datas!");
+							manager.close();
+							return false;
+						}
+					}else{
+						Mensagem.add("Data de demissão anterior a de admissão!");
+						manager.close();
+						return false;
+					}
+				}else{
+					Mensagem.add("Data de admissão anterior ao registro inicial!");
+					manager.close();
+					return false;
+				}
 			} else {
 				Mensagem.add("Data informada não é um dia util!");
 				manager.close();
@@ -48,6 +70,7 @@ public class ProfissionalService {
 			return false;
 		}
 	}
+
 
 	public boolean update(Profissional profissional) {
 		EntityManager manager = JPAUtil.getEntityManager();

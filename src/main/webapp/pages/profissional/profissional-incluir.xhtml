@@ -87,12 +87,20 @@
                 </p:selectOneMenu>
                 <br /><br />
                 
+                  <p:outputLabel for="inicio" value="#{message['label.data.inicio']}" styleClass="label"/>
+        		<p:calendar id="inicio" value="#{profissionalManager.profissional.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
+        		<br/><br/>
+        		
                 <p:outputLabel for="admissao" value="#{message['label.profissional.dataAdmissao']}" styleClass="label"/>
         		<p:calendar id="admissao" value="#{profissionalManager.profissional.dataAdmissao}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataAdimissao']}" disabledWeekends="true"/>
         		<br/><br/>
         		
         		<p:outputLabel for="demissao" value="#{message['label.profissional.dataDemissao']}" styleClass="label"/>
         		<p:calendar id="demissao" value="#{profissionalManager.profissional.dataDemissao}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>
+        		<br/><br/>
+        		
+        		<p:outputLabel for="fim" value="#{message['label.data.final']}" styleClass="label"/>
+        		<p:calendar id="fim" value="#{profissionalManager.profissional.registroValidaeFim}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>
         		<br/><br/>
                 
                 <p:commandButton value="#{message['button.salvar']}" action="#{profissionalManager.save()}" update="growl" styleClass="btn"/>
