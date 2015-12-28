@@ -1,7 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
     template="/pages/template/default.xhtml"
-    xmlns:pretty="http://ocpsoft.com/prettyfaces">
+    xmlns:pretty="http://ocpsoft.com/prettyfaces"
+    xmlns:pe="http://primefaces.org/ui/extensions">
 
     <ui:define name="content">
     	<p:breadCrumb>
@@ -37,11 +38,13 @@
                 <br /><br />
 								
 				<p:outputLabel for="salario" value="#{message['label.profissional.salario']}" styleClass="label" />
-				<p:inputMask id="salario" value="#{profissionalManager.profissional.salario}" onblur="retornaPadrao(this)" converter="salarioConverter" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/>
+				<!-- <p:inputMask id="salario" value="#{profissionalManager.profissional.salario}" onblur="retornaPadrao(this)" converter="salarioConverter" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/> -->
+				<pe:inputNumber id="salario" value="#{profissionalManager.profissional.salario}" minValue="0.00" maxValue="999999999.99" required="true" requiredMessage="#{message['span.obrigatorio.Salario']}" symbol="R$" emptyValue="empty"/>
 				<br /><br />
 				
+				
 				<p:outputLabel for="beneficio" value="#{message['label.profissional.beneficios']}" styleClass="label" />
-				<p:inputText id="beneficio" value="#{profissionalManager.profissional.beneficios}" onblur="retornaPadrao(this)" converter="beneficioConverter" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/>
+				<pe:inputNumber id="beneficio" value="#{profissionalManager.profissional.beneficios}" minValue="0.00" maxValue="999999999.99" required="true" requiredMessage="#{message['span.obrigatorio.Beneficio']}" symbol="R$" emptyValue="empty"/>
 				<br /><br />
 				
 				<p:outputLabel for="cargaH" value="#{message['label.cargaHoraria']}" styleClass="label" />
@@ -52,7 +55,7 @@
                 <br /><br />
 				
 				<p:outputLabel for="valorHora" value="#{message['label.profissional.valorHora']}" styleClass="label"/>
-				<p:inputMask id="valorHora" value="#{profissionalManager.profissional.valorHora}" onblur="retornaPadrao(this)" converter="valorHoraConverter" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/>
+				<pe:inputNumber id="valorHora" value="#{profissionalManager.profissional.valorHora}" minValue="0.00" maxValue="999999999.99" required="true" requiredMessage="#{message['span.obrigatorio.ValorHora']}" symbol="R$" emptyValue="empty"/>
 				<br/><br/>
 											
 				<p:outputLabel for="equipe" value="#{message['label.profissional.equipe']}" styleClass="label" />
