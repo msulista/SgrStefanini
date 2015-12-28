@@ -79,7 +79,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.0.8</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.primefaces.extensions</groupId>
+			<artifactId>primefaces-extensions</artifactId>
+			<version>4.0.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
