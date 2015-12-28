@@ -76,17 +76,24 @@ public class ProfissionalService {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
-		if (DateUtil.verificaDiaUtil(profissional.getDataAdmissao())) {
-
+		if (DateUtil.verificaDiaUtil(profissional.getDataAdmissao())&&DateUtil.verificaDiaUtil(profissional.getDataDemissao())&&DateUtil.verificaDiaUtil(profissional.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(profissional.getRegistroValidaeFim())) {
+			
 			Profissional profissionalMerge = (Profissional) getProfissionalById(profissional.getId());
 
-			if (DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())
-					|| profissional.getDataDemissao() == null) {
+			if(DateUtil.verificaDataValida(profissionalMerge.getRegistroValidadeInicio(), profissional.getRegistroValidadeInicio())){
+			
+				if(DateUtil.verificaDataValida(profissionalMerge.getRegistroValidadeInicio(), profissional.getDataAdmissao())){
+					
+					if(DateUtil.verificaDataValida(profissionalMerge.getRegistroValidadeInicio(), profissional.getDataDemissao())){
+				
+						if (DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())) {
 
-				profissionalMerge.setRegistroValidaeFim(new Date());
+							if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())&&DateUtil.verificaDataValida(profissional.getDataAdmissao() ,profissional.getRegistroValidaeFim())&&DateUtil.verificaDataValida(profissional.getDataDemissao(),profissional.getRegistroValidaeFim())){
+				
+				profissionalMerge.setRegistroValidaeFim(DateUtil.retornaDataFimAntesDoNovoInicio(profissional.getRegistroValidadeInicio()));
 				manager.merge(profissionalMerge);
-				manager.getTransaction().commit();
-				manager.close();
+				
+			
 
 				Profissional profissionalPersist = new Profissional();
 				profissionalPersist.setNome(profissional.getNome());
@@ -96,8 +103,8 @@ public class ProfissionalService {
 				profissionalPersist.setValorHora(profissional.getValorHora());
 				profissionalPersist.setDataAdmissao(profissional.getDataAdmissao());
 				profissionalPersist.setDataDemissao(profissional.getDataDemissao());
-				profissionalPersist.setRegistroValidadeInicio(profissional.getDataAdmissao());
-				profissionalPersist.setRegistroValidaeFim(profissional.getDataDemissao());
+				profissionalPersist.setRegistroValidadeInicio(profissional.getRegistroValidadeInicio());
+				profissionalPersist.setRegistroValidaeFim(profissional.getRegistroValidaeFim());
 				profissionalPersist.setCelula(celulaService.getCelulaById(profissional.getCelula().getId()));
 				profissionalPersist.setCargo(cargoService.getCargoById(profissional.getCargo().getId()));
 				profissionalPersist.setEquipe(equipeService.getEquipeById(profissional.getEquipe().getId()));
@@ -108,11 +115,34 @@ public class ProfissionalService {
 						formaContratacaoService.getFormaContratacaoById(profissional.getFormaContratacao().getId()));
 				profissionalPersist.setStatus(statusService.getStatusById(profissional.getStatus().getId()));
 
-				save(profissionalPersist);
+				manager.persist(profissionalPersist);
+				manager.getTransaction().commit();
+				manager.close();
+				
 				return true;
 
-			} else {
-				Mensagem.add("Erro, data demissão anterior a admissão!");
+							}else{
+								Mensagem.add("Data final do registro não pode ser anterior as outras datas!");
+								manager.close();
+								return false;
+							}
+					} else {
+				Mensagem.add("Data de demissão anterior a de admissão!");
+				manager.close();
+				return false;
+			}
+					}else{
+						Mensagem.add("Data de demissão é anterior a data de registro inicial!");
+						manager.close();
+						return false;
+					}
+					}else{
+						Mensagem.add("Data de adimissão é anterior a data de registro inicial!");
+						manager.close();
+						return false;
+				}
+			}else{
+				Mensagem.add("Nova data de registro é anterior a cadastrada originalmente!");
 				manager.close();
 				return false;
 			}

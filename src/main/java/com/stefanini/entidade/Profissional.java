@@ -38,6 +38,7 @@ public class Profissional implements BaseEntity, Serializable {
 	private static final long serialVersionUID = 1L;
 	public Profissional() {
 		this.dataAdmissao = DateUtil.getProximoDiaUtil();
+		this.registroValidadeInicio = DateUtil.getProximoDiaUtil();
 		this.dataManipulacao = DateUtil.getProximoDiaUtil();
 	}
 	
