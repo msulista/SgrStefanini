@@ -7,6 +7,7 @@ import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.stefanini.entidade.Perfil;
 import com.stefanini.entidade.Status;
 import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
@@ -84,11 +85,20 @@ public class StatusService {
 
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
-		manager.getTransaction().begin();
-		Status statusMerge = (Status) getStatusById(id);
-		statusMerge.setRegistroValidadeFim(new Date());
-		manager.merge(statusMerge);
-		manager.getTransaction().commit();
-		manager.close();
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByCargo");
+		q.setParameter("id", id);
+		if(q.getResultList().isEmpty()){
+			manager.getTransaction().begin();
+			Status statusMerge = (Status) getStatusById(id);
+			statusMerge.setRegistroValidadeFim(new Date());
+			manager.merge(statusMerge);
+			manager.getTransaction().commit();
+			manager.close();
+		}else {
+			Mensagem.add("Existem profissionais ativos vinculados a este Status, não pode ser excluída.");
+			manager.close();
+		}
+		
+		
 	}
 }
