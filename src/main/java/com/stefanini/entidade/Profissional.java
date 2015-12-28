@@ -55,13 +55,13 @@ public class Profissional implements BaseEntity, Serializable {
 	private int matricula;
 	
 	@Column(name = "SALARIO", nullable = false)
-	private double salario;
+	private Double salario = null;
 	
 	@Column(name="BENEFICIOS", nullable = true)
-	private double beneficios;
+	private Double beneficios;
 	
 	@Column(name = "VALOR_HORA", nullable = false)
-	private double valorHora;
+	private Double valorHora;
 	
 	@Column(name = "DATA_ADMISSAO", nullable = false)
 	private Date dataAdmissao;
@@ -129,27 +129,27 @@ public class Profissional implements BaseEntity, Serializable {
 		this.nome = nome;
 	}
 
-	public double getSalario() {
+	public Double getSalario() {
 		return salario;
 	}
 
-	public void setSalario(double salario) {
+	public void setSalario(Double salario) {
 		this.salario = salario;
 	}
 
-	public double getBeneficios() {
+	public Double getBeneficios() {
 		return beneficios;
 	}
 
-	public void setBeneficios(double beneficios) {
+	public void setBeneficios(Double beneficios) {
 		this.beneficios = beneficios;
 	}
 
-	public double getValorHora() {
+	public Double getValorHora() {
 		return valorHora;
 	}
 
-	public void setValorHora(double valorHora) {
+	public void setValorHora(Double valorHora) {
 		this.valorHora = valorHora;
 	}
 
