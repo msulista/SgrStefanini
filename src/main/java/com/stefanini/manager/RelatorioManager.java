@@ -104,9 +104,9 @@ public class RelatorioManager {
 	
 	public void itemSelect(ItemSelectEvent event){
 		System.out.println("############ Evento: " + event.getItemIndex());
-		if(event.getItemIndex() == 0){
-			System.out.println("############ Evento: " + event.getItemIndex());
-		}
+		System.out.println("############ Evento: " + relatorios.get(event.getItemIndex()).getNome() );
+		
+		
 	}
 
 }
