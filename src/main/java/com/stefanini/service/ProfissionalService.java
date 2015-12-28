@@ -22,6 +22,7 @@ public class ProfissionalService {
 	private StatusService statusService = new StatusService();
 	private CelulaService celulaService = new CelulaService();
 
+	@SuppressWarnings("unchecked")
 	public boolean save(Profissional profissional) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("Profissional.findMatricula");
@@ -101,24 +102,46 @@ public class ProfissionalService {
 
 	@SuppressWarnings("unchecked")
 	public List<Profissional> listarAtivos() {
-		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery(
-				"SELECT * FROM sgr_profissional WHERE REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE() ORDER BY REGISTRO_VALIDADE_INICIO ASC",
-				Profissional.class);
+		EntityManager manager = JPAUtil.getEntityManager();		
+		Query q = manager.createNamedQuery("Profissional.findAtivos");
 		List<Profissional> profissionais = q.getResultList();
+		manager.close();
 		return profissionais;
 	}
 
 	public Profissional getProfissionalById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNativeQuery("SELECT * FROM sgr_profissional WHERE ID_PROFISSIONAL = :idProfissional",
-				Profissional.class);
-		q.setParameter("idProfissional", id);
+		Query q = manager.createNamedQuery("Profissional.findId");
+		q.setParameter("id", id);
 		Profissional profissional = (Profissional) q.getSingleResult();
 		manager.close();
 		return profissional;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Profissional> buscaPorNome(String nome) {
+		EntityManager manager = JPAUtil.getEntityManager();
+//		String sql = "SELECT * FROM sgr_profissional WHERE NOME LIKE :nome AND DATA_DEMISSAO IS NULL"
+//				+ " AND (REGISTRO_VALIDADE_FIM IS NULL OR REGISTRO_VALIDADE_FIM > CURRENT_DATE())"
+//				+ " ORDER BY NOME ASC";
+//
+//		Query q = manager.createNativeQuery(sql, Profissional.class);
+		Query q = manager.createNamedQuery("Profissional.findNome");
+		q.setParameter("nome", "%" + nome + "%");
+		List<Profissional> profissionais = q.getResultList();
+		manager.close();
+		return profissionais;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Profissional> getProfissionalByMatricula(int matricula) {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Profissional.findMatricula");
+		q.setParameter("matricula", matricula);
+		List<Profissional> profissionais = q.getResultList();
+		manager.close();
+		return profissionais;
+	}
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
@@ -128,21 +151,6 @@ public class ProfissionalService {
 		manager.merge(profissionalDesativar);
 		manager.getTransaction().commit();
 		manager.close();
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Profissional> buscaPorNome(String nome) {
-		EntityManager manager = JPAUtil.getEntityManager();
-
-		String sql = "SELECT * FROM sgr_profissional" + " WHERE NOME LIKE :nome" + " AND DATA_DEMISSAO IS NULL"
-				+ " AND (REGISTRO_VALIDADE_FIM IS NULL" + " OR REGISTRO_VALIDADE_FIM > CURRENT_DATE())"
-				+ " ORDER BY NOME ASC";
-
-		Query q = manager.createNativeQuery(sql, Profissional.class);
-		q.setParameter("nome", "%" + nome + "%");
-
-		List<Profissional> profissionais = q.getResultList();
-		return profissionais;
-	}
+	}	
 
 }
