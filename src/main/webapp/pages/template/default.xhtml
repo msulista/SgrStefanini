@@ -37,7 +37,7 @@
 	</div>
 
 	<div class="ct-menu">
-		<nav class="menu">
+		<div class="menu">
 			<ul class="clearfix">
 				<li><a href="#">Home</a></li>
 				<li><a href="#">Cadastros<span class="arrow">&#9660;</span></a>
@@ -53,21 +53,14 @@
 						<li><h:link outcome="pretty:perfilStefanini">#{message['title.perfilStefanini']}</h:link></li>
 						<li class="item-last"><h:link outcome="pretty:status">#{message['title.status']}</h:link></li>
 					</ul></li>
-				<li><a href="#">Relatorios</a><span class="arrow">&#9660;</span></li>
+				<li><a href="#">Relatorios<span class="arrow">&#9660;</span></a>
 					<ul class="sub-menu">
-						<li><h:link outcome="pretty:profissional">#{message['title.profissional']}</h:link></li>
+						<li><span>#{message['title.relatorio.equipe']}</span></li>
 						<p:separator />
-						<li><h:link outcome="pretty:cargaHoraria">#{message['title.cargaHoraria']}</h:link></li>
-						<li><h:link outcome="pretty:cargo">#{message['title.cargos']}</h:link></li>
-						<li><h:link outcome="pretty:celula">#{message['title.celulas']}</h:link></li>
-						<li><h:link outcome="pretty:equipe">#{message['title.equipes']}</h:link></li>
-						<li><h:link outcome="pretty:formaContratacao">#{message['title.formaContratacao']}</h:link></li>
-						<li><h:link outcome="pretty:perfil">#{message['title.perfis']}</h:link></li>
-						<li><h:link outcome="pretty:perfilStefanini">#{message['title.perfilStefanini']}</h:link></li>
-						<li class="item-last"><h:link outcome="pretty:status">#{message['title.status']}</h:link></li>
-					</ul>
+						<li class="item-last"><h:link outcome="pretty:relatorio">#{message['title.relatorio.profissional.equipe']}</h:link></li>
+					</ul></li>
 			</ul>
-		</nav>
+		</div>
 	</div>
 	<div class="container">
 		<div class="ct-content">
