@@ -17,15 +17,22 @@ public class CargoService {
 	public boolean save(Cargo cargo) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		if (DateUtil.verificaDiaUtil(cargo.getRegistroValidadeInicio())) {
+		if (DateUtil.verificaDiaUtil(cargo.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(cargo.getRegistroValidadeFim())) {
+			if(DateUtil.verificaDataValida(cargo.getRegistroValidadeInicio(), cargo.getRegistroValidadeFim())){
 			manager.persist(cargo);
 			manager.getTransaction().commit();
 			manager.close();
 			return true;
+		}else{
+			Mensagem.add("Data final do registro anterior a data inicial!");
+			manager.close();
+			return false;
 		}
+		}else{
 		Mensagem.add("Data informada não é um dia util!");
 		manager.close();
 		return false;
+		}
 	}
 
 	public boolean update(Cargo cargo) {
