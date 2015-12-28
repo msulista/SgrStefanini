@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
+import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -19,7 +22,7 @@ import com.stefanini.entidade.Relatorio;
 import com.stefanini.service.RelatorioService;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 @URLMappings(mappings = {
 		@URLMapping(id = "relatorio", pattern = "/profissional-por-equipe", viewId = "/pages/relatorio/relatorio-profissional-equipe.xhtml")
 })
@@ -31,8 +34,7 @@ public class RelatorioManager {
 	private List<Relatorio> relatorios = new ArrayList<>();
 
 	public RelatorioManager() {
-	}
-	
+	}	
 	
 	@PostConstruct
 	public void init() {
@@ -41,8 +43,7 @@ public class RelatorioManager {
 	
 	public Relatorio getRelatorio() {
 		return relatorio;
-	}		
-	
+	}	
 	public void setRelatorio(Relatorio relatorio) {
 		this.relatorio = relatorio;
 	}
@@ -65,41 +66,47 @@ public class RelatorioManager {
 	public void setRelatorios(List<Relatorio> relatorios) {
 		this.relatorios = relatorios;
 	}
-
-
-	public List<Relatorio> relatorioProfissionalPorEquipeView(){
-		return this.service.profissionaisPorEquipeView();
+	
+	//Graficos
+	
+	public void criaGrafico(){
+	   	createProfissionalPorEquipe();
 	}
-	    
-	    public void criaGrafico(){
-	    	createBarModel();
-	    }
-	    private BarChartModel initBarModel() {
-	        BarChartModel model = new BarChartModel();
+	
+	//Profissional por Equipe
+	private BarChartModel initProfissionalPorEquipe() {
+	    BarChartModel model = new BarChartModel();
 	 
-	        ChartSeries grafico = new ChartSeries();
-	        grafico.setLabel("Equipe");
-	        for (Relatorio relatorio : this.service.profissionaisPorEquipe()) {
-				grafico.set(relatorio.getNome(), relatorio.getQuantidade());
-			}	 
-	        model.addSeries(grafico);
+	    ChartSeries grafico = new ChartSeries();
+	    grafico.setLabel("Equipe");
+	    for (Relatorio relatorio : this.service.profissionaisPorEquipe()) {
+	    	grafico.set(relatorio.getNome(), relatorio.getQuantidade());
+		}	 
+	    model.addSeries(grafico);
 	         
-	        return model;
-	    }
-	     
-	    private void createBarModel() {
-	        profissionalPorEquipe = initBarModel();
+	    return model;
+	}	     
+	private void createProfissionalPorEquipe() {
+	   profissionalPorEquipe = initProfissionalPorEquipe();
 	         
-	        profissionalPorEquipe.setTitle("Profissionais por equipe");
-	        profissionalPorEquipe.setLegendPosition("ne");
+	   profissionalPorEquipe.setTitle("Profissionais por equipe");
+	   profissionalPorEquipe.setAnimate(true);
+	   profissionalPorEquipe.setLegendPosition("ne");
+	       
+	   Axis xAxis = profissionalPorEquipe.getAxis(AxisType.X);
+	   xAxis.setLabel("Equipes");
 	         
-	        Axis xAxis = profissionalPorEquipe.getAxis(AxisType.X);
-	        xAxis.setLabel("Equipes");
-	         
-	        Axis yAxis = profissionalPorEquipe.getAxis(AxisType.Y);
-	        yAxis.setLabel("N° Profissionais");
-	        yAxis.setMin(0);
-	        yAxis.setMax(50);
-	    }
+	   Axis yAxis = profissionalPorEquipe.getAxis(AxisType.Y);
+	   yAxis.setLabel("N° Profissionais");
+	   yAxis.setMin(0);
+	   yAxis.setMax(50);
+	}
+	
+	public void itemSelect(ItemSelectEvent event){
+		System.out.println("############ Evento: " + event.getItemIndex());
+		if(event.getItemIndex() == 0){
+			System.out.println("############ Evento: " + event.getItemIndex());
+		}
+	}
 
 }

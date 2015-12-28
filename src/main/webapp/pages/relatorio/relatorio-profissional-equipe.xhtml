@@ -7,17 +7,33 @@
 	xmlns:pretty="http://ocpsoft.com/prettyfaces">
 
 	<ui:define name="content">
+	<p:growl id="growl" life="4000" />
 		<p:breadCrumb>
 		    <p:menuitem value="Home" url="#" />
 		    <p:menuitem value="Relatorio" outcome="pretty:relatorio" disabled="true"/>
 		</p:breadCrumb>
 		<h2>#{message['title.profissional']}</h2>
 		
-		<p:chart type="bar" model="#{relatorioManager.profissionalPorEquipe}" style="height:300px"/>
+		<p:chart type="bar" model="#{relatorioManager.profissionalPorEquipe}" style="height:300px" responsive="true">
+			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelect}" process="@this" update="growl"/>
+		</p:chart>
 		
 		<br /><br />
 		
-		<p:dataTable id="gridCargos" var="rel" value="#{relatorioManager.relatorios}" emptyMessage="#{message['alerta.listaVazia']}" >
+		
+			<p:tabView >
+				<ui:repeat var="equipe" value="#{relatorioManager.relatorios}">
+        			<p:tab title="#{equipe.nome}">
+			            <h:panelGrid columns="2" cellpadding="10">			                
+			                <h:outputText value="The story begins as Don Vito Corleone..." />
+			            </h:panelGrid>
+			        </p:tab>
+        		</ui:repeat>
+        	</p:tabView>		
+		
+		<br /><br />
+		
+		<p:dataTable id="gridRelatorio" var="rel" value="#{relatorioManager.relatorios}" emptyMessage="#{message['alerta.listaVazia']}" >
 	
 			<p:column headerText="#{message['label.nome']}" >
 				<h:outputText value="#{rel.nome}" />
