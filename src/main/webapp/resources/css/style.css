@@ -428,6 +428,7 @@ input[type=text] {
 .menu li:hover .sub-menu {
     z-index:1;
     opacity:1;
+    display: inline;
 }
  
 .sub-menu {
@@ -441,6 +442,7 @@ input[type=text] {
     transition:opacity linear 0.15s;
     box-shadow:0px 2px 3px rgba(0,0,0,0.2);
     background:#fff;
+    display:none;
 }
  
 .sub-menu li {
