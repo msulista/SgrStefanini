@@ -94,7 +94,7 @@ html, body {
     position: absolute;
     left: 25%;
     top: 35px;
-    font-size: 55px;
+    font-size: 60px;
     color: #0052A4;
 }
 
@@ -131,7 +131,7 @@ html, body {
     height: 25px;
     z-index: 80;
     position: absolute;
-    top: 137px;
+    top: 125px;
     color: #FFF;
     left: 7.5%;
 }
@@ -414,7 +414,7 @@ input[type=text] {
 }
  
 .menu > ul > li > a {
-    padding:10px 40px;
+    padding:17px 40px;
     display:inline-block;
 }
  
