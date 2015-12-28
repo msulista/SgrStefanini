@@ -1,7 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
     template="/pages/template/default.xhtml"
-    xmlns:pretty="http://ocpsoft.com/prettyfaces">
+    xmlns:pretty="http://ocpsoft.com/prettyfaces"
+    xmlns:pe="http://primefaces.org/ui/extensions">
 
     <ui:define name="content">
     	<p:breadCrumb>
@@ -18,10 +19,12 @@
 				<p:inputText value="#{perfilStefaniniManager.perfilStefanini.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}"/><br/><br/>
 				
 				<p:outputLabel value="#{message['label.perfilStefanini.valorInicial']}" styleClass="label" for="valorInicial"/>
-				<p:inputText id="valorInicial" value="#{perfilStefaniniManager.perfilStefanini.valorInicial}" onblur="retornaPadrao(this)" converter="valorInicialConverter" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/><br/><br/>
+				<pe:inputNumber id="valorInicial" value="#{perfilStefaniniManager.perfilStefanini.valorInicial}" minValue="0.00" maxValue="999999999.99" required="true" requiredMessage="#{message['span.obrigatorio.valorInicial']}" symbol="R$ " emptyValue="empty"/>
+				<br/><br/>
 				
 				<p:outputLabel for="valorFinal" value="#{message['label.perfilStefanini.valorFinal']}" styleClass="label"/>
-        		<p:inputText id="valorFinal" value="#{perfilStefaniniManager.perfilStefanini.valorFinal}" onblur="retornaPadrao(this)" converter="valorFinalConverter" onfocus="limpaDoubleVazio(this)" onkeypress="mascara(this,moeda)" maxlength="14"/><br/><br/>
+        		<pe:inputNumber id="valorFinal" value="#{perfilStefaniniManager.perfilStefanini.valorFinal}" minValue="0.00" maxValue="999999999.99" required="true" requiredMessage="#{message['span.obrigatorio.valorFinal']}" symbol="R$ " emptyValue="empty"/>
+        		<br/><br/>
         		
         		<p:outputLabel for="calendario" value="#{message['label.data.inicio']}" styleClass="label"/>
         		<p:calendar id="calendario" value="#{perfilStefaniniManager.perfilStefanini.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/><br/><br/>

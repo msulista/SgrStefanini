@@ -33,10 +33,10 @@ public class PerfilStefanini implements Serializable{
 	private Long id;
 
 	@Column(name = "VALOR_INICIAL", nullable = false)
-	private double valorInicial;
+	private Double valorInicial;
 
 	@Column(name = "VALOR_FINAL", nullable = false)
-	private double valorFinal;
+	private Double valorFinal;
 
 	@Column(name = "NOME", nullable = false)
 	private String nome;
@@ -63,19 +63,19 @@ public class PerfilStefanini implements Serializable{
 		this.id = id;
 	}
 
-	public double getValorInicial() {
+	public Double getValorInicial() {
 		return valorInicial;
 	}
 
-	public void setValorInicial(double valorInicial) {
+	public void setValorInicial(Double valorInicial) {
 		this.valorInicial = valorInicial;
 	}
 
-	public double getValorFinal() {
+	public Double getValorFinal() {
 		return valorFinal;
 	}
 
-	public void setValorFinal(double valorFinal) {
+	public void setValorFinal(Double valorFinal) {
 		this.valorFinal = valorFinal;
 	}
 
