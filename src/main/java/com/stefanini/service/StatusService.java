@@ -76,7 +76,7 @@ public class StatusService {
 	public Status getStatusById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("Status.findId");
-		q.setParameter("idStatus", id);
+		q.setParameter("id", id);
 		Status status = (Status) q.getSingleResult();
 		manager.close();
 		return status;
