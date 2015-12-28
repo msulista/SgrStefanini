@@ -126,13 +126,15 @@ public class DateUtil {
 	public static boolean verificaDiaUtil(Date data) {
 		GregorianCalendar calendar = new GregorianCalendar();
 
+		if(data!=null){
 		calendar.setTime(data);
-
 		if (calendar.get(GregorianCalendar.DAY_OF_WEEK) == 1 || calendar.get(GregorianCalendar.DAY_OF_WEEK) == 7) {
 			return false;
 		} else {
 			return true;
-
+		}
+		}else{
+			return true;
 		}
 	}
 
