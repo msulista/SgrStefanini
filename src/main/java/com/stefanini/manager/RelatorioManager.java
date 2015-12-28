@@ -18,6 +18,7 @@ import org.primefaces.model.chart.ChartSeries;
 
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
+import com.stefanini.entidade.Profissional;
 import com.stefanini.entidade.Relatorio;
 import com.stefanini.service.RelatorioService;
 
@@ -32,8 +33,10 @@ public class RelatorioManager {
 	private RelatorioService service = new RelatorioService();
 	private BarChartModel profissionalPorEquipe;
 	private List<Relatorio> relatorios = new ArrayList<>();
+	private List<Profissional> profissionais = new ArrayList<>();
 
 	public RelatorioManager() {
+		
 	}	
 	
 	@PostConstruct
@@ -41,6 +44,14 @@ public class RelatorioManager {
 	   criaGrafico();
 	}
 	
+	public List<Profissional> getProfissionais() {
+		return profissionais;
+	}
+
+	public void setProfissionais(List<Profissional> profissionais) {
+		this.profissionais = profissionais;
+	}
+
 	public Relatorio getRelatorio() {
 		return relatorio;
 	}	
@@ -105,8 +116,6 @@ public class RelatorioManager {
 	public void itemSelect(ItemSelectEvent event){
 		System.out.println("############ Evento: " + event.getItemIndex());
 		System.out.println("############ Evento: " + relatorios.get(event.getItemIndex()).getNome() );
-		
-		
 	}
 
 }

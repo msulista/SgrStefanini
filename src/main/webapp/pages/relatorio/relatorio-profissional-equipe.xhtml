@@ -16,7 +16,7 @@
 		<h2>#{message['title.profissional']}</h2>
 		
 		<p:chart type="bar" model="#{relatorioManager.profissionalPorEquipe}" style="height:300px" responsive="true">
-			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelect}" process="@this" update="growl"/>
+			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelect}" process="@this" update="gridRelatorio"/>
 		</p:chart>
 		
 		<br /><br />		
