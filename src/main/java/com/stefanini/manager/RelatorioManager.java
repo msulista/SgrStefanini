@@ -71,7 +71,6 @@ public class RelatorioManager {
 	}	
 	public List<Relatorio> getRelatorios() {
 		relatorios = this.service.profissionaisPorEquipe();
-		equipe = relatorios.get(0).getNome();
 		return relatorios;
 	}
 	public void setRelatorios(List<Relatorio> relatorios) {
@@ -123,11 +122,8 @@ public class RelatorioManager {
 	   yAxis.setLabel("N° Profissionais");
 	   yAxis.setMin(0);
 	   
-	   if((int)(maxY % 2) != 0){
-		   maxY = maxY + 7;
-	   }else{
-		   maxY = maxY + 6;
-	   }
+	   maxY = maxY % 2 == 0 ? maxY + 6 : maxY + 7;
+	   
 	   yAxis.setTickCount(maxY%2);
 	   yAxis.setMax(maxY);
 	}
@@ -139,6 +135,7 @@ public class RelatorioManager {
 		System.out.println("############ Evento: " + relatorios.get(event.getItemIndex()).getNome() );
 		System.out.println("############ Profi size: " + profissionais.size());
 		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorios.get(event.getItemIndex()).getNome());
+		equipe = profissionais.get(0).getNome();
 		System.out.println("########## Profi size: " + profissionais.size());
 		
 	}
