@@ -33,6 +33,7 @@ public class RelatorioManager {
 	private List<Profissional> profissionais = new ArrayList<>();
 	private int maxY = 0;
 	private String equipe = "";
+	private int quantidadeTotal = 0;
 
 	public RelatorioManager() {
 		
@@ -100,12 +101,13 @@ public class RelatorioManager {
 	    grafico.setLabel("Equipe");
 	    for (Relatorio relatorio : getRelatorios()) {
 	    	grafico.set(relatorio.getNome(), relatorio.getQuantidade());
-	    	if(relatorio.getQuantidade() > maxY){
-	    		maxY = (int)(relatorio.getQuantidade()/1);
-	    	}
-		}	 
-	    model.addSeries(grafico);
-	         
+//	    	if(relatorio.getQuantidade() > maxY){
+//	    		maxY = (int)(relatorio.getQuantidade()/1);
+//	    	}
+	    	quantidadeTotal = (int)(quantidadeTotal + relatorio.getQuantidade());
+		}	
+	    grafico.set("Total Resultados", quantidadeTotal);
+	    model.addSeries(grafico);	         
 	    return model;
 	}	     
 	private void createProfissionalPorEquipe() {
@@ -122,10 +124,10 @@ public class RelatorioManager {
 	   yAxis.setLabel("N° Profissionais");
 	   yAxis.setMin(0);
 	   
-	   maxY = maxY % 2 == 0 ? maxY + 6 : maxY + 7;
+	   quantidadeTotal = quantidadeTotal % 2 == 0 ? quantidadeTotal + 2 : quantidadeTotal + 3;
 	   
-	   yAxis.setTickCount(maxY%2);
-	   yAxis.setMax(maxY);
+	   yAxis.setTickCount(quantidadeTotal%2);
+	   yAxis.setMax(quantidadeTotal);
 	}
 	
 	public void itemSelect(ItemSelectEvent event){
