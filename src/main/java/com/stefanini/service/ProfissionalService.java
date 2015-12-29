@@ -32,8 +32,6 @@ public class ProfissionalService {
 
 			if (DateUtil.verificaDiaUtil(profissional.getDataAdmissao())&&DateUtil.verificaDiaUtil(profissional.getDataDemissao())&&DateUtil.verificaDiaUtil(profissional.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(profissional.getRegistroValidaeFim())) {
 				
-				if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(), profissional.getDataAdmissao())){
-					
 					if(DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())){
 						
 						if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())&&DateUtil.verificaDataValida(profissional.getDataAdmissao() ,profissional.getRegistroValidaeFim())&&DateUtil.verificaDataValida(profissional.getDataDemissao(),profissional.getRegistroValidaeFim())){
@@ -45,7 +43,7 @@ public class ProfissionalService {
 				manager.close();
 				return true;
 						}else{
-							Mensagem.add("Data final do registro não pode ser anterior as outras datas!");
+							Mensagem.add("Data final do registro não pode ser anterior a de inicio!");
 							manager.close();
 							return false;
 						}
@@ -54,11 +52,6 @@ public class ProfissionalService {
 						manager.close();
 						return false;
 					}
-				}else{
-					Mensagem.add("Data de admissão anterior ao registro inicial!");
-					manager.close();
-					return false;
-				}
 			} else {
 				Mensagem.add("Data informada não é um dia util!");
 				manager.close();
@@ -82,16 +75,18 @@ public class ProfissionalService {
 
 			if(DateUtil.verificaDataValida(profissionalMerge.getRegistroValidadeInicio(), profissional.getRegistroValidadeInicio())){
 			
-				if(DateUtil.verificaDataValida(profissionalMerge.getRegistroValidadeInicio(), profissional.getDataAdmissao())){
-					
-					if(DateUtil.verificaDataValida(profissionalMerge.getRegistroValidadeInicio(), profissional.getDataDemissao())){
 				
 						if (DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())) {
 
-							if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())&&DateUtil.verificaDataValida(profissional.getDataAdmissao() ,profissional.getRegistroValidaeFim())&&DateUtil.verificaDataValida(profissional.getDataDemissao(),profissional.getRegistroValidaeFim())){
-				
+							if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())){
+			
+								if(profissional.getRegistroValidadeInicio().compareTo(profissionalMerge.getRegistroValidadeInicio())==0){
+					profissionalMerge.setRegistroValidaeFim(new Date());
+					manager.merge(profissionalMerge);
+				}else{
 				profissionalMerge.setRegistroValidaeFim(DateUtil.retornaDataFimAntesDoNovoInicio(profissional.getRegistroValidadeInicio()));
 				manager.merge(profissionalMerge);
+				}
 				
 			
 
@@ -121,11 +116,6 @@ public class ProfissionalService {
 				
 				return true;
 
-							}else{
-								Mensagem.add("Data final do registro não pode ser anterior as outras datas!");
-								manager.close();
-								return false;
-							}
 					} else {
 				Mensagem.add("Data de demissão anterior a de admissão!");
 				manager.close();
@@ -136,11 +126,7 @@ public class ProfissionalService {
 						manager.close();
 						return false;
 					}
-					}else{
-						Mensagem.add("Data de adimissão é anterior a data de registro inicial!");
-						manager.close();
-						return false;
-				}
+					
 			}else{
 				Mensagem.add("Nova data de registro é anterior a cadastrada originalmente!");
 				manager.close();
