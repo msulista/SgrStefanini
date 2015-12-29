@@ -26,9 +26,12 @@
         		<pe:inputNumber id="valorFinal" value="#{perfilStefaniniManager.perfilStefanini.valorFinal}" minValue="0.00" maxValue="999999999.99" required="true" requiredMessage="#{message['span.obrigatorio.valorFinal']}" symbol="R$ " emptyValue="empty"/>
         		<br/><br/>
         		
-        		<p:outputLabel for="calendario" value="#{message['label.data.inicio']}" styleClass="label"/>
-        		<p:calendar id="calendario" value="#{perfilStefaniniManager.perfilStefanini.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/><br/><br/>
+        		<p:outputLabel for="calendarioInicio" value="#{message['label.data.inicio']}" styleClass="label"/>
+        		<p:calendar id="calendarioInicio" value="#{perfilStefaniniManager.perfilStefanini.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/><br/><br/>
         		
+        		<p:outputLabel for="calendarioFinal" value="#{message['label.data.final']}" styleClass="label"/>
+        		<p:calendar id="calendarioFinal" value="#{perfilStefaniniManager.perfilStefanini.registroValidadeFim}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/><br/><br/>
+        		       		
         		<p:commandButton value="#{message['button.salvar']}" action="#{perfilStefaniniManager.save()}" update="growl" styleClass="btn"/>
         		<p:button value="#{message['button.cancelar']}" outcome="pretty:perfilStefanini" styleClass="btn"/>
 			</p:panel>

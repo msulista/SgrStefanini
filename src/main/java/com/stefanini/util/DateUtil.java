@@ -139,7 +139,7 @@ public class DateUtil {
 	}
 
 	public static boolean verificaDataValida(Date data, Date novaData) {
-		if (novaData != null) {
+		if (novaData != null && data != null) {
 			if (data.before(novaData) || data.compareTo(novaData) == 0) {
 				return true;
 			} else {

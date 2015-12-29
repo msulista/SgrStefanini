@@ -39,3 +39,11 @@ function moeda(v) {
 												// ultimos 4 digitos
 	return v;
 }
+
+function mostraData(obj){
+	if(obj.value == "2"){
+		$("#dataAfastado").hide();
+	}else{
+		$("#dataAfastado").show();
+	}
+}

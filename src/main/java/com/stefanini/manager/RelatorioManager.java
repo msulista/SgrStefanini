@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.Axis;
@@ -23,7 +20,7 @@ import com.stefanini.entidade.Relatorio;
 import com.stefanini.service.RelatorioService;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 @URLMappings(mappings = {
 		@URLMapping(id = "relatorio", pattern = "/profissional-por-equipe", viewId = "/pages/relatorio/relatorio-profissional-equipe.xhtml")
 })
@@ -34,6 +31,7 @@ public class RelatorioManager {
 	private BarChartModel profissionalPorEquipe;
 	private List<Relatorio> relatorios = new ArrayList<>();
 	private List<Profissional> profissionais = new ArrayList<>();
+	private int maxY = 0;
 
 	public RelatorioManager() {
 		
@@ -92,6 +90,9 @@ public class RelatorioManager {
 	    grafico.setLabel("Equipe");
 	    for (Relatorio relatorio : this.service.profissionaisPorEquipe()) {
 	    	grafico.set(relatorio.getNome(), relatorio.getQuantidade());
+	    	if(relatorio.getQuantidade() > maxY){
+	    		maxY = (int)(relatorio.getQuantidade()/1);
+	    	}
 		}	 
 	    model.addSeries(grafico);
 	         
@@ -110,7 +111,14 @@ public class RelatorioManager {
 	   Axis yAxis = profissionalPorEquipe.getAxis(AxisType.Y);
 	   yAxis.setLabel("N° Profissionais");
 	   yAxis.setMin(0);
-	   yAxis.setMax(50);
+	   
+	   if((int)(maxY % 2) != 0){
+		   maxY = maxY + 7;
+	   }else{
+		   maxY = maxY + 6;
+	   }
+	   yAxis.setTickCount(maxY%2);
+	   yAxis.setMax(maxY);
 	}
 	
 	public void itemSelect(ItemSelectEvent event){

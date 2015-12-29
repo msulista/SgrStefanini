@@ -18,7 +18,7 @@
 		<p:chart type="bar" model="#{relatorioManager.profissionalPorEquipe}" style="height:300px" responsive="true">
 			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelect}" process="@this" update="gridRelatorio"/>
 		</p:chart>
-		
+	</h:form>
 		<br /><br />		
 		
 		<p:dataTable id="gridRelatorio" var="profissional" value="#{relatorioManager.profissionais}" emptyMessage="#{message['alerta.listaVazia']}" >
@@ -62,7 +62,7 @@
 				</p:column>
 			
 		</p:dataTable>
-		</h:form>
+		
 	</ui:define>
 
 </ui:composition>

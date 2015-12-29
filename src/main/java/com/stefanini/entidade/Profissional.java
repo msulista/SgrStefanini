@@ -20,24 +20,26 @@ import com.stefanini.util.DateUtil;
 @Entity
 @Table(name = "SGR_PROFISSIONAL")
 @NamedQueries({
-	@NamedQuery(name = "Profissional.findAll", query = "SELECT p FROM Profissional p ORDER BY p.nome ASC"),
-	@NamedQuery(name = "Profissional.findAtivos", query = "SELECT p FROM Profissional p WHERE p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE ORDER BY p.nome ASC"),
-	@NamedQuery(name = "Profissional.findNome", query = "SELECT p FROM Profissional p WHERE p.nome LIKE :nome AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),
-	@NamedQuery(name = "Profissional.findId", query = "SELECT p FROM Profissional p WHERE p.id = :id"),
-	@NamedQuery(name = "Profissional.findMatricula", query = "SELECT p FROM Profissional p WHERE p.matricula = :matricula"),
-	@NamedQuery(name = "Profissional.findProfissionalByCargaHoraria", query = "SELECT p FROM Profissional p WHERE p.cargaHoraria.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)"),	
-	@NamedQuery(name = "Profissional.findProfissionalByCargo", query = "SELECT p FROM Profissional p WHERE p.cargo.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)"),	
-	@NamedQuery(name = "Profissional.findProfissionalByCelula", query = "SELECT p FROM Profissional p WHERE p.celula.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)"),	
-	@NamedQuery(name = "Profissional.findProfissionalByEquipe", query = "SELECT p FROM Profissional p WHERE p.equipe.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)"),	
-	@NamedQuery(name = "Profissional.findProfissionalByEquipeNome", query = "SELECT p FROM Profissional p WHERE p.equipe.nome = :nome AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)"),	
-	@NamedQuery(name = "Profissional.findProfissionalByFormaContratacao", query = "SELECT p FROM Profissional p WHERE p.formaContratacao.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)"),	
-	@NamedQuery(name = "Profissional.findProfissionalByPerfil", query = "SELECT p FROM Profissional p WHERE p.perfil.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)"),	
-	@NamedQuery(name = "Profissional.findProfissionalByStatus", query = "SELECT p FROM Profissional p WHERE p.status.id = :id AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)"),	
+	@NamedQuery(name = "Profissional.findAll", query ="SELECT p FROM Profissional p ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Profissional.findMatriculaParaHistorico", query ="SELECT p FROM Profissional p WHERE p.matricula = :matricula"),
+	@NamedQuery(name = "Profissional.findAtivos", query ="SELECT p FROM Profissional p WHERE p.registroValidadeInicio <= CURRENT_DATE AND p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Profissional.findNome", query ="SELECT p FROM Profissional p WHERE p.nome LIKE :nome AND p.dataDemissao IS NULL OR p.dataDemissao < CURRENT_DATE  AND p.registroValidadeInicio <= CURRENT_DATE AND p.nome LIKE :nome AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Profissional.findId", query ="SELECT p FROM Profissional p WHERE p.id = :id AND p.dataDemissao IS NULL OR p.dataDemissao < CURRENT_DATE  AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Profissional.findMatricula", query ="SELECT p FROM Profissional p WHERE p.matricula = :matricula AND p.dataDemissao IS NULL OR p.dataDemissao < CURRENT_DATE  AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Profissional.findProfissionalByCargaHoraria", query ="SELECT p FROM Profissional p WHERE p.cargaHoraria.id = :id AND p.dataDemissao IS NULL OR p.dataDemissao < CURRENT_DATE AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),	
+	@NamedQuery(name = "Profissional.findProfissionalByCargo", query ="SELECT p FROM Profissional p WHERE p.cargo.id = :id AND p.dataDemissao IS NULL OR p.dataDemissao < CURRENT_DATE  AND p.registroValidadeInicio <= CURRENT_DATE AND p.nome LIKE :nome AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),	
+	@NamedQuery(name = "Profissional.findProfissionalByCelula", query ="SELECT p FROM Profissional p WHERE p.celula.id = :id AND p.dataDemissao IS NULL OR p.dataDemissao < CURRENT_DATE  AND p.registroValidadeInicio <= CURRENT_DATE AND p.nome LIKE :nome AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),	
+	@NamedQuery(name = "Profissional.findProfissionalByEquipe", query ="SELECT p FROM Profissional p WHERE p.equipe.id = :id AND p.dataDemissao IS NULL OR p.dataDemissao < CURRENT_DATE  AND p.registroValidadeInicio <= CURRENT_DATE AND p.nome LIKE :nome AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),	
+	@NamedQuery(name = "Profissional.findProfissionalByEquipeNome", query ="SELECT p FROM Profissional p WHERE p.equipe.nome = :nome AND p.dataDemissao IS NULL OR p.dataDemissao < CURRENT_DATE  AND p.registroValidadeInicio <= CURRENT_DATE AND p.nome LIKE :nome AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),	
+	@NamedQuery(name = "Profissional.findProfissionalByFormaContratacao", query ="SELECT p FROM Profissional p WHERE p.formaContratacao.id = :id AND p.dataDemissao IS NULL OR p.dataDemissao < CURRENT_DATE  AND p.registroValidadeInicio <= CURRENT_DATE AND p.nome LIKE :nome AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),	
+	@NamedQuery(name = "Profissional.findProfissionalByPerfil", query = "SELECT p FROM Profissional p WHERE p.perfil.id = :id AND p.dataDemissao IS NULL OR p.dataDemissao < CURRENT_DATE  AND p.registroValidadeInicio <= CURRENT_DATE AND p.nome LIKE :nome AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),	
+	@NamedQuery(name = "Profissional.findProfissionalByStatus", query ="SELECT p FROM Profissional p WHERE p.status.id = :id AND p.dataDemissao  IS NULL OR p.dataDemissao < CURRENT_DATE  AND p.registroValidadeInicio <= CURRENT_DATE AND p.nome LIKE :nome AND p.dataDemissao IS NULL AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),	
 })
 public class Profissional implements BaseEntity, Serializable {
 	private static final long serialVersionUID = 1L;
 	public Profissional() {
 		this.dataAdmissao = DateUtil.getProximoDiaUtil();
+		this.registroValidadeInicio = DateUtil.getProximoDiaUtil();
 		this.dataManipulacao = DateUtil.getProximoDiaUtil();
 	}
 	
