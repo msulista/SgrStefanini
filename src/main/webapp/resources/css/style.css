@@ -54,11 +54,11 @@ html, body {
 
 /* TOPO */
 .ct-top {
-    float: left;
-    width: 100%;
-    height: 170px;
-    background-color: #5F9EA0;
-    background: transparent url("../img/menu.jpg") center top;
+	float: left;
+	width: 100%;
+	height: 170px;
+	background-color: #5F9EA0;
+	background: transparent url("../img/menu.jpg") center top;
 }
 
 .ct-top h1 {
@@ -66,8 +66,9 @@ html, body {
 	color: #FFF;
 }
 
-.btn-menu .ui-state-default{
-	background-image: linear-gradient(to right, rgb(115, 177, 100), rgb(87, 170, 118));
+.btn-menu .ui-state-default {
+	background-image: linear-gradient(to right, rgb(115, 177, 100),
+		rgb(87, 170, 118));
 	color: rgb(255, 255, 255);
 	border: medium none;
 	box-shadow: none;
@@ -75,102 +76,179 @@ html, body {
 	text-shadow: none;
 }
 
-.btn-menu .ui-state-default:hover{
+.btn-menu .ui-state-default:hover {
+	
 }
 
 .cabecalho {
-    margin: auto;
+	margin: auto;
 	width: 85%;
 	height: 100%;
 }
 
 .container--topmenu {
-    background-color: rgb(255, 255, 255);
-    height: 115px;
-    margin-top: 10px;
+	background-color: rgb(255, 255, 255);
+	height: 115px;
+	margin-top: 10px;
 }
 
-.nome-sistema h1{
-    position: absolute;
-    left: 25%;
-    top: 35px;
-    font-size: 60px;
-    color: #0052A4;
+.nome-sistema h1 {
+	position: absolute;
+	left: 25%;
+	top: 35px;
+	font-size: 60px;
+	color: #0052A4;
 }
 
-.calendario-data{
+.calendario-data {
 	float: left;
 	width: 160px;
 	margin-top: 45px;
 	margin-left: 270px;
-
 }
 
-.calendario-data span,
-.relogio-hora span {
+.calendario-data span, .relogio-hora span {
 	color: rgb(51, 51, 51);
-	font-weight: 300;	
+	font-weight: 300;
 }
 
-
-.relogio-hora{
+.relogio-hora {
 	float: left;
 	width: 160px;
 	margin-top: 45px;
-	
 }
 
-.ui-clock{
-	background-color:#fff;
-	border:none;
-} 
+.ui-clock {
+	background-color: #fff;
+	border: none;
+}
 
 /* MENU */
 .ct-menu {
-    width: 85%;
-    height: 25px;
-    z-index: 80;
-    position: absolute;
-    top: 125px;
-    color: #FFF;
-    left: 7.5%;
+	width: 85%;
+	height: 25px;
+	z-index: 80;
+	position: absolute;
+	top: 125px;
+	color: #FFF;
+	left: 7.5%;
 }
 
 .ct-menu ul {
 	float: left;
 }
 
-
 .ct-menu ul li a {
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 12px;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 12px;
 }
 
-.ct-menu ul li a:hover{
-	color:#bbb;
-	text-decoration: underline;	
+.ct-menu ul li a:hover {
+	color: #bbb;
+	text-decoration: underline;
 }
 
 .ct-menu ul li.item-last {
 	border: none;
 }
 
-
-.img-logo {
-    width: 208px;
-    height: 47px;
-    background-image: url("../img/logo.jpg");
-    float: left;
-    margin-top: 30px;
+/*----- Menu Outline -----*/
+.menu a {
+	transition: all linear 0.15s;
+	color: #fff;
 }
 
-.date-time-icon{
+.ct-menu .sub-menu ul li a {
+	color: #333;
+}
+
+.menu li:hover>a, .menu .current-item>a {
+	text-decoration: none;
+	color: #ddd;
+}
+
+.menu .arrow {
+	font-size: 11px;
+	line-height: 0%;
+}
+
+/*----- Top Level -----*/
+.menu>ul>li {
+	float: left;
+	display: inline-block;
+	position: relative;
+	font-size: 19px;
+}
+
+.menu-categoria {
+	padding: 17px 10px;
+}
+
+.menu>ul>li>a {
+	display: inline-block;
+}
+
+.menu-categoria {
+	padding: 17px 10px;
+}
+
+.menu>ul>li:hover>a, .menu>ul>.current-item>a {
+	background-color: #FFF;
+	color: #333;
+}
+
+/*----- Bottom Level -----*/
+.menu li:hover .sub-menu {
+	z-index: 1;
+	opacity: 1;
+	display: inline;
+	width: 270%;
+}
+
+.sub-menu {
+	padding: 5px 0px;
+	position: absolute;
+	top: 100%;
+	left: 0px;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity linear 0.15s;
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+	background: #fff;
+	display: none;
+}
+
+.sub-menu li {
+	display: block;
+	font-size: 16px;
+}
+
+.sub-menu li a {
+	padding: 10px 20px;
+	display: block;
+	color: #333;
+}
+
+.sub-menu span {
+	color: #bbb;
+	padding: 5px;
+}
+
+.img-logo {
+	width: 208px;
+	height: 47px;
+	background-image: url("../img/logo.jpg");
+	float: left;
+	margin-top: 30px;
+}
+
+.date-time-icon {
 	height: 20px;
 	width: 20px;
 }
 
-.ui-breadcrumb{
+.ui-breadcrumb {
 	position: absolute;
 	top: 171px;
 	background: #fff;
@@ -178,10 +256,11 @@ html, body {
 	padding: 5px 0px 7px;
 }
 
-.ui-breadcrumb a{
+.ui-breadcrumb a {
 	color: #333;
 }
-.ui-breadcrumb a:hover{
+
+.ui-breadcrumb a:hover {
 	font-weight: 600;
 	text-decoration: underline;
 }
@@ -193,7 +272,7 @@ html, body {
 
 .ui-panel-titlebar {
 	color: #FFF;
-	background-image: linear-gradient(to right,#85B65A, #00AFCC ,#005189);
+	background-image: linear-gradient(to right, #85B65A, #00AFCC, #005189);
 }
 
 .ui-growl {
@@ -211,8 +290,8 @@ html, body {
 	float: left;
 }
 
-.ct-content *{
-	font-size:12px;
+.ct-content * {
+	font-size: 12px;
 }
 
 .ct-content h2 {
@@ -220,14 +299,14 @@ html, body {
 	margin-bottom: 20px;
 }
 
-.container{
+.container {
 	margin: auto;
-    width: 85%;	
+	width: 85%;
 }
 
 /* FORM */
 #painel-3-Colunas {
-	width:450px;
+	width: 450px;
 }
 
 .label {
@@ -262,16 +341,16 @@ input[type=text] {
 	width: 230px;
 }
 
-/* RODAPE
+/* RODAPE  */
 .ct-bottom{
     bottom: 0;
-    position: fixed;
+    position: absolute;
     color: #fff;
     background-color: #201B55;
-    width: 100%;
+    width: 98.8%;
     height: 20px;
     padding: 10px;
-    display: none;
+    display: block;
 }
 
 .rodape{
@@ -297,62 +376,62 @@ input[type=text] {
     float: right;
     bottom: 20px;
 }
- */
-.btn-acao{
+
+.btn-acao {
 	width: 25px;
 }
 
-.btn-default{
+.btn-default {
 	width: 50px;
 }
 
-.btn{
+.btn {
 	width: 70px;
 }
 
-.panel-formulario{
+.panel-formulario {
 	width: 35%;
 }
 
 .ui-button-text-only .ui-button-text {
-    padding: 3px;
+	padding: 3px;
 }
 
-.ui-datatable-header.ui-widget-header.ui-corner-top{
-	text-align:right;
+.ui-datatable-header.ui-widget-header.ui-corner-top {
+	text-align: right;
 }
 
 .ui-widget .ui-widget {
-    margin-top: 2px;
+	margin-top: 2px;
 }
 
 .ui-selectcheckboxmenu .ui-selectcheckboxmenu-label {
-    width: 100px;
-    height: 15px;
+	width: 100px;
+	height: 15px;
 }
 
-.alt{
+.alt {
 	font-size: 12px;
 }
 
-.painel{
+.painel {
 	border: 3px solid #0f4d40;
 	height: 140px;
 	width: 300px;
-	position: relative;	
+	position: relative;
 }
 
-#relatorio{
+#relatorio {
 	left: 140px;
 	float: right;
 }
 
-#profissionais{
+#profissionais {
 	left: 100px;
 	float: left;
 }
 
-.text-painel{
+.text-painel {
 	font-size: 25px;
 	position: relative;
 	right: 50px;
@@ -360,112 +439,24 @@ input[type=text] {
 	top: 50px;
 }
 
-.painel a{
-	color:#333;
+.painel a {
+	color: #333;
 }
 
-.text-painel:hover{
-	text-decoration:underline;
+.text-painel:hover {
+	text-decoration: underline;
 	font-weight: 600;
 }
 
-.img-painel{
+.img-painel {
 	left: 30px;
 	position: relative;
 	top: 30px;
 	width: 50px;
 	height: auto;
-	float:left;
+	float: left;
 }
 
-.pesquisa{
+.pesquisa {
 	margin-bottom: 15px;
-}
-
-
-/*TESTE*/ 
-
- 
-/*----- Menu Outline -----*/
-.menu a {
-    transition:all linear 0.15s;
-    color:#fff;
-}
-
-.ct-menu .sub-menu ul li a{
-	color:#333;
-}
- 
-.menu li:hover > a, .menu .current-item > a {
-    text-decoration:none;
-    color:#ddd;
-}
- 
-.menu .arrow {
-    font-size:11px;
-    line-height:0%;
-}
- 
-/*----- Top Level -----*/
-.menu > ul > li {
-    float:left;
-    display:inline-block;
-    position:relative;
-    font-size:19px;
-}
-
-.menu-categoria{
-	padding: 17px 10px;
-}
-
-.menu > ul > li > a {
-    
-    display:inline-block;
-}
-
-.menu-categoria{
-	padding: 17px 10px;
-}
- 
-.menu > ul > li:hover > a, .menu > ul > .current-item > a {
-    background-color: #FFF ;
-	color: #333;
-}
- 
-/*----- Bottom Level -----*/
-.menu li:hover .sub-menu {
-    z-index:1;
-    opacity:1;
-    display: inline;
-    width: 270%;
-}
- 
-.sub-menu {
-
-    padding:5px 0px;
-    position:absolute;
-    top:100%;
-    left:0px;
-    z-index:-1;
-    opacity:0;
-    transition:opacity linear 0.15s;
-    box-shadow:0px 2px 3px rgba(0,0,0,0.2);
-    background:#fff;
-    display:none;
-}
- 
-.sub-menu li {
-    display:block;
-    font-size:16px;
-}
- 
-.sub-menu li a {
-    padding:10px 20px;
-    display:block;
-    color: #333;
-}
- 
-.sub-menu span{
-	color: #bbb;
-	padding: 5px;
 }
