@@ -469,3 +469,7 @@ input[type=text] {
 	color: #bbb;
 	padding: 5px;
 }
+
+.dataStatus input[type="text"]{
+	width: 80px;
+}
