@@ -34,7 +34,7 @@ public class ProfissionalService {
 				
 					if(DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())){
 						
-						if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())&&DateUtil.verificaDataValida(profissional.getDataAdmissao() ,profissional.getRegistroValidaeFim())&&DateUtil.verificaDataValida(profissional.getDataDemissao(),profissional.getRegistroValidaeFim())){
+						if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())){
 				
 				manager.getTransaction().begin();
 				manager.persist(profissional);
@@ -76,8 +76,8 @@ public class ProfissionalService {
 			
 				
 						if (DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())) {
-
-							if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())){
+								
+								if(DateUtil.verificaDataValida(DateUtil.getDataParaComparacao(new Date()),profissional.getRegistroValidadeInicio())){
 			
 								if(profissional.getRegistroValidadeInicio().compareTo(profissionalMerge.getRegistroValidadeInicio())==0){
 					profissionalMerge.setRegistroValidaeFim(new Date());
@@ -114,17 +114,16 @@ public class ProfissionalService {
 				manager.close();
 				
 				return true;
-
+								}else{
+									Mensagem.add("Nova data de registro nao pode ser anterior ao dia atual");
+									manager.close();
+									return false;
+								}
 					} else {
 				Mensagem.add("Data de demissão anterior a de admissão!");
 				manager.close();
 				return false;
 			}
-					}else{
-						Mensagem.add("Data de demissão é anterior a data de registro inicial!");
-						manager.close();
-						return false;
-					}
 					
 			}else{
 				Mensagem.add("Nova data de registro é anterior a cadastrada originalmente!");
