@@ -27,13 +27,17 @@
 				#{message['rel.lista.profissionais']} 
 				<h:outputText value="#{relatorioManager.equipe}" />
 			</f:facet>
-							
+										
 			<p:column headerText="#{message['label.profissional.matricula']} " sortBy="#{profissional.matricula}">
 				<h:outputText value="#{profissional.matricula}"/>
 			</p:column>
 				
 			<p:column headerText="#{message['label.nome']} " sortBy="#{profissional.nome}">
 				<h:outputText value="#{profissional.nome}"/>
+			</p:column>
+			
+			<p:column headerText="#{message['label.nome']} " sortBy="#{profissional.nome}">
+				<h:outputText value="#{profissional.equipe}"/>
 			</p:column>
 							
 			<p:column headerText="#{message['label.profissional.celula']}" sortBy="#{profissional.celula.nome}">	
