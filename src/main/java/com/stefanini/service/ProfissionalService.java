@@ -36,7 +36,6 @@ public class ProfissionalService {
 						
 						if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())&&DateUtil.verificaDataValida(profissional.getDataAdmissao() ,profissional.getRegistroValidaeFim())&&DateUtil.verificaDataValida(profissional.getDataDemissao(),profissional.getRegistroValidaeFim())){
 				
-							profissional.setRegistroValidadeInicio(profissional.getDataAdmissao());
 				manager.getTransaction().begin();
 				manager.persist(profissional);
 				manager.getTransaction().commit();
