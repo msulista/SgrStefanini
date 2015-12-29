@@ -13,10 +13,10 @@
 		    <p:menuitem value="Home" url="#" />
 		    <p:menuitem value="Relatorio" outcome="pretty:relatorio" disabled="true"/>
 		</p:breadCrumb>
-		<h2>#{message['title.profissional']}</h2>
+		<h2>#{message['title.relatorio.profissional.equipe']}</h2>
 		
 		<p:chart type="bar" model="#{relatorioManager.profissionalPorEquipe}" style="height:300px" responsive="true">
-			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelect}" process="@this" update="gridRelatorio"/>
+			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectProfissionalPorEquipe}" process="@this" update="gridRelatorio"/>
 		</p:chart>
 	</h:form>
 		<br /><br />
@@ -34,10 +34,6 @@
 				
 			<p:column headerText="#{message['label.nome']} " sortBy="#{profissional.nome}">
 				<h:outputText value="#{profissional.nome}"/>
-			</p:column>
-			
-			<p:column headerText="#{message['label.nome']} " sortBy="#{profissional.nome}">
-				<h:outputText value="#{profissional.equipe}"/>
 			</p:column>
 							
 			<p:column headerText="#{message['label.profissional.celula']}" sortBy="#{profissional.celula.nome}">	
