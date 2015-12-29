@@ -355,7 +355,7 @@ input[type=text] {
 
 .rodape{
     margin: auto;
-    width: 80%;
+    width: 86%;
 }
 
 .rodape-descricao p,
@@ -459,4 +459,9 @@ input[type=text] {
 
 .pesquisa {
 	margin-bottom: 15px;
+}
+
+.conteudo {
+    position: relative;
+    min-height: 100%;
 }
