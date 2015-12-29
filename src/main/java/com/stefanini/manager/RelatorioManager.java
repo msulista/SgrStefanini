@@ -101,9 +101,6 @@ public class RelatorioManager {
 	    grafico.setLabel("Equipe");
 	    for (Relatorio relatorio : getRelatorios()) {
 	    	grafico.set(relatorio.getNome(), relatorio.getQuantidade());
-//	    	if(relatorio.getQuantidade() > maxY){
-//	    		maxY = (int)(relatorio.getQuantidade()/1);
-//	    	}
 	    	quantidadeTotal = (int)(quantidadeTotal + relatorio.getQuantidade());
 		}	
 	    grafico.set("Total Resultados", quantidadeTotal);
@@ -113,7 +110,7 @@ public class RelatorioManager {
 	private void createProfissionalPorEquipe() {
 	   profissionalPorEquipe = initProfissionalPorEquipe();
 	         
-	   profissionalPorEquipe.setTitle("Profissionais por equipe");
+	   profissionalPorEquipe.setTitle("Selecione a coluna da equipe desejada");
 	   profissionalPorEquipe.setAnimate(true);
 	   profissionalPorEquipe.setLegendPosition("ne");
 	       
@@ -124,13 +121,11 @@ public class RelatorioManager {
 	   yAxis.setLabel("N° Profissionais");
 	   yAxis.setMin(0);
 	   
-	   quantidadeTotal = quantidadeTotal % 2 == 0 ? quantidadeTotal + 2 : quantidadeTotal + 3;
-	   
-	   yAxis.setTickCount(quantidadeTotal%2);
-	   yAxis.setMax(quantidadeTotal);
+	   yAxis.setTickCount(quantidadeTotal + 4);
+	   yAxis.setMax(quantidadeTotal + 3);
 	}
 	
-	public void itemSelect(ItemSelectEvent event){
+	public void itemSelectProfissionalPorEquipe(ItemSelectEvent event){
 		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorios.get(event.getItemIndex()).getNome());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
