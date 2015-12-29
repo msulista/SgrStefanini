@@ -129,5 +129,43 @@ public class RelatorioManager {
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
-
+	
+	//CLT x Estagiario por equipe
+	
+	private BarChartModel initCltXestagioPorEquipe() {
+	    BarChartModel model = new BarChartModel();
+	 
+	    ChartSeries grafico = new ChartSeries();
+	    grafico.setLabel("Equipe");
+	    for (Relatorio relatorio : getRelatorios()) {
+	    	grafico.set(relatorio.getNome(), relatorio.getQuantidade());
+	    	quantidadeTotal = (int)(quantidadeTotal + relatorio.getQuantidade());
+		}	
+	    grafico.set("Total Resultados", quantidadeTotal);
+	    model.addSeries(grafico);	         
+	    return model;
+	}	     
+	private void createCltXestagioPorEquipe() {
+	   profissionalPorEquipe = initProfissionalPorEquipe();
+	         
+	   profissionalPorEquipe.setTitle("Selecione a coluna da equipe desejada");
+	   profissionalPorEquipe.setAnimate(true);
+	   profissionalPorEquipe.setLegendPosition("ne");
+	       
+	   Axis xAxis = profissionalPorEquipe.getAxis(AxisType.X);
+	   xAxis.setLabel("Equipes");
+	         
+	   Axis yAxis = profissionalPorEquipe.getAxis(AxisType.Y);
+	   yAxis.setLabel("N° Profissionais");
+	   yAxis.setMin(0);
+	   
+	   yAxis.setTickCount(quantidadeTotal + 4);
+	   yAxis.setMax(quantidadeTotal + 3);
+	}
+	
+	public void itemSelectCltXestagioPorEquipe(ItemSelectEvent event){
+		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorios.get(event.getItemIndex()).getNome());
+		equipe = profissionais.get(0).getEquipe().getNome();
+		
+	}
 }
