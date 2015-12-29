@@ -41,7 +41,7 @@ function moeda(v) {
 }
 
 function mostraData(obj){
-	if(obj.value == "2"){
+	if(obj.value == "Ativo"){
 		$("#dataAfastado").hide();
 	}else{
 		$("#dataAfastado").show();

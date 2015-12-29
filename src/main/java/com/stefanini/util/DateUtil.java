@@ -175,6 +175,16 @@ public class DateUtil {
 		data = calendar.getTime();
 		return data;
 	}
+	
+	 public static Date getDataParaComparacao (Date aDate){       
+	        Calendar myCalendar = Calendar.getInstance();
+	        myCalendar.setTime(aDate);
+	        myCalendar.set(Calendar.HOUR_OF_DAY, 0);
+	        myCalendar.set(Calendar.MINUTE, 0);
+	        myCalendar.set(Calendar.SECOND, 0);
+	        myCalendar.set(Calendar.MILLISECOND, 0);
+	        return myCalendar.getTime();
+	    }
 	// public static Date DataDoSistemaMySql(){
 	// SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 	// Date dataAtual = new Date();

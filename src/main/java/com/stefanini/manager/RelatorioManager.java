@@ -31,7 +31,8 @@ public class RelatorioManager {
 	private BarChartModel profissionalPorEquipe;
 	private List<Relatorio> relatorios = new ArrayList<>();
 	private List<Profissional> profissionais = new ArrayList<>();
-	private int maxY = 0;
+	private String equipe = "";
+	private int quantidadeTotal = 0;
 
 	public RelatorioManager() {
 		
@@ -39,7 +40,7 @@ public class RelatorioManager {
 	
 	@PostConstruct
 	public void init() {
-	   criaGrafico();
+	    criaGrafico();
 	}
 	
 	public List<Profissional> getProfissionais() {
@@ -76,8 +77,17 @@ public class RelatorioManager {
 		this.relatorios = relatorios;
 	}
 	
+	
 	//Graficos
 	
+	public String getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(String equipe) {
+		this.equipe = equipe;
+	}
+
 	public void criaGrafico(){
 	   	createProfissionalPorEquipe();
 	}
@@ -88,20 +98,18 @@ public class RelatorioManager {
 	 
 	    ChartSeries grafico = new ChartSeries();
 	    grafico.setLabel("Equipe");
-	    for (Relatorio relatorio : this.service.profissionaisPorEquipe()) {
+	    for (Relatorio relatorio : getRelatorios()) {
 	    	grafico.set(relatorio.getNome(), relatorio.getQuantidade());
-	    	if(relatorio.getQuantidade() > maxY){
-	    		maxY = (int)(relatorio.getQuantidade()/1);
-	    	}
-		}	 
-	    model.addSeries(grafico);
-	         
+	    	quantidadeTotal = (int)(quantidadeTotal + relatorio.getQuantidade());
+		}	
+	    grafico.set("Total Resultados", quantidadeTotal);
+	    model.addSeries(grafico);	         
 	    return model;
 	}	     
 	private void createProfissionalPorEquipe() {
 	   profissionalPorEquipe = initProfissionalPorEquipe();
 	         
-	   profissionalPorEquipe.setTitle("Profissionais por equipe");
+	   profissionalPorEquipe.setTitle("Selecione a coluna da equipe desejada");
 	   profissionalPorEquipe.setAnimate(true);
 	   profissionalPorEquipe.setLegendPosition("ne");
 	       
@@ -112,18 +120,52 @@ public class RelatorioManager {
 	   yAxis.setLabel("N° Profissionais");
 	   yAxis.setMin(0);
 	   
-	   if((int)(maxY % 2) != 0){
-		   maxY = maxY + 7;
-	   }else{
-		   maxY = maxY + 6;
-	   }
-	   yAxis.setTickCount(maxY%2);
-	   yAxis.setMax(maxY);
+	   yAxis.setTickCount(quantidadeTotal + 4);
+	   yAxis.setMax(quantidadeTotal + 3);
 	}
 	
-	public void itemSelect(ItemSelectEvent event){
-		System.out.println("############ Evento: " + event.getItemIndex());
-		System.out.println("############ Evento: " + relatorios.get(event.getItemIndex()).getNome() );
+	public void itemSelectProfissionalPorEquipe(ItemSelectEvent event){
+		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorios.get(event.getItemIndex()).getNome());
+		equipe = profissionais.get(0).getEquipe().getNome();
+		
 	}
-
+	
+	//CLT x Estagiario por equipe
+	
+	private BarChartModel initCltXestagioPorEquipe() {
+	    BarChartModel model = new BarChartModel();
+	 
+	    ChartSeries grafico = new ChartSeries();
+	    grafico.setLabel("Equipe");
+	    for (Relatorio relatorio : getRelatorios()) {
+	    	grafico.set(relatorio.getNome(), relatorio.getQuantidade());
+	    	quantidadeTotal = (int)(quantidadeTotal + relatorio.getQuantidade());
+		}	
+	    grafico.set("Total Resultados", quantidadeTotal);
+	    model.addSeries(grafico);	         
+	    return model;
+	}	     
+	private void createCltXestagioPorEquipe() {
+	   profissionalPorEquipe = initProfissionalPorEquipe();
+	         
+	   profissionalPorEquipe.setTitle("Selecione a coluna da equipe desejada");
+	   profissionalPorEquipe.setAnimate(true);
+	   profissionalPorEquipe.setLegendPosition("ne");
+	       
+	   Axis xAxis = profissionalPorEquipe.getAxis(AxisType.X);
+	   xAxis.setLabel("Equipes");
+	         
+	   Axis yAxis = profissionalPorEquipe.getAxis(AxisType.Y);
+	   yAxis.setLabel("N° Profissionais");
+	   yAxis.setMin(0);
+	   
+	   yAxis.setTickCount(quantidadeTotal + 4);
+	   yAxis.setMax(quantidadeTotal + 3);
+	}
+	
+	public void itemSelectCltXestagioPorEquipe(ItemSelectEvent event){
+		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorios.get(event.getItemIndex()).getNome());
+		equipe = profissionais.get(0).getEquipe().getNome();
+		
+	}
 }

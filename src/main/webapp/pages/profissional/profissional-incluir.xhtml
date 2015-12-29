@@ -78,16 +78,27 @@
                     <f:selectItems value="#{perfilManager.listarAtivos()}" var="perfil" itemLabel="#{perfil.nome}" itemValue="#{perfil}"/>
                 </p:selectOneMenu>
                 <br /><br />
-                                
+                
                 <p:outputLabel for="status" value="#{message['label.profissional.status']}" styleClass="label" />
                 <p:selectOneMenu id="status" value="#{profissionalManager.profissional.status}"  required="true" requiredMessage="#{message['span.obrigatorio.status']}">
                    <f:converter converterId="simpleEntityConverter"/>
-                    
+                    <f:selectItem itemLabel="Ativo" itemValue="#{statusManager.valorDefault()}" />
                     <f:selectItems value="#{statusManager.listarAtivos()}" var="status" itemLabel="#{status.nome}" itemValue="#{status}"/>
-                </p:selectOneMenu>
-                <br /><br />
-                
-                  <p:outputLabel for="inicio" value="#{message['label.data.inicio']}" styleClass="label"/>
+                   <f:ajax render="groups" />
+				</p:selectOneMenu>
+				
+				<h:panelGroup id="groups">
+				    <h:panelGroup rendered="#{profissionalManager.profissional.status.nome == 'Afastado' || profissionalManager.profissional.status.nome == 'Licença'}">
+				    	<br/><br/>
+				    	<p:outputLabel  value="#{message['label.data.dataStatus']}" styleClass="label"/>
+						<p:calendar id="saida" styleClass="dataStatus"  value="#{profissionalManager.profissional.dataSaida}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>
+						 / 
+						<p:calendar id="retorno" styleClass="dataStatus"  value="#{profissionalManager.profissional.dataRetorno}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>			
+				    </h:panelGroup>
+
+				</h:panelGroup>
+                <br/><br/>
+                <p:outputLabel for="inicio" value="#{message['label.data.inicio']}" styleClass="label"/>
         		<p:calendar id="inicio" value="#{profissionalManager.profissional.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
         		<br/><br/>
         		

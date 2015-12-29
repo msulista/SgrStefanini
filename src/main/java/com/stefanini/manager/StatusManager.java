@@ -70,6 +70,16 @@ public class StatusManager {
 	public List<Status> listarAtivos() {
 		return this.service.listarAtivos();
 	}
+	
+	public Status valorDefault(){
+		Status status = new Status();
+		for(Status obj : this.service.listarAtivos()){
+			if(obj.getNome().equals("Ativo")){
+				status = obj;
+			}
+		}
+		return status;
+	}
 
 	public String desativar(Long id) {
 		this.service.desativar(id);
