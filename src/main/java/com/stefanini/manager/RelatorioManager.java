@@ -31,7 +31,6 @@ public class RelatorioManager {
 	private BarChartModel profissionalPorEquipe;
 	private List<Relatorio> relatorios = new ArrayList<>();
 	private List<Profissional> profissionais = new ArrayList<>();
-	private int maxY = 0;
 	private String equipe = "";
 	private int quantidadeTotal = 0;
 
