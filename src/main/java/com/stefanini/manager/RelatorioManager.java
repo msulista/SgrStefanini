@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -20,7 +21,7 @@ import com.stefanini.entidade.Relatorio;
 import com.stefanini.service.RelatorioService;
 
 @ManagedBean
-@ViewScoped
+@ApplicationScoped
 @URLMappings(mappings = {
 		@URLMapping(id = "relatorio", pattern = "/profissional-por-equipe", viewId = "/pages/relatorio/relatorio-profissional-equipe.xhtml")
 })
@@ -39,7 +40,7 @@ public class RelatorioManager {
 	
 	@PostConstruct
 	public void init() {
-	   criaGrafico();
+	    criaGrafico();
 	}
 	
 	public List<Profissional> getProfissionais() {
@@ -88,7 +89,7 @@ public class RelatorioManager {
 	 
 	    ChartSeries grafico = new ChartSeries();
 	    grafico.setLabel("Equipe");
-	    for (Relatorio relatorio : this.service.profissionaisPorEquipe()) {
+	    for (Relatorio relatorio : getRelatorios()) {
 	    	grafico.set(relatorio.getNome(), relatorio.getQuantidade());
 	    	if(relatorio.getQuantidade() > maxY){
 	    		maxY = (int)(relatorio.getQuantidade()/1);
@@ -122,8 +123,14 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelect(ItemSelectEvent event){
+		System.out.println("############ Evento: Clique " );
 		System.out.println("############ Evento: " + event.getItemIndex());
+		System.out.println("############ Relatorios size: " + relatorios.size());
 		System.out.println("############ Evento: " + relatorios.get(event.getItemIndex()).getNome() );
+		System.out.println("############ Profi size: " + profissionais.size());
+		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorios.get(event.getItemIndex()).getNome());
+		System.out.println("########## Profi size: " + profissionais.size());
+		
 	}
 
 }
