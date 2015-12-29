@@ -14,7 +14,7 @@ public class RelatorioService {
 	@SuppressWarnings("unchecked")
 	public List<Relatorio> profissionaisPorEquipe(){		
 		EntityManager manager = JPAUtil.getEntityManager();		
-		String profisionalPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome, COUNT(p)) FROM Profissional p WHERE p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE GROUP BY p.equipe.nome";
+		String profisionalPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome, COUNT(p)) FROM Profissional p WHERE p.registroValidadeInicio <= CURRENT_DATE AND p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE GROUP BY p.equipe.nome";
 		Query q = manager.createQuery(profisionalPorEquipe);
 //		Query q = manager.createNamedQuery("Relatorio.profissionalPorEquipe");
 		List<Relatorio> relatorioProfissionalPorEquipe = (List<Relatorio>)q.getResultList();
