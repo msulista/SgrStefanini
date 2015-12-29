@@ -36,11 +36,19 @@ public class ProfissionalService {
 						
 						if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())){
 				
+							if(DateUtil.verificaDataValida(DateUtil.getDataParaComparacao(new Date()),profissional.getRegistroValidaeFim())){
+								
 				manager.getTransaction().begin();
 				manager.persist(profissional);
 				manager.getTransaction().commit();
 				manager.close();
 				return true;
+				
+							}else{
+								Mensagem.add("Data final do regirstro nao pode ser anteriro ao dia atual");
+								manager.close();
+								return false;
+							}
 						}else{
 							Mensagem.add("Data final do registro não pode ser anterior a de inicio!");
 							manager.close();
@@ -75,61 +83,82 @@ public class ProfissionalService {
 			if(DateUtil.verificaDataValida(profissionalMerge.getRegistroValidadeInicio(), profissional.getRegistroValidadeInicio())){
 			
 				
-						if (DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())) {
+				if (DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())) {
 								
-								if(DateUtil.verificaDataValida(DateUtil.getDataParaComparacao(new Date()),profissional.getRegistroValidadeInicio())){
-			
+					if(DateUtil.verificaDataValida(DateUtil.getDataParaComparacao(new Date()),profissional.getRegistroValidadeInicio())){
+									
+						if(DateUtil.verificaDataValida(DateUtil.getDataParaComparacao(new Date()),profissional.getRegistroValidadeInicio())){
+										
+							if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())){
+											
 								if(profissional.getRegistroValidadeInicio().compareTo(profissionalMerge.getRegistroValidadeInicio())==0){
-					profissionalMerge.setRegistroValidaeFim(new Date());
-					manager.merge(profissionalMerge);
-				}else{
-				profissionalMerge.setRegistroValidaeFim(DateUtil.retornaDataFimAntesDoNovoInicio(profissional.getRegistroValidadeInicio()));
-				manager.merge(profissionalMerge);
-				}
+									profissionalMerge.setRegistroValidaeFim(new Date());
+									manager.merge(profissionalMerge);
+					
+								}else{
+									profissionalMerge.setRegistroValidaeFim(DateUtil.retornaDataFimAntesDoNovoInicio(profissional.getRegistroValidadeInicio()));
+									manager.merge(profissionalMerge);
+													
+								}
 				
 			
 
-				Profissional profissionalPersist = new Profissional();
-				profissionalPersist.setNome(profissional.getNome());
-				profissionalPersist.setMatricula(profissional.getMatricula());
-				profissionalPersist.setSalario(profissional.getSalario());
-				profissionalPersist.setBeneficios(profissional.getBeneficios());
-				profissionalPersist.setValorHora(profissional.getValorHora());
-				profissionalPersist.setDataAdmissao(profissional.getDataAdmissao());
-				profissionalPersist.setDataDemissao(profissional.getDataDemissao());
-				profissionalPersist.setRegistroValidadeInicio(profissional.getRegistroValidadeInicio());
-				profissionalPersist.setRegistroValidaeFim(profissional.getRegistroValidaeFim());
-				profissionalPersist.setCelula(celulaService.getCelulaById(profissional.getCelula().getId()));
-				profissionalPersist.setCargo(cargoService.getCargoById(profissional.getCargo().getId()));
-				profissionalPersist.setEquipe(equipeService.getEquipeById(profissional.getEquipe().getId()));
-				profissionalPersist.setPerfil(perfilService.getPerfilById(profissional.getPerfil().getId()));
-				profissionalPersist.setCargaHoraria(
-						cargaHorariaService.getCargaHorariaById(profissional.getCargaHoraria().getId()));
-				profissionalPersist.setFormaContratacao(
-						formaContratacaoService.getFormaContratacaoById(profissional.getFormaContratacao().getId()));
-				profissionalPersist.setStatus(statusService.getStatusById(profissional.getStatus().getId()));
-
-				manager.persist(profissionalPersist);
-				manager.getTransaction().commit();
-				manager.close();
+								Profissional profissionalPersist = new Profissional();
+								profissionalPersist.setNome(profissional.getNome());
+								profissionalPersist.setMatricula(profissional.getMatricula());
+								profissionalPersist.setSalario(profissional.getSalario());
+								profissionalPersist.setBeneficios(profissional.getBeneficios());
+								profissionalPersist.setValorHora(profissional.getValorHora());
+								profissionalPersist.setDataAdmissao(profissional.getDataAdmissao());
+								profissionalPersist.setDataDemissao(profissional.getDataDemissao());
+								profissionalPersist.setRegistroValidadeInicio(profissional.getRegistroValidadeInicio());
+								profissionalPersist.setRegistroValidaeFim(profissional.getRegistroValidaeFim());
+								profissionalPersist.setCelula(celulaService.getCelulaById(profissional.getCelula().getId()));
+								profissionalPersist.setCargo(cargoService.getCargoById(profissional.getCargo().getId()));
+								profissionalPersist.setEquipe(equipeService.getEquipeById(profissional.getEquipe().getId()));
+								profissionalPersist.setPerfil(perfilService.getPerfilById(profissional.getPerfil().getId()));
+								profissionalPersist.setCargaHoraria(
+										cargaHorariaService.getCargaHorariaById(profissional.getCargaHoraria().getId()));
+								profissionalPersist.setFormaContratacao(
+										formaContratacaoService.getFormaContratacaoById(profissional.getFormaContratacao().getId()));
+								profissionalPersist.setStatus(statusService.getStatusById(profissional.getStatus().getId()));
 				
-				return true;
+								manager.persist(profissionalPersist);
+								manager.getTransaction().commit();
+								manager.close();
+				
+								return true;
+				
+										}else{
+											Mensagem.add("Data final do registro não pode ser anterior a de inicio!");
+											manager.close();
+											return false;
+										}
+										
+									}else{
+										Mensagem.add("Data final do regirstro nao pode ser anteriro ao dia atual");
+										manager.close();
+										return false;
+									}
+									
 								}else{
 									Mensagem.add("Nova data de registro nao pode ser anterior ao dia atual");
 									manager.close();
 									return false;
 								}
+								
 					} else {
 				Mensagem.add("Data de demissão anterior a de admissão!");
 				manager.close();
 				return false;
-			}
+					}
 					
 			}else{
 				Mensagem.add("Nova data de registro é anterior a cadastrada originalmente!");
 				manager.close();
 				return false;
 			}
+			
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();
