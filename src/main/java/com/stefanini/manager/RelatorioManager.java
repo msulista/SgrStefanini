@@ -129,14 +129,8 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelect(ItemSelectEvent event){
-		System.out.println("############ Evento: Clique " );
-		System.out.println("############ Evento: " + event.getItemIndex());
-		System.out.println("############ Relatorios size: " + relatorios.size());
-		System.out.println("############ Evento: " + relatorios.get(event.getItemIndex()).getNome() );
-		System.out.println("############ Profi size: " + profissionais.size());
 		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorios.get(event.getItemIndex()).getNome());
-		equipe = profissionais.get(0).getNome();
-		System.out.println("########## Profi size: " + profissionais.size());
+		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
 
