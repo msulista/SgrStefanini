@@ -24,7 +24,8 @@
 		<p:dataTable id="gridRelatorio" var="profissional" value="#{relatorioManager.profissionais}" emptyMessage="#{message['alerta.listaVazia']}" >
 			
 			<f:facet name="header">
-				#{message['rel.lista.profissionais']} <p:ajax oncomplete="#{relatorioManager.equipe}"/>
+				#{message['rel.lista.profissionais']} 
+				<h:outputText value="#{relatorioManager.equipe}" />
 			</f:facet>
 							
 			<p:column headerText="#{message['label.profissional.matricula']} " sortBy="#{profissional.matricula}">
