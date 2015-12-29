@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -21,7 +20,7 @@ import com.stefanini.entidade.Relatorio;
 import com.stefanini.service.RelatorioService;
 
 @ManagedBean
-@ApplicationScoped
+@ViewScoped
 @URLMappings(mappings = {
 		@URLMapping(id = "relatorio", pattern = "/profissional-por-equipe", viewId = "/pages/relatorio/relatorio-profissional-equipe.xhtml")
 })
@@ -33,6 +32,7 @@ public class RelatorioManager {
 	private List<Relatorio> relatorios = new ArrayList<>();
 	private List<Profissional> profissionais = new ArrayList<>();
 	private int maxY = 0;
+	private String equipe = "";
 
 	public RelatorioManager() {
 		
@@ -71,14 +71,24 @@ public class RelatorioManager {
 	}	
 	public List<Relatorio> getRelatorios() {
 		relatorios = this.service.profissionaisPorEquipe();
+		equipe = relatorios.get(0).getNome();
 		return relatorios;
 	}
 	public void setRelatorios(List<Relatorio> relatorios) {
 		this.relatorios = relatorios;
 	}
 	
+	
 	//Graficos
 	
+	public String getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(String equipe) {
+		this.equipe = equipe;
+	}
+
 	public void criaGrafico(){
 	   	createProfissionalPorEquipe();
 	}
