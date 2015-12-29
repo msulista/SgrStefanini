@@ -31,7 +31,7 @@ public class RelatorioManager {
 	private BarChartModel profissionalPorEquipe;
 	private List<Relatorio> relatorios = new ArrayList<>();
 	private List<Profissional> profissionais = new ArrayList<>();
-	private Long maxY = 0L;
+	private int maxY = 0;
 
 	public RelatorioManager() {
 		
@@ -91,7 +91,7 @@ public class RelatorioManager {
 	    for (Relatorio relatorio : this.service.profissionaisPorEquipe()) {
 	    	grafico.set(relatorio.getNome(), relatorio.getQuantidade());
 	    	if(relatorio.getQuantidade() > maxY){
-	    		maxY = relatorio.getQuantidade();
+	    		maxY = (int)(relatorio.getQuantidade()/1);
 	    	}
 		}	 
 	    model.addSeries(grafico);
@@ -111,8 +111,14 @@ public class RelatorioManager {
 	   Axis yAxis = profissionalPorEquipe.getAxis(AxisType.Y);
 	   yAxis.setLabel("N° Profissionais");
 	   yAxis.setMin(0);
-	   yAxis.setTickCount((int)((maxY + 6)%1));
-	   yAxis.setMax(maxY + 6);
+	   
+	   if((int)(maxY % 2) != 0){
+		   maxY = maxY + 7;
+	   }else{
+		   maxY = maxY + 6;
+	   }
+	   yAxis.setTickCount(maxY%2);
+	   yAxis.setMax(maxY);
 	}
 	
 	public void itemSelect(ItemSelectEvent event){
