@@ -90,10 +90,18 @@
 				<h:panelGroup id="groups">
 				    <h:panelGroup rendered="#{profissionalManager.profissional.status.nome == 'Afastado'}">
 				    	<br/><br/>
-				    	<p:outputLabel for="saida" value="#{message['label.data.dataStatus']}" styleClass="label"/>
-						<p:calendar styleClass="dataStatus" id="saida" value="#{profissionalManager.profissional.dataSaida}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>
+				    	<p:outputLabel  value="#{message['label.data.dataStatus']}" styleClass="label"/>
+						<p:calendar styleClass="dataStatus"  value="#{profissionalManager.profissional.dataSaida}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>
 						 / 
-						<p:calendar styleClass="dataStatus" id="retorno" value="#{profissionalManager.profissional.dataRetorno}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>			
+						<p:calendar styleClass="dataStatus"  value="#{profissionalManager.profissional.dataRetorno}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>			
+				    </h:panelGroup>
+				    
+				    <h:panelGroup rendered="#{profissionalManager.profissional.status.nome == 'Licença'}">
+				    	<br/><br/>
+				    	<p:outputLabel value="#{message['label.data.dataStatus']}" styleClass="label"/>
+						<p:calendar styleClass="dataStatus"  value="#{profissionalManager.profissional.dataSaida}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>
+						 / 
+						<p:calendar styleClass="dataStatus"  value="#{profissionalManager.profissional.dataRetorno}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>			
 				    </h:panelGroup>
 				    
 				</h:panelGroup>
