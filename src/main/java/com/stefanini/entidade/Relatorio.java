@@ -20,12 +20,19 @@ public class Relatorio {
 	public Relatorio() {
 	}
 	
+	//Relatorio Prifissionais por equipe
 	public Relatorio(String nome01, Long quantidade01) {
 		this.quantidade01 = quantidade01;
 		this.nome01 = nome01;
+	}	
+	
+	//Relatorio CLT x Estagio por equipe
+	public Relatorio(String nome01, Long quantidade01, Long quantidade02) {
+		this.quantidade01 = quantidade01;
+		this.nome01 = nome01;
+		this.quantidade02 = quantidade02;
 	}
 
-	
 	public Relatorio(Long quantidade01, String nome01, Long quantidade02, String nome02) {
 		this.quantidade01 = quantidade01;
 		this.nome01 = nome01;
