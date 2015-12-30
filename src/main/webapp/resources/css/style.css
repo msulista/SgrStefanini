@@ -284,14 +284,15 @@ html, body {
 
 /* CONTENT */
 .ct-content {
-	padding: 15px 0px 0px 0px;
-	float: left;
+	padding: 5px 0px 0px 0px;
+	width: 85%;
+	margin-left: 8%;
+	float:left;
+	margin-bottom: 5%;
 }
 
 .ct-content .incluir-editar{
-	position: absolute;
-	top: 50px;
-	left: 0;
+	width: 35%;
 }
 .ct-content * {
 	font-size: 12px;
@@ -302,6 +303,10 @@ html, body {
 }
 
 .container {
+	position:absolute;
+	width: 100%;
+	top: 170px;
+	min-height: 78%;
 }
 
 /* FORM */
@@ -347,7 +352,7 @@ input[type=text] {
     position: absolute;
     color: #fff;
     background-color: #201B55;
-    width: 98.8%;
+    width: 98.75%;
     height: 20px;
     padding: 10px;
     display: block;
@@ -418,7 +423,6 @@ input[type=text] {
 	border: 3px solid #0f4d40;
 	height: 140px;
 	width: 300px;
-	position: absolute;
 }
 
 #relatorio {
@@ -427,8 +431,8 @@ input[type=text] {
 }
 
 #profissionais {
-	top: 70px;
-	left: 80px;
+	margin-top: 1%;
+	margin-left: 5%;
 	float: left;
 }
 

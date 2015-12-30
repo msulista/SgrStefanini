@@ -5,86 +5,86 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pretty="http://ocpsoft.com/prettyfaces">
-
-<h:head>
-	<title>#{app.title}</title>
-	<base href="#{request.contextPath}/" />
-	<link rel="stylesheet" type="text/css" href="resources/css/style.css" />
-
-	<h:outputScript library="js" name="js.js"></h:outputScript>
-</h:head>
-<h:body>
-	<div class="ct-top">
-		<div class="container--topmenu">
-			<div class="cabecalho">
-				<a href="#"> <img class="img-logo" />
-				</a>
-				<div class="nome-sistema">
-					<h1>S.G.R</h1>
-				</div>
-				<div class="calendario-data">
-					<h:graphicImage value="/resources/img/calendar.png"
-						styleClass="date-time-icon" />
-					<p:clock id="calendario" pattern="dd.MM.yyyy" mode="server" />
-				</div>
-				<div class="relogio-hora">
-					<h:graphicImage value="/resources/img/clock.png"
-						styleClass="date-time-icon" />
-					<p:clock id="horario" pattern="HH:mm:ss" mode="server" />
+	
+	<h:head>
+		<title>#{app.title}</title>
+		<base href="#{request.contextPath}/" />
+		<link rel="stylesheet" type="text/css" href="resources/css/style.css" />
+	
+		<h:outputScript library="js" name="js.js"></h:outputScript>
+	</h:head>
+	<h:body>
+		<div class="ct-top">
+			<div class="container--topmenu">
+				<div class="cabecalho">
+					<a href="#"> <img class="img-logo" />
+					</a>
+					<div class="nome-sistema">
+						<h1>S.G.R</h1>
+					</div>
+					<div class="calendario-data">
+						<h:graphicImage value="/resources/img/calendar.png"
+							styleClass="date-time-icon" />
+						<p:clock id="calendario" pattern="dd.MM.yyyy" mode="server" />
+					</div>
+					<div class="relogio-hora">
+						<h:graphicImage value="/resources/img/clock.png"
+							styleClass="date-time-icon" />
+						<p:clock id="horario" pattern="HH:mm:ss" mode="server" />
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="ct-menu">
-		<div class="menu">
-			<ul class="clearfix">
-				<li><a href="#" class="menu-categoria">Home</a></li>
-				<li><a href="#" class="menu-categoria">Cadastros<span
-						class="arrow">&#9660;</span></a>
-					<ul class="sub-menu">
-						<li><h:link outcome="pretty:profissional"
-								styleClass="submenu-categoria">#{message['title.profissional']}</h:link></li>
-						<p:separator />
-						<li><h:link outcome="pretty:cargaHoraria"
-								styleClass="submenu-categoria">#{message['title.cargaHoraria']}</h:link></li>
-						<li><h:link outcome="pretty:cargo"
-								styleClass="submenu-categoria">#{message['title.cargos']}</h:link></li>
-						<li><h:link outcome="pretty:celula"
-								styleClass="submenu-categoria">#{message['title.celulas']}</h:link></li>
-						<li><h:link outcome="pretty:equipe"
-								styleClass="submenu-categoria">#{message['title.equipes']}</h:link></li>
-						<li><h:link outcome="pretty:formaContratacao"
-								styleClass="submenu-categoria">#{message['title.formaContratacao']}</h:link></li>
-						<li><h:link outcome="pretty:perfil"
-								styleClass="submenu-categoria">#{message['title.perfis']}</h:link></li>
-						<li><h:link outcome="pretty:perfilStefanini"
-								styleClass="submenu-categoria">#{message['title.perfilStefanini']}</h:link></li>
-						<li class="item-last"><h:link outcome="pretty:status"
-								styleClass="submenu-categoria">#{message['title.status']}</h:link></li>
-					</ul></li>
-				<li><a href="#" class="menu-categoria">Relatorios<span
-						class="arrow">&#9660;</span></a>
-					<ul class="sub-menu">
-						<li><span>#{message['title.relatorio.equipe']}</span></li>
-						<p:separator />
-						<li><h:link
-								outcome="pretty:relatorioProfissional">#{message['title.relatorio.profissional.equipe']}</h:link></li>
-						<li class="item-last submenu-categoria"><h:link
-								outcome="pretty:relatorioContratacao">#{message['title.relatorio.forma.contratacao']}</h:link></li>
-					</ul></li>
-			</ul>
+		<div class="ct-menu">
+			<div class="menu">
+				<ul class="clearfix">
+					<li><a href="#" class="menu-categoria">Home</a></li>
+					<li><a href="#" class="menu-categoria">Cadastros<span
+							class="arrow">&#9660;</span></a>
+						<ul class="sub-menu">
+							<li><h:link outcome="pretty:profissional"
+									styleClass="submenu-categoria">#{message['title.profissional']}</h:link></li>
+							<p:separator />
+							<li><h:link outcome="pretty:cargaHoraria"
+									styleClass="submenu-categoria">#{message['title.cargaHoraria']}</h:link></li>
+							<li><h:link outcome="pretty:cargo"
+									styleClass="submenu-categoria">#{message['title.cargos']}</h:link></li>
+							<li><h:link outcome="pretty:celula"
+									styleClass="submenu-categoria">#{message['title.celulas']}</h:link></li>
+							<li><h:link outcome="pretty:equipe"
+									styleClass="submenu-categoria">#{message['title.equipes']}</h:link></li>
+							<li><h:link outcome="pretty:formaContratacao"
+									styleClass="submenu-categoria">#{message['title.formaContratacao']}</h:link></li>
+							<li><h:link outcome="pretty:perfil"
+									styleClass="submenu-categoria">#{message['title.perfis']}</h:link></li>
+							<li><h:link outcome="pretty:perfilStefanini"
+									styleClass="submenu-categoria">#{message['title.perfilStefanini']}</h:link></li>
+							<li class="item-last"><h:link outcome="pretty:status"
+									styleClass="submenu-categoria">#{message['title.status']}</h:link></li>
+						</ul></li>
+					<li><a href="#" class="menu-categoria">Relatorios<span
+							class="arrow">&#9660;</span></a>
+						<ul class="sub-menu">
+							<li><span>#{message['title.relatorio.equipe']}</span></li>
+							<p:separator />
+							<li><h:link outcome="pretty:relatorioProfissional">#{message['title.relatorio.profissional.equipe']}</h:link></li>
+							<li class="item-last submenu-categoria"><h:link
+									outcome="pretty:relatorioContratacao">#{message['title.relatorio.forma.contratacao']}</h:link></li>
+						</ul></li>
+				</ul>
+			</div>
 		</div>
+		
 		<div class="container">
 			<div class="ct-content">
 				<ui:insert name="content" />
 			</div>
+			<div class="ct-bottom">
+				<div class="rodape">
+					<span>teste</span>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="ct-bottom">
-		<div class="rodape">
-			<span>teste</span>
-		</div>
-	</div>
-
-</h:body>
+		
+	</h:body>
 </html>
