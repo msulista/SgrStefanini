@@ -82,7 +82,7 @@ public class ProfissionalService {
 
 		if (DateUtil.verificaDiaUtil(profissional.getDataAdmissao())&&DateUtil.verificaDiaUtil(profissional.getDataDemissao())&&DateUtil.verificaDiaUtil(profissional.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(profissional.getRegistroValidaeFim())) {
 			
-			Profissional profissionalMerge = (Profissional) getProfissionalById(profissional.getId());
+			Profissional profissionalMerge = (Profissional) getProfissionalParaEdicao(profissional.getMatricula());
 			
 				if (DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())) {
 								
