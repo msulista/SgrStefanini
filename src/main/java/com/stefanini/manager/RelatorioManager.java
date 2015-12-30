@@ -22,14 +22,16 @@ import com.stefanini.service.RelatorioService;
 @ManagedBean
 @ViewScoped
 @URLMappings(mappings = {
-		@URLMapping(id = "relatorio", pattern = "/profissional-por-equipe", viewId = "/pages/relatorio/relatorio-profissional-equipe.xhtml")
+		@URLMapping(id = "relatorioProfissional", pattern = "/profissional-por-equipe", viewId = "/pages/relatorio/relatorio-profissional-equipe.xhtml"),
+		@URLMapping(id = "relatorioContratacao", pattern = "/contratacao-por-equipe", viewId = "/pages/relatorio/relatorio-contratacao-equipe.xhtml")
 })
 public class RelatorioManager {
 	
 	private Relatorio relatorio = new Relatorio();
 	private RelatorioService service = new RelatorioService();
 	private BarChartModel profissionalPorEquipe;
-	private List<Relatorio> relatorios = new ArrayList<>();
+	private BarChartModel contratacaoPorEquipe;
+	private List<Relatorio> relatorioProfissionalEquipe = new ArrayList<>();
 	private List<Profissional> profissionais = new ArrayList<>();
 	private String equipe = "";
 	private int quantidadeTotal = 0;
@@ -41,15 +43,7 @@ public class RelatorioManager {
 	@PostConstruct
 	public void init() {
 	    criaGrafico();
-	}
-	
-	public List<Profissional> getProfissionais() {
-		return profissionais;
-	}
-
-	public void setProfissionais(List<Profissional> profissionais) {
-		this.profissionais = profissionais;
-	}
+	}	
 
 	public Relatorio getRelatorio() {
 		return relatorio;
@@ -68,13 +62,26 @@ public class RelatorioManager {
 	}
 	public void setProfissionalPorEquipe(BarChartModel profissionalPorEquipe) {
 		this.profissionalPorEquipe = profissionalPorEquipe;
-	}	
+	}		
+	public BarChartModel getContratacaoPorEquipe() {
+		return contratacaoPorEquipe;
+	}
+	public void setContratacaoPorEquipe(BarChartModel contratacaoPorEquipe) {
+		this.contratacaoPorEquipe = contratacaoPorEquipe;
+	}
+
 	public List<Relatorio> getRelatorios() {
-		relatorios = this.service.profissionaisPorEquipe();
-		return relatorios;
+		relatorioProfissionalEquipe = this.service.profissionaisPorEquipe();
+		return relatorioProfissionalEquipe;
 	}
 	public void setRelatorios(List<Relatorio> relatorios) {
-		this.relatorios = relatorios;
+		this.relatorioProfissionalEquipe = relatorios;
+	}
+	public List<Profissional> getProfissionais() {
+		return profissionais;
+	}
+	public void setProfissionais(List<Profissional> profissionais) {
+		this.profissionais = profissionais;
 	}
 	
 	
@@ -90,6 +97,7 @@ public class RelatorioManager {
 
 	public void criaGrafico(){
 	   	createProfissionalPorEquipe();
+	   	createCltXestagioPorEquipe();
 	}
 	
 	//Profissional por Equipe
@@ -99,8 +107,8 @@ public class RelatorioManager {
 	    ChartSeries grafico = new ChartSeries();
 	    grafico.setLabel("Equipe");
 	    for (Relatorio relatorio : getRelatorios()) {
-	    	grafico.set(relatorio.getNome(), relatorio.getQuantidade());
-	    	quantidadeTotal = (int)(quantidadeTotal + relatorio.getQuantidade());
+	    	grafico.set(relatorio.getNome01(), relatorio.getQuantidade01());
+	    	quantidadeTotal = (int)(quantidadeTotal + relatorio.getQuantidade01());
 		}	
 	    grafico.set("Total Resultados", quantidadeTotal);
 	    model.addSeries(grafico);	         
@@ -125,7 +133,7 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectProfissionalPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorios.get(event.getItemIndex()).getNome());
+		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorioProfissionalEquipe.get(event.getItemIndex()).getNome01());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
@@ -135,36 +143,50 @@ public class RelatorioManager {
 	private BarChartModel initCltXestagioPorEquipe() {
 	    BarChartModel model = new BarChartModel();
 	 
-	    ChartSeries grafico = new ChartSeries();
-	    grafico.setLabel("Equipe");
+	    ChartSeries clt = new ChartSeries();
+	    ChartSeries estagio = new ChartSeries();
+	    clt.setLabel("CLT");
+	    estagio.setLabel("Estágio");
+	    
 	    for (Relatorio relatorio : getRelatorios()) {
-	    	grafico.set(relatorio.getNome(), relatorio.getQuantidade());
-	    	quantidadeTotal = (int)(quantidadeTotal + relatorio.getQuantidade());
+	    	System.out.println("########### Nome01: " + relatorio.getNome01());
+	    	System.out.println("########### Quantidade01: " + relatorio.getQuantidade01());
+	    	System.out.println("########### Nome02: " + relatorio.getNome02());
+	    	System.out.println("########### Quantidade02: " + relatorio.getQuantidade02());
+	    	System.out.println("########### Nome03: " + relatorio.getNome03());
+	    	System.out.println("########### Quantidade3: " + relatorio.getQuantidade03());
+	    	clt.set(relatorio.getNome01(), relatorio.getQuantidade01());
+	    	estagio.set(relatorio.getNome01(), relatorio.getQuantidade02());
+	    	
+	    	//quantidadeTotal = (int)(quantidadeTotal + relatorio.getQuantidade01());
 		}	
-	    grafico.set("Total Resultados", quantidadeTotal);
-	    model.addSeries(grafico);	         
+	   // clt.set("Total Resultados", quantidadeTotal);
+	   // estagio.set("Total Resultados", quantidadeTotal);	    
+	    
+	    model.addSeries(clt);	         
+	    model.addSeries(estagio);	         
 	    return model;
 	}	     
 	private void createCltXestagioPorEquipe() {
-	   profissionalPorEquipe = initProfissionalPorEquipe();
-	         
-	   profissionalPorEquipe.setTitle("Selecione a coluna da equipe desejada");
-	   profissionalPorEquipe.setAnimate(true);
-	   profissionalPorEquipe.setLegendPosition("ne");
+		contratacaoPorEquipe = initCltXestagioPorEquipe();
+		
+		contratacaoPorEquipe.setTitle("Selecione a coluna da forma de contratação desejada");
+		contratacaoPorEquipe.setAnimate(true);
+		contratacaoPorEquipe.setLegendPosition("ne");
 	       
-	   Axis xAxis = profissionalPorEquipe.getAxis(AxisType.X);
-	   xAxis.setLabel("Equipes");
+	    Axis xAxis = contratacaoPorEquipe.getAxis(AxisType.X);
+	    xAxis.setLabel("Equipes");
 	         
-	   Axis yAxis = profissionalPorEquipe.getAxis(AxisType.Y);
-	   yAxis.setLabel("N° Profissionais");
-	   yAxis.setMin(0);
+	    Axis yAxis = profissionalPorEquipe.getAxis(AxisType.Y);
+	    yAxis.setLabel("N° Profissionais");
+	    yAxis.setMin(0);
 	   
-	   yAxis.setTickCount(quantidadeTotal + 4);
-	   yAxis.setMax(quantidadeTotal + 3);
+	    yAxis.setTickCount(quantidadeTotal + 4);
+	    yAxis.setMax(quantidadeTotal + 3);
 	}
 	
 	public void itemSelectCltXestagioPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorios.get(event.getItemIndex()).getNome());
+		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorioProfissionalEquipe.get(event.getItemIndex()).getNome01());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
