@@ -31,8 +31,11 @@ public class RelatorioManager {
 	private RelatorioService service = new RelatorioService();
 	private BarChartModel profissionalPorEquipe;
 	private BarChartModel contratacaoPorEquipe;
+	
 	private List<Relatorio> relatorioProfissionalEquipe = new ArrayList<>();
+	private List<Relatorio> relatorioContratacaoEquipe = new ArrayList<>();
 	private List<Profissional> profissionais = new ArrayList<>();
+	
 	private String equipe = "";
 	private int quantidadeTotal = 0;
 
@@ -70,13 +73,13 @@ public class RelatorioManager {
 		this.contratacaoPorEquipe = contratacaoPorEquipe;
 	}
 
-	public List<Relatorio> getRelatorios() {
-		relatorioProfissionalEquipe = this.service.profissionaisPorEquipe();
-		return relatorioProfissionalEquipe;
-	}
-	public void setRelatorios(List<Relatorio> relatorios) {
-		this.relatorioProfissionalEquipe = relatorios;
-	}
+//	public List<Relatorio> getRelatorios() {
+//		relatorioProfissionalEquipe = this.service.profissionaisPorEquipe();
+//		return relatorioProfissionalEquipe;
+//	}
+//	public void setRelatorios(List<Relatorio> relatorios) {
+//		this.relatorioProfissionalEquipe = relatorios;
+//	}
 	public List<Profissional> getProfissionais() {
 		return profissionais;
 	}
@@ -84,9 +87,27 @@ public class RelatorioManager {
 		this.profissionais = profissionais;
 	}
 	
+	public List<Relatorio> getRelatorioProfissionalEquipe() {
+		relatorioProfissionalEquipe = this.service.profissionaisPorEquipe();
+		return relatorioProfissionalEquipe;
+	}
+
+	public void setRelatorioProfissionalEquipe(List<Relatorio> relatorioProfissionalEquipe) {
+		this.relatorioProfissionalEquipe = relatorioProfissionalEquipe;
+	}
+
+	public List<Relatorio> getRelatorioContratacaoEquipe() {
+		relatorioContratacaoEquipe = this.service.contratacaoPorEquipe();
+		return relatorioContratacaoEquipe;
+	}
+
+	public void setRelatorioContratacaoEquipe(List<Relatorio> relatorioContratacaoEquipe) {
+		this.relatorioContratacaoEquipe = relatorioContratacaoEquipe;
+	}
+	
 	
 	//Graficos
-	
+
 	public String getEquipe() {
 		return equipe;
 	}
@@ -106,7 +127,7 @@ public class RelatorioManager {
 	 
 	    ChartSeries grafico = new ChartSeries();
 	    grafico.setLabel("Equipe");
-	    for (Relatorio relatorio : getRelatorios()) {
+	    for (Relatorio relatorio : getRelatorioProfissionalEquipe()) {
 	    	grafico.set(relatorio.getNome01(), relatorio.getQuantidade01());
 	    	quantidadeTotal = (int)(quantidadeTotal + relatorio.getQuantidade01());
 		}	
@@ -148,11 +169,13 @@ public class RelatorioManager {
 	    clt.setLabel("CLT");
 	    estagio.setLabel("Estágio");
 	    
-	    for (Relatorio relatorio : getRelatorios()) {
+	    for (Relatorio relatorio : getRelatorioContratacaoEquipe()) {
 	    	System.out.println("########### Nome01: " + relatorio.getNome01());
 	    	System.out.println("########### Quantidade01: " + relatorio.getQuantidade01());
-	    	System.out.println("########### Nome02: " + relatorio.getNome02());
 	    	System.out.println("########### Quantidade02: " + relatorio.getQuantidade02());
+	    	System.out.println("##########");
+	    	
+	    	System.out.println("########### Nome02: " + relatorio.getNome02());	    	
 	    	System.out.println("########### Nome03: " + relatorio.getNome03());
 	    	System.out.println("########### Quantidade3: " + relatorio.getQuantidade03());
 	    	clt.set(relatorio.getNome01(), relatorio.getQuantidade01());
