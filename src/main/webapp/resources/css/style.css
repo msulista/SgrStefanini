@@ -363,20 +363,20 @@ input[type=text] {
     width: 86%;
 }
 
-.rodape-descricao p,
-.rodape-descricao h2{
+.rodape p,
+.rodape h2{
 	display:inline;
 }
 
-.rodape-descricao p{
+.rodape p{
 	font-size:12px;
 }
 
-.rodape-descricao h2{
+.rodape h2{
     margin-left: 100px;
 }
 
-.rodape .ui-button-icon-only{
+.rodape .btn-return{
 	display: inline;
     float: right;
     bottom: 20px;
