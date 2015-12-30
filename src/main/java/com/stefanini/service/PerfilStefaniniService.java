@@ -16,7 +16,7 @@ public class PerfilStefaniniService {
 	public boolean save(PerfilStefanini perfilStefanini) {
 		EntityManager manager = JPAUtil.getEntityManager();
 
-		if (DateUtil.verificaDiaUtil(perfilStefanini.getRegistroValidadeInicio())) {
+		if (DateUtil.verificaDiaUtil(perfilStefanini.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(perfilStefanini.getRegistroValidadeFim())) {
 			manager.getTransaction().begin();
 			manager.persist(perfilStefanini);
 			manager.getTransaction().commit();
@@ -32,15 +32,22 @@ public class PerfilStefaniniService {
 	public boolean update(PerfilStefanini perfilStefanini) {
 		EntityManager manager = JPAUtil.getEntityManager();
 
-		if (DateUtil.verificaDiaUtil(perfilStefanini.getRegistroValidadeInicio())) {
+		if (DateUtil.verificaDiaUtil(perfilStefanini.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(perfilStefanini.getRegistroValidadeFim())) {
+			
 			PerfilStefanini perfilStefaniniAntigo = getPerfilStefaniniById(perfilStefanini.getId());
-				if(DateUtil.verificaDataValida(perfilStefanini.getRegistroValidadeInicio(), perfilStefanini.getRegistroValidadeFim())||perfilStefanini.getRegistroValidadeFim()==null){
+			
+				if(DateUtil.verificaDataValida(perfilStefanini.getRegistroValidadeInicio(), perfilStefanini.getRegistroValidadeFim())){
 				manager.getTransaction().begin();
 			
-				perfilStefaniniAntigo.setRegistroValidadeFim(new Date());
-				manager.merge(perfilStefaniniAntigo);
-				manager.getTransaction().commit();
-				manager.close();
+				if(perfilStefaniniAntigo.getRegistroValidadeInicio().compareTo(perfilStefanini.getRegistroValidadeInicio())==0){
+					perfilStefaniniAntigo.setRegistroValidadeFim(new Date());
+					manager.merge(perfilStefaniniAntigo);
+	
+				}else{
+					perfilStefaniniAntigo.setRegistroValidadeFim(DateUtil.retornaDataFimAntesDoNovoInicio(perfilStefanini.getRegistroValidadeInicio()));
+					manager.merge(perfilStefaniniAntigo);
+									
+				}
 
 				PerfilStefanini perfilStefaniniNova = new PerfilStefanini();
 				perfilStefaniniNova.setNome(perfilStefanini.getNome());
@@ -48,13 +55,18 @@ public class PerfilStefaniniService {
 				perfilStefaniniNova.setValorFinal(perfilStefanini.getValorFinal());
 				perfilStefaniniNova.setRegistroValidadeInicio(perfilStefanini.getRegistroValidadeInicio());
 				perfilStefaniniNova.setRegistroValidadeFim(perfilStefanini.getRegistroValidadeFim());
-				save(perfilStefaniniNova);
+				manager.persist(perfilStefaniniNova);
+				
+				manager.getTransaction().commit();
+				manager.close();
 				return true;
+				
 				}else{
 					Mensagem.add("Erro, data final menor que a inicial!");
 					manager.close();
 					return false;
 				}
+				
 		} else {
 			Mensagem.add("Data informada não é um dia util!");
 			manager.close();

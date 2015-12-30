@@ -16,7 +16,7 @@ import com.stefanini.service.ProfissionalService;
 @ViewScoped
 @URLMappings(mappings = { @URLMapping(id = "profissional", pattern = "/profissional", viewId = "/pages/profissional/profissional-listar.xhtml"),
 		@URLMapping(id = "profissional-incluir", pattern = "/incluir", viewId = "/pages/profissional/profissional-incluir.xhtml", parentId = "profissional"),
-		@URLMapping(id = "profissional-editar", pattern = "/#{profissionalManager.profissional.id}/editar", viewId = "/pages/profissional/profissional-editar.xhtml", parentId = "profissional") })
+		@URLMapping(id = "profissional-editar", pattern = "/#{profissionalManager.profissional.matricula}/editar", viewId = "/pages/profissional/profissional-editar.xhtml", parentId = "profissional") })
 public class ProfissionalManager {
 
 	private Profissional profissional = new Profissional();
@@ -104,7 +104,7 @@ public class ProfissionalManager {
 
 	@URLActions(actions = { @URLAction(mappingId = "profissional-editar", onPostback = false) })
 	public void load() throws IOException {
-		profissional = service.getProfissionalById(profissional.getId());
+		profissional = service.getProfissionalParaEdicao(profissional.getMatricula());
 	}
 	
 	

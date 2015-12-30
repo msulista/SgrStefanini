@@ -34,6 +34,8 @@ import com.stefanini.util.DateUtil;
 	@NamedQuery(name = "Profissional.findProfissionalByFormaContratacao", query ="SELECT p FROM Profissional p WHERE p.formaContratacao.id = :id AND (p.registroValidadeInicio <= CURRENT_DATE) AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),	
 	@NamedQuery(name = "Profissional.findProfissionalByPerfil", query = "SELECT p FROM Profissional p WHERE p.perfil.id = :id AND  (p.registroValidadeInicio <= CURRENT_DATE) AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),	
 	@NamedQuery(name = "Profissional.findProfissionalByStatus", query ="SELECT p FROM Profissional p WHERE p.status.id = :id AND (p.registroValidadeInicio <= CURRENT_DATE) AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),	
+	@NamedQuery(name = "Profissional.checkMatriculaParaEdicao", query ="SELECT p FROM Profissional p WHERE p.id = (SELECT MAX(pr.id)FROM Profissional pr WHERE pr.matricula = :matricula)")
+
 })
 public class Profissional implements BaseEntity, Serializable {
 	private static final long serialVersionUID = 1L;

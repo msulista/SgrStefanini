@@ -19,9 +19,9 @@ import com.stefanini.util.DateUtil;
 @Table(name = "SGR_PERFIL_STEFANINI")
 @NamedQueries({
 	@NamedQuery(name = "PerfilStefanini.findAll", query = "SELECT p FROM PerfilStefanini p ORDER BY p.nome ASC"),
-	@NamedQuery(name = "PerfilStefanini.findAtivos", query = "SELECT p FROM PerfilStefanini p WHERE p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE ORDER BY p.nome ASC"),
-	@NamedQuery(name = "PerfilStefanini.findNome", query = "SELECT p FROM PerfilStefanini p WHERE p.nome = :nome"),
-	@NamedQuery(name = "PerfilStefanini.findId", query = "SELECT p FROM PerfilStefanini p WHERE p.id = :id")
+	@NamedQuery(name = "PerfilStefanini.findAtivos", query = "SELECT p FROM PerfilStefanini p WHERE p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE AND p.registroValidadeInicio <= CURRENT_DATE ORDER BY p.nome ASC"),
+	@NamedQuery(name = "PerfilStefanini.findNome", query = "SELECT p FROM PerfilStefanini p WHERE p.nome = :nome AND p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE AND p.registroValidadeInicio <= CURRENT_DATE ORDER BY p.nome ASC"),
+	@NamedQuery(name = "PerfilStefanini.findId", query = "SELECT p FROM PerfilStefanini p WHERE p.id = :id AND p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE AND p.registroValidadeInicio <= CURRENT_DATE ORDER BY p.nome ASC")
 })
 public class PerfilStefanini implements Serializable{
 

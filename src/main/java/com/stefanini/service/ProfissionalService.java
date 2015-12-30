@@ -179,6 +179,15 @@ public class ProfissionalService {
 		return profissional;
 	}
 
+	public Profissional getProfissionalParaEdicao(int matricula) {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Profissional.checkMatriculaParaEdicao");
+		q.setParameter("matricula", matricula);
+		Profissional profissional = (Profissional) q.getSingleResult();
+		manager.close();
+		return profissional;
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<Profissional> buscaPorNome(String nome) {
 		EntityManager manager = JPAUtil.getEntityManager();
