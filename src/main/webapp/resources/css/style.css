@@ -249,8 +249,6 @@ html, body {
 }
 
 .ui-breadcrumb {
-	position: absolute;
-	top: 171px;
 	background: #fff;
 	border: none;
 	padding: 5px 0px 7px;
@@ -286,22 +284,24 @@ html, body {
 
 /* CONTENT */
 .ct-content {
-	padding: 50px 0px 0px 0px;
+	padding: 15px 0px 0px 0px;
 	float: left;
 }
 
+.ct-content .incluir-editar{
+	position: absolute;
+	top: 50px;
+	left: 0;
+}
 .ct-content * {
 	font-size: 12px;
 }
 
 .ct-content h2 {
 	font-size: 20px;
-	margin-bottom: 20px;
 }
 
 .container {
-	margin: auto;
-	width: 85%;
 }
 
 /* FORM */
@@ -418,7 +418,7 @@ input[type=text] {
 	border: 3px solid #0f4d40;
 	height: 140px;
 	width: 300px;
-	position: relative;
+	position: absolute;
 }
 
 #relatorio {
@@ -427,7 +427,8 @@ input[type=text] {
 }
 
 #profissionais {
-	left: 100px;
+	top: 70px;
+	left: 80px;
 	float: left;
 }
 
@@ -524,7 +525,6 @@ input[type=text] {
 }
  
 .sub-menu {
-
     padding:5px 0px;
     position:absolute;
     top:100%;
