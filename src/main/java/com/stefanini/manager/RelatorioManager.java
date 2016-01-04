@@ -31,9 +31,11 @@ public class RelatorioManager {
 	private RelatorioService service = new RelatorioService();
 	private BarChartModel profissionalPorEquipe;
 	private BarChartModel contratacaoPorEquipe;
+	private BarChartModel valorPorEquipe;
 	
 	private List<Relatorio> relatorioProfissionalEquipe = new ArrayList<>();
 	private List<Relatorio> relatorioContratacaoEquipe = new ArrayList<>();
+	private List<Relatorio> relatorioValorEquipe = new ArrayList<>();
 	private List<Profissional> profissionais = new ArrayList<>();
 	
 	private String equipe = "";
@@ -72,8 +74,16 @@ public class RelatorioManager {
 	public void setContratacaoPorEquipe(BarChartModel contratacaoPorEquipe) {
 		this.contratacaoPorEquipe = contratacaoPorEquipe;
 	}
+		
+	public BarChartModel getValorPorEquipe() {
+		return valorPorEquipe;
+	}
 
-//	public List<Relatorio> getRelatorios() {
+	public void setValorPorEquipe(BarChartModel valorPorEquipe) {
+		this.valorPorEquipe = valorPorEquipe;
+	}
+
+	//	public List<Relatorio> getRelatorios() {
 //		relatorioProfissionalEquipe = this.service.profissionaisPorEquipe();
 //		return relatorioProfissionalEquipe;
 //	}
@@ -105,8 +115,25 @@ public class RelatorioManager {
 		this.relatorioContratacaoEquipe = relatorioContratacaoEquipe;
 	}
 	
+	public List<Relatorio> getRelatorioValorEquipe() {
+		/*
+		 * ################################################
+		 * ################################################
+		 * criar no service.
+		 * ################################################
+		 * ################################################
+		 * relatorioValorEquipe = this.service.valorEquipe();*/
+		return relatorioValorEquipe;
+	}
+
+	public void setRelatorioValorEquipe(List<Relatorio> relatorioValorEquipe) {
+		this.relatorioValorEquipe = relatorioValorEquipe;
+	}
+	
 	
 	//Graficos
+
+
 
 	public String getEquipe() {
 		return equipe;
@@ -210,6 +237,46 @@ public class RelatorioManager {
 	
 	public void itemSelectCltXestagioPorEquipe(ItemSelectEvent event){
 		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorioProfissionalEquipe.get(event.getItemIndex()).getNome01());
+		equipe = profissionais.get(0).getEquipe().getNome();
+		
+	}
+	
+	// Valor por Equipe
+	
+	private BarChartModel initValorPorEquipe() {
+	    BarChartModel model = new BarChartModel();
+	 
+	    ChartSeries grafico = new ChartSeries();
+	    grafico.setLabel("Equipe");
+	    for (Relatorio relatorio : getRelatorioValorEquipe()) {
+	    	grafico.set(relatorio.getNome01(), relatorio.getQuantidade01());
+	    	quantidadeTotal = (int)(quantidadeTotal + relatorio.getQuantidade01());
+		}	
+	    grafico.set("Total Resultados", quantidadeTotal);
+	    model.addSeries(grafico);	         
+	    return model;
+	}
+	
+	private void createValorPorEquipe() {
+		valorPorEquipe = initCltXestagioPorEquipe();
+		
+		valorPorEquipe.setTitle("Selecione a coluna da forma de contratação desejada");
+		valorPorEquipe.setAnimate(true);
+		valorPorEquipe.setLegendPosition("ne");
+	       
+	    Axis xAxis = valorPorEquipe.getAxis(AxisType.X);
+	    xAxis.setLabel("Equipes");
+	         
+	    Axis yAxis = valorPorEquipe.getAxis(AxisType.Y);
+	    yAxis.setLabel("Valor R$");
+	    yAxis.setMin(0);
+	   
+	    yAxis.setTickCount(quantidadeTotal + 4);
+	    yAxis.setMax(quantidadeTotal + 3);
+	}
+	
+	public void itemSelectValorPorEquipe(ItemSelectEvent event){
+		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorioValorEquipe.get(event.getItemIndex()).getNome01());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
