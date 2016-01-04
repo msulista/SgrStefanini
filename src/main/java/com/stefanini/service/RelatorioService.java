@@ -25,11 +25,13 @@ public class RelatorioService {
 	@SuppressWarnings("unchecked")
 	public List<Relatorio> contratacaoPorEquipe(){
 		EntityManager manager = JPAUtil.getEntityManager();
-		String contratacaoPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome,(SELECT COUNT(p) FROM Profissional p WHERE p.formaContratacao.nome = :clt), (SELECT COUNT(p) FROM Profissional p WHERE p.formaContratacao.nome = :estagio)) FROM Profissional p "
+		String contratacaoPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome, COUNT(p), COUNT(pp))"
+				+ "FROM Profissional p, Profissonal pp "
 				+ "WHERE "
-			//	+ " p.formaContratacao = :clt AND p.formaContratacao = :estagio "
+				+ "p.formaContratacao.nome = :clt AND pp.formaContratacao.nome = :estagio AND "
 				+ "p.registroValidadeInicio <= CURRENT_DATE AND p.registroValidaeFim IS NULL OR p.registroValidaeFim > CURRENT_DATE "
 				+ "GROUP BY p.equipe.nome";
+
 		Query q = manager.createQuery(contratacaoPorEquipe);
 		q.setParameter("clt", "CLT");
 		q.setParameter("estagio", "Estágio");
@@ -37,7 +39,7 @@ public class RelatorioService {
 		manager.close();
 		return relatorioContratacaoPorEquipe;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Profissional> listaDeProfissionaisPorEquipe(String nome){
 		EntityManager manager = JPAUtil.getEntityManager();

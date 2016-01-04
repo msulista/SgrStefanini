@@ -100,7 +100,7 @@ public class RelatorioManager {
 		relatorioContratacaoEquipe = this.service.contratacaoPorEquipe();
 		return relatorioContratacaoEquipe;
 	}
-
+	
 	public void setRelatorioContratacaoEquipe(List<Relatorio> relatorioContratacaoEquipe) {
 		this.relatorioContratacaoEquipe = relatorioContratacaoEquipe;
 	}
