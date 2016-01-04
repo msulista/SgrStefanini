@@ -292,7 +292,7 @@ html, body {
 }
 
 .ct-content .incluir-editar{
-	width: 35%;
+	width: 37%;
 }
 .ct-content * {
 	font-size: 12px;
@@ -366,6 +366,7 @@ input[type=text] {
 .rodape p,
 .rodape h2{
 	display:inline;
+	margin-left: 30%;
 }
 
 .rodape p{
