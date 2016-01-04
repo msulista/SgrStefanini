@@ -217,5 +217,5 @@ public class ProfissionalService {
 		manager.getTransaction().commit();
 		manager.close();
 	}	
-
+	
 }

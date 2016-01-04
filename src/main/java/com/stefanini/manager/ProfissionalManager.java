@@ -23,6 +23,7 @@ public class ProfissionalManager {
 	private ProfissionalService service = new ProfissionalService();
 	private List<Profissional> lista;
 	private String nome;
+	private boolean temDataStatus = false;
 
 	public ProfissionalManager() {
 		populaLista();
@@ -61,6 +62,14 @@ public class ProfissionalManager {
 		this.nome = nome;
 	}
 
+	public boolean isTemDataStatus() {
+		return temDataStatus;
+	}
+
+	public void setTemDataStatus(boolean temDataStatus) {
+		this.temDataStatus = temDataStatus;
+	}
+	
 	public String save() {
 		if(service.save(profissional)){
 			return "pretty:profissional";
@@ -100,6 +109,17 @@ public class ProfissionalManager {
 	public String desativar(Long id) {
 		service.desativar(id);
 		return "pretty:profissional";
+	}
+	
+	public void mudaStatus(){
+		
+		
+		if(this.profissional.getStatus().getNome().equals("Afastado")||this.profissional.getStatus().getNome().equals("Licença")){
+			this.temDataStatus = false;
+		}else{
+			this.temDataStatus = true;
+		}
+		
 	}
 
 	@URLActions(actions = { @URLAction(mappingId = "profissional-editar", onPostback = false) })
