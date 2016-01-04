@@ -25,7 +25,7 @@ public class RelatorioService {
 	@SuppressWarnings("unchecked")
 	public List<Relatorio> contratacaoPorEquipe(){
 		EntityManager manager = JPAUtil.getEntityManager();
-		String contratacaoPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome,(SELECT COUNT(pp.formaContratacao.nome) FROM Profissional pp WHERE pp.formaContratacao.nome = :clt), (SELECT COUNT(p.formaContratacao.nome) FROM Profissional p WHERE p.formaContratacao.nome = :estagio)) FROM Profissional p "
+		String contratacaoPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome,(SELECT COUNT(p) FROM Profissional p WHERE p.formaContratacao.nome = :clt), (SELECT COUNT(p) FROM Profissional p WHERE p.formaContratacao.nome = :estagio)) FROM Profissional p "
 				+ "WHERE "
 			//	+ " p.formaContratacao = :clt AND p.formaContratacao = :estagio "
 				+ "p.registroValidadeInicio <= CURRENT_DATE AND p.registroValidaeFim IS NULL OR p.registroValidaeFim > CURRENT_DATE "
