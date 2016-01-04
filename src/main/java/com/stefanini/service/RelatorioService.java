@@ -30,10 +30,10 @@ public class RelatorioService {
 				+ "WHERE "
 				+ "p.formaContratacao.nome = :clt AND "
 				+ "p.registroValidadeInicio <= CURRENT_DATE AND p.registroValidaeFim IS NULL OR p.registroValidaeFim > CURRENT_DATE AND "
+
 				+ "pp.formaContratacao.nome = :estagio AND "
 				+ "pp.registroValidadeInicio <= CURRENT_DATE AND pp.registroValidaeFim IS NULL OR pp.registroValidaeFim > CURRENT_DATE "
-				+ "GROUP BY p.equipe.nome,pp.equipe.nome "
-				+ "ORDER BY p.equipe.nome";
+				+ "GROUP BY p.equipe.nome";
 
 		Query q = manager.createQuery(contratacaoPorEquipe);
 		q.setParameter("clt", "CLT");
