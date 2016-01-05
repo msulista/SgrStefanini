@@ -234,10 +234,10 @@ html, body {
 }
 
 .img-sistema{
-	width: 17%;
+	width: 10%;
 	float: left;
 	margin-left: 50px;
-	margin-top: 15px;
+	margin-top: 25px;
 }
 
 .date-time-icon {
@@ -428,10 +428,10 @@ input[type=text] {
 .painel:hover {
 	background-color: #0F4D40;
 }
+
 .painel:hover .text-painel{
 	color: #fff;
 }
-
 
 #relatorio {
 	left: 140px;
