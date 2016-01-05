@@ -1,5 +1,6 @@
 package com.stefanini.manager;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,8 @@ import com.stefanini.service.RelatorioService;
 @ViewScoped
 @URLMappings(mappings = {
 		@URLMapping(id = "relatorioProfissional", pattern = "/profissional-por-equipe", viewId = "/pages/relatorio/relatorio-profissional-equipe.xhtml"),
-		@URLMapping(id = "relatorioContratacao", pattern = "/contratacao-por-equipe", viewId = "/pages/relatorio/relatorio-contratacao-equipe.xhtml")
+		@URLMapping(id = "relatorioContratacao", pattern = "/contratacao-por-equipe", viewId = "/pages/relatorio/relatorio-contratacao-equipe.xhtml"),
+		@URLMapping(id = "relatorioValorEquipe", pattern = "/valor-por-equipe", viewId = "/pages/relatorio/relatorio-valor-equipe.xhtml")
 })
 public class RelatorioManager {
 	
@@ -40,6 +42,7 @@ public class RelatorioManager {
 	
 	private String equipe = "";
 	private int quantidadeTotal = 0;
+	private double valorTotal = 0;
 
 	public RelatorioManager() {
 		
@@ -116,13 +119,7 @@ public class RelatorioManager {
 	}
 	
 	public List<Relatorio> getRelatorioValorEquipe() {
-		/*
-		 * ################################################
-		 * ################################################
-		 * criar no service.
-		 * ################################################
-		 * ################################################
-		 * relatorioValorEquipe = this.service.valorEquipe();*/
+		relatorioValorEquipe = this.service.valorPorEquipe();
 		return relatorioValorEquipe;
 	}
 
@@ -146,6 +143,7 @@ public class RelatorioManager {
 	public void criaGrafico(){
 	   	createProfissionalPorEquipe();
 	   	createCltXestagioPorEquipe();
+	   	createValorPorEquipe();
 	}
 	
 	//Profissional por Equipe
@@ -245,22 +243,23 @@ public class RelatorioManager {
 	
 	private BarChartModel initValorPorEquipe() {
 	    BarChartModel model = new BarChartModel();
-	 
+	    model.setExtender("decimalConverter");
 	    ChartSeries grafico = new ChartSeries();
 	    grafico.setLabel("Equipe");
 	    for (Relatorio relatorio : getRelatorioValorEquipe()) {
-	    	grafico.set(relatorio.getNome01(), relatorio.getQuantidade01());
-	    	quantidadeTotal = (int)(quantidadeTotal + relatorio.getQuantidade01());
+	    	grafico.set(relatorio.getNome01(), relatorio.getValorMedio().doubleValue());
+	    	valorTotal = (double)(valorTotal + relatorio.getValorMedio().doubleValue());
 		}	
-	    grafico.set("Total Resultados", quantidadeTotal);
-	    model.addSeries(grafico);	         
+	    grafico.set("Valor Médio Total", valorTotal / getRelatorioValorEquipe().size());
+	    model.addSeries(grafico);	
+	    
 	    return model;
 	}
 	
 	private void createValorPorEquipe() {
-		valorPorEquipe = initCltXestagioPorEquipe();
+		valorPorEquipe = initValorPorEquipe();
 		
-		valorPorEquipe.setTitle("Selecione a coluna da forma de contratação desejada");
+		valorPorEquipe.setTitle("Selecione a coluna para listar os profissionais");
 		valorPorEquipe.setAnimate(true);
 		valorPorEquipe.setLegendPosition("ne");
 	       
@@ -271,8 +270,8 @@ public class RelatorioManager {
 	    yAxis.setLabel("Valor R$");
 	    yAxis.setMin(0);
 	   
-	    yAxis.setTickCount(quantidadeTotal + 4);
-	    yAxis.setMax(quantidadeTotal + 3);
+	    yAxis.setTickCount(11);
+	    yAxis.setMax(100);
 	}
 	
 	public void itemSelectValorPorEquipe(ItemSelectEvent event){
@@ -280,4 +279,6 @@ public class RelatorioManager {
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
+	
+	
 }

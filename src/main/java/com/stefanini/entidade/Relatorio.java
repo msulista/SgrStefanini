@@ -16,6 +16,8 @@ public class Relatorio {
 	
 	private Long quantidade03;
 	private String nome03;
+	
+	private Double valorMedio;
 		
 	public Relatorio() {
 	}
@@ -31,6 +33,12 @@ public class Relatorio {
 		this.quantidade01 = quantidade01;
 		this.nome01 = nome01;
 		this.quantidade02 = quantidade02;
+	}
+	
+	//Relatorio Valor Médio Por Equipe
+	public Relatorio(String nome01, Double valorMedio){
+		this.nome01 = nome01;
+		this.valorMedio = valorMedio;
 	}
 
 	public Relatorio(Long quantidade01, String nome01, Long quantidade02, String nome02) {
@@ -95,6 +103,14 @@ public class Relatorio {
 	public void setNome03(String nome03) {
 		this.nome03 = nome03;
 	}
+	
+	public Double getValorMedio() {
+		return valorMedio;
+	}
+
+	public void setValorMedio(Double valorMedio) {
+		this.valorMedio = valorMedio;
+	}
 
 	@Override
 	public int hashCode() {
@@ -106,6 +122,7 @@ public class Relatorio {
 		result = prime * result + ((quantidade01 == null) ? 0 : quantidade01.hashCode());
 		result = prime * result + ((quantidade02 == null) ? 0 : quantidade02.hashCode());
 		result = prime * result + ((quantidade03 == null) ? 0 : quantidade03.hashCode());
+		result = prime * result + ((valorMedio == null) ? 0 : valorMedio.hashCode());
 		return result;
 	}
 
@@ -148,13 +165,13 @@ public class Relatorio {
 				return false;
 		} else if (!quantidade03.equals(other.quantidade03))
 			return false;
+		if (valorMedio == null) {
+			if (other.valorMedio != null)
+				return false;
+		} else if (!valorMedio.equals(other.valorMedio))
+			return false;
 		return true;
 	}
-	
-	
-	
 
-	
-	
 	
 }

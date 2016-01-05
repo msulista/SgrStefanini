@@ -12,8 +12,8 @@ function mensagem(){
 	alert("oi");
 }
 
-function teste(obj){
-	alert('obj.value');
+function teste(){
+	alert('oioioioi');
 }
 
 function limpaDoubleVazio(obj){
@@ -46,4 +46,10 @@ function mostraData(obj){
 	}else{
 		$("#dataAfastado").show();
 	}
+}
+
+function decimalConverter() {
+	this.cfg.axes.yaxis.tickOptions = {
+            formatString : '%#.2f'           	
+        };	
 }
