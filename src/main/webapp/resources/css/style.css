@@ -409,6 +409,8 @@ input[type=text] {
 
 .ui-widget .ui-widget {
 	margin-top: 2px;
+	overflow: hidden;
+    text-overflow: ellipsis; 
 }
 
 .ui-selectcheckboxmenu .ui-selectcheckboxmenu-label {
@@ -464,7 +466,7 @@ input[type=text] {
 }
 
 .pesquisa {
-	margin-bottom: 15px;
+	margin: 10px 0 15px 0;
 }
 
 .conteudo {
