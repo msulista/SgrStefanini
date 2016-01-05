@@ -4,29 +4,31 @@
     xmlns:pretty="http://ocpsoft.com/prettyfaces">
 
     <ui:define name="content">
-    	<p:breadCrumb>
-		    <p:menuitem value="#{message['pao.home']}" url="#" />
-		    <p:menuitem value="#{message['pao.status']}" outcome="pretty:status"/>
-		    <p:menuitem value="#{message['pao.status.incluir']}" outcome="pretty:status-incluir" disabled="true"/>
-		</p:breadCrumb>
-    	<h2>#{message['title.status']}</h2>
-        <h:form>
-        	<p:growl id="growl" life="4000" />
-			<p:panel id="panel" header="#{message['title.status.cadastro']}">	
-				<p:focus context="panel"/>		
-				<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" />
-				<p:inputText id="nome" value="#{statusManager.status.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
-				<br /><br />
-				<p:outputLabel for="button" value="#{message['label.data.inicio']}" styleClass="label" />
-				<p:calendar id="button" value="#{statusManager.status.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
-				<br /><br />
-				<p:outputLabel for="buttonFim" value="#{message['label.data.final']}" styleClass="label" />
-				<p:calendar id="buttonFim" value="#{statusManager.status.registroValidadeFim}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>
-				<br /><br />
-				<p:commandButton value="#{message['button.salvar']}" action="#{statusManager.save()}" update="growl" styleClass="btn"/>				
-				<p:button  value="#{message['button.cancelar']}" outcome="pretty:status" styleClass="btn"/>				
-			</p:panel>
-		</h:form>
+    	<div class="incluir-editar">
+	    	<p:breadCrumb>
+			    <p:menuitem value="#{message['pao.home']}" url="#" />
+			    <p:menuitem value="#{message['pao.status']}" outcome="pretty:status"/>
+			    <p:menuitem value="#{message['pao.status.incluir']}" outcome="pretty:status-incluir" disabled="true"/>
+			</p:breadCrumb>
+	    	<h2>#{message['title.status']}</h2>
+	        <h:form>
+	        	<p:growl id="growl" life="4000" />
+				<p:panel id="panel" header="#{message['title.status.cadastro']}">	
+					<p:focus context="panel"/>		
+					<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" />
+					<p:inputText id="nome" value="#{statusManager.status.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
+					<br /><br />
+					<p:outputLabel for="button" value="#{message['label.data.inicio']}" styleClass="label" />
+					<p:calendar id="button" value="#{statusManager.status.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
+					<br /><br />
+					<p:outputLabel for="buttonFim" value="#{message['label.data.final']}" styleClass="label" />
+					<p:calendar id="buttonFim" value="#{statusManager.status.registroValidadeFim}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>
+					<br /><br />
+					<p:commandButton value="#{message['button.salvar']}" action="#{statusManager.save()}" update="growl" styleClass="btn"/>				
+					<p:button  value="#{message['button.cancelar']}" outcome="pretty:status" styleClass="btn"/>				
+				</p:panel>
+			</h:form>
+		</div>
     </ui:define>
 
 </ui:composition>

@@ -3,17 +3,16 @@
     template="/pages/template/default.xhtml">
 
     <ui:define name="content">
-    
-   	   <div id="profissionais" class="painel">
-        	<h:link outcome="pretty:profissional">
+    	<h:link outcome="pretty:profissional">
+   	   		<div id="profissionais" class="painel">        	
         		<div class="img-painel">
         			<h:graphicImage styleClass="img-relatorio" value="/resources/img/profissional.png" />
         		</div>
         		<div class="text-painel">
         			Profissionais
-        		</div>
-       		</h:link>
-        </div>    	
+        		</div>       		
+        	</div> 
+        </h:link>   	
     </ui:define>
 
 </ui:composition>

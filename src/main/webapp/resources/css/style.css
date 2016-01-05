@@ -92,19 +92,12 @@ html, body {
 	margin-top: 10px;
 }
 
-.nome-sistema h1 {
-	position: absolute;
-	left: 25%;
-	top: 35px;
-	font-size: 60px;
-	color: #0052A4;
-}
 
 .calendario-data {
 	float: left;
 	width: 160px;
 	margin-top: 45px;
-	margin-left: 270px;
+	margin-left: 50px;
 }
 
 .calendario-data span, .relogio-hora span {
@@ -236,11 +229,15 @@ html, body {
 }
 
 .img-logo {
-	width: 208px;
-	height: 47px;
-	background-image: url("../img/logo.jpg");
 	float: left;
 	margin-top: 30px;
+}
+
+.img-sistema{
+	width: 17%;
+	float: left;
+	margin-left: 50px;
+	margin-top: 15px;
 }
 
 .date-time-icon {
@@ -428,6 +425,14 @@ input[type=text] {
 	width: 300px;
 }
 
+.painel:hover {
+	background-color: #0F4D40;
+}
+.painel:hover .text-painel{
+	color: #fff;
+}
+
+
 #relatorio {
 	left: 140px;
 	float: right;
@@ -445,16 +450,9 @@ input[type=text] {
 	right: 50px;
 	float: right;
 	top: 50px;
+    color: #333;
 }
 
-.painel a {
-	color: #333;
-}
-
-.text-painel:hover {
-	text-decoration: underline;
-	font-weight: 600;
-}
 
 .img-painel {
 	left: 30px;
@@ -466,7 +464,7 @@ input[type=text] {
 }
 
 .pesquisa {
-	margin: 10px 0 15px 0;
+	margin: 10px 0 0 0;
 }
 
 .conteudo {
@@ -562,4 +560,11 @@ input[type=text] {
 
 .dataStatus input[type="text"]{
 	width: 100px;
+}
+
+.ui-datatable table{
+	margin-top: 10px;
+}
+.ui-panel{
+	margin-top: 10px;
 }
