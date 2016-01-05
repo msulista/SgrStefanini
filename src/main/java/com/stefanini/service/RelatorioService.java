@@ -25,11 +25,16 @@ public class RelatorioService {
 	@SuppressWarnings("unchecked")
 	public List<Relatorio> contratacaoPorEquipe(){
 		EntityManager manager = JPAUtil.getEntityManager();
-		String contratacaoPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome,(SELECT COUNT(pp.formaContratacao.nome) FROM Profissional pp WHERE pp.formaContratacao.nome = :clt), (SELECT COUNT(p.formaContratacao.nome) FROM Profissional p WHERE p.formaContratacao.nome = :estagio)) FROM Profissional p "
+		String contratacaoPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome,COUNT(DISTINCT p),COUNT(DISTINCT pp))"
+				+ "FROM Profissional p, Profissional pp "
 				+ "WHERE "
-			//	+ " p.formaContratacao = :clt AND p.formaContratacao = :estagio "
-				+ "p.registroValidadeInicio <= CURRENT_DATE AND p.registroValidaeFim IS NULL OR p.registroValidaeFim > CURRENT_DATE "
+				+ "p.formaContratacao.nome = :clt AND "
+				+ "p.registroValidadeInicio <= CURRENT_DATE AND p.registroValidaeFim IS NULL OR p.registroValidaeFim > CURRENT_DATE AND "
+
+				+ "pp.formaContratacao.nome = :estagio AND "
+				+ "pp.registroValidadeInicio <= CURRENT_DATE AND pp.registroValidaeFim IS NULL OR pp.registroValidaeFim > CURRENT_DATE "
 				+ "GROUP BY p.equipe.nome";
+
 		Query q = manager.createQuery(contratacaoPorEquipe);
 		q.setParameter("clt", "CLT");
 		q.setParameter("estagio", "Estágio");
@@ -37,7 +42,7 @@ public class RelatorioService {
 		manager.close();
 		return relatorioContratacaoPorEquipe;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Profissional> listaDeProfissionaisPorEquipe(String nome){
 		EntityManager manager = JPAUtil.getEntityManager();

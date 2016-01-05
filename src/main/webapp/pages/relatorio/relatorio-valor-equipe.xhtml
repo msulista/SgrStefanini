@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/template/default.xhtml"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces">
+
+	<ui:define name="content">
+	<h:form>
+	<p:growl id="growl" life="4000" />
+		<p:breadCrumb>
+		    <p:menuitem value="Home" url="#" />
+		    <p:menuitem value="Relatorio" outcome="pretty:relatorio" disabled="true"/>
+		</p:breadCrumb>
+		<h2>#{message['title.relatorio.profissional.equipe']}</h2>
+		
+		<p:chart type="bar" model="#{relatorioManager.valorPorEquipe}" style="height:300px" responsive="true">
+			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectProfissionalPorEquipe}" process="@this" update="gridRelatorio"/>
+		</p:chart>
+	</h:form>
+		<br /><br />
+		
+		<p:dataTable id="gridRelatorio" var="profissional" value="#{relatorioManager.profissionais}" emptyMessage="#{message['alerta.listaVazia']}" >
+			
+			<f:facet name="header">
+				#{message['rel.lista.profissionais']} 
+				<h:outputText value="#{relatorioManager.equipe}" />
+			</f:facet>
+										
+			<p:column headerText="#{message['label.profissional.matricula']} " sortBy="#{profissional.matricula}">
+				<h:outputText value="#{profissional.matricula}"/>
+			</p:column>
+				
+			<p:column headerText="#{message['label.nome']} " sortBy="#{profissional.nome}">
+				<h:outputText value="#{profissional.nome}"/>
+			</p:column>
+							
+			<p:column headerText="#{message['label.profissional.celula']}" sortBy="#{profissional.celula.nome}">	
+				<h:outputText value="#{profissional.celula.nome}"/>			
+			</p:column>	 
+				 
+			<p:column headerText="#{message['label.profissional.cargo']}" sortBy="#{profissional.cargo.nome}">
+				<h:outputText value="#{profissional.cargo.nome}"/>			
+			</p:column>
+				
+			<p:column headerText="#{message['label.profissional.perfil']}" sortBy="#{profissional.perfil.nome}">
+				<h:outputText value="#{profissional.perfil.nome}"/>	
+			</p:column>
+				
+			<p:column  headerText="#{message['label.cargaHoraria']}" sortBy="#{profissional.cargaHoraria.cargaHoraria}">
+				<h:outputText value="#{profissional.cargaHoraria.cargaHoraria}">
+					<f:converter converterId="cargaHorariaConverter"/>
+				</h:outputText>			
+			</p:column>
+				
+			<p:column headerText="#{message['label.profissional.contratacao']}" sortBy="#{profissional.formaContratacao.nome}">
+				<h:outputText value="#{profissional.formaContratacao.nome}"/>			
+			</p:column>
+				
+			<p:column headerText="#{message['label.profissional.status']}" sortBy="#{profissional.status.nome}">
+				<h:outputText value="#{profissional.status.nome}"/>			
+			</p:column>
+		</p:dataTable>
+		
+	</ui:define>
+
+</ui:composition>
