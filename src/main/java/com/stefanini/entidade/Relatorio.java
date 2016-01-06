@@ -1,11 +1,5 @@
 package com.stefanini.entidade;
 
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-
-@NamedQueries({
-	@NamedQuery(name = "Relatorio.profissionalPorEquipe", query = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome, COUNT(p)) FROM Profissional p GROUP BY p.equipe.nome")
-})
 public class Relatorio {
 	
 	private Long quantidade01;

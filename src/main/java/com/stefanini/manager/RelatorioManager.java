@@ -1,6 +1,5 @@
 package com.stefanini.manager;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
