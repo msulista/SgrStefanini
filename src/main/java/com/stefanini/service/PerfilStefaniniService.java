@@ -39,6 +39,7 @@ public class PerfilStefaniniService {
 				if(DateUtil.verificaDataValida(perfilStefanini.getRegistroValidadeInicio(), perfilStefanini.getRegistroValidadeFim())){
 				manager.getTransaction().begin();
 			
+				if(DateUtil.verificaDataValida(DateUtil.getDataParaComparacao(new Date()), perfilStefanini.getRegistroValidadeInicio())){
 				if(perfilStefaniniAntigo.getRegistroValidadeInicio().compareTo(perfilStefanini.getRegistroValidadeInicio())==0){
 					perfilStefaniniAntigo.setRegistroValidadeFim(new Date());
 					manager.merge(perfilStefaniniAntigo);
@@ -60,9 +61,13 @@ public class PerfilStefaniniService {
 				manager.getTransaction().commit();
 				manager.close();
 				return true;
-				
 				}else{
-					Mensagem.add("Erro, data final menor que a inicial!");
+					Mensagem.add("Erro, Nova data de registro nao pode ser anterior ao dia atual!");
+					manager.close();
+					return false;
+				}
+				}else{
+					Mensagem.add("Erro, data final anterior a inicial!");
 					manager.close();
 					return false;
 				}

@@ -1,6 +1,5 @@
 package com.stefanini.manager;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,9 @@ import com.stefanini.service.RelatorioService;
 @URLMappings(mappings = {
 		@URLMapping(id = "relatorioProfissional", pattern = "/profissional-por-equipe", viewId = "/pages/relatorio/relatorio-profissional-equipe.xhtml"),
 		@URLMapping(id = "relatorioContratacao", pattern = "/contratacao-por-equipe", viewId = "/pages/relatorio/relatorio-contratacao-equipe.xhtml"),
-		@URLMapping(id = "relatorioValorEquipe", pattern = "/valor-por-equipe", viewId = "/pages/relatorio/relatorio-valor-equipe.xhtml")
+		@URLMapping(id = "relatorioValorEquipe", pattern = "/valor-por-equipe", viewId = "/pages/relatorio/relatorio-valor-equipe.xhtml"),
+		@URLMapping(id = "relatorioPerfilEquipe", pattern = "/perfil-por-equipe", viewId = "/pages/relatorio/relatorio-perfil-equipe.xhtml")
+
 })
 public class RelatorioManager {
 	
@@ -34,10 +35,12 @@ public class RelatorioManager {
 	private BarChartModel profissionalPorEquipe;
 	private BarChartModel contratacaoPorEquipe;
 	private BarChartModel valorPorEquipe;
+	private BarChartModel perfilPorEquipe;
 	
 	private List<Relatorio> relatorioProfissionalEquipe = new ArrayList<>();
 	private List<Relatorio> relatorioContratacaoEquipe = new ArrayList<>();
 	private List<Relatorio> relatorioValorEquipe = new ArrayList<>();
+	private List<Relatorio> relatorioPerfilPorEquipe = new ArrayList<>();
 	private List<Profissional> profissionais = new ArrayList<>();
 	
 	private String equipe = "";
@@ -85,6 +88,8 @@ public class RelatorioManager {
 	public void setValorPorEquipe(BarChartModel valorPorEquipe) {
 		this.valorPorEquipe = valorPorEquipe;
 	}
+	
+
 
 	//	public List<Relatorio> getRelatorios() {
 //		relatorioProfissionalEquipe = this.service.profissionaisPorEquipe();
@@ -127,10 +132,27 @@ public class RelatorioManager {
 		this.relatorioValorEquipe = relatorioValorEquipe;
 	}
 	
-	
+	public List<Relatorio> getRelatorioPerfilPorEquipe() {
+		relatorioPerfilPorEquipe = this.service.perfilPorEquipe();
+		return relatorioPerfilPorEquipe;
+	}
+
+	public void setRelatorioPerfilPorEquipe(List<Relatorio> relatorioPerfilPorEquipe) {
+		
+		this.relatorioPerfilPorEquipe = relatorioPerfilPorEquipe;
+	}
+	public BarChartModel getPerfilPorEquipe() {
+		return perfilPorEquipe;
+	}
+
+	public void setPerfilPorEquipe(BarChartModel perfilPorEquipe) {
+		this.perfilPorEquipe = perfilPorEquipe;
+	}
 	//Graficos
 
 
+
+	
 
 	public String getEquipe() {
 		return equipe;
@@ -144,6 +166,7 @@ public class RelatorioManager {
 	   	createProfissionalPorEquipe();
 	   	createCltXestagioPorEquipe();
 	   	createValorPorEquipe();
+	   	createPerfilPorEquipe();
 	}
 	
 	//Profissional por Equipe
@@ -234,7 +257,7 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectCltXestagioPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorioProfissionalEquipe.get(event.getItemIndex()).getNome01());
+		profissionais = this.service.listaDeCLTXEstagio(relatorioContratacaoEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
@@ -280,5 +303,55 @@ public class RelatorioManager {
 		
 	}
 	
+	//Perfil por equipe
+	private BarChartModel initPerfilPorEquipe() {
+	    BarChartModel model = new BarChartModel();
+	 
+	    ChartSeries junior = new ChartSeries();
+	    ChartSeries pleno = new ChartSeries();
+	    ChartSeries senior = new ChartSeries();
+	    junior.setLabel("JUNIOR");
+	    pleno.setLabel("PLENO");
+	    senior.setLabel("SENIOR");
+	    
+	    for (Relatorio relatorio : getRelatorioPerfilPorEquipe()) {
+	    	
+	    	junior.set(relatorio.getNome01(), relatorio.getQuantidade01());
+	    	pleno.set(relatorio.getNome01(), relatorio.getQuantidade02());
+	    	senior.set(relatorio.getNome01(), relatorio.getQuantidade03());
+	    	
+	    	//quantidadeTotal = (int)(quantidadeTotal + relatorio.getQuantidade01());
+		}	
+	   // clt.set("Total Resultados", quantidadeTotal);
+	   // estagio.set("Total Resultados", quantidadeTotal);	    
+	    
+	    model.addSeries(junior);	         
+	    model.addSeries(pleno);	   
+	    model.addSeries(senior);	  
+	    return model;
+	}	     
+	private void createPerfilPorEquipe() {
+		perfilPorEquipe = initPerfilPorEquipe();
+		
+		perfilPorEquipe.setTitle("Selecione a coluna da forma de contratação desejada");
+		perfilPorEquipe.setAnimate(true);
+		perfilPorEquipe.setLegendPosition("ne");
+	       
+	    Axis xAxis = getPerfilPorEquipe().getAxis(AxisType.X);
+	    xAxis.setLabel("Equipes");
+	         
+	    Axis yAxis = profissionalPorEquipe.getAxis(AxisType.Y);
+	    yAxis.setLabel("N° Profissionais");
+	    yAxis.setMin(0);
+	   
+	    yAxis.setTickCount(quantidadeTotal + 4);
+	    yAxis.setMax(quantidadeTotal + 3);
+	}
+	
+	public void itemSelectPerfilPorEquipe(ItemSelectEvent event){
+		profissionais = this.service.listaDePerfilPorEquipe(relatorioPerfilPorEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
+		equipe = profissionais.get(0).getEquipe().getNome();
+		
+	}
 	
 }
