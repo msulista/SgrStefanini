@@ -52,6 +52,13 @@ public class Relatorio {
 		this.quantidade03 = quantidade03;
 		this.nome03 = nome03;
 	}
+	
+	public Relatorio (String nome, Long quantidade01, Long quantidade02, Long quantidade03){
+		this.nome01 = nome;
+		this.quantidade01 = quantidade01;
+		this.quantidade02 = quantidade02;
+		this.quantidade03 = quantidade03;
+	}
 
 	public Long getQuantidade01() {
 		return quantidade01;

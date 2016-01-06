@@ -55,4 +55,15 @@ public class RelatorioService {
 		manager.close();
 		return relatorioValorPorEquipe;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Relatorio> perfilPorEquipe(){
+		EntityManager manager = JPAUtil.getEntityManager();
+		String valorPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(v.nome,v.junior,v.pleno,v.senior)FROM ViewPerfilXEquipe v";
+		Query q = manager.createQuery(valorPorEquipe);
+		List<Relatorio> relatorioValorPorEquipe = (List<Relatorio>)q.getResultList();
+		manager.close();
+		return relatorioValorPorEquipe;
+		
+	}
 }
