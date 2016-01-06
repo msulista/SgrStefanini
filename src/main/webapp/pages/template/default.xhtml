@@ -18,11 +18,15 @@
 			<div class="container--topmenu">
 				<div class="cabecalho">
 					<a href="#">
+						<h:graphicImage styleClass="img-logo" value="/resources/img/sistem.jpg" /> 
+					</a>
+				
+					<!-- <a href="#">
 						<h:graphicImage styleClass="img-logo" value="/resources/img/logo.jpg" /> 
 					</a>
 					<div class="nome-sistema">
 						<h:graphicImage styleClass="img-sistema" value="/resources/img/SGR.jpg" /> 
-					</div> 
+					</div> -->
 					<div class="calendario-data">
 						<h:graphicImage value="/resources/img/calendar.png"
 							styleClass="date-time-icon" />
@@ -62,7 +66,8 @@
 									styleClass="submenu-categoria">#{message['title.perfilStefanini']}</h:link></li>
 							<li class="item-last"><h:link outcome="pretty:status"
 									styleClass="submenu-categoria">#{message['title.status']}</h:link></li>
-						</ul></li>
+						</ul>
+					</li>
 					<li>
 						<a href="#" class="menu-categoria">Relatorios<span class="arrow">&#9660;</span></a>
 						<ul class="sub-menu">
