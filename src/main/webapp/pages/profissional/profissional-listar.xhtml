@@ -73,11 +73,17 @@
 						<f:param value="#{profissional.matricula}" />
 						<p:commandButton id="editar" styleClass="btn-acao" type="button" icon="ui-icon-pencil" />
 					</pretty:link>
+					<pretty:link mappingId="profissional-historico">
+						<f:param value="#{profissional.matricula}" />
+						<p:commandButton id="historico" styleClass="btn-acao" type="button" icon="ui-icon-script" />
+					</pretty:link>
 					<p:commandButton id="desativar" styleClass="btn-acao" icon="ui-icon-closethick" action="#{profissionalManager.desativar(profissional.id)}" update="gridProfissional" >
 						<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
 					</p:commandButton>
 					<p:tooltip id="alt-editarr" for="editar" value="#{message['label.editar']}" styleClass="alt"/>
-						<p:tooltip id="alt-desativarr" for="desativar" value="#{message['label.desativar']}" styleClass="alt"/>
+					<p:tooltip id="alt-desativarr" for="desativar" value="#{message['label.desativar']}" styleClass="alt"/>
+					<p:tooltip id="alt-historicoo" for="historico" value="#{message['label.historico']}" styleClass="alt"/>
+				
 				</p:column>
 						
 			</p:dataTable>

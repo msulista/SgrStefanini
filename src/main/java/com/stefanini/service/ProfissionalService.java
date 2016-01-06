@@ -207,6 +207,16 @@ public class ProfissionalService {
 		manager.close();
 		return profissionais;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Profissional> getProfissionalHistorico(int matricula) {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Profissional.findMatriculaParaHistorico");
+		q.setParameter("matricula", matricula);
+		List<Profissional> profissionais = q.getResultList();
+		manager.close();
+		return profissionais;
+	}
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();

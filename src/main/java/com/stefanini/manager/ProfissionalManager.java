@@ -16,10 +16,13 @@ import com.stefanini.service.ProfissionalService;
 @ViewScoped
 @URLMappings(mappings = { @URLMapping(id = "profissional", pattern = "/profissional", viewId = "/pages/profissional/profissional-listar.xhtml"),
 		@URLMapping(id = "profissional-incluir", pattern = "/incluir", viewId = "/pages/profissional/profissional-incluir.xhtml", parentId = "profissional"),
-		@URLMapping(id = "profissional-editar", pattern = "/#{profissionalManager.profissional.matricula}/editar", viewId = "/pages/profissional/profissional-editar.xhtml", parentId = "profissional") })
+		@URLMapping(id = "profissional-editar", pattern = "/#{profissionalManager.profissional.matricula}/editar", viewId = "/pages/profissional/profissional-editar.xhtml", parentId = "profissional"),
+		@URLMapping(id = "profissional-historico", pattern = "/#{profissionalManager.profissional.matricula}/historico", viewId = "/pages/profissional/profissional-historico.xhtml", parentId = "profissional") })
+
 public class ProfissionalManager {
 
 	private Profissional profissional = new Profissional();
+	private List<Profissional> profissionalHistorico;
 	private ProfissionalService service = new ProfissionalService();
 	private List<Profissional> lista;
 	private String nome;
@@ -105,7 +108,9 @@ public class ProfissionalManager {
 	public List<Profissional>lista(){
 		return this.lista;
 	}
-	
+	public List<Profissional>listaHistorico(){
+		return this.profissionalHistorico;
+	}
 	public String desativar(Long id) {
 		service.desativar(id);
 		return "pretty:profissional";
@@ -127,6 +132,17 @@ public class ProfissionalManager {
 		profissional = service.getProfissionalParaEdicao(profissional.getMatricula());
 	}
 	
-	
+	@URLActions(actions = { @URLAction(mappingId = "profissional-historico", onPostback = false) })
+	public void loadHistorico() throws IOException {
+		profissionalHistorico = service.getProfissionalHistorico(profissional.getMatricula());
+	}
+
+	public List<Profissional> getProfissionalHistorico() {
+		return profissionalHistorico;
+	}
+
+	public void setProfissionalHistorico(List<Profissional> profissionalHistorico) {
+		this.profissionalHistorico = profissionalHistorico;
+	}
 	
 }

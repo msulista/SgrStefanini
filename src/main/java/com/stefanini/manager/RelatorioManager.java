@@ -89,15 +89,6 @@ public class RelatorioManager {
 		this.valorPorEquipe = valorPorEquipe;
 	}
 	
-
-
-	//	public List<Relatorio> getRelatorios() {
-//		relatorioProfissionalEquipe = this.service.profissionaisPorEquipe();
-//		return relatorioProfissionalEquipe;
-//	}
-//	public void setRelatorios(List<Relatorio> relatorios) {
-//		this.relatorioProfissionalEquipe = relatorios;
-//	}
 	public List<Profissional> getProfissionais() {
 		return profissionais;
 	}
@@ -218,21 +209,12 @@ public class RelatorioManager {
 	    estagio.setLabel("Estágio");
 	    
 	    for (Relatorio relatorio : getRelatorioContratacaoEquipe()) {
-	    	System.out.println("########### Nome01: " + relatorio.getNome01());
-	    	System.out.println("########### Quantidade01: " + relatorio.getQuantidade01());
-	    	System.out.println("########### Quantidade02: " + relatorio.getQuantidade02());
-	    	System.out.println("##########");
 	    	
-	    	System.out.println("########### Nome02: " + relatorio.getNome02());	    	
-	    	System.out.println("########### Nome03: " + relatorio.getNome03());
-	    	System.out.println("########### Quantidade3: " + relatorio.getQuantidade03());
 	    	clt.set(relatorio.getNome01(), relatorio.getQuantidade01());
 	    	estagio.set(relatorio.getNome01(), relatorio.getQuantidade02());
 	    	
-	    	//quantidadeTotal = (int)(quantidadeTotal + relatorio.getQuantidade01());
 		}	
-	   // clt.set("Total Resultados", quantidadeTotal);
-	   // estagio.set("Total Resultados", quantidadeTotal);	    
+	  
 	    
 	    model.addSeries(clt);	         
 	    model.addSeries(estagio);	         
@@ -320,10 +302,8 @@ public class RelatorioManager {
 	    	pleno.set(relatorio.getNome01(), relatorio.getQuantidade02());
 	    	senior.set(relatorio.getNome01(), relatorio.getQuantidade03());
 	    	
-	    	//quantidadeTotal = (int)(quantidadeTotal + relatorio.getQuantidade01());
 		}	
-	   // clt.set("Total Resultados", quantidadeTotal);
-	   // estagio.set("Total Resultados", quantidadeTotal);	    
+	
 	    
 	    model.addSeries(junior);	         
 	    model.addSeries(pleno);	   
