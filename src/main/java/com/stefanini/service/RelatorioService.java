@@ -47,6 +47,42 @@ public class RelatorioService {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Profissional> listaDeCLTXEstagio(String nome, int serie){
+		String serieString;
+		if(serie ==0){
+			 serieString = "CLT";
+		}else{
+			serieString = "Estágio";
+		}
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByEquipeEContratacao");
+		q.setParameter("nome", nome);
+		q.setParameter("serie", serieString);
+		List<Profissional> profissionais = q.getResultList();
+		manager.close();
+		return profissionais;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Profissional> listaDePerfilPorEquipe(String nome, int serie){
+		String serieString;
+		if(serie == 0){
+			 serieString = "Júnior";
+		}else if(serie == 1){
+			serieString = "Pleno";
+		}else{
+			serieString = "Sênior";
+		}
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByEquipeEPerfil");
+		q.setParameter("nome", nome);
+		q.setParameter("serie", serieString);
+		List<Profissional> profissionais = q.getResultList();
+		manager.close();
+		return profissionais;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Relatorio> valorPorEquipe(){
 		EntityManager manager = JPAUtil.getEntityManager();
 		String valorPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome, AVG(p.valorHora)) FROM Profissional p WHERE p.registroValidadeInicio <= CURRENT_DATE AND p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE GROUP BY p.equipe.nome";

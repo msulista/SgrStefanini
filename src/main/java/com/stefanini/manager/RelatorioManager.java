@@ -257,7 +257,7 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectCltXestagioPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorioProfissionalEquipe.get(event.getItemIndex()).getNome01());
+		profissionais = this.service.listaDeCLTXEstagio(relatorioContratacaoEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
@@ -349,7 +349,7 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectPerfilPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorioPerfilPorEquipe.get(event.getItemIndex()).getNome01());
+		profissionais = this.service.listaDePerfilPorEquipe(relatorioPerfilPorEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
