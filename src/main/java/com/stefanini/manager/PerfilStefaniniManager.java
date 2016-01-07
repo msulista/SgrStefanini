@@ -20,12 +20,14 @@ import com.stefanini.service.PerfilStefaniniService;
 @URLMappings(mappings = {
 		@URLMapping(id = "perfilStefanini", pattern = "/perfilStefanini", viewId = "/pages/perfilStefanini/perfilStefanini-listar.xhtml"),
 		@URLMapping(id = "perfilStefanini-incluir", pattern = "/incluir", viewId = "/pages/perfilStefanini/perfilStefanini-incluir.xhtml", parentId = "perfilStefanini"),
-		@URLMapping(id = "perfilStefanini-editar", pattern = "/#{perfilStefaniniManager.perfilStefanini.codigo}/editar", viewId = "/pages/perfilStefanini/perfilStefanini-editar.xhtml", parentId = "perfilStefanini") })
+		@URLMapping(id = "perfilStefanini-editar", pattern = "/#{perfilStefaniniManager.perfilStefanini.codigo}/editar", viewId = "/pages/perfilStefanini/perfilStefanini-editar.xhtml", parentId = "perfilStefanini"),
+		@URLMapping(id = "perfilStefanini-historico", pattern = "/#{perfilStefaniniManager.perfilStefanini.codigo}/historico", viewId = "/pages/perfilStefanini/perfilStefanini-historico.xhtml", parentId = "perfilStefanini") })
 
 public class PerfilStefaniniManager {
 
 	private PerfilStefanini perfilStefanini = new PerfilStefanini();
 	private PerfilStefaniniService service = new PerfilStefaniniService();
+	private List<PerfilStefanini> historico;
 	private List<PerfilStefanini> lista;
 
 	public PerfilStefaniniManager() {
@@ -60,6 +62,14 @@ public class PerfilStefaniniManager {
 	public void setService(PerfilStefaniniService service) {
 		this.service = service;
 	}
+	
+	public List<PerfilStefanini> getHistorico() {
+		return historico;
+	}
+
+	public void setHistorico(List<PerfilStefanini> historico) {
+		this.historico = historico;
+	}
 
 	public String save() {
 		if (service.save(perfilStefanini)) {
@@ -91,6 +101,9 @@ public class PerfilStefaniniManager {
 	public void load() throws IOException {
 		perfilStefanini = service.getPerfilStefaniniByCodigoParaEdicao(perfilStefanini.getCodigo());
 	}
-
+	@URLActions(actions = { @URLAction(mappingId = "perfilStefanini-historico", onPostback = false) })
+	public void loadHistorico() throws IOException {
+		historico = service.listarHistorico(perfilStefanini.getCodigo());
+	}
 	
 }

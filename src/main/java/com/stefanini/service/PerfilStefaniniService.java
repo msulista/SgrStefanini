@@ -89,6 +89,15 @@ public class PerfilStefaniniService {
 		manager.close();
 		return perfisStefanini;
 	}
+	@SuppressWarnings("unchecked")
+	public List<PerfilStefanini> listarHistorico(Long codigo) {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("PerfilStefanini.findCodigoParaHistorico");
+		q.setParameter("codigo", codigo);
+		List<PerfilStefanini> perfisStefanini = q.getResultList();
+		manager.close();
+		return perfisStefanini;
+	}
 
 	public PerfilStefanini getPerfilStefaniniById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();

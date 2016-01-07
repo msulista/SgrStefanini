@@ -10,11 +10,12 @@
 	<ui:define name="content">
 		<p:breadCrumb>
 		    <p:menuitem value="#{message['pao.home']}" url="#" />
-		    <p:menuitem value="#{message['pao.profissional']}" outcome="pretty:profissional" disabled="true"/>
+		    <p:menuitem value="#{message['pao.profissional']}" outcome="pretty:profissional"/>
+		        <p:menuitem value="#{message['pao.profissional.historico']}" outcome="pretty:profissional-historico" disabled="true"/>
 		</p:breadCrumb>		
 		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 		
-		<h2>#{message['title.profissional']}</h2>
+		<h2>#{message['title.profissional.historico']}</h2>
 		<h:form>
 			<p:dataTable id="gridProfissional" var="profissional" value="#{profissionalManager.listaHistorico()}" emptyMessage="#{message['alerta.listaVazia']}" >
 				
@@ -90,12 +91,12 @@
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 					</h:outputText>		
 				</p:column>
-				<p:column headerText="#{message['label.profissional.registro.inicio']}" >
+				<p:column headerText="#{message['label.registro.inicio']}" >
 					<h:outputText value="#{profissional.registroValidadeInicio}">	
 					<f:convertDateTime pattern="dd/MM/yyyy" />	
 					</h:outputText>
 				</p:column>
-				<p:column headerText="#{message['label.profissional.registro.fim']}" >
+				<p:column headerText="#{message['label.registro.fim']}" >
 					<h:outputText value="#{profissional.registroValidaeFim}" >	
 					<f:convertDateTime pattern="dd/MM/yyyy" />	
 					</h:outputText>	

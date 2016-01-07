@@ -14,7 +14,7 @@
 	    	<h2>#{message['title.profissional']}</h2>
 	        <h:form>
 	        	<p:growl id="growl" life="4000" />
-				<p:panel header="#{message['title.cargaHoraria.cadastro']}" id="painel">			
+				<p:panel header="#{message['title.profissional.editar']}" id="painel">			
 					<p:focus context="painel"/>
 					<p:outputLabel for="celula" value="#{message['label.profissional.celula']}" styleClass="label" />
 					<p:selectOneMenu id="celula" value="#{profissionalManager.profissional.celula}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.celula']}">

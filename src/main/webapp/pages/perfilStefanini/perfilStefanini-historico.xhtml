@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/template/default.xhtml"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces">
+
+	<ui:define name="content">
+		<p:breadCrumb>
+		    <p:menuitem value="#{message['pao.home']}" url="#" />
+		    <p:menuitem value="#{message['pao.perfilStefanini']}" outcome="pretty:perfilStefanini"/>
+		<p:menuitem value="#{message['pao.perfilStefanini.historico']}" outcome="pretty:profissional-historico" disabled="true"/>
+		</p:breadCrumb>
+		<div class="panel-formulario">
+			<h2>#{message['title.perfilStefanini.historico']}</h2>
+			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
+			<h:form>
+				<p:dataTable id="gridPerfilStefanini" var="perfilStefanini" value="#{perfilStefaniniManager.historico}" emptyMessage="#{message['alerta.listaVazia']}" >
+					<p:column headerText="#{message['label.nome']}">
+						<h:outputText value="#{perfilStefanini.nome}"/>
+					</p:column>
+					
+					<p:column headerText="#{message['label.perfilStefanini.valorInicial']}" >
+						<h:outputText value="#{perfilStefanini.valorInicial}">
+							<f:convertNumber minFractionDigits="2" type="currency" currencySymbol="R$" />
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="#{message['label.perfilStefanini.valorFinal']}"  >
+						<h:outputText value="#{perfilStefanini.valorFinal}">
+							<f:convertNumber minFractionDigits="2" type="currency" currencySymbol="R$"/>
+						</h:outputText>
+					</p:column>
+					<p:column headerText="#{message['label.registro.inicio']}"  >
+						<h:outputText value="#{perfilStefanini.registroValidadeInicio}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="#{message['label.registro.fim']}"  >
+						<h:outputText value="#{perfilStefanini.registroValidadeFim}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+				
+				</p:dataTable>
+				<br />
+			<p:button value="#{message['button.voltar']}" outcome="pretty:perfilStefanini" styleClass="btn"/>
+			</h:form>
+		</div>
+	</ui:define>
+
+</ui:composition>
