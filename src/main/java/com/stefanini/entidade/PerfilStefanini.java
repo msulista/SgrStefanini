@@ -32,6 +32,10 @@ public class PerfilStefanini implements Serializable{
 	@Column(name = "ID_PERFIL_STEFANINI", nullable = false, precision = 32)
 	private Long id;
 
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name = "REGISTRO_HISTORICO", nullable = true)
+	private int registro;
+	
 	@Column(name = "VALOR_INICIAL", nullable = false)
 	private Double valorInicial;
 
