@@ -9,12 +9,19 @@
 	<ui:define name="content">
 		<p:breadCrumb>
 		    <p:menuitem value="#{message['pao.home']}" url="#" />
-		    <p:menuitem value="#{message['pao.cargaHoraria']}" outcome="pretty:cargaHoraria" disabled="true"/>
+		    <p:menuitem id="historico" value="#{message['pao.cargaHoraria']}" outcome="pretty:cargaHoraria" disabled="true"/>
+		 
+						
 		</p:breadCrumb>
 		<div class="panel-formulario">
 			<h2>#{message['title.cargaHoraria']}</h2>
 			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 			<h:form>
+			<br />
+			<p:button styleClass="btn-default" value="#{message['button.novo']}" outcome="pretty:cargaHoraria-incluir" />
+			<p:button id="historico" styleClass="btn-default" icon="ui-icon-script" outcome="pretty:cargaHoraria-historico" />
+			   <p:tooltip id="alt-historicoo" for="historico" value="#{message['label.historico']}" styleClass="alt"/>
+			<br />
 				<p:dataTable id="gridCargaHoraria" var="cargaHoraria" value="#{cargaHorariaManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
 					<p:column headerText="#{message['label.cargaHoraria']}" for="cargaHoraria" sortBy="#{cargaHoraria.cargaHoraria}">
 						<h:outputText id="cargaHoraria" value="#{cargaHoraria.cargaHoraria}">
@@ -37,8 +44,7 @@
 					<p:commandButton value="#{message['button.nao']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 				</p:confirmDialog>
 				<br />
-				<p:button styleClass="btn-default" value="#{message['button.novo']}" outcome="pretty:cargaHoraria-incluir" />
-			</h:form>
+				</h:form>
 		</div>
 	</ui:define>
 
