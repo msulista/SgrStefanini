@@ -20,7 +20,8 @@ import com.stefanini.service.PerfilStefaniniService;
 @URLMappings(mappings = {
 		@URLMapping(id = "perfilStefanini", pattern = "/perfilStefanini", viewId = "/pages/perfilStefanini/perfilStefanini-listar.xhtml"),
 		@URLMapping(id = "perfilStefanini-incluir", pattern = "/incluir", viewId = "/pages/perfilStefanini/perfilStefanini-incluir.xhtml", parentId = "perfilStefanini"),
-		@URLMapping(id = "perfilStefanini-editar", pattern = "/#{perfilStefaniniManager.perfilStefanini.id}/editar", viewId = "/pages/perfilStefanini/perfilStefanini-editar.xhtml", parentId = "perfilStefanini") })
+		@URLMapping(id = "perfilStefanini-editar", pattern = "/#{perfilStefaniniManager.perfilStefanini.codigo}/editar", viewId = "/pages/perfilStefanini/perfilStefanini-editar.xhtml", parentId = "perfilStefanini") })
+
 public class PerfilStefaniniManager {
 
 	private PerfilStefanini perfilStefanini = new PerfilStefanini();
@@ -88,7 +89,8 @@ public class PerfilStefaniniManager {
 
 	@URLActions(actions = { @URLAction(mappingId = "perfilStefanini-editar", onPostback = false) })
 	public void load() throws IOException {
-		perfilStefanini = service.getPerfilStefaniniById(perfilStefanini.getId());
+		perfilStefanini = service.getPerfilStefaniniByCodigoParaEdicao(perfilStefanini.getCodigo());
 	}
 
+	
 }
