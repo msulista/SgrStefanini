@@ -18,12 +18,15 @@ import com.stefanini.service.CargoService;
 @RequestScoped
 @URLMappings(mappings = {
 		@URLMapping(id = "cargo", pattern = "/cargo", viewId = "/pages/cargo/cargo-listar.xhtml"),
-		@URLMapping(id = "cargo-incluir", pattern = "/incluir", viewId = "/pages/cargo/cargo-incluir.xhtml", parentId = "cargo")
+		@URLMapping(id = "cargo-incluir", pattern = "/incluir", viewId = "/pages/cargo/cargo-incluir.xhtml", parentId = "cargo"),
+		@URLMapping(id = "cargo-historico", pattern = "/historico", viewId = "/pages/cargo/cargo-historico.xhtml", parentId = "cargo")
+
 })
 public class CargoManager {
 
 	private Cargo cargo = new Cargo();
 	private CargoService service = new CargoService();
+	private List<Cargo>historico;
 	private List<Cargo> lista;
 	
 	public CargoManager() {	
@@ -60,6 +63,15 @@ public class CargoManager {
 		this.service = service;
 	}
 	
+	
+	public List<Cargo> getHistorico() {
+		return historico;
+	}
+
+	public void setHistorico(List<Cargo> historico) {
+		this.historico = historico;
+	}
+
 	public String save(){
 		if(service.save(cargo)){
 		return "pretty:cargo";
@@ -78,4 +90,8 @@ public class CargoManager {
 		return "pretty:cargo";
 	}
 	
+	@URLActions(actions = { @URLAction(mappingId = "cargo-historico", onPostback = false) })
+	public void loadHistorico() throws IOException {
+		historico = service.listarHistorico();
+	}
 }
