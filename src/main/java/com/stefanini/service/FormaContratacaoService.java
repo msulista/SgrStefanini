@@ -74,6 +74,15 @@ public class FormaContratacaoService {
 		return formaContratacoes;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<FormaContratacao> listarHistorico() {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("FormaContratacao.findAll");
+		List<FormaContratacao> formaContratacoes = q.getResultList();
+		return formaContratacoes;
+	}
+
+	
 	public FormaContratacao getFormaContratacaoById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("FormaContratacao.findId");

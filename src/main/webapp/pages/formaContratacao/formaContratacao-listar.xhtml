@@ -15,6 +15,11 @@
 			<h2>#{message['title.formaContratacao']}</h2>
 			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 			<h:form>
+						<br />
+				<p:button styleClass="btn-default" value="#{message['button.novo']}" outcome="pretty:formaContratacao-incluir" />
+			<p:button id="historico" styleClass="btn-default" icon="ui-icon-script" outcome="pretty:formaContratacao-historico" />
+			  <p:tooltip id="alt-historicoo" for="historico" value="#{message['label.historico']}" styleClass="alt"/>
+			<br />
 				<p:dataTable id="gridFormaContratacao" var="formaContratacao" value="#{formaContratacaoManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
 					
 					<p:column headerText="#{message['label.nome']}" sortBy="#{formaContratacao.nome}">
@@ -36,8 +41,7 @@
 					<p:commandButton value="#{message['button.nao']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 				</p:confirmDialog>
 				<br />
-				<p:button styleClass="btn-default" value="#{message['button.novo']}" outcome="pretty:formaContratacao-incluir" />
-			</h:form>
+				</h:form>
 		</div>
 	</ui:define>
 

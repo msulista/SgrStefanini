@@ -18,11 +18,14 @@ import com.stefanini.service.FormaContratacaoService;
 @RequestScoped
 @URLMappings(mappings = {
 		@URLMapping(id = "formaContratacao", pattern = "/formaContratacao", viewId = "/pages/formaContratacao/formaContratacao-listar.xhtml"),
-		@URLMapping(id = "formaContratacao-incluir", pattern = "/incluir", viewId = "/pages/formaContratacao/formaContratacao-incluir.xhtml", parentId = "formaContratacao") })
+		@URLMapping(id = "formaContratacao-incluir", pattern = "/incluir", viewId = "/pages/formaContratacao/formaContratacao-incluir.xhtml", parentId = "formaContratacao"),
+		@URLMapping(id = "formaContratacao-historico", pattern = "/historico", viewId = "/pages/formaContratacao/formaContratacao-historico.xhtml", parentId = "formaContratacao") })
+
 public class FormaContratacaoManager {
 
 	private FormaContratacao formaContratacao = new FormaContratacao();
 	private FormaContratacaoService service = new FormaContratacaoService();
+	private List<FormaContratacao>historico;
 	private List<FormaContratacao> lista;
 
 	public FormaContratacaoManager() {
@@ -58,6 +61,16 @@ public class FormaContratacaoManager {
 		this.service = service;
 	}
 
+	
+	
+	public List<FormaContratacao> getHistorico() {
+		return historico;
+	}
+
+	public void setHistorico(List<FormaContratacao> historico) {
+		this.historico = historico;
+	}
+
 	public String save() {
 		if (this.service.save(formaContratacao)) {
 			return "pretty:formaContratacao";
@@ -75,4 +88,9 @@ public class FormaContratacaoManager {
 		return "pretty:formaContratacao";
 	}
 
+	@URLActions(actions = { @URLAction(mappingId = "formaContratacao-historico", onPostback = false) })
+	public void loadHistorico() throws IOException {
+		historico = service.listarHistorico();
+	}
+	
 }
