@@ -73,7 +73,15 @@ public class CelulaService {
 		manager.close();
 		return celulas;
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public List<Celula> listarHistorico() {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Celula.findAll");
+		List<Celula> celulas = q.getResultList();
+		manager.close();
+		return celulas;
+	}
 	public Celula getCelulaById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("Celula.findId");

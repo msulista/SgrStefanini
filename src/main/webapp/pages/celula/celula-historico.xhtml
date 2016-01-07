@@ -9,28 +9,28 @@
 	<ui:define name="content">
 		<p:breadCrumb>
 		    <p:menuitem value="#{message['pao.home']}" url="#" />
-		    <p:menuitem value="#{message['pao.cargo']}" outcome="pretty:cargo" />
-		    <p:menuitem value="#{message['pao.cargo.historico']}" outcome="pretty:cargo-historico" disabled="true"/>
+		    <p:menuitem value="#{message['pao.celula']}" outcome="pretty:cargo" />
+		    <p:menuitem value="#{message['pao.celula.historico']}" outcome="pretty:celula-historico" disabled="true"/>
 		</p:breadCrumb>
 		<div class="panel-formulario">
-			<h2>#{message['title.cargos.historico']}</h2>
+			<h2>#{message['title.celulas.historico']}</h2>
 			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 			<br />
-			<p:button styleClass="btn-default" value="#{message['button.voltar']}" outcome="pretty:cargo" />
+			<p:button styleClass="btn-default" value="#{message['button.voltar']}" outcome="pretty:celula" />
 			<br />
 			<h:form>
-				<p:dataTable id="gridCargos" var="cargo" value="#{cargoManager.historico}" emptyMessage="#{message['alerta.listaVazia']}" >
+				<p:dataTable id="gridCargos" var="celula" value="#{celulaManager.historico}" emptyMessage="#{message['alerta.listaVazia']}" >
 	
 					<p:column headerText="#{message['label.nome']}" >
-						<h:outputText value="#{cargo.nome}" />
+						<h:outputText value="#{celula.nome}" />
 					</p:column>
 					<p:column headerText="#{message['label.registro.inicio']}"  >
-						<h:outputText value="#{cargo.registroValidadeInicio}">
+						<h:outputText value="#{celula.registroValidadeInicio}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
 					<p:column headerText="#{message['label.registro.fim']}"  >
-						<h:outputText value="#{cargo.registroValidadeFim}">
+						<h:outputText value="#{celula.registroValidadeFim}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>

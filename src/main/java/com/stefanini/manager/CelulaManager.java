@@ -17,11 +17,14 @@ import com.stefanini.service.CelulaService;
 @ManagedBean
 @RequestScoped
 @URLMappings(mappings = { @URLMapping(id = "celula", pattern = "/celula", viewId = "/pages/celula/celula-listar.xhtml"),
-		@URLMapping(id = "celula-incluir", pattern = "/incluir", viewId = "/pages/celula/celula-incluir.xhtml", parentId = "celula") })
+		@URLMapping(id = "celula-incluir", pattern = "/incluir", viewId = "/pages/celula/celula-incluir.xhtml", parentId = "celula"),
+		@URLMapping(id = "celula-historico", pattern = "/historico", viewId = "/pages/celula/celula-historico.xhtml", parentId = "celula") })
+
 public class CelulaManager {
 
 	private Celula celula = new Celula();
 	private CelulaService service = new CelulaService();
+	private List<Celula> historico;
 	private List<Celula> lista;
 
 	public CelulaManager() {
@@ -57,6 +60,15 @@ public class CelulaManager {
 		this.service = service;
 	}
 
+	
+	public List<Celula> getHistorico() {
+		return historico;
+	}
+
+	public void setHistorico(List<Celula> historico) {
+		this.historico = historico;
+	}
+
 	public String save() {
 		if (service.save(celula)) {
 			return "pretty:celula";
@@ -74,4 +86,8 @@ public class CelulaManager {
 		return "pretty:celula";
 	}
 
+	@URLActions(actions = { @URLAction(mappingId = "celula-historico", onPostback = false) })
+	public void loadHistorico() throws IOException {
+		historico = service.listarHistorico();
+	}
 }

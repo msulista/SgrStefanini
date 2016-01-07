@@ -15,6 +15,11 @@
 			<h2>#{message['title.celulas']}</h2>
 			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 			<h:form>
+						<br />
+				<p:button styleClass="btn-default" value="#{message['button.novo']}" outcome="pretty:celula-incluir" />
+			<p:button id="historico" styleClass="btn-default" icon="ui-icon-script" outcome="pretty:celula-historico" />
+			  <p:tooltip id="alt-historicoo" for="historico" value="#{message['label.historico']}" styleClass="alt"/>
+			<br />
 				<p:dataTable id="gridCelula" var="celula" value="#{celulaManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
 					
 					<p:column headerText="#{message['label.nome']}" sortBy="#{celula.nome}">
@@ -40,8 +45,7 @@
 					<p:commandButton value="#{message['button.sim']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 					<p:commandButton value="#{message['button.nao']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 				</p:confirmDialog>
-				<br />
-				<p:button styleClass="btn-default" value="#{message['button.novo']}" outcome="pretty:celula-incluir" />
+	
 			</h:form>
 		</div>
 	</ui:define>
