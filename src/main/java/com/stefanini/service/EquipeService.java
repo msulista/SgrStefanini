@@ -74,6 +74,15 @@ public class EquipeService {
 		return equipes;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Equipe> listarHistorico() {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Equipe.findAll");
+		List<Equipe> equipes = q.getResultList();
+		manager.close();
+		return equipes;
+	}
+	
 	public Equipe getEquipeById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("Equipe.findId");

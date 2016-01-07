@@ -15,11 +15,14 @@ import com.stefanini.service.EquipeService;
 
 @ManagedBean
 @URLMappings(mappings = { @URLMapping(id = "equipe", pattern = "/equipe", viewId = "/pages/equipe/equipe-listar.xhtml"),
-		@URLMapping(id = "equipe-incluir", pattern = "/incluir", viewId = "/pages/equipe/equipe-incluir.xhtml", parentId = "equipe") })
+		@URLMapping(id = "equipe-incluir", pattern = "/incluir", viewId = "/pages/equipe/equipe-incluir.xhtml", parentId = "equipe"),
+		@URLMapping(id = "equipe-historico", pattern = "/historico", viewId = "/pages/equipe/equipe-historico.xhtml", parentId = "equipe") })
+
 public class EquipeManager {
 
 	private Equipe equipe = new Equipe();
 	private EquipeService service = new EquipeService();
+	private List<Equipe>historico;
 	private List<Equipe> lista;
 
 	public EquipeManager() {
@@ -55,6 +58,16 @@ public class EquipeManager {
 		this.service = service;
 	}
 
+	
+	
+	public List<Equipe> getHistorico() {
+		return historico;
+	}
+
+	public void setHistorico(List<Equipe> historico) {
+		this.historico = historico;
+	}
+
 	public String save() {
 		if (service.save(equipe)) {
 			return "pretty:equipe";
@@ -71,5 +84,9 @@ public class EquipeManager {
 		service.desativar(id);
 		return "pretty:equipe";
 	}
-
+	
+	@URLActions(actions = { @URLAction(mappingId = "equipe-historico", onPostback = false) })
+	public void loadHistorico() throws IOException {
+		historico = service.listarHistorico();
+	}
 }
