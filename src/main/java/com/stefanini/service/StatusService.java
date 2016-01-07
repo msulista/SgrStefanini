@@ -72,6 +72,14 @@ public class StatusService {
 		List<Status> listStatus = q.getResultList();
 		return listStatus;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Status> listarHistorico() {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Status.findAll");
+		List<Status> listStatus = q.getResultList();
+		return listStatus;
+	}
 
 	public Status getStatusById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();

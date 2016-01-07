@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/template/default.xhtml"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces">
+
+	<ui:define name="content">
+		<p:breadCrumb>
+		    <p:menuitem value="#{message['pao.home']}" url="#" />
+		    <p:menuitem value="#{message['pao.status']}" outcome="pretty:status" />
+		    <p:menuitem value="#{message['pao.status.historico']}" outcome="pretty:status-historico" disabled="true"/>
+		</p:breadCrumb>
+		<div class="panel-formulario">
+			<h2>#{message['title.status.historico']}</h2>
+			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
+			<br />
+			<p:button styleClass="btn-default" value="#{message['button.voltar']}" outcome="pretty:status" />
+			<br />
+			<h:form>
+				<p:dataTable id="gridCargos" var="status" value="#{statusManager.historico}" emptyMessage="#{message['alerta.listaVazia']}" >
+	
+					<p:column headerText="#{message['label.nome']}" >
+						<h:outputText value="#{status.nome}" />
+					</p:column>
+					<p:column headerText="#{message['label.registro.inicio']}"  >
+						<h:outputText value="#{status.registroValidadeInicio}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="#{message['label.registro.fim']}"  >
+						<h:outputText value="#{status.registroValidadeFim}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+					
+				</p:dataTable>
+			</h:form>
+		</div>
+	</ui:define>
+
+</ui:composition>

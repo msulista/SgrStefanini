@@ -17,12 +17,15 @@ import com.stefanini.service.StatusService;
 @ManagedBean
 @RequestScoped
 @URLMappings(mappings = { @URLMapping(id = "status", pattern = "/status", viewId = "/pages/status/status-listar.xhtml"),
-		@URLMapping(id = "status-incluir", pattern = "/incluir", viewId = "/pages/status/status-incluir.xhtml", parentId = "status")
+		@URLMapping(id = "status-incluir", pattern = "/incluir", viewId = "/pages/status/status-incluir.xhtml", parentId = "status"),
+		@URLMapping(id = "status-historico", pattern = "/historico", viewId = "/pages/status/status-historico.xhtml", parentId = "status")
+
 })
 public class StatusManager {
 
 	private Status status = new Status();
 	private StatusService service = new StatusService();
+	private List<Status>historico;
 	private List<Status> lista;
 
 	public StatusManager() {
@@ -58,6 +61,14 @@ public class StatusManager {
 	public void setService(StatusService service) {
 		this.service = service;
 	}
+	
+	public List<Status> getHistorico() {
+		return historico;
+	}
+
+	public void setHistorico(List<Status> historico) {
+		this.historico = historico;
+	}
 
 	public String save() {
 		if (this.service.save(status)) {
@@ -86,4 +97,9 @@ public class StatusManager {
 		return "pretty:status";
 	}
 
+	@URLActions(actions = { @URLAction(mappingId = "status-historico", onPostback = false) })
+	public void loadHistorico() throws IOException {
+		historico = service.listarHistorico();
+	}
+	
 }
