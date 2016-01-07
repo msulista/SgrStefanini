@@ -78,7 +78,16 @@ public class CargaHorariaService {
 		manager.close();
 		return cargaHorarias;
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public List<CargaHoraria> listarHistorico() {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("CargaHoraria.findAll");
+		List<CargaHoraria> cargaHorarias = q.getResultList();
+		manager.close();
+		return cargaHorarias;
+	}
+	
 	public CargaHoraria getCargaHorariaById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("CargaHoraria.findId");

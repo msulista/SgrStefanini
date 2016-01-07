@@ -21,7 +21,10 @@ import com.stefanini.util.DateUtil;
 	@NamedQuery(name = "PerfilStefanini.findAll", query = "SELECT p FROM PerfilStefanini p ORDER BY p.nome ASC"),
 	@NamedQuery(name = "PerfilStefanini.findAtivos", query = "SELECT p FROM PerfilStefanini p WHERE p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE AND p.registroValidadeInicio <= CURRENT_DATE ORDER BY p.nome ASC"),
 	@NamedQuery(name = "PerfilStefanini.findNome", query = "SELECT p FROM PerfilStefanini p WHERE p.nome = :nome AND p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE AND p.registroValidadeInicio <= CURRENT_DATE ORDER BY p.nome ASC"),
-	@NamedQuery(name = "PerfilStefanini.findId", query = "SELECT p FROM PerfilStefanini p WHERE p.id = :id AND p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE AND p.registroValidadeInicio <= CURRENT_DATE ORDER BY p.nome ASC")
+	@NamedQuery(name = "PerfilStefanini.findId", query = "SELECT p FROM PerfilStefanini p WHERE p.id = :id AND p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE AND p.registroValidadeInicio <= CURRENT_DATE ORDER BY p.nome ASC"),
+	@NamedQuery(name = "PerfilStefanini.findCodigoParaHistorico", query = "SELECT p FROM PerfilStefanini p WHERE p.codigo = :codigo ORDER BY p.id DESC"),
+	@NamedQuery(name = "PerfilStefanini.findCodigoParaEdicao", query ="SELECT p FROM PerfilStefanini p WHERE p.id = (SELECT MAX(pr.id)FROM PerfilStefanini pr WHERE pr.codigo = :codigo)"),
+	@NamedQuery(name = "PerfilStefanini.findMaxId", query ="SELECT p FROM PerfilStefanini p WHERE p.id = (SELECT MAX(pr.id)FROM PerfilStefanini pr)")
 })
 public class PerfilStefanini implements Serializable{
 
@@ -32,6 +35,9 @@ public class PerfilStefanini implements Serializable{
 	@Column(name = "ID_PERFIL_STEFANINI", nullable = false, precision = 32)
 	private Long id;
 
+	@Column(name = "CODIGO", nullable = false)
+	private Long codigo;
+	
 	@Column(name = "VALOR_INICIAL", nullable = false)
 	private Double valorInicial;
 
@@ -111,19 +117,26 @@ public class PerfilStefanini implements Serializable{
 		this.dataManipulacao = dataManipulacao;
 	}
 
+	public Long getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result + ((dataManipulacao == null) ? 0 : dataManipulacao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((registroValidadeFim == null) ? 0 : registroValidadeFim.hashCode());
 		result = prime * result + ((registroValidadeInicio == null) ? 0 : registroValidadeInicio.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(valorFinal);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(valorInicial);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((valorFinal == null) ? 0 : valorFinal.hashCode());
+		result = prime * result + ((valorInicial == null) ? 0 : valorInicial.hashCode());
 		return result;
 	}
 
@@ -136,6 +149,16 @@ public class PerfilStefanini implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		PerfilStefanini other = (PerfilStefanini) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		if (dataManipulacao == null) {
+			if (other.dataManipulacao != null)
+				return false;
+		} else if (!dataManipulacao.equals(other.dataManipulacao))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -156,11 +179,18 @@ public class PerfilStefanini implements Serializable{
 				return false;
 		} else if (!registroValidadeInicio.equals(other.registroValidadeInicio))
 			return false;
-		if (Double.doubleToLongBits(valorFinal) != Double.doubleToLongBits(other.valorFinal))
+		if (valorFinal == null) {
+			if (other.valorFinal != null)
+				return false;
+		} else if (!valorFinal.equals(other.valorFinal))
 			return false;
-		if (Double.doubleToLongBits(valorInicial) != Double.doubleToLongBits(other.valorInicial))
+		if (valorInicial == null) {
+			if (other.valorInicial != null)
+				return false;
+		} else if (!valorInicial.equals(other.valorInicial))
 			return false;
 		return true;
 	}
 
+	
 }

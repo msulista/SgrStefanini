@@ -18,11 +18,14 @@ import com.stefanini.service.CargaHorariaService;
 @URLMappings(mappings = {
 		@URLMapping(id = "cargaHoraria", pattern = "/cargaHoraria", viewId = "/pages/cargaHoraria/cargaHoraria-listar.xhtml"),
 		@URLMapping(id = "cargaHoraria-incluir", pattern = "/incluir", viewId = "/pages/cargaHoraria/cargaHoraria-incluir.xhtml", parentId = "cargaHoraria"),
-		@URLMapping(id = "cargaHoraria-editar", pattern = "/#{cargaHorariaManager.cargaHoraria.id}/editar", viewId = "/pages/cargaHoraria/cargaHoraria-editar.xhtml", parentId = "cargaHoraria") })
+		@URLMapping(id = "cargaHoraria-editar", pattern = "/#{cargaHorariaManager.cargaHoraria.id}/editar", viewId = "/pages/cargaHoraria/cargaHoraria-editar.xhtml", parentId = "cargaHoraria"),
+		@URLMapping(id = "cargaHoraria-historico", pattern = "/historico", viewId = "/pages/cargaHoraria/cargaHoraria-historico.xhtml", parentId = "cargaHoraria") })
+
 public class CargaHorariaManager {
 
 	private CargaHoraria cargaHoraria = new CargaHoraria();
 	private CargaHorariaService service = new CargaHorariaService();
+	private List<CargaHoraria>historico;
 	private List<CargaHoraria> lista;
 
 	public CargaHorariaManager() {
@@ -52,6 +55,15 @@ public class CargaHorariaManager {
 
 	public void setService(CargaHorariaService service) {
 		this.service = service;
+	}
+
+	
+	public List<CargaHoraria> getHistorico() {
+		return historico;
+	}
+
+	public void setHistorico(List<CargaHoraria> historico) {
+		this.historico = historico;
 	}
 
 	public String save() {
@@ -85,6 +97,11 @@ public class CargaHorariaManager {
 	@URLActions(actions = { @URLAction(mappingId = "cargaHoraria-editar", onPostback = false) })
 	public void load() throws IOException {
 		cargaHoraria = service.getCargaHorariaById(cargaHoraria.getId());
+	}
+	
+	@URLActions(actions = { @URLAction(mappingId = "cargaHoraria-historico", onPostback = false) })
+	public void loadHistorico() throws IOException {
+		historico = service.listarHistorico();
 	}
 
 }
