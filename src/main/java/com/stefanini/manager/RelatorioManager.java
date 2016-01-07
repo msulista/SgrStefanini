@@ -45,6 +45,8 @@ public class RelatorioManager {
 	
 	private String equipe = "";
 	private int quantidadeTotal = 0;
+	private int quantidadeTotal2 = 0;
+	private int quantidadeTotal3 = 0;
 	private double valorTotal = 0;
 
 	public RelatorioManager() {
@@ -162,6 +164,7 @@ public class RelatorioManager {
 	
 	//Profissional por Equipe
 	private BarChartModel initProfissionalPorEquipe() {
+		quantidadeTotal =0;
 	    BarChartModel model = new BarChartModel();
 	 
 	    ChartSeries grafico = new ChartSeries();
@@ -175,6 +178,7 @@ public class RelatorioManager {
 	    return model;
 	}	     
 	private void createProfissionalPorEquipe() {
+		
 	   profissionalPorEquipe = initProfissionalPorEquipe();
 	         
 	   profissionalPorEquipe.setTitle("Selecione a coluna da equipe desejada");
@@ -201,10 +205,13 @@ public class RelatorioManager {
 	//CLT x Estagiario por equipe
 	
 	private BarChartModel initCltXestagioPorEquipe() {
+		quantidadeTotal = 0;
+		quantidadeTotal2 =0;
 	    BarChartModel model = new BarChartModel();
 	 
 	    ChartSeries clt = new ChartSeries();
 	    ChartSeries estagio = new ChartSeries();
+	    
 	    clt.setLabel("CLT");
 	    estagio.setLabel("Estágio");
 	    
@@ -212,15 +219,19 @@ public class RelatorioManager {
 	    	
 	    	clt.set(relatorio.getNome01(), relatorio.getQuantidade01());
 	    	estagio.set(relatorio.getNome01(), relatorio.getQuantidade02());
-	    	
+	    	quantidadeTotal = (int)(quantidadeTotal += relatorio.getQuantidade01());
+	    	quantidadeTotal2 = (int)(quantidadeTotal2+= relatorio.getQuantidade02());
 		}	
 	  
-	    
+	    clt.set("Total Resultados", quantidadeTotal);
+	    estagio.set("Total Resultados" ,quantidadeTotal2);
 	    model.addSeries(clt);	         
 	    model.addSeries(estagio);	         
 	    return model;
 	}	     
 	private void createCltXestagioPorEquipe() {
+		quantidadeTotal = 0;
+		quantidadeTotal2 =0;
 		contratacaoPorEquipe = initCltXestagioPorEquipe();
 		
 		contratacaoPorEquipe.setTitle("Selecione a coluna da forma de contratação desejada");
@@ -230,7 +241,7 @@ public class RelatorioManager {
 	    Axis xAxis = contratacaoPorEquipe.getAxis(AxisType.X);
 	    xAxis.setLabel("Equipes");
 	         
-	    Axis yAxis = profissionalPorEquipe.getAxis(AxisType.Y);
+	    Axis yAxis = contratacaoPorEquipe.getAxis(AxisType.Y);
 	    yAxis.setLabel("N° Profissionais");
 	    yAxis.setMin(0);
 	   
@@ -247,6 +258,7 @@ public class RelatorioManager {
 	// Valor por Equipe
 	
 	private BarChartModel initValorPorEquipe() {
+		
 	    BarChartModel model = new BarChartModel();
 	    model.setExtender("decimalConverter");
 	    ChartSeries grafico = new ChartSeries();
@@ -287,6 +299,9 @@ public class RelatorioManager {
 	
 	//Perfil por equipe
 	private BarChartModel initPerfilPorEquipe() {
+		quantidadeTotal =0;
+		quantidadeTotal2 =0;
+		quantidadeTotal3 =0;
 	    BarChartModel model = new BarChartModel();
 	 
 	    ChartSeries junior = new ChartSeries();
@@ -301,10 +316,14 @@ public class RelatorioManager {
 	    	junior.set(relatorio.getNome01(), relatorio.getQuantidade01());
 	    	pleno.set(relatorio.getNome01(), relatorio.getQuantidade02());
 	    	senior.set(relatorio.getNome01(), relatorio.getQuantidade03());
-	    	
+	    	quantidadeTotal = (int)(quantidadeTotal += relatorio.getQuantidade01());
+	    	quantidadeTotal2 = (int)(quantidadeTotal2+= relatorio.getQuantidade02());
+	    	quantidadeTotal3 = (int)(quantidadeTotal3 += relatorio.getQuantidade03());
 		}	
 	
-	    
+	    junior.set("Total Resultados", quantidadeTotal);
+	    pleno.set("Total Resultados", quantidadeTotal2);
+	    senior.set("Total Resultado", quantidadeTotal3);
 	    model.addSeries(junior);	         
 	    model.addSeries(pleno);	   
 	    model.addSeries(senior);	  
@@ -317,10 +336,10 @@ public class RelatorioManager {
 		perfilPorEquipe.setAnimate(true);
 		perfilPorEquipe.setLegendPosition("ne");
 	       
-	    Axis xAxis = getPerfilPorEquipe().getAxis(AxisType.X);
+	    Axis xAxis = perfilPorEquipe.getAxis(AxisType.X);
 	    xAxis.setLabel("Equipes");
 	         
-	    Axis yAxis = profissionalPorEquipe.getAxis(AxisType.Y);
+	    Axis yAxis = perfilPorEquipe.getAxis(AxisType.Y);
 	    yAxis.setLabel("N° Profissionais");
 	    yAxis.setMin(0);
 	   
