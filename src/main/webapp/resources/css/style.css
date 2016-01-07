@@ -292,6 +292,12 @@ html, body {
 .ct-content .incluir-editar{
 	width: 37%;
 }
+
+.ct-content .historico{
+	margin: 0px -8%;
+	width: 115%;		
+}
+
 .ct-content * {
 	font-size: 12px;
 }
@@ -405,9 +411,10 @@ input[type=text] {
 	text-align: right;
 }
 
-.ui-datatable thead th:last-child {
+.incluir-editar .ui-datatable thead th:last-child {
     width: 15%;
 }
+
 
 .ui-widget .ui-widget {
 	margin-top: 2px;
