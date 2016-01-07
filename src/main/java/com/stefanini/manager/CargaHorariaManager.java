@@ -93,11 +93,6 @@ public class CargaHorariaManager {
 		service.desativar(id);
 		return "pretty:cargaHoraria";
 	}
-
-	@URLActions(actions = { @URLAction(mappingId = "cargaHoraria-editar", onPostback = false) })
-	public void load() throws IOException {
-		cargaHoraria = service.getCargaHorariaById(cargaHoraria.getId());
-	}
 	
 	@URLActions(actions = { @URLAction(mappingId = "cargaHoraria-historico", onPostback = false) })
 	public void loadHistorico() throws IOException {
