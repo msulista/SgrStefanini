@@ -17,13 +17,16 @@ import com.stefanini.service.PerfilService;
 @ManagedBean
 @RequestScoped
 @URLMappings(mappings = { @URLMapping(id = "perfil", pattern = "/perfil", viewId = "/pages/perfil/perfil-listar.xhtml"),
-		@URLMapping(id = "perfil-incluir", pattern = "/incluir", viewId = "/pages/perfil/perfil-incluir.xhtml", parentId = "perfil")
+		@URLMapping(id = "perfil-incluir", pattern = "/incluir", viewId = "/pages/perfil/perfil-incluir.xhtml", parentId = "perfil"),
+		@URLMapping(id = "perfil-historico", pattern = "/historico", viewId = "/pages/perfil/perfil-historico.xhtml", parentId = "perfil")
+
 })
 
 public class PerfilManager {
 
 	private Perfil perfil = new Perfil();
 	private PerfilService service = new PerfilService();
+	private List<Perfil>historico;
 	private List<Perfil> lista;
 
 	public PerfilManager() {
@@ -59,6 +62,14 @@ public class PerfilManager {
 	public void setService(PerfilService service) {
 		this.service = service;
 	}
+	
+	public List<Perfil> getHistorico() {
+		return historico;
+	}
+
+	public void setHistorico(List<Perfil> historico) {
+		this.historico = historico;
+	}
 
 	public String save() {
 		if (service.save(perfil)) {
@@ -77,4 +88,9 @@ public class PerfilManager {
 		return "pretty:perfil";
 	}
 
+	@URLActions(actions = { @URLAction(mappingId = "perfil-historico", onPostback = false) })
+	public void loadHistorico() throws IOException {
+		historico = service.listarHistorico();
+	}
+	
 }

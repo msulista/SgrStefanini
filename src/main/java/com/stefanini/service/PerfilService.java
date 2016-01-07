@@ -73,6 +73,14 @@ public class PerfilService {
 		List<Perfil> perfis = q.getResultList();
 		return perfis;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Perfil> listarHistorico() {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Perfil.findAll");
+		List<Perfil> perfis = q.getResultList();
+		return perfis;
+	}
 
 	public Perfil getPerfilById(Long id) {
 		EntityManager manager = JPAUtil.getEntityManager();
