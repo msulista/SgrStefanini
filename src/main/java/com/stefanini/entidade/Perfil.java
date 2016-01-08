@@ -18,7 +18,7 @@ import com.stefanini.util.DateUtil;
 @Entity
 @Table(name = "SGR_PERFIL")
 @NamedQueries({
-	@NamedQuery(name = "Perfil.findAll", query = "SELECT p FROM Perfil p ORDER BY p.id DESC"),
+	@NamedQuery(name = "Perfil.findAll", query = "SELECT p FROM Perfil p ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Perfil.findAtivos", query = "SELECT p FROM Perfil p WHERE p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Perfil.findNome", query = "SELECT p FROM Perfil p WHERE p.nome = :nome"),
 	@NamedQuery(name = "Perfil.findId", query = "SELECT p FROM Perfil p WHERE p.id = :id"),

@@ -75,6 +75,15 @@ public class CargoService {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Cargo> listarTodos() {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Cargo.findAll");
+		List<Cargo> cargos = q.getResultList();
+		manager.close();
+		return cargos;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Cargo> listarHistorico() {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("Cargo.findAll");

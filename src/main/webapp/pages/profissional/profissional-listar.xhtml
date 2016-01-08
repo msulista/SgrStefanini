@@ -18,12 +18,25 @@
 		<h:form>
 			
 			<div class="pesquisa">
+
 				<p:inputMask styleClass="input-pesquisa" mask="999999" id="matricula" value="#{profissionalManager.profissional.matricula}" pt:placeholder="Pesquisar por Matrícula..."/>
 				<p:inputText styleClass="input-pesquisa" id="nome" value="#{profissionalManager.profissional.nome}" pt:placeholder="Pesquisar por Nome..."/>
+				
 				<p:selectOneMenu styleClass="dropdown-pesquisa" id="equipe" value="#{profissionalManager.profissional.equipe}" converter="simpleEntityConverter">
 						<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
 						<f:selectItems value="#{equipeManager.listarAtivos()}" var="equipe" itemLabel="#{equipe.nome}" itemValue="#{equipe}"/>
-				</p:selectOneMenu>		
+				</p:selectOneMenu>	
+				
+				<p:selectOneMenu styleClass="dropdown-pesquisa" id="cargo" value="#{profissionalManager.profissional.cargo}" converter="simpleEntityConverter">
+                    <f:selectItem itemLabel="#{message['select.cargo']}" noSelectionOption="true"/>
+                    <f:selectItems value="#{cargoManager.listarTodos()}" var="cargo" itemLabel="#{cargo.nome}" itemValue="#{cargo}"/>
+	            </p:selectOneMenu>
+	            
+	            <p:selectOneMenu styleClass="dropdown-pesquisa" id="perfil" value="#{profissionalManager.profissional.perfil}" converter="simpleEntityConverter">
+                    <f:selectItem itemLabel="#{message['select.perfil']}" noSelectionOption="true"/>
+                    <f:selectItems value="#{perfilManager.listarAtivos()}" var="perfil" itemLabel="#{perfil.nome}" itemValue="#{perfil}"/>
+                </p:selectOneMenu>	
+                
 				<div class="controle-pesquisa">
 					<p:commandButton id="pesquisar" icon="ui-icon-search" action="#{profissionalManager.executaPesquisa()}" update="gridProfissional"/>
 					<p:commandButton id="limpar" icon="ui-icon-arrowreturnthick-1-w" action="#{profissionalManager.populaLista()}" update="gridProfissional"/>
@@ -35,41 +48,41 @@
 			
 			<p:dataTable id="gridProfissional" var="profissional" value="#{profissionalManager.lista()}" emptyMessage="#{message['alerta.listaVazia']}" >
 				
-				<p:column headerText="#{message['label.profissional.matricula']} " sortBy="#{profissional.matricula}">
+				<p:column headerText="#{message['label.profissional.matricula']} ">
 					<h:outputText value="#{profissional.matricula}"/>
 				</p:column>
 				
-				<p:column headerText="#{message['label.nome']} " sortBy="#{profissional.nome}">
+				<p:column headerText="#{message['label.nome']} ">
 					<h:outputText value="#{profissional.nome}"/>
 				</p:column>
 							
-				<p:column headerText="#{message['label.profissional.celula']}" sortBy="#{profissional.celula.nome}">	
+				<p:column headerText="#{message['label.profissional.celula']}">	
 					<h:outputText value="#{profissional.celula.nome}"/>			
 				</p:column>	
 							
-				<p:column headerText="#{message['label.profissional.equipe']}" sortBy="#{profissional.equipe.nome}">
+				<p:column headerText="#{message['label.profissional.equipe']}">
 					<h:outputText value="#{profissional.equipe.nome}"/>			
 				</p:column>  
 				 
-				<p:column headerText="#{message['label.profissional.cargo']}" sortBy="#{profissional.cargo.nome}">
+				<p:column headerText="#{message['label.profissional.cargo']}">
 					<h:outputText value="#{profissional.cargo.nome}"/>			
 				</p:column>
 				
-				<p:column headerText="#{message['label.profissional.perfil']}" sortBy="#{profissional.perfil.nome}">
+				<p:column headerText="#{message['label.profissional.perfil']}">
 					<h:outputText value="#{profissional.perfil.nome}"/>	
 				</p:column>
 				
-				<p:column  headerText="#{message['label.cargaHoraria']}" sortBy="#{profissional.cargaHoraria.cargaHoraria}">
+				<p:column  headerText="#{message['label.cargaHoraria']}">
 					<h:outputText value="#{profissional.cargaHoraria.cargaHoraria}">
 						<f:converter converterId="cargaHorariaConverter"/>
 					</h:outputText>			
 				</p:column>
 				
-				<p:column headerText="#{message['label.profissional.contratacao']}" sortBy="#{profissional.formaContratacao.nome}">
+				<p:column headerText="#{message['label.profissional.contratacao']}">
 					<h:outputText value="#{profissional.formaContratacao.nome}"/>			
 				</p:column>
 				
-				<p:column headerText="#{message['label.profissional.status']}" sortBy="#{profissional.status.nome}">
+				<p:column headerText="#{message['label.profissional.status']}">
 					<h:outputText value="#{profissional.status.nome}"/>			
 				</p:column>
 				

@@ -85,6 +85,10 @@ public class CargoManager {
 		return service.listarAtivos();		
 	}
 	
+	public List<Cargo> listarTodos(){
+		return service.listarTodos();		
+	}
+	
 	public String desativar(Long id){
 		service.desativar(id);
 		return "pretty:cargo";

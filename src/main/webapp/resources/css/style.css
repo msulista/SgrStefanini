@@ -422,6 +422,7 @@ input[type=text] {
 
 .dropdown-pesquisa{
 	top: 5px;
+	margin-right: 10px;
 }
 
 .input-pesquisa{
