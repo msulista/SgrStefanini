@@ -499,15 +499,18 @@ input[type=text] {
 
 .pesquisa {
 	margin: 10px 0 0 0;
+	padding: 10px;
+	border: 5px solid #ddd;	
+}
+
+.pesquisa h1{
+	font-size:20px;
 }
 
 .conteudo {
     position: relative;
     min-height: 100%;
 }
-
-/*TESTE*/ 
-
  
 /*----- Menu Outline -----*/
 .menu a {
