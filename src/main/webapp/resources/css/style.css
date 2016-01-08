@@ -429,6 +429,11 @@ input[type=text] {
 	margin-right: 10px;
 }
 
+
+.input-pesquisa:first-child {
+    width: 70px;
+}
+
 .controle-pesquisa{
 	margin-top: 10px
 }
