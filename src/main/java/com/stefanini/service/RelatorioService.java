@@ -46,6 +46,16 @@ public class RelatorioService {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Relatorio> valorPorCelula(){
+		EntityManager manager = JPAUtil.getEntityManager();
+		String valorPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.celula.nome, AVG(p.valorHora)) FROM Profissional p WHERE p.registroValidadeInicio <= CURRENT_DATE AND p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE GROUP BY p.celula.nome";
+		Query q = manager.createQuery(valorPorEquipe);
+		List<Relatorio> relatorioValorPorEquipe = (List<Relatorio>)q.getResultList();
+		manager.close();
+		return relatorioValorPorEquipe;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Relatorio> perfilPorEquipe(){
 		EntityManager manager = JPAUtil.getEntityManager();
 		String valorPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(v.nome,v.junior,v.pleno,v.senior)FROM ViewPerfilXEquipe v";
@@ -66,6 +76,15 @@ public class RelatorioService {
 		return profissionais;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Profissional> listaDeProfissionaisPorCelula(String nome){
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByCelulaNome");
+		q.setParameter("nome", nome);
+		List<Profissional> profissionais = q.getResultList();
+		manager.close();
+		return profissionais;
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Profissional> listaDeCLTXEstagio(String nome, int serie){

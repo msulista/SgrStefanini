@@ -25,7 +25,8 @@ import com.stefanini.service.RelatorioService;
 		@URLMapping(id = "relatorioProfissional", pattern = "/profissional-por-equipe", viewId = "/pages/relatorio/relatorio-profissional-equipe.xhtml"),
 		@URLMapping(id = "relatorioContratacao", pattern = "/contratacao-por-equipe", viewId = "/pages/relatorio/relatorio-contratacao-equipe.xhtml"),
 		@URLMapping(id = "relatorioValorEquipe", pattern = "/valor-por-equipe", viewId = "/pages/relatorio/relatorio-valor-equipe.xhtml"),
-		@URLMapping(id = "relatorioPerfilEquipe", pattern = "/perfil-por-equipe", viewId = "/pages/relatorio/relatorio-perfil-equipe.xhtml")
+		@URLMapping(id = "relatorioPerfilEquipe", pattern = "/perfil-por-equipe", viewId = "/pages/relatorio/relatorio-perfil-equipe.xhtml"),
+		@URLMapping(id = "relatorioValorCelula", pattern = "/valor-por-celula", viewId = "/pages/relatorio/relatorio-valor-celula.xhtml")
 
 })
 public class RelatorioManager {
@@ -35,11 +36,14 @@ public class RelatorioManager {
 	private BarChartModel profissionalPorEquipe;
 	private BarChartModel contratacaoPorEquipe;
 	private BarChartModel valorPorEquipe;
+	private BarChartModel valorPorCelula;
 	private BarChartModel perfilPorEquipe;
+	
 	
 	private List<Relatorio> relatorioProfissionalEquipe = new ArrayList<>();
 	private List<Relatorio> relatorioContratacaoEquipe = new ArrayList<>();
 	private List<Relatorio> relatorioValorEquipe = new ArrayList<>();
+	private List<Relatorio> relatorioValorCelula = new ArrayList<>();
 	private List<Relatorio> relatorioPerfilPorEquipe = new ArrayList<>();
 	private List<Profissional> profissionais = new ArrayList<>();
 	
@@ -134,6 +138,18 @@ public class RelatorioManager {
 		
 		this.relatorioPerfilPorEquipe = relatorioPerfilPorEquipe;
 	}
+	
+	
+	public List<Relatorio> getRelatorioValorCelula() {
+		relatorioValorCelula = this.service.valorPorCelula();
+		return relatorioValorCelula;
+	}
+
+	public void setRelatorioValorCelula(List<Relatorio> relatorioValorCelula) {
+		
+		this.relatorioValorCelula = relatorioValorCelula;
+	}
+
 	public BarChartModel getPerfilPorEquipe() {
 		return perfilPorEquipe;
 	}
@@ -141,11 +157,21 @@ public class RelatorioManager {
 	public void setPerfilPorEquipe(BarChartModel perfilPorEquipe) {
 		this.perfilPorEquipe = perfilPorEquipe;
 	}
+	
+	
 	//Graficos
 
 
 
 	
+
+	public BarChartModel getValorPorCelula() {
+		return valorPorCelula;
+	}
+
+	public void setValorPorCelula(BarChartModel valorPorCelula) {
+		this.valorPorCelula = valorPorCelula;
+	}
 
 	public String getEquipe() {
 		return equipe;
@@ -160,6 +186,7 @@ public class RelatorioManager {
 	   	createCltXestagioPorEquipe();
 	   	createValorPorEquipe();
 	   	createPerfilPorEquipe();
+	   	createValorPorCelula();
 	}
 	
 	//Profissional por Equipe
@@ -350,6 +377,47 @@ public class RelatorioManager {
 	public void itemSelectPerfilPorEquipe(ItemSelectEvent event){
 		profissionais = this.service.listaDePerfilPorEquipe(relatorioPerfilPorEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
 		equipe = profissionais.get(0).getEquipe().getNome();
+		
+	}
+	
+	//Valor medio por celula
+private BarChartModel initValorPorCelula() {
+		valorTotal = 0;
+	    BarChartModel model = new BarChartModel();
+	    model.setExtender("decimalConverter");
+	    ChartSeries grafico = new ChartSeries();
+	    grafico.setLabel("Celula");
+	    for (Relatorio relatorio : getRelatorioValorCelula()) {
+	    	grafico.set(relatorio.getNome01(), relatorio.getValorMedio().doubleValue());
+	    	valorTotal = (double)(valorTotal + relatorio.getValorMedio().doubleValue());
+		}	
+	    grafico.set("Valor Médio Total", valorTotal / getRelatorioValorCelula().size());
+	    model.addSeries(grafico);	
+	    
+	    return model;
+	}
+	
+	private void createValorPorCelula() {
+		valorPorCelula = initValorPorCelula();
+		
+		valorPorCelula.setTitle("Selecione a coluna para listar os profissionais");
+		valorPorCelula.setAnimate(true);
+		valorPorCelula.setLegendPosition("ne");
+	       
+	    Axis xAxis = valorPorCelula.getAxis(AxisType.X);
+	    xAxis.setLabel("Equipes");
+	         
+	    Axis yAxis = valorPorCelula.getAxis(AxisType.Y);
+	    yAxis.setLabel("Valor R$");
+	    yAxis.setMin(0);
+	   
+	    yAxis.setTickCount(11);
+	    yAxis.setMax(valorTotal + 10);
+	}
+	
+	public void itemSelectValorPorCelula(ItemSelectEvent event){
+		profissionais = this.service.listaDeProfissionaisPorCelula(relatorioValorCelula.get(event.getItemIndex()).getNome01());
+		equipe = profissionais.get(0).getCelula().getNome();
 		
 	}
 	
