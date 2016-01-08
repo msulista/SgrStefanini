@@ -19,11 +19,11 @@
 			
 			<div class="pesquisa">
 
-				<p:inputMask styleClass="input-pesquisa" mask="999999" id="matricula" value="#{profissionalManager.profissional.matricula}" pt:placeholder="Pesquisar por Matrícula..."/>
-				<p:inputText styleClass="input-pesquisa" id="nome" value="#{profissionalManager.profissional.nome}" pt:placeholder="Pesquisar por Nome..."/>
+				<p:inputMask styleClass="input-pesquisa" mask="999999" id="matricula" value="#{profissionalManager.profissional.matricula}" pt:placeholder="Matrícula"/>
+				<p:inputText styleClass="input-pesquisa" id="nome" value="#{profissionalManager.profissional.nome}" pt:placeholder="Nome"/>
 				
 				<p:selectOneMenu styleClass="dropdown-pesquisa" id="equipe" value="#{profissionalManager.profissional.equipe}" converter="simpleEntityConverter">
-						<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
+						<f:selectItem itemLabel="#{message['select.equipe']}" noSelectionOption="true"/>
 						<f:selectItems value="#{equipeManager.listarAtivos()}" var="equipe" itemLabel="#{equipe.nome}" itemValue="#{equipe}"/>
 				</p:selectOneMenu>	
 				
@@ -36,6 +36,12 @@
                     <f:selectItem itemLabel="#{message['select.perfil']}" noSelectionOption="true"/>
                     <f:selectItems value="#{perfilManager.listarAtivos()}" var="perfil" itemLabel="#{perfil.nome}" itemValue="#{perfil}"/>
                 </p:selectOneMenu>	
+                
+                <p:selectOneMenu styleClass="dropdown-pesquisa" id="status" value="#{profissionalManager.profissional.status}">
+	                <f:converter converterId="simpleEntityConverter"/>
+	                <f:selectItem itemLabel="#{message['select.status']}" noSelectionOption="true"/>
+	                <f:selectItems value="#{statusManager.listarAtivos()}" var="status" itemLabel="#{status.nome}" itemValue="#{status}" />
+				</p:selectOneMenu>
                 
 				<div class="controle-pesquisa">
 					<p:commandButton id="pesquisar" icon="ui-icon-search" action="#{profissionalManager.executaPesquisa()}" update="gridProfissional"/>

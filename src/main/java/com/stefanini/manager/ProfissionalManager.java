@@ -33,12 +33,10 @@ public class ProfissionalManager {
 	private List<String> queryDinamica = new ArrayList<>();
 	private boolean temDataStatus = false;
 
-	public ProfissionalManager() {		
+	public ProfissionalManager() {
 		lista = new ArrayList<>();
 		populaLista();
 	}
-	
-	
 
 	public List<String> getQueryDinamica() {
 		return queryDinamica;
@@ -101,73 +99,95 @@ public class ProfissionalManager {
 	private List<Profissional> listarAtivos() {
 		return service.listarAtivos(this.queryDinamica);
 	}
-	
-	
+
 	public void populaLista() {
 
 		if (queryDinamica.isEmpty()) {
 			for (int i = 0; i <= 11; i++) {
 				queryDinamica.add("");
 			}
-			queryDinamica.set(0, "SELECT p FROM Profissional p WHERE (p.registroValidadeInicio <= CURRENT_DATE) AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ");
+			queryDinamica.set(0, "SELECT p FROM Profissional p WHERE ");
+			queryDinamica.set(1, " p.matricula != 0 ");
 			queryDinamica.set(10, " ORDER BY p.nome ASC");
 			System.out.println("$$$$$$$$$----------------- CRIEI NOVO ARRAY");
 			this.lista = listarAtivos();
 		}
 	}
-	
-	public void executaPesquisa(){
+
+	public void executaPesquisa() {
 		this.buscaPorMatricula();
 		this.buscarPorNome();
 		this.buscaPorEquipe();
 		this.buscaPorCargo();
 		this.buscaPorPerfil();
+		this.buscaPorStatus();
 		this.lista = listarAtivos();
 	}
-	
+
 	public void buscaPorMatricula() {
 		if (!(this.profissional.getMatricula() == 0)) {
 			String query = " AND p.matricula = " + this.profissional.getMatricula();
-			queryDinamica.set(1, query);
+			queryDinamica.set(2, query);
 		} else {
-			queryDinamica.set(1, "");
+			queryDinamica.set(2, "");
 		}
 	}
 
 	public void buscarPorNome() {
 		if (!this.profissional.getNome().isEmpty()) {
 			String query = " AND p.nome LIKE '" + this.profissional.getNome() + "_%'";
-			queryDinamica.set(2, query);
-		} else {
-			queryDinamica.set(2, "");
-		}
-	}
-	
-	public void buscaPorEquipe() {
-		
-		if (!(this.profissional.getEquipe() == null)) {
-			String query = " AND p.equipe.id = " + this.profissional.getEquipe().getId();
 			queryDinamica.set(3, query);
 		} else {
 			queryDinamica.set(3, "");
 		}
 	}
 
-	public void buscaPorCargo(){
-		if (!(this.profissional.getCargo() == null)) {
-			String query = " AND p.cargo.id = " + this.profissional.getCargo().getId();
+	public void buscaPorEquipe() {
+
+		if (!(this.profissional.getEquipe() == null)) {
+			String query = " AND p.equipe.id = " + this.profissional.getEquipe().getId();
 			queryDinamica.set(4, query);
 		} else {
 			queryDinamica.set(4, "");
 		}
 	}
-	
-	public void buscaPorPerfil(){
-		if (!(this.profissional.getPerfil() == null)) {
-			String query = " AND p.perfil.id = " + this.profissional.getPerfil().getId();
+
+	public void buscaPorCargo() {
+		if (!(this.profissional.getCargo() == null)) {
+			String query = " AND p.cargo.id = " + this.profissional.getCargo().getId();
 			queryDinamica.set(5, query);
 		} else {
 			queryDinamica.set(5, "");
+		}
+	}
+
+	public void buscaPorPerfil() {
+		if (!(this.profissional.getPerfil() == null)) {
+			String query = " AND p.perfil.id = " + this.profissional.getPerfil().getId();
+			queryDinamica.set(6, query);
+		} else {
+			queryDinamica.set(6, "");
+		}
+	}
+
+	public void buscaPorStatus() {
+		if (!(this.profissional.getStatus() == null)) {
+			if (!this.profissional.getStatus().getNome().equalsIgnoreCase("Inativo")) {
+				String query = " p.status.id = " + this.profissional.getStatus().getId()+" AND (p.registroValidadeInicio <= CURRENT_DATE) AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)";
+				queryDinamica.set(1, query);
+			}else{
+				String query = " p.status.id = " + this.profissional.getStatus().getId();
+				queryDinamica.set(1, query);
+			}
+
+			/*
+			 * (p.registroValidadeInicio <= CURRENT_DATE) AND
+			 * (p.registroValidaeFim IS NULL OR P.registroValidaeFim >
+			 * CURRENT_DATE)
+			 */
+
+		} else {
+			queryDinamica.set(1, " ");
 		}
 	}
 
