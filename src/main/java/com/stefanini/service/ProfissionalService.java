@@ -7,6 +7,7 @@ import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.stefanini.entidade.Equipe;
 import com.stefanini.entidade.Profissional;
 import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
@@ -162,9 +163,20 @@ public class ProfissionalService {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Profissional> listarAtivos() {
+	public List<Profissional> listarAtivos(List<String> queryDinamica) {
+		String query="";
+		for(String q : queryDinamica){
+			query = query+q;
+		}
+		System.out.println("888888888888888888888888888888888888888");
+		System.out.println("888888888888888888888888888888888888888");
+		System.out.println("888888888888888888888888888888888888888");
+		System.out.println(query);
+		System.out.println("888888888888888888888888888888888888888");
+		System.out.println("888888888888888888888888888888888888888");
+		System.out.println("888888888888888888888888888888888888888");
 		EntityManager manager = JPAUtil.getEntityManager();		
-		Query q = manager.createNamedQuery("Profissional.findAtivos");
+		Query q = manager.createQuery(query);
 		List<Profissional> profissionais = q.getResultList();
 		manager.close();
 		return profissionais;
@@ -199,6 +211,16 @@ public class ProfissionalService {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Profissional> buscaPorEquipe(Equipe equipe) {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByEquipe");
+		q.setParameter("id", equipe.getId());
+		List<Profissional> profissionais = q.getResultList();
+		manager.close();
+		return profissionais;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Profissional> getProfissionalByMatricula(int matricula) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("Profissional.findMatricula");
@@ -227,5 +249,9 @@ public class ProfissionalService {
 		manager.getTransaction().commit();
 		manager.close();
 	}	
+	
+	public void pesquisaDinamica(List query){
+		
+	}
 	
 }

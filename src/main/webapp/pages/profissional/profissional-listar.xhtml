@@ -18,9 +18,19 @@
 		<h:form>
 			
 			<div class="pesquisa">
+				<p:inputMask mask="999999" id="matricula" value="#{profissionalManager.profissional.matricula}" pt:placeholder="Pesquisar por Matrícula..."/>
+				<br/>			
+			
+				<p:inputText id="nome" value="#{profissionalManager.profissional.nome}" pt:placeholder="Pesquisar por Nome..."/>
+				<br/>
 				
-				<p:inputText id="nome" value="#{profissionalManager.nome}" pt:placeholder="Pesquisar por Nome..."/>
-				<p:commandButton id="pesquisar" icon="ui-icon-search" action="#{profissionalManager.buscarPorNome()}" update="gridProfissional"/>
+				<p:selectOneMenu id="equipe" value="#{profissionalManager.profissional.equipe}" converter="simpleEntityConverter">
+						<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
+						<f:selectItems value="#{equipeManager.listarAtivos()}" var="equipe" itemLabel="#{equipe.nome}" itemValue="#{equipe}"/>
+				</p:selectOneMenu>						
+				
+				<br/><br/>
+				<p:commandButton id="pesquisar" icon="ui-icon-search" action="#{profissionalManager.executaPesquisa()}" update="gridProfissional"/>
 				<p:commandButton id="limpar" icon="ui-icon-arrowreturnthick-1-w" action="#{profissionalManager.populaLista()}" update="gridProfissional"/>
 				<p:tooltip id="alt-pesquisar" for="pesquisar" value="Pesquisar" styleClass="alt"/>
 				<p:tooltip id="alt-limpar" for="limpar" value="Limpar" styleClass="alt"/>
