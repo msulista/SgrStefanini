@@ -26,7 +26,8 @@ import com.stefanini.service.RelatorioService;
 		@URLMapping(id = "relatorioContratacao", pattern = "/contratacao-por-equipe", viewId = "/pages/relatorio/relatorio-contratacao-equipe.xhtml"),
 		@URLMapping(id = "relatorioValorEquipe", pattern = "/valor-por-equipe", viewId = "/pages/relatorio/relatorio-valor-equipe.xhtml"),
 		@URLMapping(id = "relatorioPerfilEquipe", pattern = "/perfil-por-equipe", viewId = "/pages/relatorio/relatorio-perfil-equipe.xhtml"),
-		@URLMapping(id = "relatorioValorCelula", pattern = "/valor-por-celula", viewId = "/pages/relatorio/relatorio-valor-celula.xhtml")
+		@URLMapping(id = "relatorioValorCelula", pattern = "/valor-por-celula", viewId = "/pages/relatorio/relatorio-valor-celula.xhtml"),
+		@URLMapping(id = "relatorioContratacaoCelula", pattern = "/contratacao-por-celula", viewId = "/pages/relatorio/relatorio-contratacao-celula.xhtml")
 
 })
 public class RelatorioManager {
@@ -38,10 +39,11 @@ public class RelatorioManager {
 	private BarChartModel valorPorEquipe;
 	private BarChartModel valorPorCelula;
 	private BarChartModel perfilPorEquipe;
-	
+	private BarChartModel contratacaoPorCelula;
 	
 	private List<Relatorio> relatorioProfissionalEquipe = new ArrayList<>();
 	private List<Relatorio> relatorioContratacaoEquipe = new ArrayList<>();
+	private List<Relatorio> relatorioContratacaoCelula = new ArrayList<>();
 	private List<Relatorio> relatorioValorEquipe = new ArrayList<>();
 	private List<Relatorio> relatorioValorCelula = new ArrayList<>();
 	private List<Relatorio> relatorioPerfilPorEquipe = new ArrayList<>();
@@ -158,12 +160,14 @@ public class RelatorioManager {
 		this.perfilPorEquipe = perfilPorEquipe;
 	}
 	
-	
-	//Graficos
+	public List<Relatorio> getRelatorioContratacaoCelula() {
+		relatorioContratacaoCelula = this.service.contratacaoPorCelula();
+		return relatorioContratacaoCelula;
+	}
 
-
-
-	
+	public void setRelatorioContratacaoCelula(List<Relatorio> relatorioContratacaoCelula) {
+		this.relatorioContratacaoCelula = relatorioContratacaoCelula;
+	}
 
 	public BarChartModel getValorPorCelula() {
 		return valorPorCelula;
@@ -180,6 +184,18 @@ public class RelatorioManager {
 	public void setEquipe(String equipe) {
 		this.equipe = equipe;
 	}
+	
+	public BarChartModel getContratacaoPorCelula() {
+		return contratacaoPorCelula;
+	}
+
+	public void setContratacaoPorCelula(BarChartModel contratacaoPorCelula) {
+		this.contratacaoPorCelula = contratacaoPorCelula;
+	}
+	
+	//Graficos
+
+	
 
 	public void criaGrafico(){
 	   	createProfissionalPorEquipe();
@@ -187,6 +203,7 @@ public class RelatorioManager {
 	   	createValorPorEquipe();
 	   	createPerfilPorEquipe();
 	   	createValorPorCelula();
+	   	createCltXestagioPorCelula();
 	}
 	
 	//Profissional por Equipe
@@ -420,5 +437,58 @@ private BarChartModel initValorPorCelula() {
 		equipe = profissionais.get(0).getCelula().getNome();
 		
 	}
+	
+	//CLT X ESTAGIO POR CELULA
+	private BarChartModel initCltXestagioPorCelula() {
+		quantidadeTotal = 0;
+		quantidadeTotal2 =0;
+	    BarChartModel model = new BarChartModel();
+	 
+	    ChartSeries clt = new ChartSeries();
+	    ChartSeries estagio = new ChartSeries();
+	    
+	    clt.setLabel("CLT");
+	    estagio.setLabel("Estágio");
+	    
+	    for (Relatorio relatorio : getRelatorioContratacaoCelula()) {
+	    	
+	    	clt.set(relatorio.getNome01(), relatorio.getQuantidade01());
+	    	estagio.set(relatorio.getNome01(), relatorio.getQuantidade02());
+	    	quantidadeTotal = (int)(quantidadeTotal += relatorio.getQuantidade01());
+	    	quantidadeTotal2 = (int)(quantidadeTotal2+= relatorio.getQuantidade02());
+		}	
+	  
+	    clt.set("Total Resultados", quantidadeTotal);
+	    estagio.set("Total Resultados" ,quantidadeTotal2);
+	    model.addSeries(clt);	         
+	    model.addSeries(estagio);	         
+	    return model;
+	}	     
+	private void createCltXestagioPorCelula() {
+		quantidadeTotal = 0;
+		quantidadeTotal2 =0;
+		contratacaoPorCelula = initCltXestagioPorCelula();
+		
+		contratacaoPorCelula.setTitle("Selecione a coluna da forma de contratação desejada");
+		contratacaoPorCelula.setAnimate(true);
+		contratacaoPorCelula.setLegendPosition("ne");
+	       
+	    Axis xAxis = contratacaoPorCelula.getAxis(AxisType.X);
+	    xAxis.setLabel("Células");
+	         
+	    Axis yAxis = contratacaoPorCelula.getAxis(AxisType.Y);
+	    yAxis.setLabel("N° Profissionais");
+	    yAxis.setMin(0);
+	   
+	    yAxis.setTickCount(quantidadeTotal + 4);
+	    yAxis.setMax(quantidadeTotal + 3);
+	}
+	
+	public void itemSelectCltXestagioPorCelula(ItemSelectEvent event){
+		profissionais = this.service.listaDeCLTXEstagioCelula(relatorioContratacaoCelula.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
+		equipe = profissionais.get(0).getEquipe().getNome();
+		
+	}
+	
 	
 }
