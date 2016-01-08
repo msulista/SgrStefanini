@@ -420,6 +420,17 @@ input[type=text] {
     width: 15%;
 }
 
+.dropdown-pesquisa{
+	top: 5px;
+}
+
+.input-pesquisa{
+	margin-right: 10px;
+}
+
+.controle-pesquisa{
+	margin-top: 10px
+}
 
 .ui-widget .ui-widget {
 	margin-top: 2px;

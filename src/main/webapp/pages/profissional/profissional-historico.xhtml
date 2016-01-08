@@ -8,14 +8,14 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 	<ui:define name="content">
-		<p:breadCrumb>
-			<p:menuitem value="#{message['pao.home']}" url="#" />
-			<p:menuitem value="#{message['pao.profissional']}"
-				outcome="pretty:profissional" disabled="true" />
-		</p:breadCrumb>
-		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
-		<h2>#{message['title.profissional']}</h2>
 		<div class="historico">
+			<p:breadCrumb>
+				<p:menuitem value="#{message['pao.home']}" url="#" />
+				<p:menuitem value="#{message['pao.profissional']}"
+					outcome="pretty:profissional" disabled="true" />
+			</p:breadCrumb>
+			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
+			<h2>#{message['title.profissional']}</h2>
 			<h:form>
 				<p:dataTable id="gridProfissional" var="profissional"
 					value="#{profissionalManager.listaHistorico()}"
@@ -58,58 +58,60 @@
 					<p:column headerText="#{message['label.profissional.status']}">
 						<h:outputText value="#{profissional.status.nome}" />
 					</p:column>
-					
+
 					<p:column headerText="#{message['label.profissional.saida']}">
 						<h:outputText value="#{profissional.dataSaida}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
-					
+
 					<p:column headerText="#{message['label.profissional.retorno']}">
 						<h:outputText value="#{profissional.dataRetorno}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
-					
+
 					<p:column headerText="#{message['label.profissional.salario']}">
 						<h:outputText value="#{profissional.salario}">
 							<f:convertNumber minFractionDigits="2" type="currency"
 								currencySymbol="R$" />
 						</h:outputText>
 					</p:column>
-					
+
 					<p:column headerText="#{message['label.profissional.beneficios']}">
 						<h:outputText value="#{profissional.beneficios}">
 							<f:convertNumber minFractionDigits="2" type="currency"
 								currencySymbol="R$" />
 						</h:outputText>
 					</p:column>
-					
+
 					<p:column headerText="#{message['label.profissional.valorHora']}">
 						<h:outputText value="#{profissional.valorHora}">
 							<f:convertNumber minFractionDigits="2" type="currency"
 								currencySymbol="R$" />
 						</h:outputText>
 					</p:column>
-					
-					<p:column headerText="#{message['label.profissional.dataAdmissao']}">
+
+					<p:column
+						headerText="#{message['label.profissional.dataAdmissao']}">
 						<h:outputText value="#{profissional.dataAdmissao}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
-					
-					<p:column headerText="#{message['label.profissional.dataAdmissao']}">
+
+					<p:column
+						headerText="#{message['label.profissional.dataAdmissao']}">
 						<h:outputText value="#{profissional.dataDemissao}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
-										
+
 					<p:column headerText="#{message['label.registro.inicio']}">
 						<h:outputText value="#{profissional.registroValidadeInicio}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
-					
+
 					<p:column headerText="#{message['label.registro.fim']}">
 						<h:outputText value="#{profissional.registroValidaeFim}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
