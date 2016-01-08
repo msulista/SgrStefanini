@@ -144,6 +144,7 @@ html, body {
 
 .ct-menu ul li.item-last {
 	border: none;
+	margin-bottom: 5px;
 }
 
 /*----- Menu Outline -----*/
@@ -400,6 +401,10 @@ input[type=text] {
 }
 
 .panel-formulario {
+	width: 30%;
+}
+
+.panel-formulario-historico{
 	width: 35%;
 }
 
@@ -411,7 +416,7 @@ input[type=text] {
 	text-align: right;
 }
 
-.incluir-editar .ui-datatable thead th:last-child {
+.panel-formulario .ui-datatable thead th:last-child {
     width: 15%;
 }
 
