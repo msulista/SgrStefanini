@@ -17,7 +17,8 @@
 		<h2>#{message['title.profissional']}</h2>
 		<h:form>
 			
-			<div class="pesquisa">
+				
+			<h:panelGroup styleClass="pesquisa" id="formularioAvancado">
 				<h1> Pesquisa Avançada </h1>
 
 				<p:inputMask styleClass="input-pesquisa" mask="999999" id="matricula" value="#{profissionalManager.profissional.matricula}" pt:placeholder="Matrícula"/>
@@ -46,11 +47,11 @@
                 
 				<div class="controle-pesquisa">
 					<p:commandButton id="pesquisar" icon="ui-icon-search" action="#{profissionalManager.executaPesquisa()}" update="gridProfissional"/>
-					<p:commandButton id="limpar" icon="ui-icon-arrowreturnthick-1-w" action="#{profissionalManager.populaLista()}" update="gridProfissional"/>
+					<p:commandButton id="limpar" icon="ui-icon-arrowreturnthick-1-w" action="#{profissionalManager.limparPesquisa()}" update="gridProfissional formularioAvancado"/>
 					<p:tooltip id="alt-pesquisar" for="pesquisar" value="Pesquisar" styleClass="alt"/>
 					<p:tooltip id="alt-limpar" for="limpar" value="Limpar" styleClass="alt"/>
 				</div>
-			</div>
+			</h:panelGroup>
 
 			
 			<p:dataTable id="gridProfissional" var="profissional" value="#{profissionalManager.lista()}" emptyMessage="#{message['alerta.listaVazia']}" >

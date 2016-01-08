@@ -239,6 +239,7 @@ public class RelatorioManager {
 	    BarChartModel model = new BarChartModel();
 	    model.setLegendPosition("ne");
     	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
+    	model.setShowPointLabels(true);
 	    ChartSeries grafico = new ChartSeries();
 	    grafico.setLabel("Equipe");
 	    for (Relatorio relatorio : getRelatorioProfissionalEquipe()) {
@@ -264,7 +265,7 @@ public class RelatorioManager {
 	   yAxis.setLabel("N° Profissionais");
 	   yAxis.setMin(0);
 	   
-	   yAxis.setTickCount(quantidadeTotal + 4);
+	   yAxis.setTickCount(11);
 	   yAxis.setMax(quantidadeTotal + 3);
 	}
 	
@@ -337,6 +338,7 @@ public class RelatorioManager {
 	    ChartSeries grafico = new ChartSeries();
 	    model.setLegendPosition("ne");
     	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
+    	model.setShowPointLabels(true);
 	    grafico.setLabel("Equipe");
 	    for (Relatorio relatorio : getRelatorioValorEquipe()) {
 	    	grafico.set(relatorio.getNome01(), relatorio.getValorMedio().doubleValue());
@@ -436,6 +438,7 @@ private BarChartModel initValorPorCelula() {
 	    model.setLegendPosition("ne");
     	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
 	    model.setExtender("decimalConverter");
+	    model.setShowPointLabels(true);
 	    ChartSeries grafico = new ChartSeries();
 	    grafico.setLabel("Celula");
 	    for (Relatorio relatorio : getRelatorioValorCelula()) {

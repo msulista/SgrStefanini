@@ -161,13 +161,10 @@ public class ProfissionalService {
 			return false;
 		}
 	}
-
+	
 	@SuppressWarnings("unchecked")
-	public List<Profissional> listarAtivos(List<String> queryDinamica) {
-		String query="";
-		for(String q : queryDinamica){
-			query = query+q;
-		}
+	public List<Profissional> listarTudo(String query) {
+		
 		System.out.println("888888888888888888888888888888888888888");
 		System.out.println("888888888888888888888888888888888888888");
 		System.out.println("888888888888888888888888888888888888888");
@@ -249,9 +246,5 @@ public class ProfissionalService {
 		manager.getTransaction().commit();
 		manager.close();
 	}	
-	
-	public void pesquisaDinamica(List query){
 		
-	}
-	
 }
