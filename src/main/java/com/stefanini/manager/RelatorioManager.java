@@ -12,6 +12,7 @@ import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.LegendPlacement;
 
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
@@ -27,8 +28,9 @@ import com.stefanini.service.RelatorioService;
 		@URLMapping(id = "relatorioValorEquipe", pattern = "/valor-por-equipe", viewId = "/pages/relatorio/relatorio-valor-equipe.xhtml"),
 		@URLMapping(id = "relatorioPerfilEquipe", pattern = "/perfil-por-equipe", viewId = "/pages/relatorio/relatorio-perfil-equipe.xhtml"),
 		@URLMapping(id = "relatorioValorCelula", pattern = "/valor-por-celula", viewId = "/pages/relatorio/relatorio-valor-celula.xhtml"),
-		@URLMapping(id = "relatorioContratacaoCelula", pattern = "/contratacao-por-celula", viewId = "/pages/relatorio/relatorio-contratacao-celula.xhtml")
-
+		@URLMapping(id = "relatorioContratacaoCelula", pattern = "/contratacao-por-celula", viewId = "/pages/relatorio/relatorio-contratacao-celula.xhtml"),
+		@URLMapping(id = "relatorioPerfilCelula", pattern = "/perfil-por-celula", viewId = "/pages/relatorio/relatorio-perfil-celula.xhtml"),
+		
 })
 public class RelatorioManager {
 	
@@ -40,6 +42,8 @@ public class RelatorioManager {
 	private BarChartModel valorPorCelula;
 	private BarChartModel perfilPorEquipe;
 	private BarChartModel contratacaoPorCelula;
+	private BarChartModel perfilPorCelula;
+	
 	
 	private List<Relatorio> relatorioProfissionalEquipe = new ArrayList<>();
 	private List<Relatorio> relatorioContratacaoEquipe = new ArrayList<>();
@@ -48,11 +52,14 @@ public class RelatorioManager {
 	private List<Relatorio> relatorioValorCelula = new ArrayList<>();
 	private List<Relatorio> relatorioPerfilPorEquipe = new ArrayList<>();
 	private List<Profissional> profissionais = new ArrayList<>();
+	private List<Relatorio> relatorioPerfilPorCelula = new ArrayList<>();
+	
 	
 	private String equipe = "";
 	private int quantidadeTotal = 0;
 	private int quantidadeTotal2 = 0;
 	private int quantidadeTotal3 = 0;
+	private double porcentagem = 0;
 	private double valorTotal = 0;
 
 	public RelatorioManager() {
@@ -193,10 +200,29 @@ public class RelatorioManager {
 		this.contratacaoPorCelula = contratacaoPorCelula;
 	}
 	
+	public BarChartModel getPerfilPorCelula() {
+		return perfilPorCelula;
+	}
+
+	public void setPerfilPorCelula(BarChartModel perfilPorCelula) {
+		this.perfilPorCelula = perfilPorCelula;
+	}
+
+	public List<Relatorio> getRelatorioPerfilPorCelula() {
+		relatorioPerfilPorCelula = this.service.perfilPorCelula();
+		return relatorioPerfilPorCelula;
+	}
+
+	public void setRelatorioPerfilPorCelula(List<Relatorio> relatorioPerfilPorCelula) {
+		this.relatorioPerfilPorCelula = relatorioPerfilPorCelula;
+	}
+
+	
 	//Graficos
 
 	
 
+	
 	public void criaGrafico(){
 	   	createProfissionalPorEquipe();
 	   	createCltXestagioPorEquipe();
@@ -204,13 +230,15 @@ public class RelatorioManager {
 	   	createPerfilPorEquipe();
 	   	createValorPorCelula();
 	   	createCltXestagioPorCelula();
+	   	createPerfilPorCelula();
 	}
 	
 	//Profissional por Equipe
 	private BarChartModel initProfissionalPorEquipe() {
 		quantidadeTotal =0;
 	    BarChartModel model = new BarChartModel();
-	 
+	    model.setLegendPosition("ne");
+    	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
 	    ChartSeries grafico = new ChartSeries();
 	    grafico.setLabel("Equipe");
 	    for (Relatorio relatorio : getRelatorioProfissionalEquipe()) {
@@ -227,7 +255,7 @@ public class RelatorioManager {
 	         
 	   profissionalPorEquipe.setTitle("Selecione a coluna da equipe desejada");
 	   profissionalPorEquipe.setAnimate(true);
-	   profissionalPorEquipe.setLegendPosition("ne");
+	   
 	       
 	   Axis xAxis = profissionalPorEquipe.getAxis(AxisType.X);
 	   xAxis.setLabel("Equipes");
@@ -252,7 +280,8 @@ public class RelatorioManager {
 		quantidadeTotal = 0;
 		quantidadeTotal2 =0;
 	    BarChartModel model = new BarChartModel();
-	 
+	    model.setLegendPosition("ne");
+    	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
 	    ChartSeries clt = new ChartSeries();
 	    ChartSeries estagio = new ChartSeries();
 	    
@@ -280,7 +309,7 @@ public class RelatorioManager {
 		
 		contratacaoPorEquipe.setTitle("Selecione a coluna da forma de contratação desejada");
 		contratacaoPorEquipe.setAnimate(true);
-		contratacaoPorEquipe.setLegendPosition("ne");
+		
 	       
 	    Axis xAxis = contratacaoPorEquipe.getAxis(AxisType.X);
 	    xAxis.setLabel("Equipes");
@@ -306,6 +335,8 @@ public class RelatorioManager {
 	    BarChartModel model = new BarChartModel();
 	    model.setExtender("decimalConverter");
 	    ChartSeries grafico = new ChartSeries();
+	    model.setLegendPosition("ne");
+    	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
 	    grafico.setLabel("Equipe");
 	    for (Relatorio relatorio : getRelatorioValorEquipe()) {
 	    	grafico.set(relatorio.getNome01(), relatorio.getValorMedio().doubleValue());
@@ -322,7 +353,7 @@ public class RelatorioManager {
 		
 		valorPorEquipe.setTitle("Selecione a coluna para listar os profissionais");
 		valorPorEquipe.setAnimate(true);
-		valorPorEquipe.setLegendPosition("ne");
+		
 	       
 	    Axis xAxis = valorPorEquipe.getAxis(AxisType.X);
 	    xAxis.setLabel("Equipes");
@@ -346,14 +377,15 @@ public class RelatorioManager {
 		quantidadeTotal =0;
 		quantidadeTotal2 =0;
 		quantidadeTotal3 =0;
-	    BarChartModel model = new BarChartModel();
-	 
+	    BarChartModel model = new BarChartModel(); 
+	    	model.setLegendPosition("ne");
+	    	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
 	    ChartSeries junior = new ChartSeries();
 	    ChartSeries pleno = new ChartSeries();
 	    ChartSeries senior = new ChartSeries();
-	    junior.setLabel("JUNIOR");
-	    pleno.setLabel("PLENO");
-	    senior.setLabel("SENIOR");
+	    junior.setLabel("Junior");
+	    pleno.setLabel("Pleno");
+	    senior.setLabel("Sênior");
 	    
 	    for (Relatorio relatorio : getRelatorioPerfilPorEquipe()) {
 	    	
@@ -378,7 +410,7 @@ public class RelatorioManager {
 		
 		perfilPorEquipe.setTitle("Selecione a coluna da forma de contratação desejada");
 		perfilPorEquipe.setAnimate(true);
-		perfilPorEquipe.setLegendPosition("ne");
+		
 	       
 	    Axis xAxis = perfilPorEquipe.getAxis(AxisType.X);
 	    xAxis.setLabel("Equipes");
@@ -401,6 +433,8 @@ public class RelatorioManager {
 private BarChartModel initValorPorCelula() {
 		valorTotal = 0;
 	    BarChartModel model = new BarChartModel();
+	    model.setLegendPosition("ne");
+    	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
 	    model.setExtender("decimalConverter");
 	    ChartSeries grafico = new ChartSeries();
 	    grafico.setLabel("Celula");
@@ -419,7 +453,7 @@ private BarChartModel initValorPorCelula() {
 		
 		valorPorCelula.setTitle("Selecione a coluna para listar os profissionais");
 		valorPorCelula.setAnimate(true);
-		valorPorCelula.setLegendPosition("ne");
+		
 	       
 	    Axis xAxis = valorPorCelula.getAxis(AxisType.X);
 	    xAxis.setLabel("Equipes");
@@ -443,7 +477,8 @@ private BarChartModel initValorPorCelula() {
 		quantidadeTotal = 0;
 		quantidadeTotal2 =0;
 	    BarChartModel model = new BarChartModel();
-	 
+	    model.setLegendPosition("ne");
+    	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
 	    ChartSeries clt = new ChartSeries();
 	    ChartSeries estagio = new ChartSeries();
 	    
@@ -471,7 +506,7 @@ private BarChartModel initValorPorCelula() {
 		
 		contratacaoPorCelula.setTitle("Selecione a coluna da forma de contratação desejada");
 		contratacaoPorCelula.setAnimate(true);
-		contratacaoPorCelula.setLegendPosition("ne");
+		
 	       
 	    Axis xAxis = contratacaoPorCelula.getAxis(AxisType.X);
 	    xAxis.setLabel("Células");
@@ -490,5 +525,63 @@ private BarChartModel initValorPorCelula() {
 		
 	}
 	
+	//PERFIL POR CELULA
+	private BarChartModel initPerfilPorCelula() {
 	
+	    BarChartModel model = new BarChartModel();
+	    model.setExtender("decimalConverter");
+	    model.setLegendPosition("ne");
+    	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
+	    ChartSeries junior = new ChartSeries();
+	    ChartSeries pleno = new ChartSeries();
+	    ChartSeries senior = new ChartSeries();
+	    ChartSeries total = new ChartSeries();
+	    junior.setLabel("Junior");
+	    pleno.setLabel("Pleno");
+	    senior.setLabel("Sênior");
+	    total.setLabel("Total Resultado");
+	    for (Relatorio relatorio : getRelatorioPerfilPorCelula()) {
+	    	porcentagem = (double) ((relatorio.getQuantidade01()+relatorio.getQuantidade02())+relatorio.getQuantidade03());
+	    	System.out.println("ckdhfkasjka   "+porcentagem);
+	    	junior.set(relatorio.getNome01(),(relatorio.getQuantidade01()*100)/porcentagem);
+	    	System.out.println("ckdhfkasjka   "+(relatorio.getQuantidade01()*100)/porcentagem);
+	    	pleno.set(relatorio.getNome01(), (relatorio.getQuantidade02()*100)/porcentagem);
+	    	senior.set(relatorio.getNome01(), (relatorio.getQuantidade03()*100)/porcentagem);
+	    	total.set(relatorio.getNome01(), (porcentagem*100)/porcentagem);
+	    	porcentagem = 0;
+		}	
+	
+	    
+	   
+	   
+	    model.addSeries(junior);	         
+	    model.addSeries(pleno);	   
+	    model.addSeries(senior);	
+	    model.addSeries(total);
+	    return model;
+	}	     
+	private void createPerfilPorCelula() {
+		
+		perfilPorCelula = initPerfilPorCelula();
+		
+		perfilPorCelula.setTitle("Selecione a coluna da forma de contratação desejada");
+		perfilPorCelula.setAnimate(true);
+		
+	       
+	    Axis xAxis = perfilPorCelula.getAxis(AxisType.X);
+	    xAxis.setLabel("Celula");
+	         
+	    Axis yAxis = perfilPorCelula.getAxis(AxisType.Y);
+	    yAxis.setLabel("% Profissionais");
+	    yAxis.setMin(0);
+	   
+	    yAxis.setTickCount(11);
+	    yAxis.setMax(100);
+	}
+	
+	public void itemSelectPerfilPorCelula(ItemSelectEvent event){
+		profissionais = this.service.listaDePerfilPorCelula(relatorioPerfilPorCelula.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
+		equipe = profissionais.get(0).getEquipe().getNome();
+		
+	}
 }

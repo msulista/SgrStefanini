@@ -72,11 +72,22 @@ public class RelatorioService {
 	@SuppressWarnings("unchecked")
 	public List<Relatorio> perfilPorEquipe(){
 		EntityManager manager = JPAUtil.getEntityManager();
-		String valorPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(v.nome,v.junior,v.pleno,v.senior)FROM ViewPerfilXEquipe v";
-		Query q = manager.createQuery(valorPorEquipe);
+		String perfilPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(v.nome,v.junior,v.pleno,v.senior)FROM ViewPerfilXEquipe v";
+		Query q = manager.createQuery(perfilPorEquipe);
 		List<Relatorio> relatorioValorPorEquipe = (List<Relatorio>)q.getResultList();
 		manager.close();
 		return relatorioValorPorEquipe;
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Relatorio> perfilPorCelula(){
+		EntityManager manager = JPAUtil.getEntityManager();
+		String perfilPorCelula = "SELECT new com.stefanini.entidade.Relatorio(v.nome,v.junior,v.pleno,v.senior)FROM ViewPerfilXCelula v";
+		Query q = manager.createQuery(perfilPorCelula);
+		List<Relatorio> relatorioPerfilPorCelula = (List<Relatorio>)q.getResultList();
+		manager.close();
+		return relatorioPerfilPorCelula;
 		
 	}
 	
@@ -152,5 +163,35 @@ public class RelatorioService {
 		return profissionais;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Profissional> listaDePerfilPorCelula(String nome, int serie){
+		String serieString;
+		String queryString;
+		if(serie == 0){
+			 serieString = "Júnior";
+			 queryString= "Profissional.findProfissionalByCelulaEPerfil";
+		}else if(serie == 1){
+			serieString = "Pleno";
+			queryString= "Profissional.findProfissionalByCelulaEPerfil";
+		}else if (serie ==2){
+			serieString = "Sênior";
+			queryString= "Profissional.findProfissionalByCelulaEPerfil";
+		}else{
+			serieString ="";
+			queryString ="Profissional.findProfissionalByCelulaNome";
+		}
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery(queryString);
+		if(serie == 0||serie==1||serie==2){
+		q.setParameter("nome", nome);
+		q.setParameter("serie", serieString);
+		}else{
+			q.setParameter("nome", nome);
+		}
+		
+		List<Profissional> profissionais = q.getResultList();
+		manager.close();
+		return profissionais;
+	}
 	
 }

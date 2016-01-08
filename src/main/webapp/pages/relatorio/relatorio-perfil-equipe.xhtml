@@ -28,37 +28,37 @@
 				<h:outputText value="#{relatorioManager.equipe}" />
 			</f:facet>
 										
-			<p:column headerText="#{message['label.profissional.matricula']} " sortBy="#{profissional.matricula}">
+			<p:column headerText="#{message['label.profissional.matricula']} ">
 				<h:outputText value="#{profissional.matricula}"/>
 			</p:column>
 				
-			<p:column headerText="#{message['label.nome']} " sortBy="#{profissional.nome}">
+			<p:column headerText="#{message['label.nome']} ">
 				<h:outputText value="#{profissional.nome}"/>
 			</p:column>
 							
-			<p:column headerText="#{message['label.profissional.celula']}" sortBy="#{profissional.celula.nome}">	
+			<p:column headerText="#{message['label.profissional.celula']}">	
 				<h:outputText value="#{profissional.celula.nome}"/>			
 			</p:column>	 
 				 
-			<p:column headerText="#{message['label.profissional.cargo']}" sortBy="#{profissional.cargo.nome}">
+			<p:column headerText="#{message['label.profissional.cargo']}">
 				<h:outputText value="#{profissional.cargo.nome}"/>			
 			</p:column>
 				
-			<p:column headerText="#{message['label.profissional.perfil']}" sortBy="#{profissional.perfil.nome}">
+			<p:column headerText="#{message['label.profissional.perfil']}">
 				<h:outputText value="#{profissional.perfil.nome}"/>	
 			</p:column>
 				
-			<p:column  headerText="#{message['label.cargaHoraria']}" sortBy="#{profissional.cargaHoraria.cargaHoraria}">
+			<p:column  headerText="#{message['label.cargaHoraria']}">
 				<h:outputText value="#{profissional.cargaHoraria.cargaHoraria}">
 					<f:converter converterId="cargaHorariaConverter"/>
 				</h:outputText>			
 			</p:column>
 				
-			<p:column headerText="#{message['label.profissional.contratacao']}" sortBy="#{profissional.formaContratacao.nome}">
+			<p:column headerText="#{message['label.profissional.contratacao']}">
 				<h:outputText value="#{profissional.formaContratacao.nome}"/>			
 			</p:column>
 				
-			<p:column headerText="#{message['label.profissional.status']}" sortBy="#{profissional.status.nome}">
+			<p:column headerText="#{message['label.profissional.status']}">
 				<h:outputText value="#{profissional.status.nome}"/>			
 			</p:column>
 		</p:dataTable>

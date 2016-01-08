@@ -22,7 +22,7 @@
 			<br />
 				<p:dataTable id="gridCargos" var="cargo" value="#{cargoManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
 	
-					<p:column headerText="#{message['label.nome']}" sortBy="#{cargo.nome}">
+					<p:column headerText="#{message['label.nome']}" >
 						<h:outputText value="#{cargo.nome}" />
 					</p:column>
 					

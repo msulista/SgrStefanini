@@ -21,7 +21,7 @@
 			  <p:tooltip id="alt-historicoo" for="historico" value="#{message['label.historico']}" styleClass="alt"/>
 			<br />
 				<p:dataTable id="gridEquipes" var="equipe" value="#{equipeManager.lista}" emptyMessage="#{message['alerta.listaVazia']}">
-					<p:column headerText="#{message['label.nome']}" sortBy="#{equipe.nome}">
+					<p:column headerText="#{message['label.nome']}">
 						<h:outputText value="#{equipe.nome}" />
 					</p:column>
 					

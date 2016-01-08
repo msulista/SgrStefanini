@@ -23,7 +23,7 @@
 				<p:dataTable id="gridPerfis" var="perfil"
 					value="#{perfilManager.lista}"
 					emptyMessage="#{message['alerta.listaVazia']}">
-					<p:column headerText="#{message['label.nome']}" sortBy="#{perfil.nome}">
+					<p:column headerText="#{message['label.nome']}" >
 						<h:outputText value="#{perfil.nome}" />
 					</p:column>
 					<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">

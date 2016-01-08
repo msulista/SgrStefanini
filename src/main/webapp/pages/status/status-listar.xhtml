@@ -21,7 +21,7 @@
 			<br />
 			<h:form>
 				<p:dataTable id="gridStatus" var="status" value="#{statusManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
-					<p:column headerText="#{message['label.nome']}" sortBy="#{status.nome}">
+					<p:column headerText="#{message['label.nome']}">
 						<h:outputText value="#{status.nome}" />
 					</p:column>
 					<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
