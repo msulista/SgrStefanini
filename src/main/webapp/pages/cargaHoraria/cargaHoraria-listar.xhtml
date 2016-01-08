@@ -23,7 +23,7 @@
 			   <p:tooltip id="alt-historicoo" for="historico" value="#{message['label.historico']}" styleClass="alt"/>
 			<br />
 				<p:dataTable id="gridCargaHoraria" var="cargaHoraria" value="#{cargaHorariaManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
-					<p:column headerText="#{message['label.cargaHoraria']}" for="cargaHoraria" sortBy="#{cargaHoraria.cargaHoraria}">
+					<p:column headerText="#{message['label.cargaHoraria']}" for="cargaHoraria">
 						<h:outputText id="cargaHoraria" value="#{cargaHoraria.cargaHoraria}">
 							<f:converter converterId="cargaHorariaConverter"/>
 						</h:outputText>						
