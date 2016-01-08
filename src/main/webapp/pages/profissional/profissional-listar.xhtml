@@ -16,10 +16,10 @@
 		
 		<h2>#{message['title.profissional']}</h2>
 		<h:form>
-			
+			<div class="pesquisa">
+				<h3> Pesquisa Avançada </h3>
+			<h:panelGroup id="formularioAvancado">
 				
-			<h:panelGroup styleClass="pesquisa" id="formularioAvancado">
-				<h1> Pesquisa Avançada </h1>
 
 				<p:inputMask styleClass="input-pesquisa" mask="999999" id="matricula" value="#{profissionalManager.profissional.matricula}" pt:placeholder="Matrícula"/>
 				<p:inputText styleClass="input-pesquisa" id="nome" value="#{profissionalManager.profissional.nome}" pt:placeholder="Nome"/>
@@ -52,7 +52,7 @@
 					<p:tooltip id="alt-limpar" for="limpar" value="Limpar" styleClass="alt"/>
 				</div>
 			</h:panelGroup>
-
+			</div>
 			
 			<p:dataTable id="gridProfissional" var="profissional" value="#{profissionalManager.lista()}" emptyMessage="#{message['alerta.listaVazia']}" >
 				

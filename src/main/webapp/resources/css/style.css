@@ -500,7 +500,8 @@ input[type=text] {
 .pesquisa {
 	margin: 10px 0 0 0;
 	padding: 10px;
-	border: 5px solid #ddd;	
+	border: 1px solid #ddd;	
+	border-radius:7px;
 }
 
 .pesquisa h1{
