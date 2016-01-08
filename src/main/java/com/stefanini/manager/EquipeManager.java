@@ -79,6 +79,10 @@ public class EquipeManager {
 	public List<Equipe> listarAtivos() {
 		return service.listarAtivos();
 	}
+	
+	public List<Equipe> listarTodos(){
+		return service.listarTodos();
+	}
 
 	public String desativar(Long id) {
 		service.desativar(id);

@@ -18,7 +18,7 @@ import com.stefanini.util.DateUtil;
 @Entity
 @Table(name = "SGR_CARGO")
 @NamedQueries({
-	@NamedQuery(name = "Cargo.findAll", query = "SELECT c FROM Cargo c ORDER BY c.id DESC"),
+	@NamedQuery(name = "Cargo.findAll", query = "SELECT c FROM Cargo c ORDER BY c.nome ASC"),
 	@NamedQuery(name = "Cargo.findAtivos", query = "SELECT c FROM Cargo c WHERE c.registroValidadeFim IS NULL OR c.registroValidadeFim > CURRENT_DATE ORDER BY c.nome ASC"),
 	@NamedQuery(name = "Cargo.findNome", query = "SELECT c FROM Cargo c WHERE c.nome = :nome"),
 	@NamedQuery(name = "Cargo.findId", query = "SELECT c FROM Cargo c WHERE c.id = :id")

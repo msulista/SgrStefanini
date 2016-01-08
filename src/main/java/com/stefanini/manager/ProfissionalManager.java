@@ -119,7 +119,9 @@ public class ProfissionalManager {
 	public void executaPesquisa(){
 		this.buscaPorMatricula();
 		this.buscarPorNome();
-		this.buscaPorEquipe();	
+		this.buscaPorEquipe();
+		this.buscaPorCargo();
+		this.buscaPorPerfil();
 		this.lista = listarAtivos();
 	}
 	
@@ -140,7 +142,7 @@ public class ProfissionalManager {
 			queryDinamica.set(2, "");
 		}
 	}
-
+	
 	public void buscaPorEquipe() {
 		
 		if (!(this.profissional.getEquipe() == null)) {
@@ -151,7 +153,23 @@ public class ProfissionalManager {
 		}
 	}
 
-
+	public void buscaPorCargo(){
+		if (!(this.profissional.getCargo() == null)) {
+			String query = " AND p.cargo.id = " + this.profissional.getCargo().getId();
+			queryDinamica.set(4, query);
+		} else {
+			queryDinamica.set(4, "");
+		}
+	}
+	
+	public void buscaPorPerfil(){
+		if (!(this.profissional.getPerfil() == null)) {
+			String query = " AND p.perfil.id = " + this.profissional.getPerfil().getId();
+			queryDinamica.set(5, query);
+		} else {
+			queryDinamica.set(5, "");
+		}
+	}
 
 	public List<Profissional> lista() {
 		return this.lista;

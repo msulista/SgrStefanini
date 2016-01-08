@@ -82,6 +82,10 @@ public class PerfilManager {
 	public List<Perfil> listarAtivos() {
 		return service.listarAtivos();
 	}
+	
+	public List<Perfil> listarTodos() {
+		return service.listarTodos();
+	}
 
 	public String desativar(Long id) {
 		service.desativar(id);
