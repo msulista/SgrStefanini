@@ -38,7 +38,8 @@ import com.stefanini.util.DateUtil;
 	@NamedQuery(name = "Profissional.checkMatriculaParaEdicao", query ="SELECT p FROM Profissional p WHERE p.id = (SELECT MAX(pr.id)FROM Profissional pr WHERE pr.matricula = :matricula)"),
 	@NamedQuery(name = "Profissional.findProfissionalByEquipeEContratacao", query ="SELECT p FROM Profissional p WHERE p.equipe.nome = :nome AND p.formaContratacao.nome = :serie AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC)"),
 	@NamedQuery(name = "Profissional.findProfissionalByCelulaEContratacao", query ="SELECT p FROM Profissional p WHERE p.celula.nome = :nome AND p.formaContratacao.nome = :serie AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC)"),
-	@NamedQuery(name = "Profissional.findProfissionalByEquipeEPerfil", query ="SELECT p FROM Profissional p WHERE p.equipe.nome = :nome AND p.perfil.nome = :serie AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC)")
+	@NamedQuery(name = "Profissional.findProfissionalByEquipeEPerfil", query ="SELECT p FROM Profissional p WHERE p.equipe.nome = :nome AND p.perfil.nome = :serie AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC)"),
+	@NamedQuery(name = "Profissional.findProfissionalByCelulaEPerfil", query ="SELECT p FROM Profissional p WHERE p.celula.nome = :nome AND p.perfil.nome = :serie AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC)")
 
 })
 public class Profissional implements BaseEntity, Serializable {
