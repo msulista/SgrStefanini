@@ -15,12 +15,15 @@
 		    	<p:growl id="growl" life="4000" />
 		    	<p:panel header="#{message['title.perfil.cadastro']}" id="painel">	
 					<p:focus context="painel"/>		
-		    		<p:outputLabel value="#{message['label.nome']} *" styleClass="label"/>
-		    		<p:inputText value="#{perfilManager.perfil.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}"/><br /><br />
-		    		<p:outputLabel for="button" value="#{message['label.data.inicio']}" styleClass="label" />
-		    		<p:calendar id="button" value="#{perfilManager.perfil.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/><br /><br/>
-		    		<p:outputLabel for="buttonFim" value="#{message['label.data.final']}" styleClass="label" />
-		    		<p:calendar id="buttonFim" value="#{perfilManager.perfil.registroValidadeFim}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/><br /><br/>
+		    		<p:outputLabel value="#{message['label.nome']} *" styleClass="label" title="#{message['label.title.perfil.nome']}"/>
+		    		<p:inputText value="#{perfilManager.perfil.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}"/>
+		    		<br /><br />
+		    		<p:outputLabel for="button" value="#{message['label.data.inicio']}" styleClass="label" title="#{message['label.title.perfil.dataInicio']}"/>
+		    		<p:calendar id="button" value="#{perfilManager.perfil.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
+		    		<br /><br/>
+		    		<p:outputLabel for="buttonFim" value="#{message['label.data.final']}" styleClass="label" title="#{message['label.title.perfil.dataFim']}"/>
+		    		<p:calendar id="buttonFim" value="#{perfilManager.perfil.registroValidadeFim}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>
+		    		<br /><br/>
 		    		<p:commandButton value="#{message['button.salvar']}" action="#{perfilManager.save()}" update="growl" styleClass="btn" />
 		    		<p:button value="#{message['button.cancelar']}"  outcome="pretty:perfil" styleClass="btn" />
 		    	</p:panel>
