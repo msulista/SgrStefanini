@@ -125,7 +125,7 @@ public class ProfissionalManager {
 				query = query + " AND p.matricula = " + this.profissional.getMatricula();
 			}
 			if (!this.profissional.getNome().isEmpty()) {
-				query = query + " AND p.nome LIKE '" + this.profissional.getNome() + "_%'";
+				query = query + " AND p.nome LIKE '" + this.profissional.getNome() +"%'";
 			}
 			if (!(this.profissional.getEquipe() == null)) {
 				query = query + " AND p.equipe.id = " + this.profissional.getEquipe().getId();
@@ -148,7 +148,7 @@ public class ProfissionalManager {
 				}
 
 			}else{
-				query = query + "  AND (p.registroValidadeInicio <= CURRENT_DATE) AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC";
+				query = query + " AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC";
 				this.lista = listarTudo();
 			}
 		} else {
