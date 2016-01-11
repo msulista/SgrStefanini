@@ -261,9 +261,9 @@ public class ProfissionalService {
 		profissionalPersist.setBeneficios(profissionalMerge.getBeneficios());
 		profissionalPersist.setValorHora(profissionalMerge.getValorHora());
 		profissionalPersist.setDataAdmissao(profissionalMerge.getDataAdmissao());
-		profissionalPersist.setDataDemissao(profissionalMerge.getDataDemissao());
-		profissionalPersist.setRegistroValidadeInicio(profissionalMerge.getRegistroValidadeInicio());
-		profissionalPersist.setRegistroValidaeFim(profissionalMerge.getRegistroValidaeFim());
+		profissionalPersist.setDataDemissao(new Date());
+		profissionalPersist.setRegistroValidadeInicio(new Date());
+		profissionalPersist.setRegistroValidaeFim(new Date());
 		profissionalPersist.setCelula(celulaService.getCelulaById(profissionalMerge.getCelula().getId()));
 		profissionalPersist.setCargo(cargoService.getCargoById(profissionalMerge.getCargo().getId()));
 		profissionalPersist.setEquipe(equipeService.getEquipeById(profissionalMerge.getEquipe().getId()));
