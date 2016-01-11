@@ -101,7 +101,7 @@ html, body {
 }
 
 .calendario-data span, .relogio-hora span {
-	color: rgb(51, 51, 51);
+	color: #808080;
 	font-weight: 300;
 }
 
@@ -413,7 +413,7 @@ input[type=text] {
 }
 
 .ui-datatable-header.ui-widget-header.ui-corner-top {
-	text-align: right;
+	text-align: left;
 }
 
 .panel-formulario .ui-datatable thead th:last-child {
@@ -454,13 +454,13 @@ input[type=text] {
 }
 
 .painel {
-	border: 3px solid #0f4d40;
-	height: 140px;
-	width: 300px;
+	border: 1px solid #66AD6B;
+	height: 120px;
+	width: 290px;
 }
 
 .painel:hover {
-	background-color: #0F4D40;
+	background-color: #66AD6B;
 }
 
 .painel:hover .text-painel{
@@ -565,6 +565,9 @@ input[type=text] {
     opacity:1;
     display: inline;
     width: 270%;
+    border: 1px solid #00AFCE;
+	border-top: none;
+	border-radius: 0 0 10px 10px;
 }
  
 .sub-menu {
