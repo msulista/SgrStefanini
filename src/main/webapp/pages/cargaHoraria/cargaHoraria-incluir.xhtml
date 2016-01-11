@@ -15,11 +15,11 @@
 	        	<p:growl id="growl" life="4000" />
 				<p:panel header="#{message['title.cargaHoraria.cadastro']}" id="painel">			
 					<p:focus context="painel"/>
-					<p:outputLabel value="#{message['label.cargaHoraria']}" styleClass="label" for="cargaHoraria"/>
+					<p:outputLabel value="#{message['label.cargaHoraria']}" styleClass="label" for="cargaHoraria" title="#{message['label.title.cargaHoraria']}"/>
 					<p:inputMask id="cargaHoraria" value="#{cargaHorariaManager.cargaHoraria.cargaHoraria}" mask="99,99" converter="cargaHorariaConverter" required="true" requiredMessage="#{message['span.obrigatorio.cargaHoraria']}"/><br/><br/>
-					<p:outputLabel for="calendario" value="#{message['label.data.inicio']}" styleClass="label"/>
+					<p:outputLabel for="calendario" value="#{message['label.data.inicio']}" styleClass="label" title="#{message['label.title.cargaHoraria.dataInicio']}"/>
 	        		<p:calendar id="calendario" value="#{cargaHorariaManager.cargaHoraria.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/><br/><br/>
-	        		<p:outputLabel for="calendarioFim" value="#{message['label.data.final']}" styleClass="label"/>
+	        		<p:outputLabel for="calendarioFim" value="#{message['label.data.final']}" styleClass="label" title="#{message['label.title.cargaHoraria.dataFim']}"/>
 	        		<p:calendar id="calendarioFim" value="#{cargaHorariaManager.cargaHoraria.registroValidadeFim}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/><br/><br/>
 	        		<p:commandButton value="#{message['button.salvar']}" action="#{cargaHorariaManager.save()}" update="growl" styleClass="btn"/>
 	        		<p:button value="#{message['button.cancelar']}" outcome="pretty:cargaHoraria" styleClass="btn"/>
