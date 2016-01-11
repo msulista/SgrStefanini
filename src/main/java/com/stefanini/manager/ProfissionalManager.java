@@ -149,8 +149,8 @@ public class ProfissionalManager {
 		return this.profissionalHistorico;
 	}
 
-	public String desativar(Long id) {
-		service.desativar(id);
+	public String desativar(Profissional profissional) {
+		service.desativar(profissional);
 		return "pretty:profissional";
 	}
 

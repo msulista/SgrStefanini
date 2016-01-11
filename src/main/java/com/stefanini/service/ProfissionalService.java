@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import com.stefanini.entidade.Equipe;
 import com.stefanini.entidade.Profissional;
+import com.stefanini.entidade.Status;
 import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
@@ -236,13 +237,45 @@ public class ProfissionalService {
 		manager.close();
 		return profissionais;
 	}
-	public void desativar(Long id) throws ConverterException {
+	
+	public void desativar(Profissional profissional) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
+		Status status = statusService.getStatusById((long) 16);
 		manager.getTransaction().begin();
-		Profissional profissionalDesativar = (Profissional) getProfissionalById(id);
-		profissionalDesativar.setRegistroValidaeFim(new Date());
-		profissionalDesativar.setDataDemissao(profissionalDesativar.getRegistroValidaeFim());
-		manager.merge(profissionalDesativar);
+		Profissional profissionalMerge = (Profissional) getProfissionalParaEdicao(profissional.getMatricula());		
+		
+		if(new Date().compareTo(profissionalMerge.getRegistroValidadeInicio())==0){
+			profissionalMerge.setRegistroValidaeFim(new Date());
+			manager.merge(profissionalMerge);
+
+		}else{
+			profissionalMerge.setRegistroValidaeFim(DateUtil.retornaDataFimAntesDoNovoInicio(new Date()));
+			manager.merge(profissionalMerge);
+							
+		}
+		
+		Profissional profissionalPersist = new Profissional();
+		profissionalPersist.setNome(profissionalMerge.getNome());
+		profissionalPersist.setMatricula(profissionalMerge.getMatricula());
+		profissionalPersist.setSalario(profissionalMerge.getSalario());
+		profissionalPersist.setBeneficios(profissionalMerge.getBeneficios());
+		profissionalPersist.setValorHora(profissionalMerge.getValorHora());
+		profissionalPersist.setDataAdmissao(profissionalMerge.getDataAdmissao());
+		profissionalPersist.setDataDemissao(profissionalMerge.getDataDemissao());
+		profissionalPersist.setRegistroValidadeInicio(profissionalMerge.getRegistroValidadeInicio());
+		profissionalPersist.setRegistroValidaeFim(profissionalMerge.getRegistroValidaeFim());
+		profissionalPersist.setCelula(celulaService.getCelulaById(profissionalMerge.getCelula().getId()));
+		profissionalPersist.setCargo(cargoService.getCargoById(profissionalMerge.getCargo().getId()));
+		profissionalPersist.setEquipe(equipeService.getEquipeById(profissionalMerge.getEquipe().getId()));
+		profissionalPersist.setPerfil(perfilService.getPerfilById(profissionalMerge.getPerfil().getId()));
+		profissionalPersist.setCargaHoraria(
+				cargaHorariaService.getCargaHorariaById(profissionalMerge.getCargaHoraria().getId()));
+		profissionalPersist.setFormaContratacao(
+				formaContratacaoService.getFormaContratacaoById(profissionalMerge.getFormaContratacao().getId()));
+		profissionalPersist.setStatus(status);
+		manager.persist(profissionalPersist);
+		
+		
 		manager.getTransaction().commit();
 		manager.close();
 	}	
