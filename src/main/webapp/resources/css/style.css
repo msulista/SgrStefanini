@@ -404,6 +404,14 @@ input[type=text] {
 	width: 30%;
 }
 
+.perfil-stefanini {
+	width: 40%;
+}
+
+.perfil-stefanini .ui-datatable thead th:first-child {
+    width: 35%;
+}
+
 .panel-formulario-historico{
 	width: 35%;
 }
@@ -417,7 +425,7 @@ input[type=text] {
 }
 
 .panel-formulario .ui-datatable thead th:last-child {
-    width: 21%;
+    width: 25%;
 }
 
 .dropdown-pesquisa{
