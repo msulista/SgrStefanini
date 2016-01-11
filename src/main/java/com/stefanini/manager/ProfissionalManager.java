@@ -113,32 +113,45 @@ public class ProfissionalManager {
 	}
 
 	public void executaPesquisa() {
-		query = "SELECT p FROM Profissional p WHERE p.id != 0";
-		if (!(this.profissional.getMatricula() == 0)) {
-			query = query + " AND p.matricula = " + this.profissional.getMatricula();
-		}
-		if (!this.profissional.getNome().isEmpty()) {
-			query = query + " AND p.nome LIKE '" + this.profissional.getNome() + "_%'";
-		}
-		if (!(this.profissional.getEquipe() == null)) {
-			query = query + " AND p.equipe.id = " + this.profissional.getEquipe().getId();
-		}
-		if (!(this.profissional.getCargo() == null)) {
-			query = query + " AND p.cargo.id = " + this.profissional.getCargo().getId();
-		}
-		if (!(this.profissional.getPerfil() == null)) {
-			query = query + " AND p.perfil.id = " + this.profissional.getPerfil().getId();
-		}
-		if (!(this.profissional.getStatus() == null)) {
-			if (!this.profissional.getStatus().getNome().equalsIgnoreCase("Inativo")) {
-				query = query + " AND p.status.id = " + this.profissional.getStatus().getId()
-						+ " AND (p.registroValidadeInicio <= CURRENT_DATE) AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)";
-			} else {
-				query = query + " AND p.status.id = " + this.profissional.getStatus().getId();
+		if (this.profissional.getMatricula() != 0 ||
+				!this.profissional.getNome().isEmpty() || 
+				!(this.profissional.getEquipe() == null) || 
+				!(this.profissional.getCargo() == null)	||
+				!(this.profissional.getPerfil() == null) || 
+				!(this.profissional.getStatus() == null)) {
+
+			query = "SELECT p FROM Profissional p WHERE p.id != 0";
+			if (!(this.profissional.getMatricula() == 0)) {
+				query = query + " AND p.matricula = " + this.profissional.getMatricula();
 			}
+			if (!this.profissional.getNome().isEmpty()) {
+				query = query + " AND p.nome LIKE '" + this.profissional.getNome() + "_%'";
+			}
+			if (!(this.profissional.getEquipe() == null)) {
+				query = query + " AND p.equipe.id = " + this.profissional.getEquipe().getId();
+			}
+			if (!(this.profissional.getCargo() == null)) {
+				query = query + " AND p.cargo.id = " + this.profissional.getCargo().getId();
+			}
+			if (!(this.profissional.getPerfil() == null)) {
+				query = query + " AND p.perfil.id = " + this.profissional.getPerfil().getId();
+			}
+			if (!(this.profissional.getStatus() == null)) {
+				if (!this.profissional.getStatus().getNome().equalsIgnoreCase("Inativo")) {
+					query = query + " AND p.status.id = " + this.profissional.getStatus().getId()
+							+ " AND (p.registroValidadeInicio <= CURRENT_DATE) AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)";
+				} else {
+					query = query + " AND p.status.id = " + this.profissional.getStatus().getId();
+				}
+
+			}
+			query = query + "ORDER BY p.nome ASC";
+			this.lista = listarTudo();
+		} else {
+			System.out.println("$$$$$$$$$$$------------- caí no else");
+			query = "SELECT p FROM Profissional p WHERE p.id != 0 AND (p.registroValidadeInicio <= CURRENT_DATE) AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome";
+			this.lista = listarTudo();
 		}
-		query = query + " ORDER BY p.nome ASC";
-		this.lista = listarTudo();
 	}
 
 	public List<Profissional> lista() {
