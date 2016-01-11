@@ -483,7 +483,7 @@ input[type=text] {
 	position: relative;
 	right: 50px;
 	float: right;
-	top: 50px;
+	top: 40px;
     color: #333;
 }
 
@@ -491,7 +491,7 @@ input[type=text] {
 .img-painel {
 	left: 30px;
 	position: relative;
-	top: 30px;
+	top: 20px;
 	width: 50px;
 	height: auto;
 	float: left;
@@ -608,4 +608,16 @@ input[type=text] {
 }
 .ui-panel{
 	margin-top: 10px;
+}
+
+.titulo-pagina{
+	font-size: 30px !important;
+	color: #1B4581;
+	font-weight: 500;
+	margin: 15px 0;
+}
+
+.subtitulo-pagina{
+	font-size: 14px;
+	text-decoration: none;
 }
