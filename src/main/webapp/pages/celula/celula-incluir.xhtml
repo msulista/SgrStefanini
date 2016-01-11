@@ -15,16 +15,16 @@
 	        	<p:growl id="growl" life="4000" />
 				<p:panel header="#{message['title.celula.cadastro']}" id="painel">	
 					<p:focus context="painel"/>		
-					<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" />
+					<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" title="#{message['label.title.celula.nome']}"/>
 					<p:inputText id="nome" value="#{celulaManager.celula.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
 					<br /><br />
-					<p:outputLabel for="descricao" value="#{message['label.descricao']}" styleClass="label" />
+					<p:outputLabel for="descricao" value="#{message['label.descricao']}" styleClass="label" title="#{message['label.title.celula.descricao']}"/>
 					<p:inputText id="descricao" value="#{celulaManager.celula.descricao}" required="true" requiredMessage="#{message['span.obrigatorio.Descricao']}" />
 					<br /><br />
-					<p:outputLabel for="button" value="#{message['label.data.inicio']}" styleClass="label" />
+					<p:outputLabel for="button" value="#{message['label.data.inicio']}" styleClass="label" title="#{message['label.title.celula.dataInicio']}"/>
 					<p:calendar id="button" value="#{celulaManager.celula.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
 					<br /><br />
-					<p:outputLabel for="buttonFim" value="#{message['label.data.final']}" styleClass="label" />
+					<p:outputLabel for="buttonFim" value="#{message['label.data.final']}" styleClass="label" title="#{message['label.title.celula.dataFim']}"/>
 					<p:calendar id="buttonFim" value="#{celulaManager.celula.registroValidadeFim}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>
 					<br /><br />
 					<p:commandButton value="#{message['button.salvar']}" action="#{celulaManager.save()}" update="growl" styleClass="btn"/>				
