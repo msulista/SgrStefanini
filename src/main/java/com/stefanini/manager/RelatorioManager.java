@@ -447,7 +447,7 @@ private BarChartModel initValorPorCelula() {
 	    	grafico.set(relatorio.getNome01(), relatorio.getValorMedio().doubleValue());
 	    	valorTotal = (double)(valorTotal + relatorio.getValorMedio().doubleValue());
 		}	
-	    grafico.set("Valor Médio Total", valorTotal / getRelatorioValorCelula().size());
+	   
 	    model.addSeries(grafico);	
 	    
 	    return model;
@@ -495,7 +495,6 @@ private BarChartModel initValorPorCelula() {
 	    	clt.set(relatorio.getNome01(), relatorio.getQuantidade01());
 	    	estagio.set(relatorio.getNome01(), relatorio.getQuantidade02());
 	    	quantidadeTotal = (int)(quantidadeTotal += relatorio.getQuantidade01()+relatorio.getQuantidade02());
-	    	//quantidadeTotal2 = (int)(quantidadeTotal2+= relatorio.getQuantidade02());
 		}	
 	  
 	    clt.set("Total Resultados", quantidadeTotal);

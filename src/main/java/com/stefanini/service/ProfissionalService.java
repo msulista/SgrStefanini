@@ -80,25 +80,30 @@ public class ProfissionalService {
 }
 
 	public boolean update(Profissional profissional) {
-		Status status = new Status();
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
+		//verificando se todas as datas nao sao finais de semana
 		if (DateUtil.verificaDiaUtil(profissional.getDataAdmissao())&&DateUtil.verificaDiaUtil(profissional.getDataDemissao())&&DateUtil.verificaDiaUtil(profissional.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(profissional.getRegistroValidaeFim())) {
 			
 			Profissional profissionalMerge = (Profissional) getProfissionalParaEdicao(profissional.getMatricula());
 			
+			//verificando se data demissão e anterior a de admissão
 				if (DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())) {
-								
+							
+					//verificando se o novo registro é anterior ao dia atual
 					if(DateUtil.verificaDataValida(DateUtil.getDataParaComparacao(new Date()),profissional.getRegistroValidadeInicio())){
 						
-					
+					//verificando se a nova data de inicio é anterior a antiga
 						if(DateUtil.verificaDataValida(profissionalMerge.getRegistroValidadeInicio(),profissional.getRegistroValidadeInicio())){
-									
+						
+							//verificando se dataFim com o dia atual
 						if(DateUtil.verificaDataValida(DateUtil.getDataParaComparacao(new Date()),profissional.getRegistroValidaeFim())){
-										
+									
+							//verificando se data final na é anterior a inicial
 							if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())){
 											
+								//comparando se o registro inicio do profissional é igual ao dia atual e igual a data inicio do antigo
 								if(profissional.getRegistroValidadeInicio().compareTo(DateUtil.getDataParaComparacao(new Date()))==0&&profissional.getRegistroValidadeInicio().compareTo(profissionalMerge.getRegistroValidadeInicio())==0){
 									profissionalMerge.setRegistroValidaeFim(new Date());
 									manager.merge(profissionalMerge);
@@ -134,6 +139,7 @@ public class ProfissionalService {
 								profissionalPersist.setDataRetorno(profissional.getDataRetorno());
 							
 
+								//regra da data retorno em caso de afastamento ou ferias
 								if(profissional.getDataRetorno()!=null){
 									
 									profissionalPersist.setRegistroValidaeFim(profissional.getDataRetorno());
