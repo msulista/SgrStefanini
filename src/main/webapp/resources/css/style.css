@@ -417,7 +417,7 @@ input[type=text] {
 }
 
 .panel-formulario .ui-datatable thead th:last-child {
-    width: 15%;
+    width: 20%;
 }
 
 .dropdown-pesquisa{
