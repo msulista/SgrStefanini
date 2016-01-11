@@ -46,6 +46,7 @@ public class ProfissionalService {
 								if(DateUtil.verificaDataValida(profissional.getDataSaida(), profissional.getDataRetorno())){
 				
 				manager.getTransaction().begin();
+				profissional.setStatus(statusService.getStatusById((long) 13));
 				manager.persist(profissional);
 				manager.getTransaction().commit();
 				manager.close();
@@ -79,6 +80,7 @@ public class ProfissionalService {
 }
 
 	public boolean update(Profissional profissional) {
+		Status status = new Status();
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 
@@ -89,12 +91,15 @@ public class ProfissionalService {
 				if (DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())) {
 								
 					if(DateUtil.verificaDataValida(DateUtil.getDataParaComparacao(new Date()),profissional.getRegistroValidadeInicio())){
+						
+					
+						if(DateUtil.verificaDataValida(profissionalMerge.getRegistroValidadeInicio(),profissional.getRegistroValidadeInicio())){
 									
 						if(DateUtil.verificaDataValida(DateUtil.getDataParaComparacao(new Date()),profissional.getRegistroValidaeFim())){
 										
 							if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())){
 											
-								if(profissional.getRegistroValidadeInicio().compareTo(profissionalMerge.getRegistroValidadeInicio())==0){
+								if(profissional.getRegistroValidadeInicio().compareTo(DateUtil.getDataParaComparacao(new Date()))==0&&profissional.getRegistroValidadeInicio().compareTo(profissionalMerge.getRegistroValidadeInicio())==0){
 									profissionalMerge.setRegistroValidaeFim(new Date());
 									manager.merge(profissionalMerge);
 					
@@ -127,9 +132,22 @@ public class ProfissionalService {
 								profissionalPersist.setStatus(statusService.getStatusById(profissional.getStatus().getId()));
 								profissionalPersist.setDataSaida(profissional.getDataSaida());
 								profissionalPersist.setDataRetorno(profissional.getDataRetorno());
+							
+
+								if(profissional.getDataRetorno()!=null){
+									
+									profissionalPersist.setRegistroValidaeFim(profissional.getDataRetorno());
+									manager.persist(profissionalPersist);
+									this.persistAfastado(profissional);
 				
-								manager.persist(profissionalPersist);
-								manager.getTransaction().commit();
+									manager.getTransaction().commit();
+									
+								}else{
+																		
+									manager.persist(profissionalPersist);
+									manager.getTransaction().commit();
+								}
+						
 								manager.close();
 				
 								return true;
@@ -151,6 +169,11 @@ public class ProfissionalService {
 									manager.close();
 									return false;
 								}
+					}else{
+						Mensagem.add("Nova data de registro nao pode ser anterior a antiga");
+						manager.close();
+						return false;
+						}
 								
 					} else {
 				Mensagem.add("Data de demissão anterior a de admissão!");
@@ -165,6 +188,21 @@ public class ProfissionalService {
 		}
 	}
 	
+	public void persistAfastado(Profissional profissional){
+		
+		EntityManager manager = JPAUtil.getEntityManager();
+		manager.getTransaction().begin();
+		Profissional profissionalRetorno = profissional;
+		profissionalRetorno.setRegistroValidadeInicio(profissional.getDataRetorno());
+		profissionalRetorno.setRegistroValidaeFim(null);
+		profissionalRetorno.setDataSaida(null);
+		profissionalRetorno.setDataRetorno(null);
+		profissionalRetorno.setStatus(statusService.getStatusById((long) 13));
+			
+		manager.persist(profissionalRetorno);
+		manager.getTransaction().commit();
+		manager.close();
+	}
 	@SuppressWarnings("unchecked")
 	public List<Profissional> listarTudo(String query) {
 		
