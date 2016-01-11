@@ -285,6 +285,7 @@ public class RelatorioManager {
 	    BarChartModel model = new BarChartModel();
 	    model.setLegendPosition("ne");
     	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
+    	model.setShowPointLabels(true);
 	    ChartSeries clt = new ChartSeries();
 	    ChartSeries estagio = new ChartSeries();
 	    
@@ -387,6 +388,7 @@ public class RelatorioManager {
 	    ChartSeries junior = new ChartSeries();
 	    ChartSeries pleno = new ChartSeries();
 	    ChartSeries senior = new ChartSeries();
+	    model.setShowPointLabels(true);
 	    junior.setLabel("Junior");
 	    pleno.setLabel("Pleno");
 	    senior.setLabel("Sênior");
@@ -484,6 +486,7 @@ private BarChartModel initValorPorCelula() {
 	    BarChartModel model = new BarChartModel();
 	    model.setLegendPosition("ne");
     	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
+    	model.setShowPointLabels(true);
 	    ChartSeries clt = new ChartSeries();
 	    ChartSeries estagio = new ChartSeries();
 	    
@@ -535,6 +538,7 @@ private BarChartModel initValorPorCelula() {
 	    model.setExtender("decimalConverter");
 	    model.setLegendPosition("ne");
     	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
+    	model.setShowPointLabels(true);
 	    ChartSeries junior = new ChartSeries();
 	    ChartSeries pleno = new ChartSeries();
 	    ChartSeries senior = new ChartSeries();
@@ -579,7 +583,7 @@ private BarChartModel initValorPorCelula() {
 	    yAxis.setMin(0);
 	   
 	    yAxis.setTickCount(11);
-	    yAxis.setMax(100);
+	    yAxis.setMax(120);
 	}
 	
 	public void itemSelectPerfilPorCelula(ItemSelectEvent event){
