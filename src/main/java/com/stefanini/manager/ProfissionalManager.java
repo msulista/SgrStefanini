@@ -140,13 +140,17 @@ public class ProfissionalManager {
 				if (!this.profissional.getStatus().getNome().equalsIgnoreCase("Inativo")) {
 					query = query + " AND p.status.id = " + this.profissional.getStatus().getId()
 							+ " AND (p.registroValidadeInicio <= CURRENT_DATE) AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE)";
+					query = query + "   ORDER BY p.nome ASC";
+					this.lista = listarTudo();
 				} else {
-					query = query + " AND p.status.id = " + this.profissional.getStatus().getId();
+					query = query + " AND p.status.id = " + this.profissional.getStatus().getId() + " ORDER BY p.nome ASC";
+					this.lista = listarTudo();
 				}
 
+			}else{
+				query = query + "  AND (p.registroValidadeInicio <= CURRENT_DATE) AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC";
+				this.lista = listarTudo();
 			}
-			query = query + "ORDER BY p.nome ASC";
-			this.lista = listarTudo();
 		} else {
 			System.out.println("$$$$$$$$$$$------------- caí no else");
 			query = "SELECT p FROM Profissional p WHERE p.id != 0 AND (p.registroValidadeInicio <= CURRENT_DATE) AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome";
