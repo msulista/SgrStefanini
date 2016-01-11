@@ -15,13 +15,13 @@
 		    	<p:growl id="growl" life="4000" />
 		    	<p:panel header="#{message['title.equipe.cadastro']}" id="painel">	
 					<p:focus context="painel"/>		
-		    		<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label"/>
+		    		<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" title="#{message['label.title.equipe.nome']}"/>
 		    		<p:inputText id="nome" value="#{equipeManager.equipe.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}"/>
 		    		<br /><br />
-		    		<p:outputLabel for="button" value="#{message['label.data.inicio']}" styleClass="label" />
+		    		<p:outputLabel for="button" value="#{message['label.data.inicio']}" styleClass="label" title="#{message['label.title.equipe.dataInicio']}"/>
 		    		<p:calendar id="button" value="#{equipeManager.equipe.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
 		    		<br /><br/>
-		    		<p:outputLabel for="buttonFim" value="#{message['label.data.final']}" styleClass="label" />
+		    		<p:outputLabel for="buttonFim" value="#{message['label.data.final']}" styleClass="label" title="#{message['label.title.equipe.dataFim']}"/>
 		    		<p:calendar id="buttonFim" value="#{equipeManager.equipe.registroValidadeFim}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true"/>
 		    		<br /><br/>
 		    		<p:commandButton value="#{message['button.salvar']}" action="#{equipeManager.save()}" update="growl" styleClass="btn"/>
