@@ -417,7 +417,7 @@ input[type=text] {
 }
 
 .panel-formulario .ui-datatable thead th:last-child {
-    width: 20%;
+    width: 21%;
 }
 
 .dropdown-pesquisa{
@@ -557,6 +557,8 @@ input[type=text] {
 .menu > ul > li:hover > a, .menu > ul > .current-item > a {
     background-color: #FFF ;
 	color: #333;
+	border: 1px solid #00AFCE;
+	border-bottom: none;
 }
  
 /*----- Bottom Level -----*/
@@ -566,8 +568,8 @@ input[type=text] {
     display: inline;
     width: 270%;
     border: 1px solid #00AFCE;
-	border-top: none;
-	border-radius: 0 0 10px 10px;
+    border-top:none;
+	border-radius: 0 10px 10px 10px;
 }
  
 .sub-menu {
