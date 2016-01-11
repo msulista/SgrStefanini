@@ -125,6 +125,8 @@ public class ProfissionalService {
 								profissionalPersist.setFormaContratacao(
 										formaContratacaoService.getFormaContratacaoById(profissional.getFormaContratacao().getId()));
 								profissionalPersist.setStatus(statusService.getStatusById(profissional.getStatus().getId()));
+								profissionalPersist.setDataSaida(profissional.getDataSaida());
+								profissionalPersist.setDataRetorno(profissional.getDataRetorno());
 				
 								manager.persist(profissionalPersist);
 								manager.getTransaction().commit();
