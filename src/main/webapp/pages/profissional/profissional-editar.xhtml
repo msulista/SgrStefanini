@@ -23,7 +23,7 @@
 					</p:selectOneMenu>
 					<br /><br />							
 					<p:outputLabel for="matricula" value="#{message['label.profissional.matricula']}" styleClass="label" title="#{message['label.title.profissional.matricula']}"/>
-					<p:inputMask mask="999999" id="matricula" value="#{profissionalManager.profissional.matricula}" required="true" requiredMessage="#{message['span.obrigatorio.Matricula']}" />
+					<p:inputMask mask="999999" id="matricula" value="#{profissionalManager.profissional.matricula}" required="true" disabled="true" requiredMessage="#{message['span.obrigatorio.Matricula']}" />
 					<br /><br />								
 					<p:outputLabel for="nome" value="#{message['label.nome']}" styleClass="label" title="#{message['label.title.profissional.nome']}"/>
 					<p:inputText id="nome" value="#{profissionalManager.profissional.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
