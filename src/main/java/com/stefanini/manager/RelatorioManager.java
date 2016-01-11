@@ -34,6 +34,8 @@ import com.stefanini.service.RelatorioService;
 })
 public class RelatorioManager {
 	
+	
+	
 	private Relatorio relatorio = new Relatorio();
 	private RelatorioService service = new RelatorioService();
 	private BarChartModel profissionalPorEquipe;
@@ -492,12 +494,11 @@ private BarChartModel initValorPorCelula() {
 	    	
 	    	clt.set(relatorio.getNome01(), relatorio.getQuantidade01());
 	    	estagio.set(relatorio.getNome01(), relatorio.getQuantidade02());
-	    	quantidadeTotal = (int)(quantidadeTotal += relatorio.getQuantidade01());
-	    	quantidadeTotal2 = (int)(quantidadeTotal2+= relatorio.getQuantidade02());
+	    	quantidadeTotal = (int)(quantidadeTotal += relatorio.getQuantidade01()+relatorio.getQuantidade02());
+	    	//quantidadeTotal2 = (int)(quantidadeTotal2+= relatorio.getQuantidade02());
 		}	
 	  
 	    clt.set("Total Resultados", quantidadeTotal);
-	    estagio.set("Total Resultados" ,quantidadeTotal2);
 	    model.addSeries(clt);	         
 	    model.addSeries(estagio);	         
 	    return model;
