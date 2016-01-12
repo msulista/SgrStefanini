@@ -20,7 +20,7 @@
 			<p:button value="#{message['button.voltar']}" outcome="pretty:cargaHoraria" styleClass="btn"/>
 				<br />
 				<p:dataTable id="gridCargaHoraria" var="cargaHoraria" value="#{cargaHorariaManager.historico}" emptyMessage="#{message['alerta.listaVazia']}" >
-					<p:column headerText="#{message['label.cargaHoraria']}" for="cargaHoraria" sortBy="#{cargaHoraria.cargaHoraria}">
+					<p:column headerText="#{message['label.cargaHoraria']}" for="cargaHoraria" >
 						<h:outputText id="cargaHoraria" value="#{cargaHoraria.cargaHoraria}">
 							<f:converter converterId="cargaHorariaConverter"/>
 						</h:outputText>						

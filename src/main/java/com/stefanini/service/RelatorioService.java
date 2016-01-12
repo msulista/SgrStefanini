@@ -14,7 +14,7 @@ public class RelatorioService {
 	@SuppressWarnings("unchecked")
 	public List<Relatorio> profissionaisPorEquipe(){		
 		EntityManager manager = JPAUtil.getEntityManager();		
-		String profisionalPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome, COUNT(p)) FROM Profissional p WHERE p.registroValidadeInicio <= CURRENT_DATE AND p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE GROUP BY p.equipe.nome";
+		String profisionalPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome, COUNT(p)) FROM Profissional p WHERE p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) GROUP BY p.equipe.nome";
 		Query q = manager.createQuery(profisionalPorEquipe);
 		List<Relatorio> relatorioProfissionalPorEquipe = (List<Relatorio>)q.getResultList();
 		manager.close();
@@ -52,7 +52,7 @@ public class RelatorioService {
 	@SuppressWarnings("unchecked")
 	public List<Relatorio> valorPorEquipe(){
 		EntityManager manager = JPAUtil.getEntityManager();
-		String valorPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome, AVG(p.valorHora)) FROM Profissional p WHERE p.registroValidadeInicio <= CURRENT_DATE AND p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE GROUP BY p.equipe.nome";
+		String valorPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome, AVG(p.valorHora)) FROM Profissional p WHERE p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) GROUP BY p.equipe.nome";
 		Query q = manager.createQuery(valorPorEquipe);
 		List<Relatorio> relatorioValorPorEquipe = (List<Relatorio>)q.getResultList();
 		manager.close();
@@ -62,7 +62,7 @@ public class RelatorioService {
 	@SuppressWarnings("unchecked")
 	public List<Relatorio> valorPorCelula(){
 		EntityManager manager = JPAUtil.getEntityManager();
-		String valorPorCelula = "SELECT new com.stefanini.entidade.Relatorio(p.celula.nome, AVG(p.valorHora)) FROM Profissional p WHERE p.registroValidadeInicio <= CURRENT_DATE AND p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE GROUP BY p.celula.nome";
+		String valorPorCelula = "SELECT new com.stefanini.entidade.Relatorio(p.celula.nome, AVG(p.valorHora)) FROM Profissional p WHERE p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) GROUP BY p.celula.nome";
 		Query q = manager.createQuery(valorPorCelula);
 		List<Relatorio> relatorioValorPorCelula = (List<Relatorio>)q.getResultList();
 		manager.close();
