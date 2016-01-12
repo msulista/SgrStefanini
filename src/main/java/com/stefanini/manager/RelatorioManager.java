@@ -23,6 +23,7 @@ import com.stefanini.service.RelatorioService;
 @ManagedBean
 @ViewScoped
 @URLMappings(mappings = {
+		@URLMapping(id = "relatoriosLinks", pattern = "/relatorios-links", viewId = "/pages/relatorio/relatorio-listar.xhtml"),
 		@URLMapping(id = "relatorioProfissional", pattern = "/profissional-por-equipe", viewId = "/pages/relatorio/relatorio-profissional-equipe.xhtml"),
 		@URLMapping(id = "relatorioContratacao", pattern = "/contratacao-por-equipe", viewId = "/pages/relatorio/relatorio-contratacao-equipe.xhtml"),
 		@URLMapping(id = "relatorioValorEquipe", pattern = "/valor-por-equipe", viewId = "/pages/relatorio/relatorio-valor-equipe.xhtml"),

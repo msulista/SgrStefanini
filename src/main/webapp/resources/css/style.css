@@ -461,37 +461,42 @@ input[type=text] {
 }
 
 .painel {
-	border: 1px solid #66AD6B;
 	height: 120px;
 	width: 290px;
+	margin-top: 1%;
+	margin-left: 5%;
+	float: left;
 	background-size: 100px auto;
 	background-repeat: no-repeat;
-	background-image: url("../img/prof_verde.png");
 	background-position: 10px;
 }
 
-.painel:hover{
-	background-image: url("../img/prof_branco.png");
-}
-
-
-.painel:hover {
-	background-color: #66AD6B;
-}
 
 .painel:hover .text-painel{
 	color: #fff;
 }
 
-#relatorio {
-	left: 140px;
-	float: right;
+#relatorios {
+	background-image: url("../img/graf_azul.png");
+	border: 1px solid #2A96FB;
+	color: #2A96FB;	
+}
+
+#relatorios:hover {
+	background-image: url("../img/graf_branco.png");
+	background-color: #2A96FB;;
+	
 }
 
 #profissionais {
-	margin-top: 1%;
-	margin-left: 5%;
-	float: left;
+	background-image: url("../img/prof_verde.png");
+	border: 1px solid #66AD6B;
+	color: #66AD6B;
+}
+
+#profissionais:hover{
+	background-image: url("../img/prof_branco.png");
+	background-color: #66AD6B;
 }
 
 .text-painel {
@@ -500,9 +505,27 @@ input[type=text] {
 	right: 30px;
 	float: right;
 	top: 40px;
-    color: #66AD6B;
 }
 
+.lista-relatorio {
+	height: 110px;
+	width: 28%;
+	margin: 1% 2% 0% 3%;;
+	background-size: 60px auto;
+} 
+
+.lista-relatorio .text-painel{
+	font-size: 20px;
+	right: 5px;
+	top: 40px;
+}
+
+.bloco-relatorios{
+	display: block;
+	height: 300px;
+	margin-bottom: 1%;
+	width: 100%;
+}
 
 .pesquisa {
 	margin: 10px 0 10px 0;
@@ -624,6 +647,13 @@ input[type=text] {
 	color: #1B4581;
 	font-weight: 500;
 	margin: 15px 0;
+}
+
+.titulo-pagina-relatorio{
+	font-size: 30px !important;
+	color: #1B4581;
+	font-weight: 500;
+	margin: 1% 0 0 3%;
 }
 
 .subtitulo-pagina{

@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/template/default.xhtml">
+
+	<ui:define name="content">
+		<div class="bloco-relatorios">
+			<h2 class="titulo-pagina-relatorio">Relatorios por Equipes</h2>
+			<h:link outcome="pretty:relatorioProfissional">
+				<div id="relatorios" class="painel lista-relatorio">
+					<div class="text-painel">
+						#{message['title.relatorio.profissional.equipe']}
+					</div>
+				</div>
+			</h:link>
+			<h:link outcome="pretty:relatorioContratacao">
+				<div id="relatorios" class="painel lista-relatorio">
+					<div class="text-painel">
+						#{message['title.relatorio.forma.contratacao']}
+					</div>
+				</div>
+			</h:link>
+			<h:link outcome="pretty:relatorioValorEquipe">
+				<div id="relatorios" class="painel lista-relatorio">
+					<div class="text-painel">
+						#{message['title.relatorio.valor.contratacao']}
+					</div>
+				</div>
+			</h:link>
+			<h:link outcome="pretty:relatorioValorCelula">
+				<div id="relatorios" class="painel lista-relatorio">
+					<div class="text-painel">
+						#{message['title.relatorio.valor.celula']}
+					</div>
+				</div>
+			</h:link>
+		</div>
+
+		<div class="bloco-relatorios">
+			<h2 class="titulo-pagina-relatorio">Relatorios por Células</h2>
+			<h:link outcome="pretty:relatorioPerfilEquipe">
+				<div id="relatorios" class="painel lista-relatorio">
+					<div class="text-painel">
+						#{message['title.relatorio.perfil.equipe']}
+					</div>
+				</div>
+			</h:link>
+			<h:link outcome="pretty:relatorioContratacaoCelula">
+				<div id="relatorios" class="painel lista-relatorio">
+					<div class="text-painel">
+						#{message['title.relatorio.forma.contratacao.celula']}
+					</div>
+				</div>
+			</h:link>
+			<h:link outcome="pretty:relatorioPerfilCelula">
+				<div id="relatorios" class="painel lista-relatorio">
+					<div class="text-painel">
+						#{message['title.relatorio.perfil.celula']}
+					</div>
+				</div>
+			</h:link>
+		</div>
+
+	</ui:define>
+</ui:composition>
