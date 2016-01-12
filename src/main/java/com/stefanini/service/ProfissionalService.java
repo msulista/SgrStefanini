@@ -102,7 +102,10 @@ public class ProfissionalService {
 									
 							//verificando se data final na é anterior a inicial
 							if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())){
-											
+								
+								//verificando se data retorno é anterior a saida
+								if(DateUtil.verificaDataValida(profissional.getDataSaida(), profissional.getDataRetorno())){
+									
 								//comparando se o registro inicio do profissional é igual ao dia atual e igual a data inicio do antigo
 								if(profissional.getRegistroValidadeInicio().compareTo(DateUtil.getDataParaComparacao(new Date()))==0&&profissional.getRegistroValidadeInicio().compareTo(profissionalMerge.getRegistroValidadeInicio())==0){
 									profissionalMerge.setRegistroValidaeFim(new Date());
@@ -157,7 +160,12 @@ public class ProfissionalService {
 								manager.close();
 				
 								return true;
-				
+								
+								}else{
+									Mensagem.add("Data retorno nao pode ser anterior a de saida");
+									manager.close();
+									return false;
+								}
 										}else{
 											Mensagem.add("Data final do registro não pode ser anterior a de inicio!");
 											manager.close();
