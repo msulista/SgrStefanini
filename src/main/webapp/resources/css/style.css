@@ -465,7 +465,16 @@ input[type=text] {
 	border: 1px solid #66AD6B;
 	height: 120px;
 	width: 290px;
+	background-size: 100px auto;
+	background-repeat: no-repeat;
+	background-image: url("../img/prof_verde.png");
+	background-position: 10px;
 }
+
+.painel:hover{
+	background-image: url("../img/prof_branco.png");
+}
+
 
 .painel:hover {
 	background-color: #66AD6B;
@@ -489,24 +498,15 @@ input[type=text] {
 .text-painel {
 	font-size: 25px;
 	position: relative;
-	right: 50px;
+	right: 30px;
 	float: right;
 	top: 40px;
     color: #333;
 }
 
 
-.img-painel {
-	left: 30px;
-	position: relative;
-	top: 20px;
-	width: 50px;
-	height: auto;
-	float: left;
-}
-
 .pesquisa {
-	margin: 10px 0 0 0;
+	margin: 10px 0 10px 0;
 	padding: 10px;
 	border: 1px solid #ddd;	
 	border-radius:7px;

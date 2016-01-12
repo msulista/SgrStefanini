@@ -9,120 +9,162 @@
 
 	<ui:define name="content">
 		<p:breadCrumb>
-		    <p:menuitem value="#{message['pao.home']}" url="#" />
-		    <p:menuitem value="#{message['pao.profissional']}" outcome="pretty:profissional" disabled="true"/>
-		</p:breadCrumb>		
+			<p:menuitem value="#{message['pao.home']}" url="#" />
+			<p:menuitem value="#{message['pao.profissional']}"
+				outcome="pretty:profissional" disabled="true" />
+		</p:breadCrumb>
 		<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
-		
+
 		<h2>#{message['title.profissional']}</h2>
 		<h:form>
 			<div class="pesquisa">
-				<h3> Pesquisa Avançada </h3>
-			<h:panelGroup id="formularioAvancado">
-				
+				<h3>Pesquisa Avançada</h3>
+				<h:panelGroup id="formularioAvancado">
 
-				<p:inputMask styleClass="input-pesquisa" mask="999999" id="matricula" value="#{profissionalManager.profissional.matricula}" pt:placeholder="Matrícula"/>
-				<p:inputText styleClass="input-pesquisa" id="nome" value="#{profissionalManager.profissional.nome}" pt:placeholder="Nome"/>
-				
-				<p:selectOneMenu styleClass="dropdown-pesquisa" id="equipe" value="#{profissionalManager.profissional.equipe}" converter="simpleEntityConverter">
-						<f:selectItem itemLabel="#{message['select.equipe']}" noSelectionOption="true"/>
-						<f:selectItems value="#{equipeManager.listarAtivos()}" var="equipe" itemLabel="#{equipe.nome}" itemValue="#{equipe}"/>
-				</p:selectOneMenu>	
-				
-				<p:selectOneMenu styleClass="dropdown-pesquisa" id="cargo" value="#{profissionalManager.profissional.cargo}" converter="simpleEntityConverter">
-                    <f:selectItem itemLabel="#{message['select.cargo']}" noSelectionOption="true"/>
-                    <f:selectItems value="#{cargoManager.listarTodos()}" var="cargo" itemLabel="#{cargo.nome}" itemValue="#{cargo}"/>
-	            </p:selectOneMenu>
-	            
-	            <p:selectOneMenu styleClass="dropdown-pesquisa" id="perfil" value="#{profissionalManager.profissional.perfil}" converter="simpleEntityConverter">
-                    <f:selectItem itemLabel="#{message['select.perfil']}" noSelectionOption="true"/>
-                    <f:selectItems value="#{perfilManager.listarAtivos()}" var="perfil" itemLabel="#{perfil.nome}" itemValue="#{perfil}"/>
-                </p:selectOneMenu>	
-                
-                <p:selectOneMenu styleClass="dropdown-pesquisa" id="status" value="#{profissionalManager.profissional.status}">
-	                <f:converter converterId="simpleEntityConverter"/>
-	                <f:selectItem itemLabel="#{message['select.status']}" noSelectionOption="true"/>
-	                <f:selectItems value="#{statusManager.listarAtivos()}" var="status" itemLabel="#{status.nome}" itemValue="#{status}" />
-				</p:selectOneMenu>
-                
-				<div class="controle-pesquisa">
-					<p:commandButton id="pesquisar" icon="ui-icon-search" action="#{profissionalManager.executaPesquisa()}" update="gridProfissional"/>
-					<p:commandButton id="limpar" icon="ui-icon-arrowreturnthick-1-w" action="#{profissionalManager.limparPesquisa()}" update="gridProfissional formularioAvancado"/>
-					<p:tooltip id="alt-pesquisar" for="pesquisar" value="Pesquisar" styleClass="alt"/>
-					<p:tooltip id="alt-limpar" for="limpar" value="Limpar" styleClass="alt"/>
-				</div>
-			</h:panelGroup>
+
+					<p:inputMask styleClass="input-pesquisa" mask="999999"
+						id="matricula"
+						value="#{profissionalManager.profissional.matricula}"
+						pt:placeholder="Matrícula" />
+					<p:inputText styleClass="input-pesquisa" id="nome"
+						value="#{profissionalManager.profissional.nome}"
+						pt:placeholder="Nome" />
+
+					<p:selectOneMenu styleClass="dropdown-pesquisa" id="equipe"
+						value="#{profissionalManager.profissional.equipe}"
+						converter="simpleEntityConverter">
+						<f:selectItem itemLabel="#{message['select.equipe']}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{equipeManager.listarAtivos()}"
+							var="equipe" itemLabel="#{equipe.nome}" itemValue="#{equipe}" />
+					</p:selectOneMenu>
+
+					<p:selectOneMenu styleClass="dropdown-pesquisa" id="cargo"
+						value="#{profissionalManager.profissional.cargo}"
+						converter="simpleEntityConverter">
+						<f:selectItem itemLabel="#{message['select.cargo']}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cargoManager.listarTodos()}" var="cargo"
+							itemLabel="#{cargo.nome}" itemValue="#{cargo}" />
+					</p:selectOneMenu>
+
+					<p:selectOneMenu styleClass="dropdown-pesquisa" id="perfil"
+						value="#{profissionalManager.profissional.perfil}"
+						converter="simpleEntityConverter">
+						<f:selectItem itemLabel="#{message['select.perfil']}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{perfilManager.listarAtivos()}"
+							var="perfil" itemLabel="#{perfil.nome}" itemValue="#{perfil}" />
+					</p:selectOneMenu>
+
+					<p:selectOneMenu styleClass="dropdown-pesquisa" id="status"
+						value="#{profissionalManager.profissional.status}">
+						<f:converter converterId="simpleEntityConverter" />
+						<f:selectItem itemLabel="#{message['select.status']}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{statusManager.listarAtivos()}"
+							var="status" itemLabel="#{status.nome}" itemValue="#{status}" />
+					</p:selectOneMenu>
+
+					<div class="controle-pesquisa">
+						<p:commandButton id="pesquisar" icon="ui-icon-search"
+							action="#{profissionalManager.executaPesquisa()}"
+							update="gridProfissional" />
+						<p:commandButton id="limpar" icon="ui-icon-arrowreturnthick-1-w"
+							action="#{profissionalManager.limparPesquisa()}"
+							update="gridProfissional formularioAvancado" />
+						<p:tooltip id="alt-pesquisar" for="pesquisar" value="Pesquisar"
+							styleClass="alt" />
+						<p:tooltip id="alt-limpar" for="limpar" value="Limpar"
+							styleClass="alt" />
+					</div>
+				</h:panelGroup>
 			</div>
 			
-			<p:dataTable id="gridProfissional" var="profissional" value="#{profissionalManager.lista()}" emptyMessage="#{message['alerta.listaVazia']}" >
-				
+			<p:button styleClass="btn-default" value="#{message['button.novo']}" outcome="pretty:profissional-incluir" />
+
+			<p:dataTable id="gridProfissional" var="profissional"
+				value="#{profissionalManager.lista()}"
+				emptyMessage="#{message['alerta.listaVazia']}">
+
 				<p:column headerText="#{message['label.profissional.matricula']} ">
-					<h:outputText value="#{profissional.matricula}"/>
+					<h:outputText value="#{profissional.matricula}" />
 				</p:column>
-				
+
 				<p:column headerText="#{message['label.nome']} ">
-					<h:outputText value="#{profissional.nome}"/>
+					<h:outputText value="#{profissional.nome}" />
 				</p:column>
-							
-				<p:column headerText="#{message['label.profissional.celula']}">	
-					<h:outputText value="#{profissional.celula.nome}"/>			
-				</p:column>	
-							
+
+				<p:column headerText="#{message['label.profissional.celula']}">
+					<h:outputText value="#{profissional.celula.nome}" />
+				</p:column>
+
 				<p:column headerText="#{message['label.profissional.equipe']}">
-					<h:outputText value="#{profissional.equipe.nome}"/>			
-				</p:column>  
-				 
+					<h:outputText value="#{profissional.equipe.nome}" />
+				</p:column>
+
 				<p:column headerText="#{message['label.profissional.cargo']}">
-					<h:outputText value="#{profissional.cargo.nome}"/>			
+					<h:outputText value="#{profissional.cargo.nome}" />
 				</p:column>
-				
+
 				<p:column headerText="#{message['label.profissional.perfil']}">
-					<h:outputText value="#{profissional.perfil.nome}"/>	
+					<h:outputText value="#{profissional.perfil.nome}" />
 				</p:column>
-				
-				<p:column  headerText="#{message['label.cargaHoraria']}">
+
+				<p:column headerText="#{message['label.cargaHoraria']}">
 					<h:outputText value="#{profissional.cargaHoraria.cargaHoraria}">
-						<f:converter converterId="cargaHorariaConverter"/>
-					</h:outputText>			
+						<f:converter converterId="cargaHorariaConverter" />
+					</h:outputText>
 				</p:column>
-				
+
 				<p:column headerText="#{message['label.profissional.contratacao']}">
-					<h:outputText value="#{profissional.formaContratacao.nome}"/>			
+					<h:outputText value="#{profissional.formaContratacao.nome}" />
 				</p:column>
-				
+
 				<p:column headerText="#{message['label.profissional.status']}">
-					<h:outputText value="#{profissional.status.nome}"/>			
+					<h:outputText value="#{profissional.status.nome}" />
 				</p:column>
-				
-				<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
+
+				<p:column headerText="#{message['label.acoes']}"
+					styleClass="txtCenter">
 					<pretty:link mappingId="profissional-editar">
 						<f:param value="#{profissional.matricula}" />
-						<p:commandButton id="editar" styleClass="btn-acao" type="button" icon="ui-icon-pencil" />
+						<p:commandButton id="editar" styleClass="btn-acao" type="button"
+							icon="ui-icon-pencil" />
 					</pretty:link>
 					<pretty:link mappingId="profissional-historico">
 						<f:param value="#{profissional.matricula}" />
-						<p:commandButton id="historico" styleClass="btn-acao" type="button" icon="ui-icon-script" />
+						<p:commandButton id="historico" styleClass="btn-acao"
+							type="button" icon="ui-icon-script" />
 					</pretty:link>
-					<p:commandButton id="desativar" styleClass="btn-acao" icon="ui-icon-closethick" action="#{profissionalManager.desativar(profissional)}" update="gridProfissional" >
-						<p:confirm header="#{message['button.desativar']}" message="#{message['questiona.desativar']}" icon="ui-icon-alert" />	
+					<p:commandButton id="desativar" styleClass="btn-acao"
+						icon="ui-icon-closethick"
+						action="#{profissionalManager.desativar(profissional)}"
+						update="gridProfissional">
+						<p:confirm header="#{message['button.desativar']}"
+							message="#{message['questiona.desativar']}" icon="ui-icon-alert" />
 					</p:commandButton>
-					<p:tooltip id="alt-editarr" for="editar" value="#{message['label.editar']}" styleClass="alt"/>
-					<p:tooltip id="alt-desativarr" for="desativar" value="#{message['label.desativar']}" styleClass="alt"/>
-					<p:tooltip id="alt-historicoo" for="historico" value="#{message['label.historico']}" styleClass="alt"/>
-				
+					<p:tooltip id="alt-editarr" for="editar"
+						value="#{message['label.editar']}" styleClass="alt" />
+					<p:tooltip id="alt-desativarr" for="desativar"
+						value="#{message['label.desativar']}" styleClass="alt" />
+					<p:tooltip id="alt-historicoo" for="historico"
+						value="#{message['label.historico']}" styleClass="alt" />
+
 				</p:column>
-						
+
 			</p:dataTable>
-			
+
 			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-				<p:commandButton value="#{message['button.sim']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="growl"/>
-				<p:commandButton value="#{message['button.nao']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				<p:commandButton value="#{message['button.sim']}" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+					update="growl" />
+				<p:commandButton value="#{message['button.nao']}" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 			</p:confirmDialog>
-			
-			<br />
-			<p:button styleClass="btn-default" value="#{message['button.novo']}" outcome="pretty:profissional-incluir" />
+
 		</h:form>
-		
+
 	</ui:define>
 
 </ui:composition>
