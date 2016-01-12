@@ -139,7 +139,6 @@ html, body {
 
 .ct-menu ul li a:hover {
 	color: #bbb;
-	text-decoration: underline;
 }
 
 .ct-menu ul li.item-last {
@@ -501,7 +500,7 @@ input[type=text] {
 	right: 30px;
 	float: right;
 	top: 40px;
-    color: #333;
+    color: #66AD6B;
 }
 
 
