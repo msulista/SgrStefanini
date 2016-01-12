@@ -10,6 +10,7 @@
 			<h2 class="titulo-pagina-relatorio">Relatorios por Equipes</h2>
 			<h:link outcome="pretty:relatorioProfissional">
 				<div id="relatorios" class="painel lista-relatorio">
+					<div class="imagem-relatorio" />
 					<div class="text-painel">
 						#{message['title.relatorio.profissional.equipe']}
 					</div>
@@ -17,6 +18,7 @@
 			</h:link>
 			<h:link outcome="pretty:relatorioContratacao">
 				<div id="relatorios" class="painel lista-relatorio">
+					<div class="imagem-relatorio" />
 					<div class="text-painel">
 						#{message['title.relatorio.forma.contratacao']}
 					</div>
@@ -24,15 +26,17 @@
 			</h:link>
 			<h:link outcome="pretty:relatorioValorEquipe">
 				<div id="relatorios" class="painel lista-relatorio">
+					<div class="imagem-relatorio" />
 					<div class="text-painel">
 						#{message['title.relatorio.valor.contratacao']}
 					</div>
 				</div>
 			</h:link>
-			<h:link outcome="pretty:relatorioValorCelula">
+			<h:link outcome="pretty:relatorioPerfilEquipe">
 				<div id="relatorios" class="painel lista-relatorio">
+					<div class="imagem-relatorio" />
 					<div class="text-painel">
-						#{message['title.relatorio.valor.celula']}
+						#{message['title.relatorio.perfil.equipe']}
 					</div>
 				</div>
 			</h:link>
@@ -40,15 +44,17 @@
 
 		<div class="bloco-relatorios">
 			<h2 class="titulo-pagina-relatorio">Relatorios por Células</h2>
-			<h:link outcome="pretty:relatorioPerfilEquipe">
+			<h:link outcome="pretty:relatorioValorCelula">
 				<div id="relatorios" class="painel lista-relatorio">
+					<div class="imagem-relatorio" />
 					<div class="text-painel">
-						#{message['title.relatorio.perfil.equipe']}
+						#{message['title.relatorio.valor.celula']}
 					</div>
 				</div>
 			</h:link>
 			<h:link outcome="pretty:relatorioContratacaoCelula">
 				<div id="relatorios" class="painel lista-relatorio">
+					<div class="imagem-relatorio" />
 					<div class="text-painel">
 						#{message['title.relatorio.forma.contratacao.celula']}
 					</div>
@@ -56,6 +62,7 @@
 			</h:link>
 			<h:link outcome="pretty:relatorioPerfilCelula">
 				<div id="relatorios" class="painel lista-relatorio">
+					<div class="imagem-relatorio" />
 					<div class="text-painel">
 						#{message['title.relatorio.perfil.celula']}
 					</div>

@@ -465,10 +465,18 @@ input[type=text] {
 	width: 290px;
 	margin-top: 1%;
 	margin-left: 5%;
-	float: left;
+	float: left;	
 	background-size: 100px auto;
 	background-repeat: no-repeat;
 	background-position: 10px;
+}
+
+.relatorio{
+	background-image: url("../img/graf_azul.png");
+}
+
+.relatorio:hover{
+	background-image: url("../img/graf_branco.png");
 }
 
 
@@ -477,15 +485,26 @@ input[type=text] {
 }
 
 #relatorios {
-	background-image: url("../img/graf_azul.png");
 	border: 1px solid #2A96FB;
 	color: #2A96FB;	
 }
 
-#relatorios:hover {
+.imagem-relatorio{
+	background-image: url("../img/graf_azul.png");
+	background-size: 50px auto;
+	background-repeat: no-repeat;
+	background-position: 19px center;
+	width: 30%;
+	float: left;
+	height: 110px;
+}
+
+#relatorios:hover  .imagem-relatorio{
 	background-image: url("../img/graf_branco.png");
-	background-color: #2A96FB;;
-	
+}
+
+#relatorios:hover {
+	background-color: #2A96FB;	
 }
 
 #profissionais {
@@ -518,6 +537,7 @@ input[type=text] {
 	font-size: 20px;
 	right: 5px;
 	top: 40px;
+	width: 70%;
 }
 
 .bloco-relatorios{
