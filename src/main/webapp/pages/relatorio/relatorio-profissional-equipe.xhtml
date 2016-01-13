@@ -21,11 +21,7 @@
 	</h:form>
 		<br /><br />
 		
-		<p:dataTable id="gridRelatorio" 
-		var="profissional" 
-		value="#{relatorioManager.profissionais}" 
-		emptyMessage="#{message['alerta.listaVazia']}"
-		showDataLabels="false" >
+		<p:dataTable id="gridRelatorio" var="profissional" value="#{relatorioManager.profissionais}" emptyMessage="#{message['alerta.listaVazia']}" >
 			
 			<f:facet name="header">
 				#{message['rel.lista.profissionais']} 
