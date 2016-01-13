@@ -12,7 +12,7 @@
 
 		<properties>
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-			<property name="hibernate.connection.url" value="jdbc:mysql://10.25.11.89:3306/SGR" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://10.25.11.43:3306/SGR" />
 			<property name="hibernate.connection.username" value="root" />
 			<property name="hibernate.connection.password" value="" />
 
