@@ -294,8 +294,34 @@ html, body {
 }
 
 .ct-content .historico{
-	margin: 0px -8%;
-	width: 115%;		
+	/*margin: 0px -8%;
+	width: 115%;*/		
+}
+
+.colunas-fixas{
+	height: 217px;
+	width: 73%;
+}
+
+.coluna-fixa:first-child{
+	width: 110px;
+}
+
+.coluna-fixa{
+	width: 200px;
+}
+
+.coluna-movel{
+	width: 300px;
+}
+
+.ui-datatable-scrollable-theadclone th.ui-state-default {
+    height: 10px;
+    padding: 10px;
+}
+
+.ui-datatable-scrollable .ui-datatable-scrollable-header, .ui-datatable-scrollable .ui-datatable-scrollable-footer{
+	display:none;
 }
 
 .ct-content * {
