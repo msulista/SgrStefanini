@@ -241,6 +241,7 @@ public class RelatorioManager {
 		quantidadeTotal =0;
 	    BarChartModel model = new BarChartModel();
 	    model.setLegendPosition("ne");
+	    model.setExtender("limpaLabel");
     	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
     	model.setShowPointLabels(true);
 	    ChartSeries grafico = new ChartSeries();
@@ -287,6 +288,7 @@ public class RelatorioManager {
 	    model.setLegendPosition("ne");
     	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
     	model.setShowPointLabels(true);
+    	model.setExtender("limpaLabel");
 	    ChartSeries clt = new ChartSeries();
 	    ChartSeries estagio = new ChartSeries();
 	    
@@ -390,6 +392,7 @@ public class RelatorioManager {
 	    ChartSeries pleno = new ChartSeries();
 	    ChartSeries senior = new ChartSeries();
 	    model.setShowPointLabels(true);
+	    model.setExtender("limpaLabel");
 	    junior.setLabel("Junior");
 	    pleno.setLabel("Pleno");
 	    senior.setLabel("Sênior");
@@ -490,6 +493,7 @@ private BarChartModel initValorPorCelula() {
     	model.setShowPointLabels(true);
 	    ChartSeries clt = new ChartSeries();
 	    ChartSeries estagio = new ChartSeries();
+	    model.setExtender("limpaLabel");
 	    
 	    clt.setLabel("CLT");
 	    estagio.setLabel("Estágio");
