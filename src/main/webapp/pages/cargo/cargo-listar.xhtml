@@ -20,7 +20,9 @@
 			<p:button id="historico" styleClass="btn-default" icon="ui-icon-script" outcome="pretty:cargo-historico" />
 			  <p:tooltip id="alt-historicoo" for="historico" value="#{message['label.historico']}" styleClass="alt"/>
 			<br />
-				<p:dataTable id="gridCargos" var="cargo" value="#{cargoManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
+				<p:dataTable id="gridCargos" var="cargo" value="#{cargoManager.lista}" emptyMessage="#{message['alerta.listaVazia']}"
+					 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                 paginator="true" rows="10" rowsPerPageTemplate="10,20,30" >
 	
 					<p:column headerText="#{message['label.nome']}" >
 						<h:outputText value="#{cargo.nome}" />

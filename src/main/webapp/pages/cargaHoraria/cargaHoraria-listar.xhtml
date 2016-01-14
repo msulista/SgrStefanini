@@ -22,7 +22,9 @@
 			<p:button id="historico" styleClass="btn-default" icon="ui-icon-script" outcome="pretty:cargaHoraria-historico" />
 			   <p:tooltip id="alt-historicoo" for="historico" value="#{message['label.historico']}" styleClass="alt"/>
 			<br />
-				<p:dataTable id="gridCargaHoraria" var="cargaHoraria" value="#{cargaHorariaManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
+				<p:dataTable id="gridCargaHoraria" var="cargaHoraria" value="#{cargaHorariaManager.lista}" emptyMessage="#{message['alerta.listaVazia']}"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+	                 paginator="true" rows="10" >
 					<p:column headerText="#{message['label.cargaHoraria']}" for="cargaHoraria">
 						<h:outputText id="cargaHoraria" value="#{cargaHoraria.cargaHoraria}">
 							<f:converter converterId="cargaHorariaConverter"/>

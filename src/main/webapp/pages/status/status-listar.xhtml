@@ -20,7 +20,9 @@
 			  <p:tooltip id="alt-historicoo" for="historico" value="#{message['label.historico']}" styleClass="alt"/>
 			<br />
 			<h:form>
-				<p:dataTable id="gridStatus" var="status" value="#{statusManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
+				<p:dataTable id="gridStatus" var="status" value="#{statusManager.lista}" emptyMessage="#{message['alerta.listaVazia']}"
+					 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                 paginator="true" rows="10" rowsPerPageTemplate="10,20,30" >
 					<p:column headerText="#{message['label.nome']}">
 						<h:outputText value="#{status.nome}" />
 					</p:column>

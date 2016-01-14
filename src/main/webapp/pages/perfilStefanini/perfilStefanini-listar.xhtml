@@ -18,7 +18,9 @@
 				<p:button styleClass="btn-default" value="#{message['button.novo']}" outcome="pretty:perfilStefanini-incluir" />
 			<br />
 			<h:form>
-				<p:dataTable id="gridPerfilStefanini" var="perfilStefanini" value="#{perfilStefaniniManager.lista}" emptyMessage="#{message['alerta.listaVazia']}" >
+				<p:dataTable id="gridPerfilStefanini" var="perfilStefanini" value="#{perfilStefaniniManager.lista}" emptyMessage="#{message['alerta.listaVazia']}"
+					 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                 paginator="true" rows="10" rowsPerPageTemplate="10,20,30" >
 					<p:column headerText="#{message['label.nome']}">
 						<h:outputText value="#{perfilStefanini.nome}"/>
 					</p:column>

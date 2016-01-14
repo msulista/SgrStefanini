@@ -22,7 +22,9 @@
 			<br />
 				<p:dataTable id="gridPerfis" var="perfil"
 					value="#{perfilManager.lista}"
-					emptyMessage="#{message['alerta.listaVazia']}">
+					emptyMessage="#{message['alerta.listaVazia']}"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                 paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
 					<p:column headerText="#{message['label.nome']}" >
 						<h:outputText value="#{perfil.nome}" />
 					</p:column>
