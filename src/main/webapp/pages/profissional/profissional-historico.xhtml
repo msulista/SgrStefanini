@@ -20,9 +20,7 @@
 				<p:dataTable id="gridProfissional" var="profissional"
 					value="#{profissionalManager.listaHistorico()}"
 					emptyMessage="#{message['alerta.listaVazia']}"
-					scrollable="true" scrollHeight="auto" scrollWidth="34%"
-					frozenColumns="2"
-					frozenRows="0"
+					
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 	                paginator="true" rows="10" rowsPerPageTemplate="10,20,30" >
 
