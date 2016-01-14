@@ -27,6 +27,9 @@ public class ViewPerfilXCelula implements BaseEntity, Serializable {
 	@Column(name = "nome")
 	private String nome;
 	
+	@Column(name = "ESTAGIO")
+	private long estagio;
+	
 	@Column(name = "JUNIOR")
 	private long junior;
 	

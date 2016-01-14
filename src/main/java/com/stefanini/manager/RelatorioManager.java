@@ -554,24 +554,27 @@ private BarChartModel initValorPorCelula() {
 	    ChartSeries pleno = new ChartSeries();
 	    ChartSeries senior = new ChartSeries();
 	    ChartSeries total = new ChartSeries();
+	    ChartSeries estagio = new ChartSeries();
+	    estagio.setLabel("Estágio");
 	    junior.setLabel("Junior");
 	    pleno.setLabel("Pleno");
 	    senior.setLabel("Sênior");
 	    total.setLabel("Total Resultado");
 	    for (Relatorio relatorio : getRelatorioPerfilPorCelula()) {
-	    	porcentagem = (double) ((relatorio.getQuantidade01()+relatorio.getQuantidade02())+relatorio.getQuantidade03());
+	    	porcentagem = (double) ((relatorio.getQuantidade01()+relatorio.getQuantidade02())+relatorio.getQuantidade03()+relatorio.getQuantidade04());
 	    	System.out.println("ckdhfkasjka   "+porcentagem);
-	    	junior.set(relatorio.getNome01(),(relatorio.getQuantidade01()*100)/porcentagem);
-	    	System.out.println("ckdhfkasjka   "+(relatorio.getQuantidade01()*100)/porcentagem);
-	    	pleno.set(relatorio.getNome01(), (relatorio.getQuantidade02()*100)/porcentagem);
-	    	senior.set(relatorio.getNome01(), (relatorio.getQuantidade03()*100)/porcentagem);
+	    	estagio.set(relatorio.getNome01(), (relatorio.getQuantidade01()*100)/porcentagem);
+	    	junior.set(relatorio.getNome01(),(relatorio.getQuantidade02()*100)/porcentagem);
+	    	System.out.println("ckdhfkasjka   "+(relatorio.getQuantidade03()*100)/porcentagem);
+	    	pleno.set(relatorio.getNome01(), (relatorio.getQuantidade03()*100)/porcentagem);
+	    	senior.set(relatorio.getNome01(), (relatorio.getQuantidade04()*100)/porcentagem);
 	    	total.set(relatorio.getNome01(), (porcentagem*100)/porcentagem);
 	    	porcentagem = 0;
 		}	
 	
 	    
 	   
-	   
+	   model.addSeries(estagio);
 	    model.addSeries(junior);	         
 	    model.addSeries(pleno);	   
 	    model.addSeries(senior);	
