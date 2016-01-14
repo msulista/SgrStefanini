@@ -54,6 +54,12 @@
 					<f:converter converterId="cargaHorariaConverter"/>
 				</h:outputText>			
 			</p:column>
+			
+			<p:column headerText="#{message['label.profissional.valorHora']}">
+				<h:outputText value="#{profissional.valorHora}">
+					<f:convertNumber minFractionDigits="2" type="currency" currencySymbol="R$"/>
+				</h:outputText>
+			</p:column>
 				
 			<p:column headerText="#{message['label.profissional.contratacao']}">
 				<h:outputText value="#{profissional.formaContratacao.nome}"/>			
