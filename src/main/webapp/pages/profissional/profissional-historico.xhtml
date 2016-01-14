@@ -22,7 +22,9 @@
 					emptyMessage="#{message['alerta.listaVazia']}"
 					scrollable="true" scrollHeight="auto" scrollWidth="34%"
 					frozenColumns="2"
-					frozenRows="0" >
+					frozenRows="0"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                paginator="true" rows="10" rowsPerPageTemplate="10,20,30" >
 
 					<div class="colunas-fixas">
 						<p:column headerText="#{message['label.profissional.matricula']} " styleClass="coluna-fixa">
