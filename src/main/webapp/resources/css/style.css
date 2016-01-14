@@ -316,6 +316,10 @@ html, body {
 	width: 160px;
 }
 
+.ui-paginator.ui-paginator-top {
+    display: none;
+}
+
 .ui-datatable-scrollable-theadclone th.ui-state-default {
     height: 10px;
     padding: 10px;
