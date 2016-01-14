@@ -5,7 +5,8 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/pages/template/default.xhtml"
 	xmlns:pretty="http://ocpsoft.com/prettyfaces"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:pe="http://primefaces.org/ui/extensions">
 
 	<ui:define name="content">
 		<p:breadCrumb>
@@ -85,7 +86,27 @@
 
 			<p:dataTable id="gridProfissional" var="profissional"
 				value="#{profissionalManager.lista()}"
-				emptyMessage="#{message['alerta.listaVazia']}">
+				emptyMessage="#{message['alerta.listaVazia']}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                 paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
+				
+                         
+				<f:facet name="{Exporters}">
+		            <h:commandLink>
+		                <h:graphicImage value="/resources/img/excel.png" width="24"/>
+		                <p:dataExporter type="xls" target="gridProfissional" fileName="profissionais" />
+		            </h:commandLink>
+		            
+		            <h:commandLink>
+		                <p:graphicImage value="/resources/img/pdf.png" width="24"/>
+		                <pe:exporter type="pdf" encoding="iso-8859-1" target="gridProfissional" fileName="profissionais" cellFontSize="7" facetFontSize="7" facetFontStyle="BOLD" datasetPadding="2" /> 
+		            </h:commandLink>
+		 
+		            <h:commandLink>
+		                <p:graphicImage value="/resources/img/csv.png" width="24"/>
+		                <p:dataExporter type="csv" encoding="iso-8859-1" target="gridProfissional" fileName="profissionais" />
+		            </h:commandLink>
+            	</f:facet>
 
 				<p:column headerText="#{message['label.profissional.matricula']} ">
 					<h:outputText value="#{profissional.matricula}" />
@@ -126,7 +147,7 @@
 				</p:column>
 
 				<p:column headerText="#{message['label.acoes']}"
-					styleClass="txtCenter">
+					styleClass="txtCenter" exportable="false">
 					<pretty:link mappingId="profissional-editar">
 						<f:param value="#{profissional.matricula}" />
 						<p:commandButton id="editar" styleClass="btn-acao" type="button"
