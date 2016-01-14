@@ -32,12 +32,10 @@ public class Recurso implements Serializable{
 	
 	@ManyToMany
 	@JoinTable(name = "PROJETO_RECURSO", joinColumns={@JoinColumn(name = "ID_RECURSO")}, inverseJoinColumns={@JoinColumn(name = "ID_PROJETO")})
-	private List<Profissional> profissionais;
-	
-	
+	private List<Projeto> projetos;
+		
 	public Recurso() {
 	}
-	
 	
 	public Long getId() {
 		return id;
@@ -57,11 +55,11 @@ public class Recurso implements Serializable{
 	public void setValorHora(double valorHora) {
 		this.valorHora = valorHora;
 	}
-	public List<Profissional> getProfissionais() {
-		return profissionais;
+	public List<Projeto> getProjetos() {
+		return projetos;
 	}
-	public void setProfissionais(List<Profissional> profissionais) {
-		this.profissionais = profissionais;
+	public void setProjetos(List<Projeto> projetos) {
+		this.projetos = projetos;
 	}
 
 
@@ -71,7 +69,7 @@ public class Recurso implements Serializable{
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + matricula;
-		result = prime * result + ((profissionais == null) ? 0 : profissionais.hashCode());
+		result = prime * result + ((projetos == null) ? 0 : projetos.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(valorHora);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -95,15 +93,17 @@ public class Recurso implements Serializable{
 			return false;
 		if (matricula != other.matricula)
 			return false;
-		if (profissionais == null) {
-			if (other.profissionais != null)
+		if (projetos == null) {
+			if (other.projetos != null)
 				return false;
-		} else if (!profissionais.equals(other.profissionais))
+		} else if (!projetos.equals(other.projetos))
 			return false;
 		if (Double.doubleToLongBits(valorHora) != Double.doubleToLongBits(other.valorHora))
 			return false;
 		return true;
-	}		
+	}
+	
+	
 	
 	
 }
