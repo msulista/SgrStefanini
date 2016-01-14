@@ -148,11 +148,15 @@ public class RelatorioService {
 	public List<Profissional> listaDePerfilPorEquipe(String nome, int serie){
 		String serieString;
 		if(serie == 0){
-			 serieString = "Júnior";
+			 serieString = "Estágio";
 		}else if(serie == 1){
+			serieString = "Júnior";
+		}else if(serie ==2){
 			serieString = "Pleno";
-		}else{
+		}else if(serie ==3){
 			serieString = "Sênior";
+		}else{
+			serieString = "";
 		}
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("Profissional.findProfissionalByEquipeEPerfil");
@@ -168,24 +172,21 @@ public class RelatorioService {
 		String serieString;
 		String queryString;
 		if(serie == 0){
-			 serieString = "Estágio";
+			 serieString = "Júnior";
 			 queryString= "Profissional.findProfissionalByCelulaEPerfil";
 		}else if(serie == 1){
-			serieString = "Júnior";
-			queryString= "Profissional.findProfissionalByCelulaEPerfil";
-		}else if (serie ==2){
 			serieString = "Pleno";
 			queryString= "Profissional.findProfissionalByCelulaEPerfil";
-		}else if(serie == 3){
-			serieString ="Sênior";
-			queryString ="Profissional.findProfissionalByCelulaEPerfil";
+		}else if (serie ==2){
+			serieString = "Sênior";
+			queryString= "Profissional.findProfissionalByCelulaEPerfil";
 		}else{
 			serieString ="";
 			queryString ="Profissional.findProfissionalByCelulaNome";
 		}
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery(queryString);
-		if(serie == 0||serie==1||serie==2||serie==3){
+		if(serie == 0||serie==1||serie==2){
 		q.setParameter("nome", nome);
 		q.setParameter("serie", serieString);
 		}else{
