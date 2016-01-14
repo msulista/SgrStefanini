@@ -309,6 +309,7 @@ html, body {
 
 .coluna-fixa{
 	width: 200px;
+	border-right: 2px solid #ddd !important;
 }
 
 .coluna-movel{

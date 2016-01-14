@@ -6,6 +6,11 @@
 	template="/pages/template/default.xhtml">
 
 	<ui:define name="content">
+		<p:breadCrumb>
+			<p:menuitem value="#{message['pao.home']}" url="#" />
+			<p:menuitem value="#{message['pao.relatorios']}"
+				outcome="pretty:profissional" disabled="true" />
+		</p:breadCrumb>
 		<div class="bloco-relatorios">
 			<h2 class="titulo-pagina-relatorio">Relatorios por Equipes</h2>
 			<h:link outcome="pretty:relatorioProfissional">
