@@ -62,6 +62,7 @@ public class RelatorioManager {
 	private int quantidadeTotal = 0;
 	private int quantidadeTotal2 = 0;
 	private int quantidadeTotal3 = 0;
+	private int quantidadeTotal4 = 0;
 	private double porcentagem = 0;
 	private double valorTotal = 0;
 
@@ -391,25 +392,30 @@ public class RelatorioManager {
 	    ChartSeries junior = new ChartSeries();
 	    ChartSeries pleno = new ChartSeries();
 	    ChartSeries senior = new ChartSeries();
+	    ChartSeries estagio = new ChartSeries();
 	    model.setShowPointLabels(true);
 	    model.setExtender("limpaLabel");
+	    estagio.setLabel("Estágio");
 	    junior.setLabel("Junior");
 	    pleno.setLabel("Pleno");
 	    senior.setLabel("Sênior");
 	    
 	    for (Relatorio relatorio : getRelatorioPerfilPorEquipe()) {
-	    	
-	    	junior.set(relatorio.getNome01(), relatorio.getQuantidade01());
-	    	pleno.set(relatorio.getNome01(), relatorio.getQuantidade02());
-	    	senior.set(relatorio.getNome01(), relatorio.getQuantidade03());
+	    	estagio.set(relatorio.getNome01(), relatorio.getQuantidade01());
+	    	junior.set(relatorio.getNome01(), relatorio.getQuantidade02());
+	    	pleno.set(relatorio.getNome01(), relatorio.getQuantidade03());
+	    	senior.set(relatorio.getNome01(), relatorio.getQuantidade04());
 	    	quantidadeTotal = (int)(quantidadeTotal += relatorio.getQuantidade01());
 	    	quantidadeTotal2 = (int)(quantidadeTotal2+= relatorio.getQuantidade02());
 	    	quantidadeTotal3 = (int)(quantidadeTotal3 += relatorio.getQuantidade03());
+	    	quantidadeTotal4 = (int)(quantidadeTotal4 += relatorio.getQuantidade04());
 		}	
 	
-	    junior.set("Total Resultados", quantidadeTotal);
-	    pleno.set("Total Resultados", quantidadeTotal2);
-	    senior.set("Total Resultado", quantidadeTotal3);
+	    estagio.set("Total Resultados", quantidadeTotal);
+	    junior.set("Total Resultados", quantidadeTotal2);
+	    pleno.set("Total Resultados", quantidadeTotal3);
+	    senior.set("Total Resultados", quantidadeTotal4);
+	    model.addSeries(estagio);
 	    model.addSeries(junior);	         
 	    model.addSeries(pleno);	   
 	    model.addSeries(senior);	  
@@ -430,7 +436,7 @@ public class RelatorioManager {
 	    yAxis.setMin(0);
 	   
 	    yAxis.setTickCount(quantidadeTotal + 4);
-	    yAxis.setMax(quantidadeTotal + 3);
+	    yAxis.setMax(quantidadeTotal + quantidadeTotal2+quantidadeTotal3+quantidadeTotal4);
 	}
 	
 	public void itemSelectPerfilPorEquipe(ItemSelectEvent event){

@@ -90,25 +90,27 @@ public class ProfissionalService {
 			
 			//verificando se data demissão e anterior a de admissão
 				if (DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())) {
+					
+					Profissional profissionalInicial = (Profissional) getPrimeiroProfissional(profissional.getMatricula());
 							
-					//verificando se o novo registro é anterior ao dia atual
-					if(DateUtil.verificaDataValida(DateUtil.getDataParaComparacao(new Date()),profissional.getRegistroValidadeInicio())){
+					//verificando se o novo registro é anterior ao primeiro registro
+					if(DateUtil.verificaDataValida(profissionalInicial.getRegistroValidadeInicio(),profissional.getRegistroValidadeInicio())){
 						
 					//verificando se a nova data de inicio é anterior a antiga
 						if(DateUtil.verificaDataValida(profissionalMerge.getRegistroValidadeInicio(),profissional.getRegistroValidadeInicio())){
 						
 							//verificando se dataFim com o dia atual
-						if(DateUtil.verificaDataValida(DateUtil.getDataParaComparacao(new Date()),profissional.getRegistroValidaeFim())){
+						//if(DateUtil.verificaDataValida(DateUtil.getDataParaComparacao(new Date()),profissional.getRegistroValidaeFim())){
 									
-							//verificando se data final na é anterior a inicial
+							//verificando se data final nao é anterior a inicial
 							if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())){
 								
 								//verificando se data retorno é anterior a saida
 								if(DateUtil.verificaDataValida(profissional.getDataSaida(), profissional.getDataRetorno())){
 									
 								//comparando se o registro inicio do profissional é igual ao dia atual e igual a data inicio do antigo
-								if(profissional.getRegistroValidadeInicio().compareTo(DateUtil.getDataParaComparacao(new Date()))==0&&profissional.getRegistroValidadeInicio().compareTo(profissionalMerge.getRegistroValidadeInicio())==0){
-									profissionalMerge.setRegistroValidaeFim(new Date());
+								if(profissional.getRegistroValidadeInicio().compareTo(profissionalMerge.getRegistroValidadeInicio())==0){
+									profissionalMerge.setRegistroValidaeFim(profissional.getRegistroValidadeInicio());
 									manager.merge(profissionalMerge);
 					
 								}else{
@@ -172,19 +174,19 @@ public class ProfissionalService {
 											return false;
 										}
 										
-									}else{
+									/*}else{
 										Mensagem.add("Data final do regirstro nao pode ser anteriro ao dia atual");
 										manager.close();
 										return false;
-									}
+									}*/
 									
 								}else{
-									Mensagem.add("Nova data de registro nao pode ser anterior ao dia atual");
+									Mensagem.add("Data nova nao pode ser anterior a alterações ja feitas ou programadas");
 									manager.close();
 									return false;
 								}
 					}else{
-						Mensagem.add("Nova data de registro nao pode ser anterior a antiga");
+						Mensagem.add("Nova data de registro nao pode ser anterior ao primeiro cadastro");
 						manager.close();
 						return false;
 						}
@@ -201,7 +203,8 @@ public class ProfissionalService {
 			return false;
 		}
 	}
-	
+
+
 	public void persistAfastado(Profissional profissional){
 		
 		EntityManager manager = JPAUtil.getEntityManager();
@@ -290,6 +293,15 @@ public class ProfissionalService {
 		List<Profissional> profissionais = q.getResultList();
 		manager.close();
 		return profissionais;
+	}
+	
+	private Profissional getPrimeiroProfissional(int matricula) {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Profissional.checkPrimeiroProfissionalByMatricula");
+		q.setParameter("matricula", matricula);
+		Profissional profissional = (Profissional) q.getSingleResult();
+		manager.close();
+		return profissional;
 	}
 	
 	public void desativar(Profissional profissional) throws ConverterException {

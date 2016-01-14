@@ -27,6 +27,9 @@ public class ViewPerfilXEquipe implements BaseEntity, Serializable {
 	@Column(name = "nome")
 	private String nome;
 	
+	@Column(name = "ESTAGIO")
+	private long estagio;
+	
 	@Column(name = "JUNIOR")
 	private long junior;
 	
@@ -42,6 +45,16 @@ public class ViewPerfilXEquipe implements BaseEntity, Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	
+	
+	public long getEstagio() {
+		return estagio;
+	}
+
+	public void setEstagio(long estagio) {
+		this.estagio = estagio;
 	}
 
 	public long getJunior() {
@@ -72,6 +85,8 @@ public class ViewPerfilXEquipe implements BaseEntity, Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (int) (estagio ^ (estagio >>> 32));
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + (int) (junior ^ (junior >>> 32));
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + (int) (pleno ^ (pleno >>> 32));
@@ -88,6 +103,10 @@ public class ViewPerfilXEquipe implements BaseEntity, Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ViewPerfilXEquipe other = (ViewPerfilXEquipe) obj;
+		if (estagio != other.estagio)
+			return false;
+		if (id != other.id)
+			return false;
 		if (junior != other.junior)
 			return false;
 		if (nome == null) {
@@ -101,6 +120,7 @@ public class ViewPerfilXEquipe implements BaseEntity, Serializable {
 			return false;
 		return true;
 	}
+
 	
 }
 	

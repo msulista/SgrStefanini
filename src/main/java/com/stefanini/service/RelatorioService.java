@@ -72,7 +72,7 @@ public class RelatorioService {
 	@SuppressWarnings("unchecked")
 	public List<Relatorio> perfilPorEquipe(){
 		EntityManager manager = JPAUtil.getEntityManager();
-		String perfilPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(v.nome,v.junior,v.pleno,v.senior)FROM ViewPerfilXEquipe v";
+		String perfilPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(v.nome,v.estagio,v.junior,v.pleno,v.senior)FROM ViewPerfilXEquipe v";
 		Query q = manager.createQuery(perfilPorEquipe);
 		List<Relatorio> relatorioValorPorEquipe = (List<Relatorio>)q.getResultList();
 		manager.close();
@@ -168,21 +168,24 @@ public class RelatorioService {
 		String serieString;
 		String queryString;
 		if(serie == 0){
-			 serieString = "Júnior";
+			 serieString = "Estágio";
 			 queryString= "Profissional.findProfissionalByCelulaEPerfil";
 		}else if(serie == 1){
-			serieString = "Pleno";
+			serieString = "Júnior";
 			queryString= "Profissional.findProfissionalByCelulaEPerfil";
 		}else if (serie ==2){
-			serieString = "Sênior";
+			serieString = "Pleno";
 			queryString= "Profissional.findProfissionalByCelulaEPerfil";
+		}else if(serie == 3){
+			serieString ="Sênior";
+			queryString ="Profissional.findProfissionalByCelulaEPerfil";
 		}else{
 			serieString ="";
 			queryString ="Profissional.findProfissionalByCelulaNome";
 		}
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery(queryString);
-		if(serie == 0||serie==1||serie==2){
+		if(serie == 0||serie==1||serie==2||serie==3){
 		q.setParameter("nome", nome);
 		q.setParameter("serie", serieString);
 		}else{
