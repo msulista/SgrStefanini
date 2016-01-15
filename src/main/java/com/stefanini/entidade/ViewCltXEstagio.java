@@ -14,6 +14,7 @@ public class ViewCltXEstagio implements BaseEntity, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name = "ID")
 	private long id;
 	
 	public Long getId() {

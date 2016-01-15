@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.ItemSelectEvent;
@@ -16,12 +19,13 @@ import org.primefaces.model.chart.LegendPlacement;
 
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
+import com.stefanini.entidade.Celula;
 import com.stefanini.entidade.Profissional;
 import com.stefanini.entidade.Relatorio;
 import com.stefanini.service.RelatorioService;
 
 @ManagedBean
-@ViewScoped
+@ApplicationScoped
 @URLMappings(mappings = {
 		@URLMapping(id = "relatoriosLinks", pattern = "/relatorios-links", viewId = "/pages/relatorio/relatorio-listar.xhtml"),
 		@URLMapping(id = "relatorioProfissional", pattern = "/profissional-por-equipe", viewId = "/pages/relatorio/relatorio-profissional-equipe.xhtml"),
@@ -35,7 +39,7 @@ import com.stefanini.service.RelatorioService;
 })
 public class RelatorioManager {
 	
-	
+	private Celula celula;
 	
 	private Relatorio relatorio = new Relatorio();
 	private RelatorioService service = new RelatorioService();
@@ -116,7 +120,7 @@ public class RelatorioManager {
 	}
 	
 	public List<Relatorio> getRelatorioProfissionalEquipe() {
-		relatorioProfissionalEquipe = this.service.profissionaisPorEquipe();
+		relatorioProfissionalEquipe = this.service.profissionaisPorEquipe(this.celula);
 		return relatorioProfissionalEquipe;
 	}
 
@@ -125,7 +129,7 @@ public class RelatorioManager {
 	}
 
 	public List<Relatorio> getRelatorioContratacaoEquipe() {
-		relatorioContratacaoEquipe = this.service.contratacaoPorEquipe();
+		relatorioContratacaoEquipe = this.service.contratacaoPorEquipe(this.celula);
 		return relatorioContratacaoEquipe;
 	}
 	
@@ -221,12 +225,22 @@ public class RelatorioManager {
 		this.relatorioPerfilPorCelula = relatorioPerfilPorCelula;
 	}
 
+	public Celula getCelula() {
+		return celula;
+	}
+
+
+	public void setCelula(Celula celula) {
+		this.celula = celula;
+	}
 	
 	//Graficos
 
 	
 
 	
+
+
 	public void criaGrafico(){
 	   	createProfissionalPorEquipe();
 	   	createCltXestagioPorEquipe();
@@ -240,7 +254,7 @@ public class RelatorioManager {
 	//Profissional por Equipe
 	private BarChartModel initProfissionalPorEquipe() {
 		quantidadeTotal =0;
-	    BarChartModel model = new BarChartModel();
+		BarChartModel model = new BarChartModel();
 	    model.setLegendPosition("ne");
 	    model.setExtender("limpaLabel");
     	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
@@ -275,7 +289,7 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectProfissionalPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorioProfissionalEquipe.get(event.getItemIndex()).getNome01());
+		profissionais = this.service.listaDeProfissionaisPorEquipe(celula.getId(),(relatorioProfissionalEquipe.get(event.getItemIndex()).getNome01()));
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
@@ -376,7 +390,7 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectValorPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDeProfissionaisPorEquipe(relatorioValorEquipe.get(event.getItemIndex()).getNome01());
+		profissionais = this.service.listaDeProfissionaisPorEquipe(celula.getId(),relatorioValorEquipe.get(event.getItemIndex()).getNome01());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
