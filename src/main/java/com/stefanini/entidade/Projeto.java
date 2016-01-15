@@ -41,7 +41,7 @@ public class Projeto {
 	@Column(name = "SALDO", nullable = true)
 	private double saldo;
 	
-	@ManyToMany(mappedBy = "PROJETO_RECURSO")
+	@ManyToMany(mappedBy = "SGR_PROJETO_RECURSO")
 	private List<Recurso> recursos;	
 	
 	public Projeto() {

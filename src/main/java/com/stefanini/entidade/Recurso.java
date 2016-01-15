@@ -20,7 +20,8 @@ import javax.persistence.Table;
 @Table(name = "SGR_RECURSO")
 @NamedQueries({
 	@NamedQuery(name = "Recurso.finAll", query = "SELECT r FROM Recurso r ORDER BY r.nome ASC"),
-	@NamedQuery(name = "Recurso.findMatricula", query ="SELECT r FROM Recurso r WHERE r.profissional.matricula = :matricula ORDER BY p.nome ASC")
+	@NamedQuery(name = "Recurso.findMatricula", query ="SELECT r FROM Recurso r WHERE r.profissional.matricula = :matricula ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Recurso.findId", query = "SELECT r FROM Recurso r where r.id = :id")
 })
 public class Recurso implements Serializable{
 	
@@ -39,7 +40,7 @@ public class Recurso implements Serializable{
 	private double valorHora;
 	
 	@ManyToMany
-	@JoinTable(name = "PROJETO_RECURSO", joinColumns={@JoinColumn(name = "ID_RECURSO")}, inverseJoinColumns={@JoinColumn(name = "ID_PROJETO")})
+	@JoinTable(name = "SGR_PROJETO_RECURSO", joinColumns={@JoinColumn(name = "ID_RECURSO")}, inverseJoinColumns={@JoinColumn(name = "ID_PROJETO")})
 	private List<Projeto> projetos;
 		
 	public Recurso() {
