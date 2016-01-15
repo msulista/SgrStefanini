@@ -15,7 +15,8 @@
 		    <p:menuitem value="Relatorio Forma de Profissional por Equipe" outcome="pretty:relatoriosLinks" disabled="true"/>
 		</p:breadCrumb>
 		<h2>#{message['title.relatorio.profissional.equipe']}</h2>
-		
+			
+			
 		<p:chart type="bar" model="#{relatorioManager.profissionalPorEquipe}" style="height:300px" responsive="true">
 			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectProfissionalPorEquipe}" process="@this" update="gridRelatorio"/>
 		</p:chart>
