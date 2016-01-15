@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "SGR_PROJETO")
+//@Entity
+//@Table(name = "SGR_PROJETO")
 public class Projeto {
 
 	@Id

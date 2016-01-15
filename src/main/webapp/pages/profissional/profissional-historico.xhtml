@@ -13,7 +13,9 @@
 			<p:breadCrumb>
 				<p:menuitem value="#{message['pao.home']}" url="#" />
 				<p:menuitem value="#{message['pao.profissional']}"
-					outcome="pretty:profissional" disabled="true" />
+					outcome="pretty:profissional"/>
+		    <p:menuitem value="Historico do Profissional" outcome="pretty:profissional" disabled="true"/>
+					
 			</p:breadCrumb>
 			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 			<h2>#{message['title.profissional']}</h2>
