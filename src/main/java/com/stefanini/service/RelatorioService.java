@@ -73,13 +73,20 @@ public class RelatorioService {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Relatorio> valorPorEquipe(){
+	public List<Relatorio> valorPorEquipe(Celula celula){
+		
+		if(celula!=null){
 		EntityManager manager = JPAUtil.getEntityManager();
-		String valorPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome, AVG(p.valorHora)) FROM Profissional p WHERE p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) GROUP BY p.equipe.nome";
+		String valorPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(p.equipe.nome, AVG(p.valorHora)) FROM Profissional p WHERE p.celula.id = :id AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) GROUP BY p.equipe.nome";
 		Query q = manager.createQuery(valorPorEquipe);
+		q.setParameter("id", celula.getId());
 		List<Relatorio> relatorioValorPorEquipe = (List<Relatorio>)q.getResultList();
 		manager.close();
 		return relatorioValorPorEquipe;
+	}else{
+		List<Relatorio> relatorioValorPorEquipe = new ArrayList<>();
+		return relatorioValorPorEquipe;
+	}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -93,14 +100,20 @@ public class RelatorioService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Relatorio> perfilPorEquipe(){
+	public List<Relatorio> perfilPorEquipe(Celula celula){
+		
+		if(celula !=null){
 		EntityManager manager = JPAUtil.getEntityManager();
-		String perfilPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(v.nome,v.estagio,v.junior,v.pleno,v.senior)FROM ViewPerfilXEquipe v";
+		String perfilPorEquipe = "SELECT new com.stefanini.entidade.Relatorio(v.nome,v.estagio,v.junior,v.pleno,v.senior)FROM ViewPerfilXEquipe v WHERE v.id = :id";
 		Query q = manager.createQuery(perfilPorEquipe);
+		q.setParameter("id", celula.getId());
 		List<Relatorio> relatorioValorPorEquipe = (List<Relatorio>)q.getResultList();
 		manager.close();
 		return relatorioValorPorEquipe;
-		
+	}else{
+		List<Relatorio> relatorioValorPorEquipe = new ArrayList<>();
+		return relatorioValorPorEquipe;
+	}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -170,7 +183,7 @@ public class RelatorioService {
 		return profissionais;
 	}
 	@SuppressWarnings("unchecked")
-	public List<Profissional> listaDePerfilPorEquipe(String nome, int serie){
+	public List<Profissional> listaDePerfilPorEquipe(Long id,String nome, int serie){
 		String serieString;
 		if(serie == 0){
 			 serieString = "Estágio";
@@ -184,9 +197,10 @@ public class RelatorioService {
 			serieString = "";
 		}
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNamedQuery("Profissional.findProfissionalByEquipeEPerfil");
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByCelulaANDEquipeEPerfil");
 		q.setParameter("nome", nome);
 		q.setParameter("serie", serieString);
+		q.setParameter("id", id);
 		List<Profissional> profissionais = q.getResultList();
 		manager.close();
 		return profissionais;

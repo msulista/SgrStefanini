@@ -138,7 +138,7 @@ public class RelatorioManager {
 	}
 	
 	public List<Relatorio> getRelatorioValorEquipe() {
-		relatorioValorEquipe = this.service.valorPorEquipe();
+		relatorioValorEquipe = this.service.valorPorEquipe(this.celula);
 		return relatorioValorEquipe;
 	}
 
@@ -147,7 +147,7 @@ public class RelatorioManager {
 	}
 	
 	public List<Relatorio> getRelatorioPerfilPorEquipe() {
-		relatorioPerfilPorEquipe = this.service.perfilPorEquipe();
+		relatorioPerfilPorEquipe = this.service.perfilPorEquipe(this.celula);
 		return relatorioPerfilPorEquipe;
 	}
 
@@ -353,7 +353,7 @@ public class RelatorioManager {
 	// Valor por Equipe
 	
 	private BarChartModel initValorPorEquipe() {
-		
+		valorTotal =0;
 	    BarChartModel model = new BarChartModel();
 	    model.setExtender("decimalConverter");
 	    ChartSeries grafico = new ChartSeries();
@@ -400,6 +400,7 @@ public class RelatorioManager {
 		quantidadeTotal =0;
 		quantidadeTotal2 =0;
 		quantidadeTotal3 =0;
+		quantidadeTotal4 = 0;
 	    BarChartModel model = new BarChartModel(); 
 	    	model.setLegendPosition("ne");
 	    	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
@@ -454,7 +455,7 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectPerfilPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDePerfilPorEquipe(relatorioPerfilPorEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
+		profissionais = this.service.listaDePerfilPorEquipe(celula.getId(),relatorioPerfilPorEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
