@@ -25,8 +25,8 @@
 							noSelectionOption="true" />
 						<f:selectItems value="#{celulaManager.listarAtivos()}"
 							var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}" />
-							<p:ajax update="grid:gridGrafico"/> 
-							<p:ajax immediate="true" update="grid:gridGrafico" event="itemSelect" listener="#{relatorioManager.criaGrafico()}"/> 
+							
+							<p:ajax immediate="true" update="@form" event="change" listener="#{relatorioManager.criaGrafico()}"/> 
 							
 							</p:selectOneMenu>
 						

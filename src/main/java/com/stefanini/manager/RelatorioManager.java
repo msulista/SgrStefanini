@@ -1,5 +1,6 @@
 package com.stefanini.manager;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.Axis;
@@ -25,7 +27,7 @@ import com.stefanini.entidade.Relatorio;
 import com.stefanini.service.RelatorioService;
 
 @ManagedBean
-@ApplicationScoped
+@ViewScoped
 @URLMappings(mappings = {
 		@URLMapping(id = "relatoriosLinks", pattern = "/relatorios-links", viewId = "/pages/relatorio/relatorio-listar.xhtml"),
 		@URLMapping(id = "relatorioProfissional", pattern = "/profissional-por-equipe", viewId = "/pages/relatorio/relatorio-profissional-equipe.xhtml"),
@@ -37,19 +39,24 @@ import com.stefanini.service.RelatorioService;
 		@URLMapping(id = "relatorioPerfilCelula", pattern = "/perfil-por-celula", viewId = "/pages/relatorio/relatorio-perfil-celula.xhtml"),
 		
 })
-public class RelatorioManager {
+public class RelatorioManager implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Celula celula;
 	
 	private Relatorio relatorio = new Relatorio();
 	private RelatorioService service = new RelatorioService();
-	private BarChartModel profissionalPorEquipe;
-	private BarChartModel contratacaoPorEquipe;
-	private BarChartModel valorPorEquipe;
-	private BarChartModel valorPorCelula;
-	private BarChartModel perfilPorEquipe;
-	private BarChartModel contratacaoPorCelula;
-	private BarChartModel perfilPorCelula;
+	private BarChartModel profissionalPorEquipe = new BarChartModel();
+	private BarChartModel contratacaoPorEquipe = new BarChartModel();
+	private BarChartModel valorPorEquipe = new BarChartModel();
+	private BarChartModel valorPorCelula = new BarChartModel();
+	private BarChartModel perfilPorEquipe = new BarChartModel();
+	private BarChartModel contratacaoPorCelula = new BarChartModel();
+	private BarChartModel perfilPorCelula = new BarChartModel();
 	
 	
 	private List<Relatorio> relatorioProfissionalEquipe = new ArrayList<>();
@@ -71,7 +78,7 @@ public class RelatorioManager {
 	private double valorTotal = 0;
 
 	public RelatorioManager() {
-		
+		criaGrafico();
 	}	
 	
 	@PostConstruct
@@ -120,7 +127,7 @@ public class RelatorioManager {
 	}
 	
 	public List<Relatorio> getRelatorioProfissionalEquipe() {
-		relatorioProfissionalEquipe = this.service.profissionaisPorEquipe(this.celula);
+		relatorioProfissionalEquipe = this.service.profissionaisPorEquipe((Celula) FacesContext.getCurrentInstance().getViewRoot().getViewMap().get(celula));
 		return relatorioProfissionalEquipe;
 	}
 
@@ -237,16 +244,18 @@ public class RelatorioManager {
 	//Graficos
 
 	
-
+	public void criaGraficoValorCelula(){
+		this.createValorPorCelula();
+	}
 	
 
 
 	public void criaGrafico(){
+		this.createValorPorCelula();
 	   	createProfissionalPorEquipe();
 	   	createCltXestagioPorEquipe();
 	   	createValorPorEquipe();
 	   	createPerfilPorEquipe();
-	   	createValorPorCelula();
 	   	createCltXestagioPorCelula();
 	   	createPerfilPorCelula();
 	}
@@ -364,6 +373,8 @@ public class RelatorioManager {
 	    for (Relatorio relatorio : getRelatorioValorEquipe()) {
 	    	grafico.set(relatorio.getNome01(), relatorio.getValorMedio().doubleValue());
 	    	valorTotal = (double)(valorTotal + relatorio.getValorMedio().doubleValue());
+	    	System.out.println("#############################################################"+relatorio.getNome01()+"@@@@@@@@@@@@@"+relatorio.getValorMedio());
+	    	
 		}	
 	    grafico.set("Valor Médio Total", valorTotal / getRelatorioValorEquipe().size());
 	    model.addSeries(grafico);	
@@ -461,8 +472,8 @@ public class RelatorioManager {
 	}
 	
 	//Valor medio por celula
-private BarChartModel initValorPorCelula() {
-		valorTotal = 0;
+	private BarChartModel initValorPorCelula() {
+		
 	    BarChartModel model = new BarChartModel();
 	    model.setLegendPosition("ne");
     	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
@@ -472,7 +483,8 @@ private BarChartModel initValorPorCelula() {
 	    grafico.setLabel("Celula");
 	    for (Relatorio relatorio : getRelatorioValorCelula()) {
 	    	grafico.set(relatorio.getNome01(), relatorio.getValorMedio().doubleValue());
-	    	valorTotal = (double)(valorTotal + relatorio.getValorMedio().doubleValue());
+			System.out.println("#############################################################"+relatorio.getNome01()+"@@@@@@@@@@@@@"+relatorio.getValorMedio());
+	    	
 		}	
 	   
 	    model.addSeries(grafico);	
@@ -481,10 +493,10 @@ private BarChartModel initValorPorCelula() {
 	}
 	
 	private void createValorPorCelula() {
-		valorPorCelula = initValorPorCelula();
+		this.valorPorCelula = initValorPorCelula();
 		
-		valorPorCelula.setTitle("Selecione a coluna para listar os profissionais");
-		valorPorCelula.setAnimate(true);
+		this.valorPorCelula.setTitle("Selecione a coluna para listar os profissionais");
+		this.valorPorCelula.setAnimate(true);
 		
 	       
 	    Axis xAxis = valorPorCelula.getAxis(AxisType.X);
@@ -495,7 +507,7 @@ private BarChartModel initValorPorCelula() {
 	    yAxis.setMin(0);
 	   
 	    yAxis.setTickCount(11);
-	    yAxis.setMax(valorTotal + 10);
+	    yAxis.setMax(100);
 	}
 	
 	public void itemSelectValorPorCelula(ItemSelectEvent event){
