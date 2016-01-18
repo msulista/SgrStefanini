@@ -136,7 +136,7 @@ public class RelatorioService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Profissional> listaDeCLTXEstagio(String nome, int serie){
+	public List<Profissional> listaDeCLTXEstagio(Long celula, String nome, int serie){
 		String serieString;
 		if(serie ==0){
 			 serieString = "CLT";
@@ -144,9 +144,10 @@ public class RelatorioService {
 			serieString = "Estágio";
 		}
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNamedQuery("Profissional.findProfissionalByEquipeEContratacao");
+		Query q = manager.createNamedQuery("Profissional.findProfissionalByCelulaANDEquipeEContratacao");
 		q.setParameter("nome", nome);
 		q.setParameter("serie", serieString);
+		q.setParameter("celula", celula);
 		List<Profissional> profissionais = q.getResultList();
 		manager.close();
 		return profissionais;
