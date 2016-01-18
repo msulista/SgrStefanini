@@ -125,7 +125,6 @@ public class PerfilStefaniniService {
 		manager.merge(perfilStefanini);
 		manager.getTransaction().commit();
 		manager.close();
-
 	}
 	
 	public Long gerarCodigo(){

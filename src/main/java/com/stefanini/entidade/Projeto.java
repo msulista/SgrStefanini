@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 //@Entity
-//@Table(name = "SGR_PROJETO")
+//@Table(name = "sgr_projeto")
 public class Projeto {
 
 	@Id

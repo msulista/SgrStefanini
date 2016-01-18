@@ -19,11 +19,11 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "SGR_RECURSO")
-//@NamedQueries({
-//	@NamedQuery(name = "Recurso.finAll", query = "SELECT r FROM Recurso r ORDER BY r.nome ASC"),
-//	@NamedQuery(name = "Recurso.findMatricula", query ="SELECT r FROM Recurso r WHERE r.profissional.matricula = :matricula ORDER BY p.nome ASC"),
-//	@NamedQuery(name = "Recurso.findId", query = "SELECT r FROM Recurso r where r.id = :id")
-//})
+@NamedQueries({
+	@NamedQuery(name = "Recurso.finAll", query = "SELECT r FROM Recurso r ORDER BY r.profissional.nome ASC"),
+	@NamedQuery(name = "Recurso.findMatricula", query ="SELECT r FROM Recurso r WHERE r.profissional.matricula = :matricula ORDER BY r.profissional.nome ASC"),
+	@NamedQuery(name = "Recurso.findId", query = "SELECT r FROM Recurso r where r.id = :id")
+})
 public class Recurso implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -35,14 +35,14 @@ public class Recurso implements Serializable{
 		
 	@ManyToOne
 	@JoinColumn(name = "ID_PROFISSIONAL", referencedColumnName = "ID_PROFISSIONAL")
-	private Profissional Profissional;
+	private Profissional profissional;
 	
 	@Column(name = "VALOR_HORA", nullable = false)
 	private double valorHora;
-//	
+	
 	@Transient
-//	@ManyToMany
-//	@JoinTable(name = "SGR_PROJETO_RECURSO", joinColumns={@JoinColumn(name = "ID_RECURSO")}, inverseJoinColumns={@JoinColumn(name = "ID_PROJETO")})
+	@ManyToMany
+	@JoinTable(name = "SGR_PROJETO_RECURSO", joinColumns={@JoinColumn(name = "ID_RECURSO")}, inverseJoinColumns={@JoinColumn(name = "ID_PROJETO")})
 	private List<Projeto> projetos;
 		
 	public Recurso() {
@@ -55,10 +55,10 @@ public class Recurso implements Serializable{
 		this.id = id;
 	}	
 	public Profissional getProfissional() {
-		return Profissional;
+		return profissional;
 	}
 	public void setProfissional(Profissional profissional) {
-		Profissional = profissional;
+		this.profissional = profissional;
 	}
 	public double getValorHora() {
 		return valorHora;
@@ -77,7 +77,7 @@ public class Recurso implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Profissional == null) ? 0 : Profissional.hashCode());
+		result = prime * result + ((profissional == null) ? 0 : profissional.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((projetos == null) ? 0 : projetos.hashCode());
 		long temp;
@@ -95,10 +95,10 @@ public class Recurso implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Recurso other = (Recurso) obj;
-		if (Profissional == null) {
-			if (other.Profissional != null)
+		if (profissional == null) {
+			if (other.profissional != null)
 				return false;
-		} else if (!Profissional.equals(other.Profissional))
+		} else if (!profissional.equals(other.profissional))
 			return false;
 		if (id == null) {
 			if (other.id != null)
