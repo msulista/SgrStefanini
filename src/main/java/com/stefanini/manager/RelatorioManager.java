@@ -158,7 +158,7 @@ public class RelatorioManager {
 	
 	
 	public List<Relatorio> getRelatorioValorCelula() {
-		relatorioValorCelula = this.service.valorPorCelula();
+		relatorioValorCelula = this.service.valorPorCelula(this.celula);
 		return relatorioValorCelula;
 	}
 
@@ -499,7 +499,7 @@ private BarChartModel initValorPorCelula() {
 	}
 	
 	public void itemSelectValorPorCelula(ItemSelectEvent event){
-		profissionais = this.service.listaDeProfissionaisPorCelula(relatorioValorCelula.get(event.getItemIndex()).getNome01());
+		profissionais = this.service.listaDeProfissionaisPorCelula(celula.getId(),relatorioValorCelula.get(event.getItemIndex()).getNome01());
 		equipe = profissionais.get(0).getCelula().getNome();
 		
 	}

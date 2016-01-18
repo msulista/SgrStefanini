@@ -7,7 +7,7 @@
 	xmlns:pretty="http://ocpsoft.com/prettyfaces">
 
 	<ui:define name="content">
-	<h:form>
+	<h:form id="grid">
 	<p:growl id="growl" life="4000" />
 		<p:breadCrumb>
 		    <p:menuitem value="Home" url="#" />
@@ -15,8 +15,18 @@
 		    <p:menuitem value="Relatorio de Valor Hora Medio por Celula" outcome="pretty:relatoriosLinks" disabled="true"/>
 		</p:breadCrumb>
 		<h2>#{message['title.relatorio.valor.celula']}</h2>
-		
-		<p:chart type="bar" model="#{relatorioManager.valorPorCelula}" style="height:300px" responsive="true" extender="decimalConverter">
+			<p:selectOneMenu styleClass="dropdown-pesquisa" id="celula"
+						value="#{relatorioManager.celula}"
+						converter="simpleEntityConverter">
+						<f:selectItem itemLabel="#{message['select.celula']}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{celulaManager.listarAtivos()}"
+							var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}" />
+							<p:ajax update="grid:gridGrafico"/> 
+							<p:ajax immediate="true" update="grid:gridGrafico" event="itemSelect" listener="#{relatorioManager.criaGrafico()}"/> 
+							
+							</p:selectOneMenu>
+		<p:chart id="gridGrafico" type="bar" model="#{relatorioManager.valorPorCelula}" style="height:300px" responsive="true" extender="decimalConverter">
 			
 			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectValorPorCelula}" process="@this" update="gridRelatorio"/>
 		</p:chart>

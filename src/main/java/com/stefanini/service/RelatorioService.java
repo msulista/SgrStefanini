@@ -90,13 +90,19 @@ public class RelatorioService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Relatorio> valorPorCelula(){
+	public List<Relatorio> valorPorCelula(Celula celula){
+		if(celula != null){
 		EntityManager manager = JPAUtil.getEntityManager();
-		String valorPorCelula = "SELECT new com.stefanini.entidade.Relatorio(p.celula.nome, AVG(p.valorHora)) FROM Profissional p WHERE p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) GROUP BY p.celula.nome";
+		String valorPorCelula = "SELECT new com.stefanini.entidade.Relatorio(p.celula.nome, AVG(p.valorHora)) FROM Profissional p WHERE p.celula.id =:id AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) GROUP BY p.celula.nome";
 		Query q = manager.createQuery(valorPorCelula);
+		q.setParameter("id", celula.getId());
 		List<Relatorio> relatorioValorPorCelula = (List<Relatorio>)q.getResultList();
 		manager.close();
 		return relatorioValorPorCelula;
+		}else{
+			List<Relatorio> relatorioValorPorCelula = new ArrayList<>();
+			return relatorioValorPorCelula;
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -139,7 +145,7 @@ public class RelatorioService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Profissional> listaDeProfissionaisPorCelula(String nome){
+	public List<Profissional> listaDeProfissionaisPorCelula(Long id,String nome){
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("Profissional.findProfissionalByCelulaNome");
 		q.setParameter("nome", nome);
