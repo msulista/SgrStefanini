@@ -54,11 +54,18 @@ public class RecursoManager {
 		}
 	}
 	
-//	private List<Recurso> listarTudo(){}
-//	
-//	private List<Recurso> lista(){}
-//	
-//	private String desativar(Recurso recurso){}
+	private List<Recurso> listarTudo(){
+		return service.listarTodos();
+	}
+	
+	private List<Recurso> lista(){
+		return service.listarAtivos();
+	}
+	
+	private String desativar(long id){
+		service.desativar(id);
+		return "pretty:recurso";
+	}
 	
 	
 	

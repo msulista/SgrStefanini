@@ -40,9 +40,9 @@ public class Recurso implements Serializable{
 	@Column(name = "VALOR_HORA", nullable = false)
 	private double valorHora;
 	
-	@Transient
+//	@Transient
 	@ManyToMany
-	@JoinTable(name = "SGR_PROJETO_RECURSO", joinColumns={@JoinColumn(name = "ID_RECURSO")}, inverseJoinColumns={@JoinColumn(name = "ID_PROJETO")})
+	@JoinTable(name = "SGR_PROJETO_RECURSO", joinColumns={@JoinColumn(name = "SGR_PROJETO_ID_RECURSO")}, inverseJoinColumns={@JoinColumn(name = "SGR_PROJETO_ID_PROJETO")})
 	private List<Projeto> projetos;
 		
 	public Recurso() {

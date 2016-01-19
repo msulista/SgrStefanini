@@ -1,6 +1,5 @@
 package com.stefanini.service;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.faces.convert.ConverterException;
@@ -58,13 +57,22 @@ public class RecursoService {
 		manager.close();
 	}
 	
-//	@SuppressWarnings("unchecked")
-//	public List<PerfilStefanini> listarAtivos() {
-//		EntityManager manager = JPAUtil.getEntityManager();
-//		Query q = manager.createNamedQuery("Recurso.findAtivos");
-//		List<PerfilStefanini> perfisStefanini = q.getResultList();
-//		manager.close();
-//		return perfisStefanini;
-//	}
+	@SuppressWarnings("unchecked")
+	public List<Recurso> listarAtivos() {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Recurso.findAtivos");
+		List<Recurso> recursos = q.getResultList();
+		manager.close();
+		return recursos;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Recurso> listarTodos() {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Recurso.findAll");
+		List<Recurso> recursos = q.getResultList();
+		manager.close();
+		return recursos;
+	}
 	
 }

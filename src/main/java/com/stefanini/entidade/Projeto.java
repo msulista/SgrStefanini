@@ -8,11 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-//@Entity
-//@Table(name = "sgr_projeto")
+@Entity
+@Table(name = "SGR_PROJETO")
 public class Projeto {
 
 	@Id
@@ -41,7 +44,8 @@ public class Projeto {
 	@Column(name = "SALDO", nullable = true)
 	private double saldo;
 	
-	@ManyToMany(mappedBy = "SGR_PROJETO_RECURSO")
+	@ManyToMany
+	@JoinTable(name = "SGR_PROJETO_RECURSO", joinColumns={@JoinColumn(name = "SGR_PROJETO_ID_RECURSO")}, inverseJoinColumns={@JoinColumn(name = "SGR_PROJETO_ID_PROJETO")})
 	private List<Recurso> recursos;	
 	
 	public Projeto() {
