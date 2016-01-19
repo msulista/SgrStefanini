@@ -82,9 +82,13 @@ public class RelatorioService {
 		q.setParameter("id", celula.getId());
 		List<Relatorio> relatorioValorPorEquipe = (List<Relatorio>)q.getResultList();
 		manager.close();
+		System.out.println("Equipe if#############################################################"+relatorioValorPorEquipe.size());
+		
 		return relatorioValorPorEquipe;
 	}else{
 		List<Relatorio> relatorioValorPorEquipe = new ArrayList<>();
+		System.out.println("Equipe else#############################################################"+relatorioValorPorEquipe.size());
+		
 		return relatorioValorPorEquipe;
 	}
 	}
@@ -93,14 +97,16 @@ public class RelatorioService {
 	public List<Relatorio> valorPorCelula(Celula celula){
 		if(celula != null){
 		EntityManager manager = JPAUtil.getEntityManager();
-		String valorPorCelula = "SELECT new com.stefanini.entidade.Relatorio(p.celula.nome, AVG(p.valorHora)) FROM Profissional p WHERE p.celula.id =:id AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) GROUP BY p.celula.nome";
+		String valorPorCelula = "SELECT new com.stefanini.entidade.Relatorio(p.celula.nome, AVG(p.valorHora)) FROM Profissional p WHERE p.celula.id = :id AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) GROUP BY p.celula.nome";
 		Query q = manager.createQuery(valorPorCelula);
 		q.setParameter("id", celula.getId());
 		List<Relatorio> relatorioValorPorCelula = (List<Relatorio>)q.getResultList();
 		manager.close();
+		System.out.println("Celula if#############################################################"+relatorioValorPorCelula.size());
 		return relatorioValorPorCelula;
 		}else{
 			List<Relatorio> relatorioValorPorCelula = new ArrayList<>();
+			System.out.println("Celula else#############################################################"+relatorioValorPorCelula.size());
 			return relatorioValorPorCelula;
 		}
 	}

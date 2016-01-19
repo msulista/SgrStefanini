@@ -1,6 +1,11 @@
 package com.stefanini.entidade;
 
-public class Relatorio {
+import java.io.Serializable;
+
+public class Relatorio implements Serializable{
+	
+
+	private static final long serialVersionUID = 1L;
 	
 	private Long quantidade01;
 	private String nome01;
