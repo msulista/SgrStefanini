@@ -11,11 +11,12 @@ import com.stefanini.util.JPAUtil;
 
 public class RecursoService {
 
+	@SuppressWarnings("unchecked")
 	public boolean save (Recurso recurso){
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("Recurso.findMatricula");
 		q.setParameter("matricula", recurso.getProfissional().getMatricula());
-		List<Recurso> recursos = q.getResultList();
+		List<Recurso> recursos = q .getResultList();
 		if(recursos.isEmpty()){
 			manager.getTransaction().begin();
 			manager.persist(recurso);
@@ -46,8 +47,7 @@ public class RecursoService {
 		manager.close();
 		return recurso;
 	}
-	
-	
+		
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Recurso recurso = getRecursoById(id);
@@ -57,14 +57,14 @@ public class RecursoService {
 		manager.close();
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<Recurso> listarAtivos() {
-		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNamedQuery("Recurso.findAtivos");
-		List<Recurso> recursos = q.getResultList();
-		manager.close();
-		return recursos;
-	}
+//	@SuppressWarnings("unchecked")
+//	public List<Recurso> listarAtivos() {
+//		EntityManager manager = JPAUtil.getEntityManager();
+//		Query q = manager.createNamedQuery("Recurso.findAtivos");
+//		List<Recurso> recursos = q.getResultList();
+//		manager.close();
+//		return recursos;
+//	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Recurso> listarTodos() {

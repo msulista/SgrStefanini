@@ -15,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "SGR_RECURSO")
@@ -23,6 +22,7 @@ import javax.persistence.Transient;
 	@NamedQuery(name = "Recurso.finAll", query = "SELECT r FROM Recurso r ORDER BY r.profissional.nome ASC"),
 	@NamedQuery(name = "Recurso.findMatricula", query ="SELECT r FROM Recurso r WHERE r.profissional.matricula = :matricula ORDER BY r.profissional.nome ASC"),
 	@NamedQuery(name = "Recurso.findId", query = "SELECT r FROM Recurso r where r.id = :id")
+//	@NamedQuery(name = "Recurso.findAtivos", query = "SELECT r FROM Recurso r where r.id = :id"),
 })
 public class Recurso implements Serializable{
 	
@@ -40,7 +40,6 @@ public class Recurso implements Serializable{
 	@Column(name = "VALOR_HORA", nullable = false)
 	private double valorHora;
 	
-//	@Transient
 	@ManyToMany
 	@JoinTable(name = "SGR_PROJETO_RECURSO", joinColumns={@JoinColumn(name = "SGR_PROJETO_ID_RECURSO")}, inverseJoinColumns={@JoinColumn(name = "SGR_PROJETO_ID_PROJETO")})
 	private List<Projeto> projetos;
