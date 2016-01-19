@@ -5,12 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.Axis;
@@ -41,12 +38,16 @@ import com.stefanini.service.RelatorioService;
 })
 public class RelatorioManager implements Serializable {
 	
+	
+	public void onChangeEstado(ValueChangeEvent e){
+		relatorio.setCelula((Celula)e.getOldValue());
+	}
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Celula celula;
+
 	
 	private Relatorio relatorio = new Relatorio();
 	private RelatorioService service = new RelatorioService();
@@ -127,7 +128,7 @@ public class RelatorioManager implements Serializable {
 	}
 	
 	public List<Relatorio> getRelatorioProfissionalEquipe() {
-		relatorioProfissionalEquipe = this.service.profissionaisPorEquipe((Celula) FacesContext.getCurrentInstance().getViewRoot().getViewMap().get(celula));
+		relatorioProfissionalEquipe = this.service.profissionaisPorEquipe(this.relatorio.getCelula());
 		return relatorioProfissionalEquipe;
 	}
 
@@ -136,7 +137,7 @@ public class RelatorioManager implements Serializable {
 	}
 
 	public List<Relatorio> getRelatorioContratacaoEquipe() {
-		relatorioContratacaoEquipe = this.service.contratacaoPorEquipe(this.celula);
+		relatorioContratacaoEquipe = this.service.contratacaoPorEquipe(this.relatorio.getCelula());
 		return relatorioContratacaoEquipe;
 	}
 	
@@ -145,7 +146,7 @@ public class RelatorioManager implements Serializable {
 	}
 	
 	public List<Relatorio> getRelatorioValorEquipe() {
-		relatorioValorEquipe = this.service.valorPorEquipe(this.celula);
+		relatorioValorEquipe = this.service.valorPorEquipe(this.relatorio.getCelula());
 		return relatorioValorEquipe;
 	}
 
@@ -154,7 +155,7 @@ public class RelatorioManager implements Serializable {
 	}
 	
 	public List<Relatorio> getRelatorioPerfilPorEquipe() {
-		relatorioPerfilPorEquipe = this.service.perfilPorEquipe(this.celula);
+		relatorioPerfilPorEquipe = this.service.perfilPorEquipe(this.relatorio.getCelula());
 		return relatorioPerfilPorEquipe;
 	}
 
@@ -165,7 +166,7 @@ public class RelatorioManager implements Serializable {
 	
 	
 	public List<Relatorio> getRelatorioValorCelula() {
-		relatorioValorCelula = this.service.valorPorCelula(this.celula);
+		relatorioValorCelula = this.service.valorPorCelula(this.relatorio.getCelula());
 		return relatorioValorCelula;
 	}
 
@@ -232,14 +233,6 @@ public class RelatorioManager implements Serializable {
 		this.relatorioPerfilPorCelula = relatorioPerfilPorCelula;
 	}
 
-	public Celula getCelula() {
-		return celula;
-	}
-
-
-	public void setCelula(Celula celula) {
-		this.celula = celula;
-	}
 	
 	//Graficos
 
@@ -298,7 +291,7 @@ public class RelatorioManager implements Serializable {
 	}
 	
 	public void itemSelectProfissionalPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDeProfissionaisPorEquipe(celula.getId(),(relatorioProfissionalEquipe.get(event.getItemIndex()).getNome01()));
+		profissionais = this.service.listaDeProfissionaisPorEquipe(this.relatorio.getCelula().getId(),(relatorioProfissionalEquipe.get(event.getItemIndex()).getNome01()));
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
@@ -354,7 +347,7 @@ public class RelatorioManager implements Serializable {
 	}
 	
 	public void itemSelectCltXestagioPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDeCLTXEstagio(celula.getId(),relatorioContratacaoEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
+		profissionais = this.service.listaDeCLTXEstagio(this.relatorio.getCelula().getId(),relatorioContratacaoEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
@@ -401,7 +394,7 @@ public class RelatorioManager implements Serializable {
 	}
 	
 	public void itemSelectValorPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDeProfissionaisPorEquipe(celula.getId(),relatorioValorEquipe.get(event.getItemIndex()).getNome01());
+		profissionais = this.service.listaDeProfissionaisPorEquipe(this.relatorio.getCelula().getId(),relatorioValorEquipe.get(event.getItemIndex()).getNome01());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
@@ -466,7 +459,7 @@ public class RelatorioManager implements Serializable {
 	}
 	
 	public void itemSelectPerfilPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDePerfilPorEquipe(celula.getId(),relatorioPerfilPorEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
+		profissionais = this.service.listaDePerfilPorEquipe(this.relatorio.getCelula().getId(),relatorioPerfilPorEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
@@ -511,7 +504,7 @@ public class RelatorioManager implements Serializable {
 	}
 	
 	public void itemSelectValorPorCelula(ItemSelectEvent event){
-		profissionais = this.service.listaDeProfissionaisPorCelula(celula.getId(),relatorioValorCelula.get(event.getItemIndex()).getNome01());
+		profissionais = this.service.listaDeProfissionaisPorCelula(this.relatorio.getCelula().getId(),relatorioValorCelula.get(event.getItemIndex()).getNome01());
 		equipe = profissionais.get(0).getCelula().getNome();
 		
 	}

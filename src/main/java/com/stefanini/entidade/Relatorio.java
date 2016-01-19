@@ -7,6 +7,8 @@ public class Relatorio implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	private Celula celula;
+	
 	private Long quantidade01;
 	private String nome01;
 	
@@ -218,6 +220,14 @@ public class Relatorio implements Serializable{
 		} else if (!valorMedio.equals(other.valorMedio))
 			return false;
 		return true;
+	}
+
+	public Celula getCelula() {
+		return celula;
+	}
+
+	public void setCelula(Celula celula) {
+		this.celula = celula;
 	}
 
 	
