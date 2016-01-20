@@ -3,9 +3,19 @@ package com.stefanini.manager;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
+import com.ocpsoft.pretty.faces.annotation.URLMapping;
+import com.ocpsoft.pretty.faces.annotation.URLMappings;
 import com.stefanini.entidade.Projeto;
 import com.stefanini.service.ProjetoService;
 
+@ManagedBean
+@RequestScoped
+@URLMappings(mappings = {
+		@URLMapping(id = "projeto", pattern = "/projeto", viewId = "/pages/projeto/projeto-listar.xhtml")
+ })
 public class ProjetoManager {
 	
 	private Projeto projeto;

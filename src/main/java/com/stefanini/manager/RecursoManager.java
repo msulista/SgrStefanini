@@ -38,6 +38,7 @@ public class RecursoManager {
 		this.recursos = recursos;
 	}
 	
+	@SuppressWarnings("unused")
 	private String save(){
 		if(service.save(recurso)){
 			return "";
@@ -46,6 +47,7 @@ public class RecursoManager {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private String update(){
 		if(service.update(recurso)){
 			return "";
@@ -54,6 +56,7 @@ public class RecursoManager {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private List<Recurso> listarTudo(){
 		return service.listarTodos();
 	}
@@ -62,6 +65,7 @@ public class RecursoManager {
 //		return service.listarAtivos();
 //	}
 	
+	@SuppressWarnings("unused")
 	private String desativar(long id){
 		service.desativar(id);
 		return "";

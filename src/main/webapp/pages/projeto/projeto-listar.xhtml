@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/template/default.xhtml"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces">
+
+	<ui:define name="content">
+		<p:breadCrumb>
+			<p:menuitem value="#{message['pao.home']}" url="#" />
+			<p:menuitem value="#{message['pao.projeto']}"
+				outcome="pretty:projeto" disabled="true" />
+		</p:breadCrumb>
+		<div class="projeto panel-formulario">
+			<h2>#{message['title.projeto']}</h2>
+			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
+
+			<p:button styleClass="btn-default" value="#{message['button.novo']}"
+				outcome="pretty:projeto-incluir" />
+
+			<h:form>
+				<p:dataTable id="gridProjeto" var="projeto"
+					value="#{projetoManager.listar}"
+					emptyMessage="#{message['alerta.listaVazia']}"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
+
+					<p:column headerText="#{message['label.projeto.codigo']}">
+						<h:outputText value="#{projeto.codigo}" />
+					</p:column>
+
+					<p:column headerText="#{message['label.nome']}">
+						<h:outputText value="#{projeto.nome}" />
+					</p:column>
+
+					<p:column headerText="#{message['label.projeto.budget']}">
+						<h:outputText value="#{projeto.budget}">
+							<f:convertNumber minFractionDigits="2" type="currency"
+								currencySymbol="R$" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="#{message['label.projeto.custoPrevisto']}">
+						<h:outputText value="#{projeto.custoPrevisto}">
+							<f:convertNumber minFractionDigits="2" type="currency"
+								currencySymbol="R$" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="#{message['label.projeto.saldo']}">
+						<h:outputText value="#{projeto.saldo}">
+							<f:convertNumber minFractionDigits="2" type="currency"
+								currencySymbol="R$" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="#{message['label.projeto.dataInicial']}">
+						<h:outputText value="#{projeto.dataInicio}" />
+					</p:column>
+
+					<p:column headerText="#{message['label.projeto.dataFinal']}">
+						<h:outputText value="#{projeto.dataFim}" />
+					</p:column>
+
+					<p:tooltip id="alt-editar" for="editar"
+						value="#{message['label.editar']}" styleClass="alt" />
+					<p:tooltip id="alt-desativar" for="desativar"
+						value="#{message['label.desativar']}" styleClass="alt" />
+					<p:tooltip id="alt-historicoo" for="historico"
+						value="#{message['label.historico']}" styleClass="alt" />
+
+				</p:dataTable>
+
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="#{message['button.sim']}" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+						update="growl" />
+					<p:commandButton value="#{message['button.nao']}" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+
+			</h:form>
+		</div>
+	</ui:define>
+
+</ui:composition>
