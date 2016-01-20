@@ -7,7 +7,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.view.facelets.FaceletCache;
+import javax.faces.view.facelets.FaceletContext;
+import javax.swing.text.View;
 
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.Axis;
@@ -39,17 +43,14 @@ import com.stefanini.service.RelatorioService;
 public class RelatorioManager implements Serializable {
 	
 	
-	public void onChangeEstado(ValueChangeEvent e){
-		relatorio.setCelula((Celula)e.getOldValue());
-	}
-	/**
-	 * 
-	 */
+	
+	
 	private static final long serialVersionUID = 1L;
 
 
 	
 	private Relatorio relatorio = new Relatorio();
+	
 	private RelatorioService service = new RelatorioService();
 	private BarChartModel profissionalPorEquipe = new BarChartModel();
 	private BarChartModel contratacaoPorEquipe = new BarChartModel();
@@ -295,7 +296,7 @@ public class RelatorioManager implements Serializable {
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
-	
+
 	//CLT x Estagiario por equipe
 	
 	private BarChartModel initCltXestagioPorEquipe() {
