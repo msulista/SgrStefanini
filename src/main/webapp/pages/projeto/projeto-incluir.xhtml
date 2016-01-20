@@ -1,0 +1,92 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/template/default.xhtml"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<ui:define name="content">
+		<div class="incluir-editar">
+			<p:breadCrumb>
+				<p:menuitem value="#{message['pao.home']}" url="#" />
+				<p:menuitem value="#{message['pao.projeto']}"
+					outcome="pretty:projeto" />
+				<p:menuitem value="#{message['pao.projeto.incluir']}"
+					outcome="pretty:projeto-incluir" disabled="true" />
+			</p:breadCrumb>
+			<h2>#{message['title.projeto']}</h2>
+			<h:form>
+				<p:growl id="growl" life="4000" />
+				<p:panel header="#{message['title.projeto']}" id="painel">
+					<p:focus context="painel" />
+					<p:outputLabel value="#{message['label.projeto.codigo']}"
+						styleClass="label"
+						title="#{message['label.title.projeto.codigo']}" />
+					<p:inputText value="#{projetoManager.projeto.codigo}"					
+						required="true"
+						requiredMessage="#{message['span.obrigatorio.codigo']}" />
+					<br/><br/>
+					
+					<p:outputLabel value="#{message['label.nome']}" styleClass="label"
+						title="#{message['label.title.projeto.nome']}" />
+					<p:inputText value="#{projetoManager.projeto.nome}" required="true"
+						requiredMessage="#{message['span.obrigatorio.Nome']}" />
+					<br/><br/>
+					
+					<p:outputLabel for="budget"
+						value="#{message['label.projeto.budget']}" styleClass="label"
+						title="#{message['label.title.projeto.budget']}" />
+					<pe:inputNumber id="budget"
+						value="#{projetoManager.projeto.budget}" minValue="0.00"
+						maxValue="999999999.99" required="true"
+						requiredMessage="#{message['span.obrigatorio.budget']}"
+						symbol="R$ " emptyValue="empty" />
+					<br/><br/>
+					
+					<p:outputLabel for="custoPrevisto"
+						value="#{message['label.projeto.custoPrevisto']}"
+						styleClass="label"
+						title="#{message['label.title.projeto.custoPrevisto']}" />
+					<pe:inputNumber id="custoPrevisto"
+						value="#{projetoManager.projeto.custoPrevisto}" minValue="0.00"
+						maxValue="999999999.99" required="true"
+						requiredMessage="#{message['span.obrigatorio.custoPrevisto']}"
+						symbol="R$ " emptyValue="empty" />
+					<br/><br/>
+
+					<p:outputLabel for="saldo"
+						value="#{message['label.projeto.saldo']}" styleClass="label"
+						title="#{message['label.title.projeto.saldo']}" />
+					<pe:inputNumber id="saldo" value="#{projetoManager.projeto.saldo}"
+						minValue="0.00" maxValue="999999999.99" required="true"
+						requiredMessage="#{message['span.obrigatorio.saldo']}"
+						symbol="R$ " emptyValue="empty" />
+					<br/><br/>
+
+					<p:outputLabel for="inicio" value="#{message['label.data.inicio']}"
+						styleClass="label"
+						title="#{message['label.title.projeto.inicio']}" />
+					<p:calendar id="inicio"
+						value="#{projetoManager.projeto.dataInicio}" pattern="dd/MM/yyyy"
+						mask="true" showOn="button" disabledWeekends="true" />
+					<br/><br/>
+					
+					<p:outputLabel for="fim" value="#{message['label.data.final']}"
+						styleClass="label" title="#{message['label.title.projeto.final']}" />
+					<p:calendar id="fim" value="#{projetoManager.projeto.dataFim}"
+						pattern="dd/MM/yyyy" mask="true" showOn="button"
+						disabledWeekends="true" />
+					<br/><br/>
+						
+					<p:commandButton value="#{message['button.salvar']}"
+						action="#{projetoManager.save()}" update="growl"
+						styleClass="btn" />
+					<p:button value="#{message['button.cancelar']}"
+						outcome="pretty:projeto" styleClass="btn" />
+				</p:panel>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

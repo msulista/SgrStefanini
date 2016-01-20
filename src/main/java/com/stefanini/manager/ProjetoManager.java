@@ -14,7 +14,8 @@ import com.stefanini.service.ProjetoService;
 @ManagedBean
 @RequestScoped
 @URLMappings(mappings = {
-		@URLMapping(id = "projeto", pattern = "/projeto", viewId = "/pages/projeto/projeto-listar.xhtml")
+		@URLMapping(id = "projeto", pattern = "/projeto", viewId = "/pages/projeto/projeto-listar.xhtml"),
+		@URLMapping(id = "projeto-incluir", pattern = "/incluir", viewId = "/pages/projeto/projeto-incluir.xhtml", parentId = "projeto"),
  })
 public class ProjetoManager {
 	
@@ -45,7 +46,7 @@ public class ProjetoManager {
 	
 	public String save(){
 		if(service.save(projeto)){
-			return "";
+			return "pretty:projeto";
 		} else {
 			return null;
 		}

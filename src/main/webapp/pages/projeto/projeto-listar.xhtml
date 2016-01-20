@@ -17,11 +17,11 @@
 			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 
 			<p:button styleClass="btn-default" value="#{message['button.novo']}"
-				outcome="pretty:projeto" />
+				outcome="pretty:projeto-incluir" />
 
 			<h:form>
 				<p:dataTable id="gridProjeto" var="projeto"
-					value="#{projetoManager.listar}"
+					value="#{projetoManager.listar()}"
 					emptyMessage="#{message['alerta.listaVazia']}"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
