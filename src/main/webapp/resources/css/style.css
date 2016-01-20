@@ -304,16 +304,39 @@ html, body {
 }
 
 .coluna-fixa:first-child{
-	width: 110px;
+	width: 80px;
 }
 
-.coluna-fixa{
+.coluna-maior{
 	width: 200px;
-	border-right: 2px solid #ddd !important;
 }
 
-.coluna-movel{
-	width: 160px;
+.coluna-menor{
+	width: 100px;
+}
+
+.matricula{
+	width: 60px;
+}
+
+.perfil{
+	width: 60px;
+}
+
+.celula{
+	width: 50px;
+}
+
+.status{
+	width:70px;
+}
+
+.contratacao{
+	width: 90px;
+}
+
+.hora{
+	width: 95px
 }
 
 .ui-paginator.ui-paginator-top {
