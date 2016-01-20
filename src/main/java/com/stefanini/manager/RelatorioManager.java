@@ -40,17 +40,15 @@ import com.stefanini.service.RelatorioService;
 		@URLMapping(id = "relatorioPerfilCelula", pattern = "/perfil-por-celula", viewId = "/pages/relatorio/relatorio-perfil-celula.xhtml"),
 		
 })
-public class RelatorioManager implements Serializable {
+public class RelatorioManager {
 	
+	public void stateChangeListener(ValueChangeEvent event) {
+       celula = (Celula) event.getNewValue();
+     criaGrafico();
+    }
 	
-	
-	
-	private static final long serialVersionUID = 1L;
-
-
-	
+	private Celula celula;
 	private Relatorio relatorio = new Relatorio();
-	
 	private RelatorioService service = new RelatorioService();
 	private BarChartModel profissionalPorEquipe = new BarChartModel();
 	private BarChartModel contratacaoPorEquipe = new BarChartModel();
@@ -80,7 +78,6 @@ public class RelatorioManager implements Serializable {
 	private double valorTotal = 0;
 
 	public RelatorioManager() {
-		criaGrafico();
 	}	
 	
 	@PostConstruct
@@ -129,8 +126,16 @@ public class RelatorioManager implements Serializable {
 	}
 	
 	public List<Relatorio> getRelatorioProfissionalEquipe() {
-		relatorioProfissionalEquipe = this.service.profissionaisPorEquipe(this.relatorio.getCelula());
+		relatorioProfissionalEquipe = this.service.profissionaisPorEquipe(this.celula);
 		return relatorioProfissionalEquipe;
+	}
+
+	public Celula getCelula() {
+		return celula;
+	}
+
+	public void setCelula(Celula celula) {
+		this.celula = celula;
 	}
 
 	public void setRelatorioProfissionalEquipe(List<Relatorio> relatorioProfissionalEquipe) {
@@ -292,7 +297,7 @@ public class RelatorioManager implements Serializable {
 	}
 	
 	public void itemSelectProfissionalPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDeProfissionaisPorEquipe(this.relatorio.getCelula().getId(),(relatorioProfissionalEquipe.get(event.getItemIndex()).getNome01()));
+		profissionais = this.service.listaDeProfissionaisPorEquipe(this.celula.getId(),(relatorioProfissionalEquipe.get(event.getItemIndex()).getNome01()));
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}

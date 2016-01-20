@@ -19,14 +19,14 @@
 		
 		
 			<p:selectOneMenu styleClass="dropdown-pesquisa" id="celula"
-						value="#{relatorioManager.relatorio.celula}" 
-						converter="simpleEntityConverter">
+						 value="#{relatorioManager.celula}" onchange="submit()" valueChangeListener="#{relatorioManager.stateChangeListener}"
+						converter="simpleEntityConverter" >
 						<f:selectItem itemLabel="#{message['select.celula']}"
 							noSelectionOption="true" />
 						<f:selectItems value="#{celulaManager.listarAtivos()}"
 							var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}" />
 							
-							<p:ajax partialSubmit="true" update="gridGrafico" event="change" listener="#{relatorioManager.criaGrafico()}" />
+						  <p:ajax update="gridGrafico" event="change"/>
 							
 					
 							
@@ -37,7 +37,7 @@
 		
 					
 		<p:chart id="gridGrafico"  type="bar" model="#{relatorioManager.profissionalPorEquipe}" style="height:300px" responsive="true">
-			<p:ajax  event="itemSelect"  immediate="false" listener="#{relatorioManager.itemSelectProfissionalPorEquipe}" process="@this" update="gridRelatorio"/>
+			<p:ajax  event="itemSelect"   listener="#{relatorioManager.itemSelectProfissionalPorEquipe}" process="@this" update="gridRelatorio"/>
 		</p:chart>
 	</h:form>
 		<br /><br />

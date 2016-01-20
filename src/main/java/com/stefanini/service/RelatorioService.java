@@ -45,7 +45,6 @@ public class RelatorioService {
 		String contratacaoPorEquipe = "SELECT new com.stefanini.entidade.Relatorio (v.nome,v.clt, v.est) "
 				+ "FROM ViewCltXEstagio v WHERE v.id =:id";
 			
-		 
 		Query q = manager.createQuery(contratacaoPorEquipe);
 		q.setParameter("id", celula.getId());
 		List<Relatorio> relatorioContratacaoPorEquipe = (List<Relatorio>)q.getResultList();
