@@ -21,7 +21,7 @@ import javax.persistence.Table;
 	@NamedQuery(name = "Projeto.finAll", query = "SELECT p FROM Projeto p ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.findCodigo", query ="SELECT p FROM Projeto p WHERE p.codigo = :codigo ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.findId", query = "SELECT p FROM Projeto p WHERE p.id = :id"),
-	@NamedQuery(name = "Projeto.findAtivos", query = "SELECT p FROM Projet p WHERE p.dataFim IS NULL OR p.dataFim > CURRENT_DATE AND p.dataInicio <= CURRENT_DATE ORDER BY p.nome ASC")
+	@NamedQuery(name = "Projeto.findAtivos", query = "SELECT p FROM Projeto p WHERE p.dataFim IS NULL OR p.dataFim > CURRENT_DATE AND p.dataInicio <= CURRENT_DATE ORDER BY p.nome ASC")
 })
 public class Projeto {
 
