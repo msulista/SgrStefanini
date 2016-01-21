@@ -16,14 +16,18 @@
 		</p:breadCrumb>
 		<h2>#{message['title.relatorio.forma.contratacao']}</h2>
 		
-		<p:selectOneMenu styleClass="dropdown-pesquisa" id="celula"
-						value="#{relatorioManager.relatorio.celula}"
-						converter="simpleEntityConverter">
+	
+			<p:selectOneMenu styleClass="dropdown-pesquisa" id="celula"
+						 value="#{relatorioManager.celula}" onchange="submit()" valueChangeListener="#{relatorioManager.stateChangeListenerContratacaoPorEquipe}"
+						converter="simpleEntityConverter" >
 						<f:selectItem itemLabel="#{message['select.celula']}"
 							noSelectionOption="true" />
 						<f:selectItems value="#{celulaManager.listarAtivos()}"
 							var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}" />
-							<p:ajax  update="gridGrafico" event="change" listener="#{relatorioManager.criaGrafico()}"/> 
+							
+						  <p:ajax immediate="true" update="gridGrafico" event="change" process="@this"/>
+							
+					
 							
 							</p:selectOneMenu>
 							

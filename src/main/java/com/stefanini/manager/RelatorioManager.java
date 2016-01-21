@@ -1,18 +1,12 @@
 package com.stefanini.manager;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
-import javax.faces.view.facelets.FaceletCache;
-import javax.faces.view.facelets.FaceletContext;
-import javax.swing.text.View;
-
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
@@ -42,10 +36,20 @@ import com.stefanini.service.RelatorioService;
 })
 public class RelatorioManager {
 	
-	public void stateChangeListener(ValueChangeEvent event) {
+	public void stateChangeListenerProfissionalPorEquipe(ValueChangeEvent event) {
        celula = (Celula) event.getNewValue();
-     criaGrafico();
+     createProfissionalPorEquipe();
     }
+	
+	public void stateChangeListenerContratacaoPorEquipe(ValueChangeEvent event) {
+	       celula = (Celula) event.getNewValue();
+	     createCltXestagioPorEquipe();
+	    }
+	
+	public void stateChangeListenerValorMedioPorEquipe(ValueChangeEvent event) {
+	       celula = (Celula) event.getNewValue();
+	     createValorPorEquipe();
+	    }
 	
 	private Celula celula;
 	private Relatorio relatorio = new Relatorio();
@@ -143,7 +147,7 @@ public class RelatorioManager {
 	}
 
 	public List<Relatorio> getRelatorioContratacaoEquipe() {
-		relatorioContratacaoEquipe = this.service.contratacaoPorEquipe(this.relatorio.getCelula());
+		relatorioContratacaoEquipe = this.service.contratacaoPorEquipe(this.celula);
 		return relatorioContratacaoEquipe;
 	}
 	
@@ -152,7 +156,7 @@ public class RelatorioManager {
 	}
 	
 	public List<Relatorio> getRelatorioValorEquipe() {
-		relatorioValorEquipe = this.service.valorPorEquipe(this.relatorio.getCelula());
+		relatorioValorEquipe = this.service.valorPorEquipe(this.celula);
 		return relatorioValorEquipe;
 	}
 
@@ -161,7 +165,7 @@ public class RelatorioManager {
 	}
 	
 	public List<Relatorio> getRelatorioPerfilPorEquipe() {
-		relatorioPerfilPorEquipe = this.service.perfilPorEquipe(this.relatorio.getCelula());
+		relatorioPerfilPorEquipe = this.service.perfilPorEquipe(this.celula);
 		return relatorioPerfilPorEquipe;
 	}
 
@@ -172,7 +176,7 @@ public class RelatorioManager {
 	
 	
 	public List<Relatorio> getRelatorioValorCelula() {
-		relatorioValorCelula = this.service.valorPorCelula(this.relatorio.getCelula());
+		relatorioValorCelula = this.service.valorPorCelula(this.celula);
 		return relatorioValorCelula;
 	}
 
@@ -353,7 +357,7 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectCltXestagioPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDeCLTXEstagio(this.relatorio.getCelula().getId(),relatorioContratacaoEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
+		profissionais = this.service.listaDeCLTXEstagio(this.celula.getId(),relatorioContratacaoEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
@@ -400,7 +404,7 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectValorPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDeProfissionaisPorEquipe(this.relatorio.getCelula().getId(),relatorioValorEquipe.get(event.getItemIndex()).getNome01());
+		profissionais = this.service.listaDeProfissionaisPorEquipe(this.celula.getId(),relatorioValorEquipe.get(event.getItemIndex()).getNome01());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}

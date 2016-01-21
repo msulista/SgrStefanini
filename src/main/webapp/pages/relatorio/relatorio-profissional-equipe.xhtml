@@ -19,14 +19,14 @@
 		
 		
 			<p:selectOneMenu styleClass="dropdown-pesquisa" id="celula"
-						 value="#{relatorioManager.celula}" onchange="submit()" valueChangeListener="#{relatorioManager.stateChangeListener}"
+						 value="#{relatorioManager.celula}" onchange="submit()" valueChangeListener="#{relatorioManager.stateChangeListenerProfissionalPorEquipe}"
 						converter="simpleEntityConverter" >
 						<f:selectItem itemLabel="#{message['select.celula']}"
 							noSelectionOption="true" />
 						<f:selectItems value="#{celulaManager.listarAtivos()}"
 							var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}" />
 							
-						  <p:ajax update="gridGrafico" event="change"/>
+						  <p:ajax immediate="true" update="gridGrafico" event="change" process="@this"/>
 							
 					
 							
@@ -39,7 +39,7 @@
 		<p:chart id="gridGrafico"  type="bar" model="#{relatorioManager.profissionalPorEquipe}" style="height:300px" responsive="true">
 			<p:ajax  event="itemSelect"   listener="#{relatorioManager.itemSelectProfissionalPorEquipe}" process="@this" update="gridRelatorio"/>
 		</p:chart>
-	</h:form>
+	
 		<br /><br />
 		
 		<p:dataTable id="gridRelatorio" var="profissional" value="#{relatorioManager.profissionais}" emptyMessage="#{message['alerta.listaVazia']}" >
@@ -87,7 +87,7 @@
 				<h:outputText value="#{profissional.status.nome}"/>			
 			</p:column>
 		</p:dataTable>
-		
+		</h:form>
 	</ui:define>
 
 </ui:composition>
