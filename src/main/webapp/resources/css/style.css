@@ -358,6 +358,7 @@ html, body {
 
 .ct-content h2 {
 	font-size: 20px;
+	margin-bottom: 5px;
 }
 
 .container {
@@ -533,6 +534,13 @@ input[type=text] {
 	background-image: url("../img/graf_branco.png");
 }
 
+.projeto{
+	background-image: url("../img/proj.png");
+}
+
+.projeto:hover {
+	background-image: url("../img/proj_branco.png");
+}
 
 .painel:hover .text-painel{
 	color: #fff;
@@ -541,6 +549,16 @@ input[type=text] {
 #relatorios {
 	border: 1px solid #2A96FB;
 	color: #2A96FB;	
+}
+
+#projeto{
+    border: 1px solid rgb(176, 144, 222);
+    color: rgb(176, 144, 222);
+}
+
+#projeto:hover{
+	color: #fff;
+    background-color: rgb(176, 144, 222);
 }
 
 .imagem-relatorio{

@@ -70,7 +70,7 @@ public class ProjetoManager {
 	
 	public String desativar(Long id){
 		service.desativar(id);
-		return "";
+		return "pretty:projeto";
 	}
 
 }

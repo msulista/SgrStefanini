@@ -12,7 +12,7 @@
 			<p:menuitem value="#{message['pao.projeto']}"
 				outcome="pretty:projeto" disabled="true" />
 		</p:breadCrumb>
-		<div class="projeto panel-formulario">
+		<div>
 			<h2>#{message['title.projeto']}</h2>
 			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
 
@@ -56,21 +56,44 @@
 					</p:column>
 
 					<p:column headerText="#{message['label.projeto.dataInicial']}">
-						<h:outputText value="#{projeto.dataInicio}" />
+						<h:outputText value="#{projeto.dataInicio}" >
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
 					</p:column>
 
 					<p:column headerText="#{message['label.projeto.dataFinal']}">
-						<h:outputText value="#{projeto.dataFim}" />
+						<h:outputText value="#{projeto.dataFim}" >
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
 					</p:column>
 
-					<p:tooltip id="alt-editar" for="editar"
-						value="#{message['label.editar']}" styleClass="alt" />
-					<p:tooltip id="alt-desativar" for="desativar"
-						value="#{message['label.desativar']}" styleClass="alt" />
-					<p:tooltip id="alt-historicoo" for="historico"
-						value="#{message['label.historico']}" styleClass="alt" />
+					<p:column headerText="#{message['label.acoes']}"
+						styleClass="txtCenter">
+						<p:commandButton id="desativar" styleClass="btn-acao"
+							icon="ui-icon-closethick"
+							action="#{projetoManager.desativar(projeto.id)}"
+							update="gridProjeto">
+							<p:confirm header="#{message['button.desativar']}"
+								message="#{message['questiona.desativar']}" icon="ui-icon-alert" />
+						</p:commandButton>
+						<p:tooltip id="alt-desativar" for="desativar"
+							value="#{message['label.desativar']}" styleClass="alt" />
+					</p:column>
 
 				</p:dataTable>
+				
+				<!--<p:dataGrid  id="gridProjeto" var="projeto"
+					value="#{projetoManager.listar()}" columns="3" layout="grid>
+					<h:link outcome="pretty:projeto">
+			   	   		<div id="relatorios" class="painel relatorio">        	
+			        		<div class="text-painel">
+			        			<h:outputText value="#{projeto.codigo}" />
+			        			<h:outputText value="#{projeto.nome}" />
+			        		</div>       		
+			        	</div>
+			        </h:link>
+				</p:dataGrid>-->
+				
 
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 					<p:commandButton value="#{message['button.sim']}" type="button"
