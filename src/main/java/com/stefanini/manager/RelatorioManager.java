@@ -51,6 +51,16 @@ public class RelatorioManager {
 	     createValorPorEquipe();
 	    }
 	
+	public void stateChangeListenerPerfilPorEquipe(ValueChangeEvent event) {
+	       celula = (Celula) event.getNewValue();
+	     createPerfilPorEquipe();
+	    }
+	
+	public void stateChangeListenerValorPorCelula(ValueChangeEvent event) {
+	       celula = (Celula) event.getNewValue();
+	     createValorPorCelula();
+	    }
+	
 	private Celula celula;
 	private Relatorio relatorio = new Relatorio();
 	private RelatorioService service = new RelatorioService();
@@ -254,7 +264,7 @@ public class RelatorioManager {
 
 
 	public void criaGrafico(){
-		this.createValorPorCelula();
+		createValorPorCelula();
 	   	createProfissionalPorEquipe();
 	   	createCltXestagioPorEquipe();
 	   	createValorPorEquipe();
@@ -376,8 +386,7 @@ public class RelatorioManager {
 	    for (Relatorio relatorio : getRelatorioValorEquipe()) {
 	    	grafico.set(relatorio.getNome01(), relatorio.getValorMedio().doubleValue());
 	    	valorTotal = (double)(valorTotal + relatorio.getValorMedio().doubleValue());
-	    	System.out.println("#############################################################"+relatorio.getNome01()+"@@@@@@@@@@@@@"+relatorio.getValorMedio());
-	    	
+	    
 		}	
 	    grafico.set("Valor Médio Total", valorTotal / getRelatorioValorEquipe().size());
 	    model.addSeries(grafico);	
@@ -465,31 +474,31 @@ public class RelatorioManager {
 	    yAxis.setMin(0);
 	   
 	    yAxis.setTickCount(quantidadeTotal + 4);
-	    yAxis.setMax(quantidadeTotal + quantidadeTotal2+quantidadeTotal3+quantidadeTotal4);
+	    yAxis.setMax(quantidadeTotal + quantidadeTotal2+quantidadeTotal3+quantidadeTotal4+1);
 	}
 	
 	public void itemSelectPerfilPorEquipe(ItemSelectEvent event){
-		profissionais = this.service.listaDePerfilPorEquipe(this.relatorio.getCelula().getId(),relatorioPerfilPorEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
+		profissionais = this.service.listaDePerfilPorEquipe(this.celula.getId(),relatorioPerfilPorEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
 	
 	//Valor medio por celula
 	private BarChartModel initValorPorCelula() {
-		
+	    valorTotal =0;
 	    BarChartModel model = new BarChartModel();
+	    model.setExtender("decimalConverter");
+	    ChartSeries grafico = new ChartSeries();
 	    model.setLegendPosition("ne");
     	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
-	    model.setExtender("decimalConverter");
-	    model.setShowPointLabels(true);
-	    ChartSeries grafico = new ChartSeries();
+    	model.setShowPointLabels(true);
 	    grafico.setLabel("Celula");
 	    for (Relatorio relatorio : getRelatorioValorCelula()) {
 	    	grafico.set(relatorio.getNome01(), relatorio.getValorMedio().doubleValue());
-			System.out.println("#############################################################"+relatorio.getNome01()+"@@@@@@@@@@@@@"+relatorio.getValorMedio());
-	    	
+	    	valorTotal = (double)(valorTotal + relatorio.getValorMedio().doubleValue());
+	    
 		}	
-	   
+	  
 	    model.addSeries(grafico);	
 	    
 	    return model;
@@ -514,7 +523,7 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectValorPorCelula(ItemSelectEvent event){
-		profissionais = this.service.listaDeProfissionaisPorCelula(this.relatorio.getCelula().getId(),relatorioValorCelula.get(event.getItemIndex()).getNome01());
+		profissionais = this.service.listaDeProfissionaisPorCelula(this.celula.getId(),relatorioValorCelula.get(event.getItemIndex()).getNome01());
 		equipe = profissionais.get(0).getCelula().getNome();
 		
 	}

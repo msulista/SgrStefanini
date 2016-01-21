@@ -17,18 +17,19 @@
 		<h2>#{message['title.relatorio.valor.celula']}</h2>
 		
 			<p:selectOneMenu styleClass="dropdown-pesquisa" id="celula"
-						value="#{relatorioManager.celula}"
-						converter="simpleEntityConverter">
+						 value="#{relatorioManager.celula}" onchange="submit()" valueChangeListener="#{relatorioManager.stateChangeListenerValorPorCelula}"
+						converter="simpleEntityConverter" >
 						<f:selectItem itemLabel="#{message['select.celula']}"
 							noSelectionOption="true" />
 						<f:selectItems value="#{celulaManager.listarAtivos()}"
 							var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}" />
-							<!--  <p:ajax update="grid:gridGrafico"/> -->
-							<p:ajax immediate="true" update="gridGrafico" event="itemSelect" listener="#{relatorioManager.criaGrafico()}"/> 
+							
+						  <p:ajax immediate="true" update="gridGrafico" event="change" process="@this"/>
+							
+					
 							
 							</p:selectOneMenu>
 		<p:chart id="gridGrafico" type="bar" model="#{relatorioManager.valorPorCelula}" style="height:300px" responsive="true" extender="decimalConverter">
-			
 			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectValorPorCelula}" process="@this" update="gridRelatorio"/>
 		</p:chart>
 	</h:form>

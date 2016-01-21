@@ -26,7 +26,7 @@
 						<f:selectItems value="#{celulaManager.listarAtivos()}"
 							var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}" />
 							
-						  <p:ajax immediate="true" update="gridGrafico" event="change" process="@this"/>
+						  <p:ajax  update="gridGrafico" event="change" process="@this"/>
 							
 					
 							

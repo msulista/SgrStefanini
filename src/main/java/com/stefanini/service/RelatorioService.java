@@ -81,12 +81,10 @@ public class RelatorioService {
 		q.setParameter("id", celula.getId());
 		List<Relatorio> relatorioValorPorEquipe = (List<Relatorio>)q.getResultList();
 		manager.close();
-		System.out.println("Equipe if#############################################################"+relatorioValorPorEquipe.size());
 		
 		return relatorioValorPorEquipe;
 	}else{
 		List<Relatorio> relatorioValorPorEquipe = new ArrayList<>();
-		System.out.println("Equipe else#############################################################"+relatorioValorPorEquipe.size());
 		
 		return relatorioValorPorEquipe;
 	}
@@ -101,11 +99,9 @@ public class RelatorioService {
 		q.setParameter("id", celula.getId());
 		List<Relatorio> relatorioValorPorCelula = (List<Relatorio>)q.getResultList();
 		manager.close();
-		System.out.println("Celula if#############################################################"+relatorioValorPorCelula.size());
 		return relatorioValorPorCelula;
 		}else{
 			List<Relatorio> relatorioValorPorCelula = new ArrayList<>();
-			System.out.println("Celula else#############################################################"+relatorioValorPorCelula.size());
 			return relatorioValorPorCelula;
 		}
 	}
