@@ -30,7 +30,7 @@
 							
 							</p:selectOneMenu>
 		<p:chart id="gridGrafico" type="bar" model="#{relatorioManager.valorPorCelula}" style="height:300px" responsive="true" extender="decimalConverter">
-			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectValorPorCelula}" process="@this" update="gridRelatorio"/>
+			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectValorPorCelula}" process="@this" update="gridRelatorio celula"/>
 		</p:chart>
 	</h:form>
 		<br /><br />

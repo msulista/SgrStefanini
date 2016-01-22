@@ -28,7 +28,7 @@
 			</p:selectOneMenu>
 			
 		<p:chart id="gridGrafico" type="bar" model="#{relatorioManager.perfilPorEquipe}" style="height:300px" responsive="true">
-			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectPerfilPorEquipe}" process="@this" update="gridRelatorio"/>
+			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectPerfilPorEquipe}" process="@this" update="gridRelatorio celula"/>
 		</p:chart>
 	</h:form>
 		<br /><br />

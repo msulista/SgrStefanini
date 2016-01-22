@@ -58,17 +58,24 @@ public class RelatorioService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Relatorio> contratacaoPorCelula(){
+	public List<Relatorio> contratacaoPorCelula(Celula celula){
+		
+		if(celula != null){
 		EntityManager manager = JPAUtil.getEntityManager();
 		String contratacaoPorCelula = "SELECT new com.stefanini.entidade.Relatorio (v.nome,v.clt, v.est) "
-				+ "FROM ViewCltXEstagioCelula v";
+				+ "FROM ViewCltXEstagioCelula v WHERE v.id = :id";
 			
 		 
 		Query q = manager.createQuery(contratacaoPorCelula);
+		q.setParameter("id", celula.getId());
 		List<Relatorio> relatorioContratacaoPorCelula = (List<Relatorio>)q.getResultList();
 		manager.close();
 
 		return relatorioContratacaoPorCelula;
+		}else{
+			List<Relatorio> relatorioContratacaoPorCelula = new ArrayList<>();
+			return relatorioContratacaoPorCelula;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -174,7 +181,7 @@ public class RelatorioService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Profissional> listaDeCLTXEstagioCelula(String nome, int serie){
+	public List<Profissional> listaDeCLTXEstagioCelula(Long celula,int serie){
 		String serieString;
 		if(serie ==0){
 			 serieString = "CLT";
@@ -183,7 +190,8 @@ public class RelatorioService {
 		}
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("Profissional.findProfissionalByCelulaEContratacao");
-		q.setParameter("nome", nome);
+		q.setParameter("celula", celula);
+	
 		q.setParameter("serie", serieString);
 		List<Profissional> profissionais = q.getResultList();
 		manager.close();

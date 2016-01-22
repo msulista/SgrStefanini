@@ -15,7 +15,8 @@ package com.stefanini.entidade;
 		private static final long serialVersionUID = 1L;
 
 		@Id
-		private long id;
+		@Column(name = "id")
+		private Long id;
 		
 		public Long getId() {
 			return id;

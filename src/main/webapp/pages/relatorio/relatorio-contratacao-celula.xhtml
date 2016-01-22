@@ -16,10 +16,25 @@
 		</p:breadCrumb>
 		<h2>#{message['title.relatorio.forma.contratacao.celula']}</h2>
 		
-		<p:chart type="bar" model="#{relatorioManager.contratacaoPorCelula}" style="height:300px" responsive="true">
-			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectCltXestagioPorCelula}" process="@this" update="gridRelatorio"/>
+		
+		<p:selectOneMenu styleClass="dropdown-pesquisa" id="celula"
+						 value="#{relatorioManager.celula}" onchange="submit()" valueChangeListener="#{relatorioManager.stateChangeListenerContratcaoPorCelula}"
+						converter="simpleEntityConverter" >
+						<f:selectItem itemLabel="#{message['select.celula']}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{celulaManager.listarAtivos()}"
+							var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}" />
+							
+						  <p:ajax  update="gridGrafico" event="change" process="@this" />
+							
+					
+							
+							</p:selectOneMenu>
+		
+		<p:chart id="gridGrafico" type="bar" model="#{relatorioManager.contratacaoPorCelula}" style="height:300px" responsive="true">
+			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectCltXestagioPorCelula}" process="@this" update="gridRelatorio celula"/>
 		</p:chart>
-	</h:form>
+	
 		<br /><br />
 		
 		<p:dataTable id="gridRelatorio" var="profissional" value="#{relatorioManager.profissionais}" emptyMessage="#{message['alerta.listaVazia']}" >
@@ -63,6 +78,7 @@
 				<h:outputText value="#{profissional.status.nome}"/>			
 			</p:column>
 		</p:dataTable>
+	</h:form>
 		
 	</ui:define>
 

@@ -61,6 +61,11 @@ public class RelatorioManager {
 	     createValorPorCelula();
 	    }
 	
+	public void stateChangeListenerContratcaoPorCelula(ValueChangeEvent event) {
+	       celula = (Celula) event.getNewValue();
+	     createCltXestagioPorCelula();
+	    }
+	
 	private Celula celula;
 	private Relatorio relatorio = new Relatorio();
 	private RelatorioService service = new RelatorioService();
@@ -204,7 +209,7 @@ public class RelatorioManager {
 	}
 	
 	public List<Relatorio> getRelatorioContratacaoCelula() {
-		relatorioContratacaoCelula = this.service.contratacaoPorCelula();
+		relatorioContratacaoCelula = this.service.contratacaoPorCelula(this.celula);
 		return relatorioContratacaoCelula;
 	}
 
@@ -257,12 +262,7 @@ public class RelatorioManager {
 	//Graficos
 
 	
-	public void criaGraficoValorCelula(){
-		this.createValorPorCelula();
-	}
 	
-
-
 	public void criaGrafico(){
 		createValorPorCelula();
 	   	createProfissionalPorEquipe();
@@ -385,8 +385,8 @@ public class RelatorioManager {
 	    grafico.setLabel("Equipe");
 	    for (Relatorio relatorio : getRelatorioValorEquipe()) {
 	    	grafico.set(relatorio.getNome01(), relatorio.getValorMedio().doubleValue());
-	    	valorTotal = (double)(valorTotal + relatorio.getValorMedio().doubleValue());
-	    
+	    	valorTotal = (double)(valorTotal += relatorio.getValorMedio().doubleValue());
+	   
 		}	
 	    grafico.set("Valor Médio Total", valorTotal / getRelatorioValorEquipe().size());
 	    model.addSeries(grafico);	
@@ -576,9 +576,8 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectCltXestagioPorCelula(ItemSelectEvent event){
-		profissionais = this.service.listaDeCLTXEstagioCelula(relatorioContratacaoCelula.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
+		profissionais = this.service.listaDeCLTXEstagioCelula(this.celula.getId(), event.getSeriesIndex());
 		equipe = profissionais.get(0).getEquipe().getNome();
-		
 	}
 	
 	//PERFIL POR CELULA
