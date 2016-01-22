@@ -69,6 +69,10 @@
 
 					<p:column headerText="#{message['label.acoes']}"
 						styleClass="txtCenter">
+						<pretty:link mappingId="projeto-editar">
+							<f:param value="#{projeto.codigo}" />
+							<p:commandButton id="editar" styleClass="btn-acao" type="button" icon="ui-icon-pencil" />
+						</pretty:link>
 						<p:commandButton id="desativar" styleClass="btn-acao"
 							icon="ui-icon-closethick"
 							action="#{projetoManager.desativar(projeto.id)}"
@@ -76,25 +80,13 @@
 							<p:confirm header="#{message['button.desativar']}"
 								message="#{message['questiona.desativar']}" icon="ui-icon-alert" />
 						</p:commandButton>
+						<p:tooltip id="alt-editar" for="editar" value="#{message['label.editar']}" styleClass="alt"/>
 						<p:tooltip id="alt-desativar" for="desativar"
 							value="#{message['label.desativar']}" styleClass="alt" />
 					</p:column>
 
 				</p:dataTable>
 				
-				<!--<p:dataGrid  id="gridProjeto" var="projeto"
-					value="#{projetoManager.listar()}" columns="3" layout="grid>
-					<h:link outcome="pretty:projeto">
-			   	   		<div id="relatorios" class="painel relatorio">        	
-			        		<div class="text-painel">
-			        			<h:outputText value="#{projeto.codigo}" />
-			        			<h:outputText value="#{projeto.nome}" />
-			        		</div>       		
-			        	</div>
-			        </h:link>
-				</p:dataGrid>-->
-				
-
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 					<p:commandButton value="#{message['button.sim']}" type="button"
 						styleClass="ui-confirmdialog-yes" icon="ui-icon-check"

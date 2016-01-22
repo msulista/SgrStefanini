@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
@@ -12,12 +12,12 @@ import com.stefanini.entidade.Projeto;
 import com.stefanini.service.ProjetoService;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 @URLMappings(mappings = {
 		@URLMapping(id = "projeto", pattern = "/projeto", viewId = "/pages/projeto/projeto-listar.xhtml"),
 		@URLMapping(id = "projeto-incluir", pattern = "/incluir", viewId = "/pages/projeto/projeto-incluir.xhtml", parentId = "projeto"),
-		@URLMapping(id = "projeto-editar", pattern = "#{projetoManager.projeto.codigo}/editar", viewId = "/pages/projeto/projeto-editar.xhtml", parentId = "projeto")
- })
+		@URLMapping(id = "projeto-editar", pattern = "/#{projetoManager.projeto.codigo}/editar", viewId = "/pages/projeto/projeto-editar.xhtml", parentId = "projeto")
+})
 public class ProjetoManager {
 	
 	private Projeto projeto;
