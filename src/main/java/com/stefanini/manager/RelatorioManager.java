@@ -38,34 +38,45 @@ public class RelatorioManager {
 	
 	public void stateChangeListenerProfissionalPorEquipe(ValueChangeEvent event) {
        celula = (Celula) event.getNewValue();
+       profissionais = new ArrayList<>();
      createProfissionalPorEquipe();
     }
 	
 	public void stateChangeListenerContratacaoPorEquipe(ValueChangeEvent event) {
 	       celula = (Celula) event.getNewValue();
+	       profissionais = new ArrayList<>();
 	     createCltXestagioPorEquipe();
 	    }
 	
 	public void stateChangeListenerValorMedioPorEquipe(ValueChangeEvent event) {
 	       celula = (Celula) event.getNewValue();
+	       profissionais = new ArrayList<>();
 	     createValorPorEquipe();
 	    }
 	
 	public void stateChangeListenerPerfilPorEquipe(ValueChangeEvent event) {
 	       celula = (Celula) event.getNewValue();
+	       profissionais = new ArrayList<>();
 	     createPerfilPorEquipe();
 	    }
 	
 	public void stateChangeListenerValorPorCelula(ValueChangeEvent event) {
 	       celula = (Celula) event.getNewValue();
+	       profissionais = new ArrayList<>();
 	     createValorPorCelula();
 	    }
 	
 	public void stateChangeListenerContratcaoPorCelula(ValueChangeEvent event) {
 	       celula = (Celula) event.getNewValue();
+	       profissionais = new ArrayList<>();
 	     createCltXestagioPorCelula();
 	    }
 	
+	public void stateChangeListenerPerfilPorCelula(ValueChangeEvent event) {
+	       celula = (Celula) event.getNewValue();
+	       profissionais = new ArrayList<>();
+	     createPerfilPorCelula();
+	    }
 	private Celula celula;
 	private Relatorio relatorio = new Relatorio();
 	private RelatorioService service = new RelatorioService();
@@ -250,7 +261,7 @@ public class RelatorioManager {
 	}
 
 	public List<Relatorio> getRelatorioPerfilPorCelula() {
-		relatorioPerfilPorCelula = this.service.perfilPorCelula();
+		relatorioPerfilPorCelula = this.service.perfilPorCelula(this.celula);
 		return relatorioPerfilPorCelula;
 	}
 
@@ -538,11 +549,12 @@ public class RelatorioManager {
     	model.setShowPointLabels(true);
 	    ChartSeries clt = new ChartSeries();
 	    ChartSeries estagio = new ChartSeries();
+	    ChartSeries total = new ChartSeries();
 	    model.setExtender("limpaLabel");
 	    
 	    clt.setLabel("CLT");
 	    estagio.setLabel("Estágio");
-	    
+	    total.setLabel("Total");
 	    for (Relatorio relatorio : getRelatorioContratacaoCelula()) {
 	    	
 	    	clt.set(relatorio.getNome01(), relatorio.getQuantidade01());
@@ -550,9 +562,10 @@ public class RelatorioManager {
 	    	quantidadeTotal = (int)(quantidadeTotal += relatorio.getQuantidade01()+relatorio.getQuantidade02());
 		}	
 	  
-	    clt.set("Total Resultados", quantidadeTotal);
+	   total.set("Total Resultados", quantidadeTotal);
 	    model.addSeries(clt);	         
-	    model.addSeries(estagio);	         
+	    model.addSeries(estagio);	
+	    model.addSeries(total);
 	    return model;
 	}	     
 	private void createCltXestagioPorCelula() {
@@ -639,7 +652,7 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectPerfilPorCelula(ItemSelectEvent event){
-		profissionais = this.service.listaDePerfilPorCelula(relatorioPerfilPorCelula.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
+		profissionais = this.service.listaDePerfilPorCelula(this.celula.getId(), event.getSeriesIndex());
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}

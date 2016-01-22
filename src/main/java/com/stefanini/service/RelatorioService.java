@@ -131,13 +131,20 @@ public class RelatorioService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Relatorio> perfilPorCelula(){
+	public List<Relatorio> perfilPorCelula(Celula celula){
+		if(celula != null){
 		EntityManager manager = JPAUtil.getEntityManager();
-		String perfilPorCelula = "SELECT new com.stefanini.entidade.Relatorio(v.nome,v.estagio,v.junior,v.pleno,v.senior)FROM ViewPerfilXCelula v";
+		String perfilPorCelula = "SELECT new com.stefanini.entidade.Relatorio(v.nome,v.estagio,v.junior,v.pleno,v.senior)FROM ViewPerfilXCelula v WHERE v.id = :id";
 		Query q = manager.createQuery(perfilPorCelula);
+		q.setParameter("id", celula.getId());
 		List<Relatorio> relatorioPerfilPorCelula = (List<Relatorio>)q.getResultList();
 		manager.close();
 		return relatorioPerfilPorCelula;
+		}else{
+			List<Relatorio> relatorioPerfilPorCelula = new ArrayList<>();
+			
+			return relatorioPerfilPorCelula;
+		}
 		
 	}
 	
@@ -182,20 +189,34 @@ public class RelatorioService {
 	
 	@SuppressWarnings("unchecked")
 	public List<Profissional> listaDeCLTXEstagioCelula(Long celula,int serie){
-		String serieString;
+		String serieString = null;
+		String query;
 		if(serie ==0){
 			 serieString = "CLT";
-		}else{
+			 query = "Profissional.findProfissionalByCelulaEContratacao";
+		}else if(serie ==1){
 			serieString = "Estágio";
+			query = "Profissional.findProfissionalByCelulaEContratacao";
+		}else{
+			query = "Profissional.findProfissionalByCelula";
 		}
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNamedQuery("Profissional.findProfissionalByCelulaEContratacao");
+		
+		if(serie==0||serie==1){
+		Query q = manager.createNamedQuery(query);
 		q.setParameter("celula", celula);
 	
 		q.setParameter("serie", serieString);
 		List<Profissional> profissionais = q.getResultList();
 		manager.close();
 		return profissionais;
+		}else{
+			Query q = manager.createNamedQuery(query);
+			q.setParameter("id", celula);
+			List<Profissional> profissionais = q.getResultList();
+			manager.close();
+			return profissionais;
+		}
 	}
 	@SuppressWarnings("unchecked")
 	public List<Profissional> listaDePerfilPorEquipe(Long id,String nome, int serie){
@@ -222,9 +243,9 @@ public class RelatorioService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Profissional> listaDePerfilPorCelula(String nome, int serie){
-		String serieString;
-		String queryString;
+	public List<Profissional> listaDePerfilPorCelula(Long celula, int serie){
+		String serieString = "";
+		String queryString ="";
 		if(serie == 0){
 			 serieString = "Estágio";
 			 queryString= "Profissional.findProfissionalByCelulaEPerfil";
@@ -238,21 +259,24 @@ public class RelatorioService {
 			serieString ="Sênior";
 			queryString= "Profissional.findProfissionalByCelulaEPerfil";
 		}else{
-			serieString ="";
-			queryString ="Profissional.findProfissionalByCelulaNome";
+			serieString="";
+			queryString = "Profissional.findProfissionalByCelula";
 		}
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNamedQuery(queryString);
-		if(serie == 0||serie==1||serie==2||serie ==3){
-		q.setParameter("nome", nome);
-		q.setParameter("serie", serieString);
-		}else{
-			q.setParameter("nome", nome);
-		}
+		if(serie==0||serie==1||serie==2||serie==3){
 		
+		Query q = manager.createNamedQuery(queryString);
+		q.setParameter("celula", celula);
+		q.setParameter("serie", serieString);
 		List<Profissional> profissionais = q.getResultList();
 		manager.close();
 		return profissionais;
+		}else{
+			Query q = manager.createNamedQuery(queryString);
+			q.setParameter("id", celula);
+			List<Profissional> profissionais = q.getResultList();
+			manager.close();
+			return profissionais;
+		}
 	}
-	
 }

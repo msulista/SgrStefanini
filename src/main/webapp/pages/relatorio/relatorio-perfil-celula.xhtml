@@ -16,8 +16,23 @@
 		</p:breadCrumb>
 		<h2>#{message['title.relatorio.perfil.celula']}</h2>
 		
-		<p:chart type="bar" model="#{relatorioManager.perfilPorCelula}" style="height:300px" responsive="true">
-			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectPerfilPorCelula}" process="@this" update="gridRelatorio"/>
+		<p:selectOneMenu styleClass="dropdown-pesquisa" id="celula"
+						 value="#{relatorioManager.celula}" onchange="submit()" valueChangeListener="#{relatorioManager.stateChangeListenerPerfilPorCelula}"
+						converter="simpleEntityConverter" >
+						<f:selectItem itemLabel="#{message['select.celula']}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{celulaManager.listarAtivos()}"
+							var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}" />
+							
+						  <p:ajax  update="gridGrafico" event="change" process="@this"/>
+							
+					
+							
+							</p:selectOneMenu>
+						
+	
+		<p:chart id="gridGrafico" type="bar" model="#{relatorioManager.perfilPorCelula}" style="height:300px" responsive="true">
+			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectPerfilPorCelula}" process="@this" update="gridRelatorio celula"/>
 		</p:chart>
 	</h:form>
 		<br /><br />
