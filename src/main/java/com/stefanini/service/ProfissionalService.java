@@ -1,5 +1,6 @@
 package com.stefanini.service;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -14,8 +15,12 @@ import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
 
-public class ProfissionalService {
+public class ProfissionalService implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private EquipeService equipeService = new EquipeService();
 	private CargoService cargoService = new CargoService();
 	private PerfilService perfilService = new PerfilService();

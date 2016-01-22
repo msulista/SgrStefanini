@@ -27,13 +27,14 @@
 						id="matricula"
 						value="#{profissionalManager.profissional.matricula}"
 						pt:placeholder="Matrícula" />
+						
 					<p:inputText styleClass="input-pesquisa" id="nome"
 						value="#{profissionalManager.profissional.nome}"
 						pt:placeholder="Nome" />
 
 					<p:selectOneMenu styleClass="dropdown-pesquisa" id="equipe"
 						value="#{profissionalManager.profissional.equipe}"
-						converter="simpleEntityConverter">
+						converter="entityConverterSelectOneMenu">
 						<f:selectItem itemLabel="#{message['select.equipe']}"
 							noSelectionOption="true" />
 						<f:selectItems value="#{equipeManager.listarAtivos()}"
@@ -42,7 +43,7 @@
 
 					<p:selectOneMenu styleClass="dropdown-pesquisa" id="cargo"
 						value="#{profissionalManager.profissional.cargo}"
-						converter="simpleEntityConverter">
+						converter="entityConverterSelectOneMenu">
 						<f:selectItem itemLabel="#{message['select.cargo']}"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cargoManager.listarTodos()}" var="cargo"
@@ -51,7 +52,7 @@
 
 					<p:selectOneMenu styleClass="dropdown-pesquisa" id="perfil"
 						value="#{profissionalManager.profissional.perfil}"
-						converter="simpleEntityConverter">
+						converter="entityConverterSelectOneMenu">
 						<f:selectItem itemLabel="#{message['select.perfil']}"
 							noSelectionOption="true" />
 						<f:selectItems value="#{perfilManager.listarAtivos()}"
@@ -59,18 +60,19 @@
 					</p:selectOneMenu>
 
 					<p:selectOneMenu styleClass="dropdown-pesquisa" id="status"
-						value="#{profissionalManager.profissional.status}">
-						<f:converter converterId="simpleEntityConverter" />
+						value="#{profissionalManager.profissional.status}"
+						converter="entityConverterSelectOneMenu">
 						<f:selectItem itemLabel="#{message['select.status']}"
 							noSelectionOption="true" />
 						<f:selectItems value="#{statusManager.listarAtivos()}"
 							var="status" itemLabel="#{status.nome}" itemValue="#{status}" />
 					</p:selectOneMenu>
-
+				</h:panelGroup>
+				<h:panelGroup>
 					<div class="controle-pesquisa">
 						<p:commandButton id="pesquisar" icon="ui-icon-search"
-							action="#{profissionalManager.executaPesquisa()}"
-							update="gridProfissional" />
+							actionListener="#{profissionalManager.executaPesquisa()}"
+							update="gridProfissional formularioAvancado"/>
 						<p:commandButton id="limpar" icon="ui-icon-arrowreturnthick-1-w"
 							action="#{profissionalManager.limparPesquisa()}"
 							update="gridProfissional formularioAvancado" />
@@ -85,12 +87,12 @@
 			<p:button styleClass="btn-default" value="#{message['button.novo']}" outcome="pretty:profissional-incluir" />
 
 			<p:dataTable id="gridProfissional" var="profissional"
-				value="#{profissionalManager.lista()}"
+				value="#{profissionalManager.lista}"
 				emptyMessage="#{message['alerta.listaVazia']}"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                 paginator="true" rows="5" rowsPerPageTemplate="5,10,20,30">
+                 paginator="true" rows="10" rowsPerPageTemplate="10,20,30" >
 				
-                         
+				
 				<f:facet name="{Exporters}">
 		            <h:commandLink>
 		                <h:graphicImage value="/resources/img/excel.png" width="24"/>
@@ -102,10 +104,6 @@
 		                <pe:exporter type="pdf" encoding="iso-8859-1" target="gridProfissional" fileName="profissionais" cellFontSize="7" facetFontSize="7" facetFontStyle="BOLD" datasetPadding="2" /> 
 		            </h:commandLink>
 		 
-		            <h:commandLink>
-		                <p:graphicImage value="/resources/img/csv.png" width="24"/>
-		                <p:dataExporter type="csv" encoding="iso-8859-1" target="gridProfissional" fileName="profissionais" />
-		            </h:commandLink>
             	</f:facet>
 
 				<p:column headerText="#{message['label.profissional.matricula']} ">

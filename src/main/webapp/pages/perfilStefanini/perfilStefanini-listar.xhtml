@@ -4,7 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/pages/template/default.xhtml"
-	xmlns:pretty="http://ocpsoft.com/prettyfaces">
+	xmlns:pretty="http://ocpsoft.com/prettyfaces"
+                xmlns:pe="http://primefaces.org/ui/extensions">
 
 	<ui:define name="content">
 		<p:breadCrumb>
@@ -19,8 +20,22 @@
 			<br />
 			<h:form>
 				<p:dataTable id="gridPerfilStefanini" var="perfilStefanini" value="#{perfilStefaniniManager.lista}" emptyMessage="#{message['alerta.listaVazia']}"
-					 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
 	                 paginator="true" rows="10" rowsPerPageTemplate="10,20,30" >
+	                 
+	                 <f:facet name="{Exporters}">
+		            <h:commandLink>
+		                <h:graphicImage value="/resources/img/excel.png" width="24"/>
+		                <p:dataExporter type="xls" target="gridPerfilStefanini" fileName="perfilStefanini" />
+		            </h:commandLink>
+		            
+		            <h:commandLink>
+		                <p:graphicImage value="/resources/img/pdf.png" width="24"/>
+		                <pe:exporter type="pdf" encoding="iso-8859-1" target="gridPerfilStefanini" fileName="perfilStefanini" cellFontSize="7" facetFontSize="7" facetFontStyle="BOLD" datasetPadding="2" /> 
+		            </h:commandLink>
+		 
+            	</f:facet>
+	                 
 					<p:column headerText="#{message['label.nome']}">
 						<h:outputText value="#{perfilStefanini.nome}"/>
 					</p:column>
@@ -36,7 +51,7 @@
 							<f:convertNumber minFractionDigits="2" type="currency" currencySymbol="R$"/>
 						</h:outputText>
 					</p:column>
-					<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter">
+					<p:column headerText="#{message['label.acoes']}" styleClass="txtCenter" exportable="false">
 						<pretty:link mappingId="perfilStefanini-editar">
 							<f:param value="#{perfilStefanini.codigo}" />
 							<p:commandButton id="editar" styleClass="btn-acao" type="button" icon="ui-icon-pencil" />

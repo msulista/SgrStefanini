@@ -1,6 +1,7 @@
 package com.stefanini.manager;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +23,9 @@ import com.stefanini.service.ProfissionalService;
 		@URLMapping(id = "profissional-editar", pattern = "/#{profissionalManager.profissional.matricula}/editar", viewId = "/pages/profissional/profissional-editar.xhtml", parentId = "profissional"),
 		@URLMapping(id = "profissional-historico", pattern = "/#{profissionalManager.profissional.matricula}/historico", viewId = "/pages/profissional/profissional-historico.xhtml", parentId = "profissional") })
 
-public class ProfissionalManager {
+public class ProfissionalManager implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Profissional profissional = new Profissional();
 	private List<Profissional> profissionalHistorico;
 	private ProfissionalService service = new ProfissionalService();
@@ -34,6 +36,7 @@ public class ProfissionalManager {
 
 	public ProfissionalManager() {
 		lista = new ArrayList<>();
+		
 		populaLista();
 	}
 
@@ -96,6 +99,7 @@ public class ProfissionalManager {
 	}
 
 	private List<Profissional> listarTudo() {
+		
 		return service.listarTudo(this.query);
 	}
 

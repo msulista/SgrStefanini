@@ -35,13 +35,9 @@
 		            
 		            <h:commandLink>
 		                <p:graphicImage value="/resources/img/pdf.png" width="24"/>
-		                <pe:exporter type="pdf" encoding="iso-8859-1" target="gridProfissional" fileName="profissionais" cellFontSize="7" facetFontSize="7" facetFontStyle="BOLD" datasetPadding="2"/> 
+		                <pe:exporter type="pdf" encoding="iso-8859-1" target="gridProfissional" fileName="profissionais" cellFontSize="6" facetFontSize="6" facetFontStyle="BOLD" datasetPadding="2"/> 
 		            </h:commandLink>
 		 
-		            <h:commandLink>
-		                <p:graphicImage value="/resources/img/csv.png" width="24"/>
-		                <p:dataExporter type="csv" encoding="iso-8859-1" target="gridProfissional" fileName="profissionais" />
-		            </h:commandLink>
             	</f:facet>
 
 					<p:column headerText="#{message['label.profissional.matricula']} " styleClass="coluna-menor matricula">
