@@ -13,13 +13,13 @@
 				<p:menuitem value="#{message['pao.home']}" url="#" />
 				<p:menuitem value="#{message['pao.projeto']}"
 					outcome="pretty:projeto" />
-				<p:menuitem value="#{message['pao.projeto.incluir']}"
-					outcome="pretty:projeto-incluir" disabled="true" />
+				<p:menuitem value="#{message['pao.projeto.editar']}"
+					outcome="pretty:projeto-editar" disabled="true" />
 			</p:breadCrumb>
 			<h2>#{message['title.projeto']}</h2>
 			<h:form>
 				<p:growl id="growl" life="4000" />
-				<p:panel header="#{message['title.projeto']}" id="painel">
+				<p:panel header="#{message['title.projeto.editar']}" id="painel">
 					<p:focus context="painel" />
 					
 					<p:outputLabel value="#{message['label.projeto.codigo']} *" styleClass="label" title="#{message['label.title.projeto.codigo']}" />

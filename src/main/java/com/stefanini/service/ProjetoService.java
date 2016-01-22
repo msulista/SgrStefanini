@@ -1,5 +1,6 @@
 package com.stefanini.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.convert.ConverterException;
@@ -7,23 +8,31 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.stefanini.entidade.Projeto;
+import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
+import com.stefanini.util.Mensagem;
 
 public class ProjetoService {
 	
 	@SuppressWarnings("unchecked")
 	public  boolean save(Projeto projeto){
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNamedQuery("Projeto.findCodigo");
-		q.setParameter("codigo", projeto.getCodigo());
-		List<Projeto> projetos = q .getResultList();
-		if(projetos.isEmpty()){
-			manager.getTransaction().begin();
-			manager.persist(projeto);
-			manager.getTransaction().commit();
-			manager.close();
-			return true;
-		}else{
+		if (DateUtil.verificaDiaUtil(projeto.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(projeto.getRegistroValidadeFim())) {	
+			Query q = manager.createNamedQuery("Projeto.findCodigo");
+			q.setParameter("codigo", projeto.getCodigo());
+			List<Projeto> projetos = q .getResultList();
+			if(projetos.isEmpty()){
+				manager.getTransaction().begin();
+				manager.persist(projeto);
+				manager.getTransaction().commit();
+				manager.close();
+				return true;
+			}else{
+				manager.close();
+				return false;
+			}
+		} else {
+			Mensagem.add("Data informada não é um dia util!");
 			manager.close();
 			return false;
 		}
@@ -50,6 +59,7 @@ public class ProjetoService {
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Projeto projeto =  getProjetoById(id);
+		projeto.setRegistroValidadeFim(new Date());
 		manager.getTransaction().begin();
  		manager.merge(projeto);
 		manager.getTransaction().commit();
@@ -72,5 +82,17 @@ public class ProjetoService {
 		List<Projeto> projetos = q.getResultList();
 		manager.close();
 		return projetos;
+	}
+	
+	public Long gerarCodigo(){
+		if(!this.listarAtivos().isEmpty()){
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("projeto.findMaxId");
+		Projeto projeto = (Projeto) q.getSingleResult();
+		manager.close();
+		return projeto.getId()+1;
+		}else{
+			return (long) 1;
+		}
 	}
 }

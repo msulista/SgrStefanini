@@ -16,6 +16,7 @@ import com.stefanini.service.ProjetoService;
 @URLMappings(mappings = {
 		@URLMapping(id = "projeto", pattern = "/projeto", viewId = "/pages/projeto/projeto-listar.xhtml"),
 		@URLMapping(id = "projeto-incluir", pattern = "/incluir", viewId = "/pages/projeto/projeto-incluir.xhtml", parentId = "projeto"),
+		@URLMapping(id = "projeto-editar", pattern = "#{projetoManager.projeto.codigo}/editar", viewId = "/pages/projeto/projeto-editar.xhtml", parentId = "projeto")
  })
 public class ProjetoManager {
 	

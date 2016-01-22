@@ -21,7 +21,7 @@ import javax.persistence.Table;
 	@NamedQuery(name = "Projeto.finAll", query = "SELECT p FROM Projeto p ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.findCodigo", query ="SELECT p FROM Projeto p WHERE p.codigo = :codigo ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.findId", query = "SELECT p FROM Projeto p WHERE p.id = :id"),
-	@NamedQuery(name = "Projeto.findAtivos", query = "SELECT p FROM Projeto p WHERE p.dataFim IS NULL OR p.dataFim > CURRENT_DATE AND p.dataInicio <= CURRENT_DATE ORDER BY p.nome ASC")
+	@NamedQuery(name = "Projeto.findAtivos", query = "SELECT p FROM Projeto p WHERE p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE AND p.dataInicio <= CURRENT_DATE ORDER BY p.nome ASC")
 })
 public class Projeto {
 
@@ -50,6 +50,12 @@ public class Projeto {
 	
 	@Column(name = "SALDO", nullable = true)
 	private double saldo;
+	
+	@Column(name = "REGISTRO_VALIDADE_INICIO", nullable = false)
+	private Date registroValidadeInicio;
+
+	@Column(name = "REGISTRO_VALIDADE_FIM", nullable = true)
+	private Date registroValidadeFim;
 	
 	@ManyToMany
 	@JoinTable(name = "SGR_PROJETO_RECURSO", joinColumns={@JoinColumn(name = "SGR_PROJETO_ID_RECURSO")}, inverseJoinColumns={@JoinColumn(name = "SGR_PROJETO_ID_PROJETO")})
@@ -120,6 +126,22 @@ public class Projeto {
 
 	public void setSaldo(double saldo) {
 		this.saldo = saldo;
+	}
+	
+	public Date getRegistroValidadeInicio() {
+		return registroValidadeInicio;
+	}
+
+	public void setRegistroValidadeInicio(Date registroValidadeInicio) {
+		this.registroValidadeInicio = registroValidadeInicio;
+	}
+
+	public Date getRegistroValidadeFim() {
+		return registroValidadeFim;
+	}
+
+	public void setRegistroValidadeFim(Date registroValidade) {
+		this.registroValidadeFim = registroValidade;
 	}
 
 	public List<Recurso> getRecursos() {
