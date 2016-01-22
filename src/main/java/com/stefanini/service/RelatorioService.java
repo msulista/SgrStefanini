@@ -151,12 +151,20 @@ public class RelatorioService {
 	@SuppressWarnings("unchecked")
 	public List<Profissional> listaDeProfissionaisPorEquipe(Long celula, String equipe){
 		EntityManager manager = JPAUtil.getEntityManager();
+		if(!(equipe.equals("Valor Total"))){
 		Query q = manager.createNamedQuery("Profissional.findProfissionalByCelulaANDEquipe");
 		q.setParameter("celula", celula);
 		q.setParameter("equipe", equipe);
 		List<Profissional> profissionais = q.getResultList();
 		manager.close();
 		return profissionais;
+		}else{
+			Query q = manager.createNamedQuery("Profissional.findProfissionalByCelula");
+			q.setParameter("id", celula);
+			List<Profissional> profissionais = q.getResultList();
+			manager.close();
+			return profissionais;
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -178,6 +186,7 @@ public class RelatorioService {
 			serieString = "Estágio";
 		}
 		EntityManager manager = JPAUtil.getEntityManager();
+		if(!(nome.equals("Total Resultados"))){
 		Query q = manager.createNamedQuery("Profissional.findProfissionalByCelulaANDEquipeEContratacao");
 		q.setParameter("nome", nome);
 		q.setParameter("serie", serieString);
@@ -185,6 +194,14 @@ public class RelatorioService {
 		List<Profissional> profissionais = q.getResultList();
 		manager.close();
 		return profissionais;
+		}else{
+			Query q = manager.createNamedQuery("Profissional.findProfissionalByCelulaEContratacao");
+			q.setParameter("serie", serieString);
+			q.setParameter("celula", celula);
+			List<Profissional> profissionais = q.getResultList();
+			manager.close();
+			return profissionais;
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
