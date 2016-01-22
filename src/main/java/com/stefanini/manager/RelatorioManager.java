@@ -378,9 +378,13 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectCltXestagioPorEquipe(ItemSelectEvent event){
+		if(!(event.getItemIndex()>relatorioContratacaoEquipe.size()-1)){
 		profissionais = this.service.listaDeCLTXEstagio(this.celula.getId(),relatorioContratacaoEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
 		equipe = profissionais.get(0).getEquipe().getNome();
-		
+		}else{
+			profissionais = this.service.listaDeCLTXEstagio(this.celula.getId(),"Total Resultados", event.getSeriesIndex());
+			equipe = profissionais.get(0).getEquipe().getNome();
+		}
 	}
 	
 	// Valor por Equipe
@@ -424,8 +428,14 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectValorPorEquipe(ItemSelectEvent event){
+
+		if(!(event.getItemIndex()>relatorioValorEquipe.size()-1)){
 		profissionais = this.service.listaDeProfissionaisPorEquipe(this.celula.getId(),relatorioValorEquipe.get(event.getItemIndex()).getNome01());
 		equipe = profissionais.get(0).getEquipe().getNome();
+		}else{
+			profissionais = this.service.listaDeProfissionaisPorEquipe(this.celula.getId(),"Valor Total");
+			equipe = profissionais.get(0).getEquipe().getNome();
+		}
 		
 	}
 	
