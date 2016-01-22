@@ -489,8 +489,14 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectPerfilPorEquipe(ItemSelectEvent event){
+		
+		if(!(event.getItemIndex()>relatorioPerfilPorEquipe.size()-1)){
 		profissionais = this.service.listaDePerfilPorEquipe(this.celula.getId(),relatorioPerfilPorEquipe.get(event.getItemIndex()).getNome01(), event.getSeriesIndex());
 		equipe = profissionais.get(0).getEquipe().getNome();
+		}else{
+			profissionais = this.service.listaDePerfilPorEquipe(this.celula.getId(),"Total Resultados", event.getSeriesIndex());
+			equipe = profissionais.get(0).getEquipe().getNome();
+		}
 		
 	}
 	

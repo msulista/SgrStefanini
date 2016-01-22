@@ -220,6 +220,7 @@ public class RelatorioService {
 	}
 	@SuppressWarnings("unchecked")
 	public List<Profissional> listaDePerfilPorEquipe(Long id,String nome, int serie){
+
 		String serieString;
 		if(serie == 0){
 			 serieString = "Estágio";
@@ -233,6 +234,11 @@ public class RelatorioService {
 			serieString = "";
 		}
 		EntityManager manager = JPAUtil.getEntityManager();
+		System.out.println("#####################################################"
+				+ "#############################################################"
+				+ "#############################################################"+"    "+nome);
+		if(!nome.equals("Total Resultados")){
+		
 		Query q = manager.createNamedQuery("Profissional.findProfissionalByCelulaANDEquipeEPerfil");
 		q.setParameter("nome", nome);
 		q.setParameter("serie", serieString);
@@ -240,6 +246,14 @@ public class RelatorioService {
 		List<Profissional> profissionais = q.getResultList();
 		manager.close();
 		return profissionais;
+		}else{
+			Query q = manager.createNamedQuery("Profissional.findProfissionalByCelulaEPerfil");
+			q.setParameter("celula", id);
+			q.setParameter("serie", serieString);
+			List<Profissional> profissionais = q.getResultList();
+			manager.close();
+			return profissionais;
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
