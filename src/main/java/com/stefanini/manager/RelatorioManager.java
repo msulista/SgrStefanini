@@ -322,8 +322,13 @@ public class RelatorioManager {
 	}
 	
 	public void itemSelectProfissionalPorEquipe(ItemSelectEvent event){
+		if(!(event.getItemIndex()>relatorioProfissionalEquipe.size()-1)){
 		profissionais = this.service.listaDeProfissionaisPorEquipe(this.celula.getId(),(relatorioProfissionalEquipe.get(event.getItemIndex()).getNome01()));
 		equipe = profissionais.get(0).getEquipe().getNome();
+		}else{
+			profissionais = this.service.listaDeProfissionaisPorEquipe(this.celula.getId(),"Valor Total");
+			equipe = profissionais.get(0).getEquipe().getNome();
+		}
 		
 	}
 
