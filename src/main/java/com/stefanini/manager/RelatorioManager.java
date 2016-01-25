@@ -13,6 +13,8 @@ import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LegendPlacement;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.LineChartSeries;
 
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
@@ -106,6 +108,8 @@ public class RelatorioManager {
 	private int quantidadeTotal4 = 0;
 	private double porcentagem = 0;
 	private double valorTotal = 0;
+	
+	private double valorMeta;
 
 	public RelatorioManager() {
 	}	
@@ -114,6 +118,14 @@ public class RelatorioManager {
 	public void init() {
 	    criaGrafico();
 	}	
+	
+	public double getValorMeta() {
+		return valorMeta;
+	}
+
+	public void setValorMeta(double valorMeta) {
+		this.valorMeta = valorMeta;
+	}
 
 	public Relatorio getRelatorio() {
 		return relatorio;
@@ -393,41 +405,42 @@ public class RelatorioManager {
 	}
 	
 	// Valor por Equipe
-	
+	public void atualizaGrafico(){
+		createValorPorEquipe();
+		createValorPorCelula();
+	}
 	private BarChartModel initValorPorEquipe() {
 		valorTotal =0;
 	    BarChartModel model = new BarChartModel();
 	    model.setExtender("decimalConverter");
 	    ChartSeries grafico = new ChartSeries();
+	    LineChartSeries meta = new LineChartSeries();
 	    model.setLegendPosition("ne");
     	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
     	model.setShowPointLabels(true);
-	    grafico.setLabel("Equipe");
+    	meta.setShowMarker(false);
+	    grafico.setLabel("Equipe");	    
+	    meta.setLabel("Meta");
 	    for (Relatorio relatorio : getRelatorioValorEquipe()) {
 	    	grafico.set(relatorio.getNome01(), relatorio.getValorMedio().doubleValue());
+	    	meta.set(relatorio.getNome01(), this.valorMeta);
 	    	valorTotal = (double)(valorTotal += relatorio.getValorMedio().doubleValue());
-	   
 		}	
 	    grafico.set("Valor Médio Total", valorTotal / getRelatorioValorEquipe().size());
-	    model.addSeries(grafico);	
-	    
+	    model.addSeries(grafico);
+	    model.addSeries(meta);
 	    return model;
 	}
 	
 	private void createValorPorEquipe() {
 		valorPorEquipe = initValorPorEquipe();
-		
 		valorPorEquipe.setTitle("Selecione a coluna para listar os profissionais");
 		valorPorEquipe.setAnimate(true);
-		
-	       
 	    Axis xAxis = valorPorEquipe.getAxis(AxisType.X);
 	    xAxis.setLabel("Equipes");
-	         
 	    Axis yAxis = valorPorEquipe.getAxis(AxisType.Y);
 	    yAxis.setLabel("Valor R$");
 	    yAxis.setMin(0);
-	   
 	    yAxis.setTickCount(11);
 	    yAxis.setMax(100);
 	}
@@ -521,18 +534,21 @@ public class RelatorioManager {
 	    BarChartModel model = new BarChartModel();
 	    model.setExtender("decimalConverter");
 	    ChartSeries grafico = new ChartSeries();
+	    LineChartSeries metaCelula = new LineChartSeries();
 	    model.setLegendPosition("ne");
     	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
     	model.setShowPointLabels(true);
+    	metaCelula.setShowMarker(true);
+    	
 	    grafico.setLabel("Celula");
+    	metaCelula.setLabel("Meta");
 	    for (Relatorio relatorio : getRelatorioValorCelula()) {
 	    	grafico.set(relatorio.getNome01(), relatorio.getValorMedio().doubleValue());
+	    	metaCelula.set(relatorio.getNome01(), this.valorMeta);
 	    	valorTotal = (double)(valorTotal + relatorio.getValorMedio().doubleValue());
-	    
 		}	
-	  
-	    model.addSeries(grafico);	
-	    
+	    model.addSeries(grafico);
+	    model.addSeries(metaCelula);
 	    return model;
 	}
 	

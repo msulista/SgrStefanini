@@ -50,16 +50,16 @@ function mostraData(obj){
 
 function decimalConverter() {
 	this.cfg.axes.yaxis.tickOptions = {
-            formatString : '%#.2f'           	
+            formatString : '%#.2f',           
         };	
 	this.cfg.highlighter = {
 	        tooltipAxes: 'y'
-	    };
+	    };	
 }
 
 function limpaLabel() {
-	this.cfg.highlighter = {
-	        tooltipAxes: 'y'
-	    };
+	seriesDefaults: {
+		pointLabels: { show:true };
+	}
 }
 

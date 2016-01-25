@@ -4,7 +4,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/pages/template/default.xhtml"
-	xmlns:pretty="http://ocpsoft.com/prettyfaces">
+	xmlns:pretty="http://ocpsoft.com/prettyfaces"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 	<ui:define name="content">
 	<h:form id="grid">
@@ -25,10 +27,10 @@
 							var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}" />
 							
 						  <p:ajax immediate="true" update="gridGrafico" event="change" process="@this"/>
-							
-					
-							
 							</p:selectOneMenu>
+		<h:inputText value="#{relatorioManager.valorMeta}" pt:placeholder="Informe a Meta">
+				<p:ajax event="keyup" update="gridGrafico" process="@this" listener="#{relatorioManager.atualizaGrafico()}"/>
+		</h:inputText>
 		<p:chart id="gridGrafico" type="bar" model="#{relatorioManager.valorPorCelula}" style="height:300px" responsive="true" extender="decimalConverter">
 			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectValorPorCelula}" process="@this" update="gridRelatorio celula"/>
 		</p:chart>
