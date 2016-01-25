@@ -22,10 +22,10 @@
 				<p:panel header="#{message['title.projeto']}" id="painel">
 					<p:focus context="painel" />
 					
-					<p:outputLabel value="#{message['label.projeto.codigo']} *" styleClass="label" title="#{message['label.title.projeto.codigo']}" />
+					<p:outputLabel value="#{message['label.projeto.codigo']}*" styleClass="label" title="#{message['label.title.projeto.codigo']}" />
 					<p:inputText value="#{projetoManager.projeto.codigo}" required="true" requiredMessage="#{message['span.obrigatorio.codigo']}"  mask="true"/>
 					<br/><br/>
-					<p:outputLabel value="#{message['label.nome']} *" styleClass="label" title="#{message['label.title.projeto.nome']}" />
+					<p:outputLabel value="#{message['label.nome']}*" styleClass="label" title="#{message['label.title.projeto.nome']}" />
 					<p:inputText value="#{projetoManager.projeto.nome}" required="true"	requiredMessage="#{message['span.obrigatorio.Nome']}" />
 					<br/><br/>
 					<p:outputLabel for="budget" value="#{message['label.projeto.budget']}" styleClass="label" title="#{message['label.title.projeto.budget']}" />

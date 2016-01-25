@@ -1,6 +1,7 @@
 package com.stefanini.entidade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -36,14 +37,18 @@ public class Recurso implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "ID_PROFISSIONAL", referencedColumnName = "ID_PROFISSIONAL")
 	private Profissional profissional;
-	
-	@Column(name = "VALOR_HORA", nullable = false)
-	private double valorHora;
-	
+
 	@ManyToMany
 	@JoinTable(name = "SGR_PROJETO_RECURSO", joinColumns={@JoinColumn(name = "SGR_PROJETO_ID_RECURSO")}, inverseJoinColumns={@JoinColumn(name = "SGR_PROJETO_ID_PROJETO")})
 	private List<Projeto> projetos;
 		
+	@Column(name= "REGISTRO_VALIDADE_INICIO")
+	private Date registroValidadeInicio;
+	
+	@Column(name = "REGISTRO_VALIDADE_FIM")
+	private Date registroValidadeFim;
+	
+
 	public Recurso() {
 	}
 	
@@ -59,12 +64,7 @@ public class Recurso implements Serializable{
 	public void setProfissional(Profissional profissional) {
 		this.profissional = profissional;
 	}
-	public double getValorHora() {
-		return valorHora;
-	}
-	public void setValorHora(double valorHora) {
-		this.valorHora = valorHora;
-	}
+	
 	public List<Projeto> getProjetos() {
 		return projetos;
 	}
@@ -72,16 +72,31 @@ public class Recurso implements Serializable{
 		this.projetos = projetos;
 	}
 
+	public Date getRegistroValidadeInicio() {
+		return registroValidadeInicio;
+	}
+
+	public void setRegistroValidadeInicio(Date registroValidadeInicio) {
+		this.registroValidadeInicio = registroValidadeInicio;
+	}
+
+	public Date getRegistroValidadeFim() {
+		return registroValidadeFim;
+	}
+
+	public void setRegistroValidadeFim(Date registroValidadeFim) {
+		this.registroValidadeFim = registroValidadeFim;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((profissional == null) ? 0 : profissional.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((profissional == null) ? 0 : profissional.hashCode());
 		result = prime * result + ((projetos == null) ? 0 : projetos.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(valorHora);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((registroValidadeFim == null) ? 0 : registroValidadeFim.hashCode());
+		result = prime * result + ((registroValidadeInicio == null) ? 0 : registroValidadeInicio.hashCode());
 		return result;
 	}
 
@@ -94,26 +109,33 @@ public class Recurso implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Recurso other = (Recurso) obj;
-		if (profissional == null) {
-			if (other.profissional != null)
-				return false;
-		} else if (!profissional.equals(other.profissional))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (profissional == null) {
+			if (other.profissional != null)
+				return false;
+		} else if (!profissional.equals(other.profissional))
 			return false;
 		if (projetos == null) {
 			if (other.projetos != null)
 				return false;
 		} else if (!projetos.equals(other.projetos))
 			return false;
-		if (Double.doubleToLongBits(valorHora) != Double.doubleToLongBits(other.valorHora))
+		if (registroValidadeFim == null) {
+			if (other.registroValidadeFim != null)
+				return false;
+		} else if (!registroValidadeFim.equals(other.registroValidadeFim))
+			return false;
+		if (registroValidadeInicio == null) {
+			if (other.registroValidadeInicio != null)
+				return false;
+		} else if (!registroValidadeInicio.equals(other.registroValidadeInicio))
 			return false;
 		return true;
 	}
-	
-	
+
 	
 }
