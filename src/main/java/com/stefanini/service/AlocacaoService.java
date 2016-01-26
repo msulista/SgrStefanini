@@ -6,9 +6,7 @@ import java.util.List;
 import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
 import com.stefanini.entidade.Alocacao;
-import com.stefanini.entidade.Projeto;
 import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
