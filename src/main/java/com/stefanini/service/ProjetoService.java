@@ -24,11 +24,13 @@ public class ProjetoService {
 			List<Projeto> projetos = q.getResultList();
 			if(projetos.isEmpty()){
 				manager.getTransaction().begin();
+				projeto.setRegistroValidadeInicio(projeto.getDataInicio());
 				manager.persist(projeto);
 				manager.getTransaction().commit();
 				manager.close();
 				return true;
 			}else{
+				Mensagem.add("Código já cadastrado!");
 				manager.close();
 				return false;
 			}

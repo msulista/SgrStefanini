@@ -37,14 +37,14 @@
 					<p:outputLabel for="budget" value="#{message['label.projeto.budget']}" styleClass="label" title="#{message['label.title.projeto.budget']}" />
 					<pe:inputNumber id="budget" value="#{projetoManager.projeto.budget}" minValue="0.00" maxValue="999999999.99" required="true" requiredMessage="#{message['span.obrigatorio.budget']}" symbol="R$ "/>
 					<br/><br/>
-					<p:outputLabel for="inicio" value="#{message['label.projeto.dataInicial']}" styleClass="label" title="#{message['label.title.projeto.inicio']}" />
+					<!-- <p:outputLabel for="inicio" value="#{message['label.projeto.dataInicial']}" styleClass="label" title="#{message['label.title.projeto.inicio']}" />
 					<p:calendar id="inicio" value="#{projetoManager.projeto.dataInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true" />
+					<br/><br/> -->
+					<p:outputLabel for="calendarioInicio" value="#{message['label.data.inicio']}" styleClass="label" title="#{message['label.title.perfilStefanini.dataInicio']}" />
+					<p:calendar id="calendarioInicio" value="#{projetoManager.projeto.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true" />
 					<br/><br/>
 					<p:outputLabel for="fim" value="#{message['label.projeto.dataFinal']}" styleClass="label" title="#{message['label.title.projeto.final']}" />
 					<p:calendar id="fim" value="#{projetoManager.projeto.dataFim}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true" />
-					<br/><br/>
-					<p:outputLabel for="calendarioInicio" value="#{message['label.data.inicio']}" styleClass="label" title="#{message['label.title.perfilStefanini.dataInicio']}" />
-					<p:calendar id="calendarioInicio" value="#{projetoManager.projeto.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true" />
 					<br/><br/>
 					<p:outputLabel for="calendarioFinal" value="#{message['label.data.final']}" styleClass="label" title="#{message['label.title.perfilStefanini.dataFim']}" />
 					<p:calendar id="calendarioFinal" value="#{projetoManager.projeto.registroValidadeFim}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true" />

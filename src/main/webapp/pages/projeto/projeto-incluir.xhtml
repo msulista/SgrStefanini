@@ -43,12 +43,12 @@
 					<p:outputLabel for="fim" value="#{message['label.projeto.dataFinal']}" styleClass="label" title="#{message['label.title.projeto.final']}" />
 					<p:calendar id="fim" value="#{projetoManager.projeto.dataFim}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true" />
 					<br/><br/>
-					<p:outputLabel for="calendarioInicio" value="#{message['label.data.inicio']}" styleClass="label" title="#{message['label.title.perfilStefanini.dataInicio']}" />
+					<!-- <p:outputLabel for="calendarioInicio" value="#{message['label.data.inicio']}" styleClass="label" title="#{message['label.title.perfilStefanini.dataInicio']}" />
 					<p:calendar id="calendarioInicio" value="#{projetoManager.projeto.registroValidadeInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true" />
 					<br/><br/>
 					<p:outputLabel for="calendarioFinal" value="#{message['label.data.final']}" styleClass="label" title="#{message['label.title.perfilStefanini.dataFim']}" />
 					<p:calendar id="calendarioFinal" value="#{projetoManager.projeto.registroValidadeFim}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true" />
-					<br/><br/>
+					<br/><br/> -->
 
 					<p:commandButton value="#{message['button.salvar']}"
 						action="#{projetoManager.save()}" update="growl" styleClass="btn" />

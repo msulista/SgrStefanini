@@ -17,9 +17,10 @@ import javax.persistence.Table;
 @Table(name = "SGR_ALOCACAO")
 @NamedQueries({
 	@NamedQuery(name = "Alocacao.findAll", query = "SELECT a FROM Alocacao a ORDER BY a.projeto.nome ASC"),
-	@NamedQuery(name = "Alocacao.findRecursosPorProjeto", query ="SELECT a FROM Alocacao a WHERE a.projeto.codigo = :codigo AND (a.dataFim IS NULL OR a.dataFim > CURRENT_DATE) AND a.dataInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC"),
-	@NamedQuery(name = "Alocacao.findPorId", query = "SELECT a FROM Alocacao a WHERE a.id = :id"),
-	@NamedQuery(name = "Alocacao.findAtivos", query = "SELECT a FROM Alocacao a WHERE a.dataFim IS NULL OR a.dataFim > CURRENT_DATE AND a.dataInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC")	
+	@NamedQuery(name = "Alocacao.findRecursosAtivosPorProjeto", query ="SELECT a FROM Alocacao a WHERE a.projeto.codigo = :codigo AND (a.registroValidadeFim IS NULL OR a.registroValidadeFim > CURRENT_DATE) AND a.registroValidadeInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC"),
+	@NamedQuery(name = "Alocacao.findPorId", query = "SELECT a FROM Alocacao a WHERE a.id = :id AND a.registroValidadeFim IS NULL OR a.registroValidadeFim > CURRENT_DATE AND a.registroValidadeInicio <= CURRENT_DATE"),
+	@NamedQuery(name = "Alocacao.findRecursoAtivoDoProjeto", query = "SELECT a FROM Alocacao a WHERE a.projeto.codigo = :codigo AND a.recurso.profissional.matricula = :matricula AND (a.registroValidadeFim IS NULL OR a.registroValidadeFim > CURRENT_DATE) AND a.registroValidadeInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC"),
+	@NamedQuery(name = "Alocacao.findAtivos", query = "SELECT a FROM Alocacao a WHERE a.registroValidadeFim IS NULL OR a.registroValidadeFim > CURRENT_DATE AND a.registroValidadeInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC")	
 })
 public class Alocacao {
 	
@@ -41,6 +42,12 @@ public class Alocacao {
 	
 	@Column(name = "DATA_INICIO", nullable = false)
 	private Date dataInicio;
+	
+	@Column(name = "REGISTRO_VALIDADE_INICIO", nullable = false)
+	private Date registroValidadeInicio;
+
+	@Column(name = "REGISTRO_VALIDADE_FIM", nullable = true)
+	private Date registroValidadeFim;
 
 	public Long getId() {
 		return id;
@@ -82,6 +89,22 @@ public class Alocacao {
 		this.dataInicio = dataInicio;
 	}
 
+	public Date getRegistroValidadeInicio() {
+		return registroValidadeInicio;
+	}
+
+	public void setRegistroValidadeInicio(Date registroValidadeInicio) {
+		this.registroValidadeInicio = registroValidadeInicio;
+	}
+
+	public Date getRegistroValidadeFim() {
+		return registroValidadeFim;
+	}
+
+	public void setRegistroValidadeFim(Date registroValidadeFim) {
+		this.registroValidadeFim = registroValidadeFim;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -91,6 +114,8 @@ public class Alocacao {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((projeto == null) ? 0 : projeto.hashCode());
 		result = prime * result + ((recurso == null) ? 0 : recurso.hashCode());
+		result = prime * result + ((registroValidadeFim == null) ? 0 : registroValidadeFim.hashCode());
+		result = prime * result + ((registroValidadeInicio == null) ? 0 : registroValidadeInicio.hashCode());
 		return result;
 	}
 
@@ -128,9 +153,17 @@ public class Alocacao {
 				return false;
 		} else if (!recurso.equals(other.recurso))
 			return false;
+		if (registroValidadeFim == null) {
+			if (other.registroValidadeFim != null)
+				return false;
+		} else if (!registroValidadeFim.equals(other.registroValidadeFim))
+			return false;
+		if (registroValidadeInicio == null) {
+			if (other.registroValidadeInicio != null)
+				return false;
+		} else if (!registroValidadeInicio.equals(other.registroValidadeInicio))
+			return false;
 		return true;
 	}
 	
-	
-
 }
