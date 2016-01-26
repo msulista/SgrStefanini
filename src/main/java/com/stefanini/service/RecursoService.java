@@ -1,11 +1,15 @@
 package com.stefanini.service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.stefanini.entidade.Celula;
+import com.stefanini.entidade.Equipe;
 import com.stefanini.entidade.Recurso;
 import com.stefanini.util.JPAUtil;
 
@@ -47,32 +51,48 @@ public class RecursoService {
 		manager.close();
 		return recurso;
 	}
+	
+	public Recurso getRecursoByMatricula(int matricula){
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Recurso.findMatricula");
+		q.setParameter("id", matricula);
+		Recurso recurso = (Recurso) q.getSingleResult();
+		manager.close();
+		return recurso;
+	}
 		
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
 		Recurso recurso = getRecursoById(id);
+		recurso.setRegistroValidadeFim(new Date());
 		manager.getTransaction().begin();
  		manager.merge(recurso);
 		manager.getTransaction().commit();
 		manager.close();
 	}
 	
-//	@SuppressWarnings("unchecked")
-//	public List<Recurso> listarAtivos() {
-//		EntityManager manager = JPAUtil.getEntityManager();
-//		Query q = manager.createNamedQuery("Recurso.findAtivos");
-//		List<Recurso> recursos = q.getResultList();
-//		manager.close();
-//		return recursos;
-//	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Recurso> listarTodos() {
+	public List<Recurso> listarTodos(Equipe equipe, Celula celula) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNamedQuery("Recurso.findAll");
+		if(equipe != null&&celula ==null){
+			Query q = manager.createNamedQuery("Recurso.findByEquipe");
+			q.setParameter("id", equipe.getId());
+			List<Recurso> recursos = q.getResultList();
+			manager.close();
+			return recursos;
+		}
+		if(equipe !=null&&celula !=null){
+		Query q = manager.createNamedQuery("Recurso.findByEquipeECelula");
+		q.setParameter("id", equipe.getId());
+		q.setParameter("celula", celula.getId());
 		List<Recurso> recursos = q.getResultList();
 		manager.close();
 		return recursos;
+		}else{
+			List<Recurso> recursos = new ArrayList<>();
+			return recursos;
+		}
 	}
 	
 }

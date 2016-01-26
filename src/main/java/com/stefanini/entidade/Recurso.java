@@ -20,10 +20,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "SGR_RECURSO")
 @NamedQueries({
-	@NamedQuery(name = "Recurso.finAll", query = "SELECT r FROM Recurso r ORDER BY r.profissional.nome ASC"),
-	@NamedQuery(name = "Recurso.findMatricula", query ="SELECT r FROM Recurso r WHERE r.profissional.matricula = :matricula ORDER BY r.profissional.nome ASC"),
-	@NamedQuery(name = "Recurso.findId", query = "SELECT r FROM Recurso r where r.id = :id")
-//	@NamedQuery(name = "Recurso.findAtivos", query = "SELECT r FROM Recurso r where r.id = :id"),
+	@NamedQuery(name = "Recurso.findAll", query = "SELECT r FROM Recurso r"),
+	@NamedQuery(name = "Recurso.findMatricula", query ="SELECT r FROM Recurso r WHERE r.profissional.matricula = :matricula"),
+	@NamedQuery(name = "Recurso.findId", query = "SELECT r FROM Recurso r where r.id = :id"),
+	@NamedQuery(name = "Recurso.findByEquipe", query = "SELECT r FROM Recurso r WHERE r.profissional.equipe.id = :id"),
+	@NamedQuery(name = "Recurso.findByEquipeECelula", query = "SELECT r FROM Recurso r WHERE r.profissional.equipe.id = :id AND r.profissional.celula.id = :celula")
 })
 public class Recurso implements Serializable{
 	
@@ -35,14 +36,11 @@ public class Recurso implements Serializable{
 	private Long id;
 		
 	@ManyToOne
-	@JoinColumn(name = "ID_PROFISSIONAL", referencedColumnName = "ID_PROFISSIONAL")
+	@JoinColumn(name = "SGR_PROFISSIONAL_ID_PROFISSIONAL", referencedColumnName = "ID_PROFISSIONAL")
 	private Profissional profissional;
 
-	@ManyToMany
-	@JoinTable(name = "SGR_PROJETO_RECURSO", joinColumns={@JoinColumn(name = "SGR_PROJETO_ID_RECURSO")}, inverseJoinColumns={@JoinColumn(name = "SGR_PROJETO_ID_PROJETO")})
-	private List<Projeto> projetos;
-		
-	@Column(name= "REGISTRO_VALIDADE_INICIO")
+	
+	@Column(name = "REGISTRO_VALIDADE_INICIO")
 	private Date registroValidadeInicio;
 	
 	@Column(name = "REGISTRO_VALIDADE_FIM")
@@ -51,42 +49,47 @@ public class Recurso implements Serializable{
 
 	public Recurso() {
 	}
-	
+
+
 	public Long getId() {
 		return id;
 	}
+
+
 	public void setId(Long id) {
 		this.id = id;
-	}	
+	}
+
+
 	public Profissional getProfissional() {
 		return profissional;
 	}
+
+
 	public void setProfissional(Profissional profissional) {
 		this.profissional = profissional;
 	}
-	
-	public List<Projeto> getProjetos() {
-		return projetos;
-	}
-	public void setProjetos(List<Projeto> projetos) {
-		this.projetos = projetos;
-	}
+
 
 	public Date getRegistroValidadeInicio() {
 		return registroValidadeInicio;
 	}
 
+
 	public void setRegistroValidadeInicio(Date registroValidadeInicio) {
 		this.registroValidadeInicio = registroValidadeInicio;
 	}
+
 
 	public Date getRegistroValidadeFim() {
 		return registroValidadeFim;
 	}
 
+
 	public void setRegistroValidadeFim(Date registroValidadeFim) {
 		this.registroValidadeFim = registroValidadeFim;
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -94,11 +97,11 @@ public class Recurso implements Serializable{
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((profissional == null) ? 0 : profissional.hashCode());
-		result = prime * result + ((projetos == null) ? 0 : projetos.hashCode());
 		result = prime * result + ((registroValidadeFim == null) ? 0 : registroValidadeFim.hashCode());
 		result = prime * result + ((registroValidadeInicio == null) ? 0 : registroValidadeInicio.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -119,11 +122,6 @@ public class Recurso implements Serializable{
 				return false;
 		} else if (!profissional.equals(other.profissional))
 			return false;
-		if (projetos == null) {
-			if (other.projetos != null)
-				return false;
-		} else if (!projetos.equals(other.projetos))
-			return false;
 		if (registroValidadeFim == null) {
 			if (other.registroValidadeFim != null)
 				return false;
@@ -136,6 +134,7 @@ public class Recurso implements Serializable{
 			return false;
 		return true;
 	}
+
 
 	
 }

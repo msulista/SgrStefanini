@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/template/default.xhtml"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces">
+
+	<ui:define name="content">
+		<p:breadCrumb>
+		    <p:menuitem value="#{message['pao.home']}" url="#" />
+		   
+		</p:breadCrumb>
+		<div >
+			<h2>#{message['title.alocacoes']}</h2>
+			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
+			<h:form>
+			<br />
+			<p:selectOneMenu styleClass="dropdown-pesquisa" id="celula"
+						 value="#{recursoManager.celula}" onchange="submit()" valueChangeListener="#{recursoManager.valueChangeCelula}"
+						converter="entityConverterSelectOneMenu" >
+						<f:selectItem itemLabel="#{message['select.celula']}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{celulaManager.listarAtivos()}"
+							var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}" />
+							
+						  <p:ajax  update="gridRecursos" event="change" process="@this" />
+							
+					
+							
+							</p:selectOneMenu>
+			<p:selectOneMenu styleClass="dropdown-pesquisa" id="equipe"
+						 value="#{recursoManager.equipe}" onchange="submit()" valueChangeListener="#{recursoManager.valueChangeEquipe}"
+						converter="entityConverterSelectOneMenu" >
+						<f:selectItem itemLabel="#{message['select.equipe']}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{equipeManager.listarAtivos()}"
+							var="equipe" itemLabel="#{equipe.nome}" itemValue="#{equipe}" />
+							
+						  <p:ajax  update="gridRecursos" event="change" process="@this" />
+							
+							</p:selectOneMenu>
+							
+				<p:dataTable id="gridRecursos" var="recurso" value="#{recursoManager.listarTudo()}" emptyMessage="#{message['alerta.listaVazia']}">
+	
+					<p:column headerText="#{message['label.nome']}" for="recursoNome">
+						<h:outputText value="#{recurso.profissional.nome}" id="recursoNome"/>
+					</p:column>
+					
+					<p:column headerText="#{message['label.profissional.cargo']}" for="recursoCargo">
+						<h:outputText value="#{recurso.profissional.cargo.nome}" id="recursoCargo" />
+					</p:column>
+				
+					<p:column headerText="#{message['label.cargaHoraria']}" for="recursoCargaHoraria" >
+						<h:outputText value="#{recurso.profissional.cargaHoraria.cargaHoraria}" id="recursoCargaHoraria">
+							<f:converter converterId="cargaHorariaConverter"/>
+						</h:outputText>
+					</p:column>
+						
+					<p:column headerText="#{message['label.profissional.valorHora']}" for="recursoValorHora">
+						<h:outputText value="#{recurso.profissional.valorHora}" id="recursoValorHora"/>
+					</p:column>
+					
+					
+					
+				</p:dataTable>
+				<br />
+				</h:form>
+		</div>
+	</ui:define>
+
+</ui:composition>

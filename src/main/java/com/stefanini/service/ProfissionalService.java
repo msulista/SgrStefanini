@@ -10,7 +10,9 @@ import javax.persistence.Query;
 
 import com.stefanini.entidade.Equipe;
 import com.stefanini.entidade.Profissional;
+import com.stefanini.entidade.Recurso;
 import com.stefanini.entidade.Status;
+import com.stefanini.manager.RecursoManager;
 import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
@@ -28,7 +30,9 @@ public class ProfissionalService implements Serializable {
 	private FormaContratacaoService formaContratacaoService = new FormaContratacaoService();
 	private StatusService statusService = new StatusService();
 	private CelulaService celulaService = new CelulaService();
-
+	private Recurso recurso = new Recurso();
+	private RecursoService recursoService = new RecursoService();
+	
 	@SuppressWarnings("unchecked")
 	public boolean save(Profissional profissional) {
 		EntityManager manager = JPAUtil.getEntityManager();
@@ -52,7 +56,10 @@ public class ProfissionalService implements Serializable {
 				
 				manager.getTransaction().begin();
 				profissional.setStatus(statusService.getStatusById((long) 13));
+				recurso.setProfissional(profissional);
+				recurso.setRegistroValidadeInicio(profissional.getRegistroValidadeInicio());
 				manager.persist(profissional);
+				manager.persist(recurso);
 				manager.getTransaction().commit();
 				manager.close();
 				return true;
@@ -125,7 +132,7 @@ public class ProfissionalService implements Serializable {
 								}
 				
 			
-
+								recurso = recursoService.getRecursoByMatricula(profissional.getMatricula());
 								Profissional profissionalPersist = new Profissional();
 								profissionalPersist.setNome(profissional.getNome());
 								profissionalPersist.setMatricula(profissional.getMatricula());
@@ -147,7 +154,7 @@ public class ProfissionalService implements Serializable {
 								profissionalPersist.setStatus(statusService.getStatusById(profissional.getStatus().getId()));
 								profissionalPersist.setDataSaida(profissional.getDataSaida());
 								profissionalPersist.setDataRetorno(profissional.getDataRetorno());
-							
+								recurso.setProfissional(profissional);
 
 								//regra da data retorno em caso de afastamento ou ferias
 								if(profissional.getDataRetorno()!=null){
@@ -155,12 +162,13 @@ public class ProfissionalService implements Serializable {
 									profissionalPersist.setRegistroValidaeFim(profissional.getDataRetorno());
 									manager.persist(profissionalPersist);
 									this.persistAfastado(profissional);
-				
+									recursoService.update(recurso);
 									manager.getTransaction().commit();
 									
 								}else{
 																		
 									manager.persist(profissionalPersist);
+									recursoService.update(recurso);
 									manager.getTransaction().commit();
 								}
 						
@@ -318,11 +326,14 @@ public class ProfissionalService implements Serializable {
 		if(new Date().compareTo(profissionalMerge.getRegistroValidadeInicio())==0){
 			profissionalMerge.setRegistroValidaeFim(new Date());
 			manager.merge(profissionalMerge);
-
+			recurso = recursoService.getRecursoByMatricula(profissional.getMatricula());
+			recursoService.desativar(recurso.getId());
 		}else{
 			profissionalMerge.setRegistroValidaeFim(DateUtil.retornaDataFimAntesDoNovoInicio(new Date()));
 			manager.merge(profissionalMerge);
-							
+			recurso = recursoService.getRecursoByMatricula(profissional.getMatricula());
+			
+			recursoService.desativar(recurso.getId());
 		}
 		
 		Profissional profissionalPersist = new Profissional();

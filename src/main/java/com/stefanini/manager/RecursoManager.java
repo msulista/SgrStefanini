@@ -1,25 +1,37 @@
 package com.stefanini.manager;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ValueChangeEvent;
 
+import com.ocpsoft.pretty.faces.annotation.URLMapping;
+import com.ocpsoft.pretty.faces.annotation.URLMappings;
+import com.stefanini.entidade.Celula;
+import com.stefanini.entidade.Equipe;
 import com.stefanini.entidade.Recurso;
 import com.stefanini.service.RecursoService;
 
 @ManagedBean
 @ViewScoped
-public class RecursoManager {
+@URLMappings(mappings = {
+		@URLMapping(id = "recursos", pattern="/alocacoes-recursos", viewId="/pages/alocacoes/alocacoes.xhtml")
+})
+public class RecursoManager implements Serializable{
 
+	
+
+	private static final long serialVersionUID = 1L;
 	private Recurso recurso;
-	private List<Recurso> recursos;
+	private List<Recurso> recursos = new ArrayList<>();
 	private RecursoService service = new RecursoService();
+	private Equipe equipe ;
+	private Celula celula ;
 	
 	public RecursoManager() {
-		this.recurso = new Recurso();
-		this.recursos = new ArrayList<>();
 	}
 
 	public Recurso getRecurso() {
@@ -37,7 +49,13 @@ public class RecursoManager {
 	public void setRecursos(List<Recurso> recursos) {
 		this.recursos = recursos;
 	}
-	
+	public Celula getCelula() {
+		return celula;
+	}
+
+	public void setCelula(Celula celula) {
+		this.celula = celula;
+	}
 	@SuppressWarnings("unused")
 	private String save(){
 		if(service.save(recurso)){
@@ -56,9 +74,8 @@ public class RecursoManager {
 		}
 	}
 	
-	@SuppressWarnings("unused")
-	private List<Recurso> listarTudo(){
-		return service.listarTodos();
+	public List<Recurso> listarTudo(){
+		return recursos;
 	}
 	
 //	private List<Recurso> lista(){
@@ -71,4 +88,31 @@ public class RecursoManager {
 		return "";
 	}
 	
+	public void valueChangeEquipe(ValueChangeEvent event) {
+	       equipe = (Equipe) event.getNewValue();
+	       recursos = service.listarTodos(this.equipe,this.celula);
+	       listarTudo();
+	    }
+
+	public void valueChangeCelula(ValueChangeEvent event) {
+	       celula = (Celula) event.getNewValue();
+	       recursos = service.listarTodos(this.equipe,this.celula);
+	       listarTudo();
+	    }
+	
+	public RecursoService getService() {
+		return service;
+	}
+
+	public void setService(RecursoService service) {
+		this.service = service;
+	}
+
+	public Equipe getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
+	}
 }
