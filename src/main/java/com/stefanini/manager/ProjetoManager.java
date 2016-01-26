@@ -1,11 +1,14 @@
 package com.stefanini.manager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import com.ocpsoft.pretty.faces.annotation.URLAction;
+import com.ocpsoft.pretty.faces.annotation.URLActions;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
 import com.stefanini.entidade.Projeto;
@@ -55,7 +58,7 @@ public class ProjetoManager {
 	
 	public String update(){
 		if(service.update(projeto)){
-			return "";
+			return "pretty:projeto";
 		} else {
 			return null;
 		}
@@ -74,4 +77,8 @@ public class ProjetoManager {
 		return "pretty:projeto";
 	}
 
+	@URLActions(actions = { @URLAction(mappingId = "projeto-editar", onPostback = false) })
+	public void load() throws IOException {
+		projeto = service.getProjetoParaEdicao(projeto.getCodigo());
+	}
 }

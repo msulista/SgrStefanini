@@ -22,20 +22,20 @@
 				<p:panel header="#{message['title.projeto']}" id="painel">
 					<p:focus context="painel" />
 					
+					<p:outputLabel for="celula" value="#{message['label.profissional.celula']}" styleClass="label" title="#{message['label.title.profissional.celula']}"/>
+					<p:selectOneMenu id="celula" value="#{projetoManager.projeto.celula}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.celula']}">
+						<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
+						<f:selectItems value="#{celulaManager.listarAtivos()}" var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}"/>
+					</p:selectOneMenu>
+					<br /><br />
 					<p:outputLabel value="#{message['label.projeto.codigo']}*" styleClass="label" title="#{message['label.title.projeto.codigo']}" />
-					<p:inputText value="#{projetoManager.projeto.codigo}" required="true" requiredMessage="#{message['span.obrigatorio.codigo']}"  mask="true"/>
+					<p:inputMask mask="999999" id="codigo" value="#{projetoManager.projeto.codigo}" required="true" requiredMessage="#{message['span.obrigatorio.codigo']}" />
 					<br/><br/>
 					<p:outputLabel value="#{message['label.nome']}*" styleClass="label" title="#{message['label.title.projeto.nome']}" />
 					<p:inputText value="#{projetoManager.projeto.nome}" required="true"	requiredMessage="#{message['span.obrigatorio.Nome']}" />
 					<br/><br/>
 					<p:outputLabel for="budget" value="#{message['label.projeto.budget']}" styleClass="label" title="#{message['label.title.projeto.budget']}" />
-					<pe:inputNumber id="budget" value="#{projetoManager.projeto.budget}" minValue="0.00" maxValue="999999999.99" required="true" requiredMessage="#{message['span.obrigatorio.budget']}" symbol="R$ " emptyValue="empty" />
-					<br/><br/>
-					<p:outputLabel for="custoPrevisto" value="#{message['label.projeto.custoPrevisto']}" styleClass="label"	title="#{message['label.title.projeto.custoPrevisto']}" />
-					<pe:inputNumber id="custoPrevisto" value="#{projetoManager.projeto.custoPrevisto}" minValue="0.00" maxValue="999999999.99" required="true" requiredMessage="#{message['span.obrigatorio.custoPrevisto']}" symbol="R$ " emptyValue="empty" />
-					<br/><br/>
-					<p:outputLabel for="saldo" value="#{message['label.projeto.saldo']}" styleClass="label" title="#{message['label.title.projeto.saldo']}" />
-					<pe:inputNumber id="saldo" value="#{projetoManager.projeto.saldo}" minValue="0.00" maxValue="999999999.99" required="true" requiredMessage="#{message['span.obrigatorio.saldo']}" symbol="R$ " emptyValue="empty" />
+					<pe:inputNumber id="budget" value="#{projetoManager.projeto.budget}" minValue="0.00" maxValue="999999999.99" required="true" requiredMessage="#{message['span.obrigatorio.budget']}" symbol="R$ "  emptyValue="empty" />
 					<br/><br/>
 					<p:outputLabel for="inicio" value="#{message['label.projeto.dataInicial']}" styleClass="label" title="#{message['label.title.projeto.inicio']}" />
 					<p:calendar id="inicio" value="#{projetoManager.projeto.dataInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true" />

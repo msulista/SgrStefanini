@@ -7,6 +7,7 @@ import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.stefanini.entidade.Profissional;
 import com.stefanini.entidade.Projeto;
 import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
@@ -20,7 +21,7 @@ public class ProjetoService {
 		if (DateUtil.verificaDiaUtil(projeto.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(projeto.getRegistroValidadeFim())) {	
 			Query q = manager.createNamedQuery("Projeto.findCodigo");
 			q.setParameter("codigo", projeto.getCodigo());
-			List<Projeto> projetos = q .getResultList();
+			List<Projeto> projetos = q.getResultList();
 			if(projetos.isEmpty()){
 				manager.getTransaction().begin();
 				manager.persist(projeto);
@@ -94,5 +95,14 @@ public class ProjetoService {
 		}else{
 			return (long) 1;
 		}
+	}
+	
+	public Projeto getProjetoParaEdicao(int codigo) {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Projeto.checkCodigoParaEdicao");
+		q.setParameter("codigo", codigo);
+		Projeto projeto= (Projeto) q.getSingleResult();
+		manager.close();
+		return projeto;
 	}
 }
