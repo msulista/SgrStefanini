@@ -1,7 +1,9 @@
 package com.stefanini.service;
 
+import java.util.Date;
 import java.util.List;
 
+import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -38,4 +40,52 @@ public class AlocacaoService {
 			return false;
 		}
 	}
+	
+	public boolean update(Alocacao alocacao){
+		EntityManager manager = JPAUtil.getEntityManager();
+		manager.getTransaction().begin();
+		manager.merge(alocacao);
+		manager.getTransaction().commit();
+		manager.close();
+		return true;		
+	}
+	
+	public Alocacao getAlocacaoById(Long id){
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Alocacao.findPorId");
+		q.setParameter("id", id);
+		Alocacao alocacao = (Alocacao) q.getSingleResult();
+		manager.close();
+		return alocacao;
+	}
+	
+	public void desativar(Long id) throws ConverterException {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Alocacao alocacao =  getAlocacaoById(id);
+		alocacao.setRegistroValidadeFim(new Date());
+		manager.getTransaction().begin();
+ 		manager.merge(alocacao);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Alocacao> listarAtivos() {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Alocacao.findAtivos");
+		List<Alocacao> alocacoes = q.getResultList();
+		manager.close();
+		return alocacoes;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Alocacao> listarTodos() {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Alocacao.findAll");
+		List<Alocacao> alocacoes = q.getResultList();
+		manager.close();
+		return alocacoes;
+	}
+	
+
 }
