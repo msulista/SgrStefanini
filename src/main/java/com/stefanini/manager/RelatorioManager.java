@@ -13,7 +13,6 @@ import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LegendPlacement;
-import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
@@ -38,47 +37,7 @@ import com.stefanini.service.RelatorioService;
 })
 public class RelatorioManager {
 	
-	public void stateChangeListenerProfissionalPorEquipe(ValueChangeEvent event) {
-       celula = (Celula) event.getNewValue();
-       profissionais = new ArrayList<>();
-     createProfissionalPorEquipe();
-    }
-	
-	public void stateChangeListenerContratacaoPorEquipe(ValueChangeEvent event) {
-	       celula = (Celula) event.getNewValue();
-	       profissionais = new ArrayList<>();
-	     createCltXestagioPorEquipe();
-	    }
-	
-	public void stateChangeListenerValorMedioPorEquipe(ValueChangeEvent event) {
-	       celula = (Celula) event.getNewValue();
-	       profissionais = new ArrayList<>();
-	     createValorPorEquipe();
-	    }
-	
-	public void stateChangeListenerPerfilPorEquipe(ValueChangeEvent event) {
-	       celula = (Celula) event.getNewValue();
-	       profissionais = new ArrayList<>();
-	     createPerfilPorEquipe();
-	    }
-	
-	public void stateChangeListenerValorPorCelula(ValueChangeEvent event) {
-	       celula = (Celula) event.getNewValue();
-	       profissionais = new ArrayList<>();
-	     createValorPorCelula();
-	    }
-	
-	public void stateChangeListenerContratcaoPorCelula(ValueChangeEvent event) {
-	       celula = (Celula) event.getNewValue();
-	       profissionais = new ArrayList<>();
-	     createCltXestagioPorCelula();
-	    }
-	
-	public void stateChangeListenerPerfilPorCelula(ValueChangeEvent event) {
-	       celula = (Celula) event.getNewValue();
-	       profissionais = new ArrayList<>();
-	     createPerfilPorCelula();
-	    }
+
 	private Celula celula;
 	private Relatorio relatorio = new Relatorio();
 	private RelatorioService service = new RelatorioService();
@@ -693,4 +652,48 @@ public class RelatorioManager {
 		equipe = profissionais.get(0).getEquipe().getNome();
 		
 	}
+	
+	// ValueChangeEvent dos gráficos
+	
+	public void stateChangeListenerProfissionalPorEquipe(ValueChangeEvent event) {
+	       celula = (Celula) event.getNewValue();
+	       profissionais = new ArrayList<>();
+	     createProfissionalPorEquipe();
+	    }
+		
+		public void stateChangeListenerContratacaoPorEquipe(ValueChangeEvent event) {
+		       celula = (Celula) event.getNewValue();
+		       profissionais = new ArrayList<>();
+		     createCltXestagioPorEquipe();
+		    }
+		
+		public void stateChangeListenerValorMedioPorEquipe(ValueChangeEvent event) {
+		       celula = (Celula) event.getNewValue();
+		       profissionais = new ArrayList<>();
+		     createValorPorEquipe();
+		    }
+		
+		public void stateChangeListenerPerfilPorEquipe(ValueChangeEvent event) {
+		       celula = (Celula) event.getNewValue();
+		       profissionais = new ArrayList<>();
+		     createPerfilPorEquipe();
+		    }
+		
+		public void stateChangeListenerValorPorCelula(ValueChangeEvent event) {
+		       celula = (Celula) event.getNewValue();
+		       profissionais = new ArrayList<>();
+		     createValorPorCelula();
+		    }
+		
+		public void stateChangeListenerContratcaoPorCelula(ValueChangeEvent event) {
+		       celula = (Celula) event.getNewValue();
+		       profissionais = new ArrayList<>();
+		     createCltXestagioPorCelula();
+		    }
+		
+		public void stateChangeListenerPerfilPorCelula(ValueChangeEvent event) {
+		       celula = (Celula) event.getNewValue();
+		       profissionais = new ArrayList<>();
+		     createPerfilPorCelula();
+		    }
 }
