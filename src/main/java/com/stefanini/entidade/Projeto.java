@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "SGR_PROJETO")
 @NamedQueries({
-	@NamedQuery(name = "Projeto.finAll", query = "SELECT p FROM Projeto p ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Projeto.findAll", query = "SELECT p FROM Projeto p ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.findCodigo", query ="SELECT p FROM Projeto p WHERE p.codigo = :codigo ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.findId", query = "SELECT p FROM Projeto p WHERE p.id = :id"),
 	@NamedQuery(name = "Projeto.findAtivos", query = "SELECT p FROM Projeto p WHERE p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE AND p.dataInicio <= CURRENT_DATE ORDER BY p.nome ASC"),

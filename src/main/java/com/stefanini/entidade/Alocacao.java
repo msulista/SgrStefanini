@@ -16,10 +16,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "SGR_ALOCACAO")
 @NamedQueries({
-	@NamedQuery(name = "Projeto.findAll", query = "SELECT a FROM Alocacao a ORDER BY a.projeto.nome ASC"),
-	@NamedQuery(name = "Projeto.findRecursosPorProjeto", query ="SELECT a FROM Alocacao a WHERE a.projeto.codigo = :codigo AND (a.dataFim IS NULL OR a.dataFim > CURRENT_DATE) AND a.dataInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC"),
-	@NamedQuery(name = "Projeto.findId", query = "SELECT a FROM Alocacao a WHERE a.id = :id"),
-	@NamedQuery(name = "Projeto.findAtivos", query = "SELECT a FROM Alocacao a WHERE a.dataFim IS NULL OR a.dataFim > CURRENT_DATE AND a.dataInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC")	
+	@NamedQuery(name = "Alocacao.findAll", query = "SELECT a FROM Alocacao a ORDER BY a.projeto.nome ASC"),
+	@NamedQuery(name = "Alocacao.findRecursosPorProjeto", query ="SELECT a FROM Alocacao a WHERE a.projeto.codigo = :codigo AND (a.dataFim IS NULL OR a.dataFim > CURRENT_DATE) AND a.dataInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC"),
+	@NamedQuery(name = "Alocacao.findPorId", query = "SELECT a FROM Alocacao a WHERE a.id = :id"),
+	@NamedQuery(name = "Alocacao.findAtivos", query = "SELECT a FROM Alocacao a WHERE a.dataFim IS NULL OR a.dataFim > CURRENT_DATE AND a.dataInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC")	
 })
 public class Alocacao {
 	
