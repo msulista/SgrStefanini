@@ -14,7 +14,7 @@ import com.stefanini.service.AlocacaoService;
 @ManagedBean
 @ViewScoped
 @URLMappings(mappings = {
-		@URLMapping(id = "alocacao", pattern = "/alocacao", viewId = "/pages/alocacao/alocacoes.xhtml"),
+		@URLMapping(id = "alocacao", pattern = "/alocacao", viewId = "/pages/alocacao/alocacao-listar.xhtml"),
 		@URLMapping(id = "alocacao-incluir", pattern = "/incluir", viewId = "/pages/alocacao/alocacao-incluir.xhtml", parentId = "alocacao"),
 		@URLMapping(id = "alocacao-editar", pattern = "/#{alocacaoManager.alocacao.id}/editar", viewId = "/pages/alocacao/alocacao-editar.xhtml", parentId = "alocacao")
 })
