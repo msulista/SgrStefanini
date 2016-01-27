@@ -18,7 +18,9 @@ public class ProjetoService {
 	@SuppressWarnings("unchecked")
 	public  boolean save(Projeto projeto){
 		EntityManager manager = JPAUtil.getEntityManager();
-		if (DateUtil.verificaDiaUtil(projeto.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(projeto.getRegistroValidadeFim())) {	
+		if (DateUtil.verificaDiaUtil(projeto.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(projeto.getRegistroValidadeFim())&&DateUtil.verificaDiaUtil(projeto.getDataInicio())&&DateUtil.verificaDiaUtil(projeto.getDataFim())) {	
+			if(DateUtil.verificaDataValida(projeto.getRegistroValidadeInicio(), projeto.getRegistroValidadeFim())){
+				if(DateUtil.verificaDataValida(projeto.getDataInicio(), projeto.getDataFim())){
 			Query q = manager.createNamedQuery("Projeto.findCodigo");
 			q.setParameter("codigo", projeto.getCodigo());
 			List<Projeto> projetos = q.getResultList();
@@ -31,6 +33,16 @@ public class ProjetoService {
 				return true;
 			}else{
 				Mensagem.add("Código já cadastrado!");
+				manager.close();
+				return false;
+			}
+				}else{
+					Mensagem.add("Data inicio anterior ao fim!");
+					manager.close();
+					return false;
+				}
+			}else{
+				Mensagem.add("Data registro fim anterior ao registro inicio!");
 				manager.close();
 				return false;
 			}

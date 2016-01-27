@@ -59,6 +59,10 @@ public class Projeto {
 	@ManyToOne
 	private Celula celula;
 	
+	@JoinColumn(name = "ID_EQUIPE", referencedColumnName = "ID_EQUIPE")
+	@ManyToOne
+	private Equipe equipe;
+	
 	public Projeto() {
 	}
 
@@ -150,6 +154,16 @@ public class Projeto {
 		this.celula = celula;
 	}
 
+	
+	
+	public Equipe getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -160,6 +174,7 @@ public class Projeto {
 		result = prime * result + ((custoPrevisto == null) ? 0 : custoPrevisto.hashCode());
 		result = prime * result + ((dataFim == null) ? 0 : dataFim.hashCode());
 		result = prime * result + ((dataInicio == null) ? 0 : dataInicio.hashCode());
+		result = prime * result + ((equipe == null) ? 0 : equipe.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((registroValidadeFim == null) ? 0 : registroValidadeFim.hashCode());
@@ -204,6 +219,11 @@ public class Projeto {
 				return false;
 		} else if (!dataInicio.equals(other.dataInicio))
 			return false;
+		if (equipe == null) {
+			if (other.equipe != null)
+				return false;
+		} else if (!equipe.equals(other.equipe))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -232,4 +252,5 @@ public class Projeto {
 		return true;
 	}
 
+	
 }

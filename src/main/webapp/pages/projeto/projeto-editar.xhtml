@@ -28,6 +28,14 @@
 						<f:selectItems value="#{celulaManager.listarAtivos()}" var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}"/>
 					</p:selectOneMenu>
 					<br /><br />
+					
+					<p:outputLabel for="equipe" value="#{message['label.profissional.equipe']}" styleClass="label" title="#{message['label.title.profissional.celula']}"/>
+					<p:selectOneMenu id="equipe" value="#{projetoManager.projeto.equipe}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.equipe']}">
+						<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
+						<f:selectItems value="#{equipeManager.listarAtivos()}" var="equipe" itemLabel="#{equipe.nome}" itemValue="#{equipe}"/>
+					</p:selectOneMenu>
+					<br /><br />
+					
 					<p:outputLabel value="#{message['label.projeto.codigo']}*" styleClass="label" title="#{message['label.title.projeto.codigo']}" />
 					<p:inputMask mask="999999" id="codigo" value="#{projetoManager.projeto.codigo}" required="true" requiredMessage="#{message['span.obrigatorio.codigo']}" />
 					<br/><br/>
