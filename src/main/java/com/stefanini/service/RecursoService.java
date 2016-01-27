@@ -81,8 +81,13 @@ public class RecursoService {
 			List<Recurso> recursos = q.getResultList();
 			manager.close();
 			return recursos;
-		}
-		if(equipe !=null&&celula !=null){
+		}else if(equipe == null && celula != null){
+			Query q = manager.createNamedQuery("Recurso.findByCelula");
+			q.setParameter("id", celula.getId());
+			List<Recurso> recursos = q.getResultList();
+			manager.close();
+			return recursos;
+		}else if(equipe != null && celula != null){
 		Query q = manager.createNamedQuery("Recurso.findByEquipeECelula");
 		q.setParameter("id", equipe.getId());
 		q.setParameter("celula", celula.getId());

@@ -24,6 +24,7 @@ import javax.persistence.Table;
 	@NamedQuery(name = "Recurso.findMatricula", query ="SELECT r FROM Recurso r WHERE r.profissional.matricula = :matricula"),
 	@NamedQuery(name = "Recurso.findId", query = "SELECT r FROM Recurso r where r.id = :id"),
 	@NamedQuery(name = "Recurso.findByEquipe", query = "SELECT r FROM Recurso r WHERE r.profissional.equipe.id = :id"),
+	@NamedQuery(name = "Recurso.findByCelula", query = "SELECT r FROM Recurso r WHERE r.profissional.celula.id = :id"),
 	@NamedQuery(name = "Recurso.findByEquipeECelula", query = "SELECT r FROM Recurso r WHERE r.profissional.equipe.id = :id AND r.profissional.celula.id = :celula")
 })
 public class Recurso implements Serializable{
