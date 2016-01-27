@@ -17,7 +17,7 @@
 				<p:panel header="#{message['title.profissional.editar']}" id="painel">			
 										<p:focus context="painel"/>
 					<p:outputLabel for="celula" value="#{message['label.profissional.celula']}" styleClass="label" title="#{message['label.title.profissional.celula']}"/>
-					<p:selectOneMenu id="celula" value="#{profissionalManager.profissional.celula}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.celula']}">
+					<p:selectOneMenu id="celula" value="#{profissionalManager.profissional.celula}" converter="entityConverterSelectOneMenu" required="true" requiredMessage="#{message['span.obrigatorio.celula']}">
 						<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
 						<f:selectItems value="#{celulaManager.listarAtivos()}" var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}"/>
 					</p:selectOneMenu>
@@ -29,7 +29,7 @@
 					<p:inputText id="nome" value="#{profissionalManager.profissional.nome}" required="true" requiredMessage="#{message['span.obrigatorio.Nome']}" />
 					<br /><br />					
 					<p:outputLabel for="fContratacao" value="#{message['label.profissional.formaContratacao']}" styleClass="label" title="#{message['label.title.profissional.formaContratacao']}"/>
-	                <p:selectOneMenu id="fContratacao" value="#{profissionalManager.profissional.formaContratacao}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.foramaContratacao']}">
+	                <p:selectOneMenu id="fContratacao" value="#{profissionalManager.profissional.formaContratacao}" converter="entityConverterSelectOneMenu" required="true" requiredMessage="#{message['span.obrigatorio.foramaContratacao']}">
 	                    <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
 	                    <f:selectItems value="#{formaContratacaoManager.listarAtivos()}" var="fContratacao" itemLabel="#{fContratacao.nome}" itemValue="#{fContratacao}"/>
 	                </p:selectOneMenu>
@@ -41,7 +41,7 @@
 					<pe:inputNumber id="beneficio" value="#{profissionalManager.profissional.beneficios}" minValue="0.00" maxValue="999999999.99" required="true" requiredMessage="#{message['span.obrigatorio.Beneficio']}" symbol="R$ " emptyValue="empty"/>
 					<br /><br />					
 					<p:outputLabel for="cargaH" value="#{message['label.cargaHoraria']}" styleClass="label" title="#{message['label.title.profissional.cargaHoraria']}"/>
-	                <p:selectOneMenu id="cargaH" value="#{profissionalManager.profissional.cargaHoraria}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.cargaHoraria']}">
+	                <p:selectOneMenu id="cargaH" value="#{profissionalManager.profissional.cargaHoraria}" converter="entityConverterSelectOneMenu" required="true" requiredMessage="#{message['span.obrigatorio.cargaHoraria']}">
 	                    <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
 	                    <f:selectItems value="#{cargaHorariaManager.listarAtivos()}" var="cargaHora" itemLabel="#{cargaHora.cargaHoraria}" itemValue="#{cargaHora}"/>
 	                </p:selectOneMenu>
@@ -50,26 +50,26 @@
 					<pe:inputNumber id="valorHora" value="#{profissionalManager.profissional.valorHora}" minValue="0.00" maxValue="999999999.99" required="true" requiredMessage="#{message['span.obrigatorio.ValorHora']}" symbol="R$ " emptyValue="empty"/>
 					<br/><br/>												
 					<p:outputLabel for="equipe" value="#{message['label.profissional.equipe']}" styleClass="label" title="#{message['label.title.profissional.equipe']}"/>
-					<p:selectOneMenu id="equipe" value="#{profissionalManager.profissional.equipe}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.equipe']}">
+					<p:selectOneMenu id="equipe" value="#{profissionalManager.profissional.equipe}" converter="entityConverterSelectOneMenu" required="true" requiredMessage="#{message['span.obrigatorio.equipe']}">
 						<f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
 						<f:selectItems value="#{equipeManager.listarAtivos()}" var="equipe" itemLabel="#{equipe.nome}" itemValue="#{equipe}"/>
 					</p:selectOneMenu>
 					<br/><br/>					
 					<p:outputLabel for="cargo" value="#{message['label.profissional.cargo']}" styleClass="label" title="#{message['label.title.profissional.cargo']}"/>
-	                <p:selectOneMenu id="cargo" value="#{profissionalManager.profissional.cargo}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.cargo']}">
+	                <p:selectOneMenu id="cargo" value="#{profissionalManager.profissional.cargo}" converter="entityConverterSelectOneMenu" required="true" requiredMessage="#{message['span.obrigatorio.cargo']}">
 	                    <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
 	                    <f:selectItems value="#{cargoManager.listarAtivos()}" var="cargo" itemLabel="#{cargo.nome}" itemValue="#{cargo}"/>
 	                </p:selectOneMenu>
 	                <br /><br />	                
 	                <p:outputLabel for="perfil" value="#{message['label.profissional.perfil']}" styleClass="label" title="#{message['label.title.profissional.perfil']}"/>
-	                <p:selectOneMenu id="perfil" value="#{profissionalManager.profissional.perfil}" converter="simpleEntityConverter" required="true" requiredMessage="#{message['span.obrigatorio.perfil']}">
+	                <p:selectOneMenu id="perfil" value="#{profissionalManager.profissional.perfil}" converter="entityConverterSelectOneMenu" required="true" requiredMessage="#{message['span.obrigatorio.perfil']}">
 	                    <f:selectItem itemLabel="#{message['select.selecione.opcao']}" noSelectionOption="true"/>
 	                    <f:selectItems value="#{perfilManager.listarAtivos()}" var="perfil" itemLabel="#{perfil.nome}" itemValue="#{perfil}"/>
 	                </p:selectOneMenu>
 	                <br /><br />	                
 	                <p:outputLabel for="status" value="#{message['label.profissional.status']}" styleClass="label" title="#{message['label.title.profissional.status']}"/>
 	                <p:selectOneMenu id="status" value="#{profissionalManager.profissional.status}"  required="true" requiredMessage="#{message['span.obrigatorio.status']}">
-	                   <f:converter converterId="simpleEntityConverter"/>
+	                   <f:converter converterId="entityConverterSelectOneMenu"/>
 	                    <p:ajax event="change" listener="#{profissionalManager.mudaStatus()}" update="dataStatus"/>
 	                    <f:selectItem itemLabel="Ativo" itemValue="#{statusManager.valorDefault()}" />
 	                    <f:selectItems value="#{statusManager.listarAtivos()}" var="status" itemLabel="#{status.nome}" itemValue="#{status}" />

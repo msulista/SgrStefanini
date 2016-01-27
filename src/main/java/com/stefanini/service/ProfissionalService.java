@@ -132,7 +132,7 @@ public class ProfissionalService implements Serializable {
 								}
 				
 			
-								recurso = recursoService.getRecursoByMatricula(profissional.getMatricula());
+								//recurso = recursoService.getRecursoByMatricula(profissional.getMatricula());
 								Profissional profissionalPersist = new Profissional();
 								profissionalPersist.setNome(profissional.getNome());
 								profissionalPersist.setMatricula(profissional.getMatricula());
@@ -154,21 +154,43 @@ public class ProfissionalService implements Serializable {
 								profissionalPersist.setStatus(statusService.getStatusById(profissional.getStatus().getId()));
 								profissionalPersist.setDataSaida(profissional.getDataSaida());
 								profissionalPersist.setDataRetorno(profissional.getDataRetorno());
-								recurso.setProfissional(profissional);
+								//recurso.setProfissional(profissional);
 
 								//regra da data retorno em caso de afastamento ou ferias
 								if(profissional.getDataRetorno()!=null){
 									
 									profissionalPersist.setRegistroValidaeFim(profissional.getDataRetorno());
 									manager.persist(profissionalPersist);
-									this.persistAfastado(profissional);
-									recursoService.update(recurso);
+									Profissional profissionalRetorno = new Profissional();
+									profissionalRetorno.setNome(profissional.getNome());
+									profissionalRetorno.setMatricula(profissional.getMatricula());
+									profissionalRetorno.setSalario(profissional.getSalario());
+									profissionalRetorno.setBeneficios(profissional.getBeneficios());
+									profissionalRetorno.setValorHora(profissional.getValorHora());
+									profissionalRetorno.setDataAdmissao(profissional.getDataAdmissao());
+									profissionalRetorno.setDataDemissao(profissional.getDataDemissao());
+									profissionalRetorno.setRegistroValidadeInicio(profissional.getDataRetorno());
+									profissionalRetorno.setRegistroValidaeFim(null);
+									profissionalRetorno.setDataSaida(null);
+									profissionalRetorno.setDataRetorno(null);
+									profissionalRetorno.setStatus(statusService.getStatusById((long) 13));
+									profissionalRetorno.setCelula(celulaService.getCelulaById(profissional.getCelula().getId()));
+									profissionalRetorno.setCargo(cargoService.getCargoById(profissional.getCargo().getId()));
+									profissionalRetorno.setEquipe(equipeService.getEquipeById(profissional.getEquipe().getId()));
+									profissionalRetorno.setPerfil(perfilService.getPerfilById(profissional.getPerfil().getId()));
+									profissionalRetorno.setCargaHoraria(
+											cargaHorariaService.getCargaHorariaById(profissional.getCargaHoraria().getId()));
+									profissionalRetorno.setFormaContratacao(
+											formaContratacaoService.getFormaContratacaoById(profissional.getFormaContratacao().getId()));
+										
+									manager.persist(profissionalRetorno);
+									//recursoService.update(recurso);
 									manager.getTransaction().commit();
 									
 								}else{
 																		
 									manager.persist(profissionalPersist);
-									recursoService.update(recurso);
+									//recursoService.update(recurso);
 									manager.getTransaction().commit();
 								}
 						
@@ -218,10 +240,8 @@ public class ProfissionalService implements Serializable {
 	}
 
 
-	public void persistAfastado(Profissional profissional){
+	public void persistAfastado(Profissional profissional, EntityManager manager ){
 		
-		EntityManager manager = JPAUtil.getEntityManager();
-		manager.getTransaction().begin();
 		Profissional profissionalRetorno = profissional;
 		profissionalRetorno.setRegistroValidadeInicio(profissional.getDataRetorno());
 		profissionalRetorno.setRegistroValidaeFim(null);
@@ -230,8 +250,8 @@ public class ProfissionalService implements Serializable {
 		profissionalRetorno.setStatus(statusService.getStatusById((long) 13));
 			
 		manager.persist(profissionalRetorno);
-		manager.getTransaction().commit();
-		manager.close();
+		
+	
 	}
 	@SuppressWarnings("unchecked")
 	public List<Profissional> listarTudo(String query) {
