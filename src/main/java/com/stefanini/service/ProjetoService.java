@@ -71,11 +71,11 @@ public class ProjetoService {
 					
 					if(DateUtil.verificaDataValida(projeto.getRegistroValidadeInicio(),projeto.getRegistroValidadeFim())){
 						
-						if(projeto.getDataInicio().compareTo(projetoMerge.getDataInicio())==0){
-							projetoMerge.setDataFim(new Date());
+						if(projeto.getRegistroValidadeInicio().compareTo(projetoMerge.getRegistroValidadeInicio())==0){
+							projetoMerge.setRegistroValidadeFim(new Date());
 							manager.merge(projetoMerge);
 						}else{
-							projetoMerge.setDataFim(DateUtil.retornaDataFimAntesDoNovoInicio(projeto.getDataInicio()));
+							projetoMerge.setRegistroValidadeFim(DateUtil.retornaDataFimAntesDoNovoInicio(projeto.getRegistroValidadeInicio()));
 							manager.merge(projetoMerge);
 						}
 						
@@ -154,7 +154,7 @@ public class ProjetoService {
 	@SuppressWarnings("unchecked")
 	public List<Projeto> listarTodos() {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNamedQuery("Projeto.findAll");
+		Query q = manager.createNamedQuery("Projeto.findByEquipeECelula");
 		List<Projeto> projetos = q.getResultList();
 		manager.close();
 		return projetos;

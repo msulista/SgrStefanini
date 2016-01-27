@@ -18,10 +18,10 @@ import javax.persistence.Table;
 	@NamedQuery(name = "Projeto.findAll", query = "SELECT p FROM Projeto p ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.findCodigo", query ="SELECT p FROM Projeto p WHERE p.codigo = :codigo ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.findId", query = "SELECT p FROM Projeto p WHERE p.id = :id"),
-	@NamedQuery(name = "Projeto.findAtivos", query = "SELECT p FROM Projeto p WHERE (p.dataFim IS NULL OR p.dataFim > CURRENT_DATE) AND (p.dataInicio <= CURRENT_DATE) AND (p.registroValidadeFim is NULL OR p.registroValidadeFim <= CURRENT_DATE) ORDER BY p.nome ASC"),
-	@NamedQuery(name = "Projeto.findByEquipe", query = "SELECT p FROM Projeto p WHERE p.equipe.id = :id"),
-	@NamedQuery(name = "Projeto.findByCelula", query = "SELECT p FROM Projeto p WHERE p.celula.id = :id"),
-	@NamedQuery(name = "Projeto.findByEquipeECelula", query = "SELECT p FROM Projeto p WHERE p.equipe.id = :id AND p.celula.id = :celula"),
+	@NamedQuery(name = "Projeto.findAtivos", query = "SELECT p FROM Projeto p WHERE (p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE) AND (p.registroValidadeInicio <= CURRENT_DATE) ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Projeto.findByEquipe", query = "SELECT p FROM Projeto p WHERE p.equipe.id = :id AND (p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE) AND (p.registroValidadeInicio <= CURRENT_DATE) ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Projeto.findByCelula", query = "SELECT p FROM Projeto p WHERE p.celula.id = :id AND (p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE) AND (p.registroValidadeInicio <= CURRENT_DATE) ORDER BY p.nome ASC "),
+	@NamedQuery(name = "Projeto.findByEquipeECelula", query = "SELECT p FROM Projeto p WHERE p.equipe.id = :id AND p.celula.id = :celula AND (p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE) AND (p.registroValidadeInicio <= CURRENT_DATE) ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.checkCodigoParaEdicao", query ="SELECT p FROM Projeto p WHERE p.id = (SELECT MAX(pr.id)FROM Projeto pr WHERE pr.codigo = :codigo)")
 })
 public class Projeto {
