@@ -22,7 +22,8 @@ import javax.persistence.Table;
 	@NamedQuery(name = "Projeto.checkCodigoParaEdicao", query ="SELECT p FROM Projeto p WHERE p.id = (SELECT MAX(pr.id)FROM Projeto pr WHERE pr.codigo = :codigo AND pr.registroValidadeInicio <= CURRENT_DATE())"),
 	@NamedQuery(name = "Projeto.findByEquipe", query = "SELECT p FROM Projeto p WHERE p.equipe.id = :id"),
 	@NamedQuery(name = "Projeto.findByCelula", query = "SELECT p FROM Projeto p WHERE p.celula.id = :id"),
-	@NamedQuery(name = "Projeto.findByEquipeECelula", query = "SELECT p FROM Projeto p WHERE p.equipe.id = :id AND p.celula.id = :celula")
+	@NamedQuery(name = "Projeto.findByEquipeECelula", query = "SELECT p FROM Projeto p WHERE p.equipe.id = :id AND p.celula.id = :celula"),
+	@NamedQuery(name = "Projeto.checkCodigoParaEdicao", query ="SELECT p FROM Projeto p WHERE p.id = (SELECT MAX(pr.id)FROM Projeto pr WHERE pr.codigo = :codigo)")
 })
 public class Projeto {
 

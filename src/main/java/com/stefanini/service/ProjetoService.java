@@ -60,10 +60,67 @@ public class ProjetoService {
 	public boolean update(Projeto projeto){
 		EntityManager manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
-		manager.merge(projeto);
+		
+		if (DateUtil.verificaDiaUtil(projeto.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(projeto.getRegistroValidadeFim())&&DateUtil.verificaDiaUtil(projeto.getDataInicio())&&DateUtil.verificaDiaUtil(projeto.getDataFim())) {	
+			
+			Projeto projetoMerge = getProjetoParaEdicao(projeto.getCodigo());
+			
+			if(DateUtil.verificaDataValida(projetoMerge.getDataInicio(), projeto.getDataInicio())){
+				
+				if(DateUtil.verificaDataValida(projeto.getDataInicio(), projeto.getDataFim())){
+					
+					if(DateUtil.verificaDataValida(projeto.getRegistroValidadeInicio(),projeto.getRegistroValidadeFim())){
+						
+						if(projeto.getDataInicio().compareTo(projetoMerge.getDataInicio())==0){
+							projetoMerge.setDataFim(new Date());
+							manager.merge(projetoMerge);
+						}else{
+							projetoMerge.setDataFim(DateUtil.retornaDataFimAntesDoNovoInicio(projeto.getDataInicio()));
+							manager.merge(projetoMerge);
+						}
+						
+						Projeto projetoPersist = new Projeto();
+						projetoPersist.setBudget(projeto.getBudget());
+						projetoPersist.setCelula(projeto.getCelula());
+						projetoPersist.setCodigo(projeto.getCodigo());
+						projetoPersist.setCustoPrevisto(projeto.getCustoPrevisto());
+						projetoPersist.setDataFim(projeto.getDataFim());
+						projetoPersist.setDataInicio(projeto.getDataInicio());
+						projetoPersist.setEquipe(projeto.getEquipe());
+						projetoPersist.setNome(projeto.getNome());
+						projetoPersist.setRegistroValidadeFim(projeto.getRegistroValidadeFim());
+						projetoPersist.setRegistroValidadeInicio(projeto.getRegistroValidadeInicio());
+						projetoPersist.setSaldo(projeto.getSaldo());
+						manager.persist(projetoPersist);
+		
 		manager.getTransaction().commit();
 		manager.close();
-		return true;		
+		return true;
+		
+					}else{
+						Mensagem.add("Data final anterior a inicial");
+						manager.close();
+						return false;
+					}
+					
+				}else{
+					Mensagem.add("Data fim anterior a inicio");
+					manager.close();
+					return false;
+				}
+				
+			}else{
+				Mensagem.add("Data inicio anterior a alterações ja cadastradas");
+				manager.close();
+				return false;
+			}
+			
+		}else{
+			Mensagem.add("Data informada não é um dia util!");
+			manager.close();
+			return false;
+		}
+		
 	}
 	
 	public Projeto getProjetoById(Long id){
