@@ -21,7 +21,7 @@ import com.stefanini.util.DateUtil;
 @Table(name = "SGR_PROFISSIONAL")
 @NamedQueries({
 	@NamedQuery(name = "Profissional.findAll", query ="SELECT p FROM Profissional p ORDER BY p.nome ASC"),
-	@NamedQuery(name = "Profissional.findMatriculaParaHistorico", query ="SELECT p FROM Profissional p WHERE p.matricula = :matricula ORDER BY p.registroValidadeInicio DESC"),
+	@NamedQuery(name = "Profissional.findMatriculaParaHistorico", query ="SELECT p FROM Profissional p WHERE p.matricula = :matricula ORDER BY p.id DESC"),
 	@NamedQuery(name = "Profissional.findAtivos", query ="SELECT p FROM Profissional p WHERE p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR p.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Profissional.findNome", query ="SELECT p FROM Profissional p WHERE p.nome LIKE :nome AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Profissional.findId", query ="SELECT p FROM Profissional p WHERE p.id = :id AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR p.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),
@@ -36,7 +36,7 @@ import com.stefanini.util.DateUtil;
 	@NamedQuery(name = "Profissional.findProfissionalByFormaContratacao", query ="SELECT p FROM Profissional p WHERE p.formaContratacao.id = :id AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR p.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),	
 	@NamedQuery(name = "Profissional.findProfissionalByPerfil", query = "SELECT p FROM Profissional p WHERE p.perfil.id = :id AND  p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR p.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),	
 	@NamedQuery(name = "Profissional.findProfissionalByStatus", query ="SELECT p FROM Profissional p WHERE p.status.id = :id AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR p.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC"),	
-	@NamedQuery(name = "Profissional.checkMatriculaParaEdicao", query ="SELECT p FROM Profissional p WHERE p.id = (SELECT MAX(pr.id)FROM Profissional pr WHERE pr.matricula = :matricula AND pr.registroValidadeInicio <= CURRENT_DATE())"),
+	@NamedQuery(name = "Profissional.checkMatriculaParaEdicao", query ="SELECT p FROM Profissional p WHERE p.id = (SELECT MAX(pr.id)FROM Profissional pr WHERE pr.matricula = :matricula)"),
 	@NamedQuery(name = "Profissional.checkPrimeiroProfissionalByMatricula", query ="SELECT p FROM Profissional p WHERE p.id = (SELECT MIN(pr.id)FROM Profissional pr WHERE pr.matricula = :matricula)"),
 	@NamedQuery(name = "Profissional.findProfissionalByCelulaANDEquipeEContratacao", query ="SELECT p FROM Profissional p WHERE p.equipe.nome = :nome AND p.formaContratacao.nome = :serie AND p.celula.id= :celula AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR p.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC)"),
 	@NamedQuery(name = "Profissional.findProfissionalByCelulaEContratacao", query ="SELECT p FROM Profissional p WHERE p.celula.id = :celula AND p.formaContratacao.nome = :serie AND p.registroValidadeInicio <= CURRENT_DATE AND (p.registroValidaeFim IS NULL OR p.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC)"),

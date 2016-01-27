@@ -152,8 +152,13 @@ public class ProfissionalService implements Serializable {
 								profissionalPersist.setFormaContratacao(
 										formaContratacaoService.getFormaContratacaoById(profissional.getFormaContratacao().getId()));
 								profissionalPersist.setStatus(statusService.getStatusById(profissional.getStatus().getId()));
-								profissionalPersist.setDataSaida(profissional.getDataSaida());
-								profissionalPersist.setDataRetorno(profissional.getDataRetorno());
+								if(profissional.getStatus().getId()==13){
+								profissionalPersist.setDataSaida(null);
+								profissionalPersist.setDataRetorno(null);
+								}else{
+									profissionalPersist.setDataSaida(profissional.getDataSaida());
+									profissionalPersist.setDataRetorno(profissional.getDataRetorno());
+								}
 								//recurso.setProfissional(profissional);
 
 								//regra da data retorno em caso de afastamento ou ferias
