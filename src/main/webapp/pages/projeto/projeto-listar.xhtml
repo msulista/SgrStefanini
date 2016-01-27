@@ -22,8 +22,36 @@
 				outcome="pretty:alocacao" />
 
 			<h:form>
+			
+			<p:selectOneMenu styleClass="dropdown-pesquisa"
+									id="celula"
+								 	value="#{projetoManager.celula}"
+								 	onchange="submit()"
+								 	valueChangeListener="#{projetoManager.valueChangeCelula}"
+									converter="entityConverterSelectOneMenu" >
+						<f:selectItem itemLabel="#{message['select.celula']}" noSelectionOption="true" />
+						<f:selectItems value="#{celulaManager.listarAtivos()}"
+									var="celula"
+									itemLabel="#{celula.nome}"
+									itemValue="#{celula}" />
+						<p:ajax update="gridProjeto" event="change" process="@this" />
+					</p:selectOneMenu>
+					
+					<p:selectOneMenu styleClass="dropdown-pesquisa"
+									id="equipe"
+								 	value="#{projetoManager.equipe}"
+								 	onchange="submit()"
+								 	valueChangeListener="#{projetoManager.valueChangeEquipe}"
+									converter="entityConverterSelectOneMenu" >
+						<f:selectItem itemLabel="#{message['select.equipe']}" noSelectionOption="true" />
+						<f:selectItems value="#{equipeManager.listarAtivos()}"
+									var="equipe"
+									itemLabel="#{equipe.nome}"
+									itemValue="#{equipe}" />
+						<p:ajax update="gridProjeto" event="change" process="@this" />	
+					</p:selectOneMenu>
 				<p:dataTable id="gridProjeto" var="projeto"
-					value="#{projetoManager.listar()}"
+					value="#{projetoManager.listarTudo()}"
 					emptyMessage="#{message['alerta.listaVazia']}"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
@@ -34,6 +62,10 @@
 
 					<p:column headerText="#{message['label.nome']}">
 						<h:outputText value="#{projeto.nome}" />
+					</p:column>
+					
+					<p:column headerText="#{message['label.profissional.equipe']}">
+						<h:outputText value="#{projeto.equipe.nome}" />
 					</p:column>
 
 					<p:column headerText="#{message['label.projeto.budget']}">

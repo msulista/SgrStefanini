@@ -19,7 +19,10 @@ import javax.persistence.Table;
 	@NamedQuery(name = "Projeto.findCodigo", query ="SELECT p FROM Projeto p WHERE p.codigo = :codigo ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.findId", query = "SELECT p FROM Projeto p WHERE p.id = :id"),
 	@NamedQuery(name = "Projeto.findAtivos", query = "SELECT p FROM Projeto p WHERE p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE AND p.dataInicio <= CURRENT_DATE ORDER BY p.nome ASC"),
-	@NamedQuery(name = "Projeto.checkCodigoParaEdicao", query ="SELECT p FROM Projeto p WHERE p.id = (SELECT MAX(pr.id)FROM Projeto pr WHERE pr.codigo = :codigo AND pr.registroValidadeInicio <= CURRENT_DATE())")
+	@NamedQuery(name = "Projeto.checkCodigoParaEdicao", query ="SELECT p FROM Projeto p WHERE p.id = (SELECT MAX(pr.id)FROM Projeto pr WHERE pr.codigo = :codigo AND pr.registroValidadeInicio <= CURRENT_DATE())"),
+	@NamedQuery(name = "Projeto.findByEquipe", query = "SELECT p FROM Projeto p WHERE p.equipe.id = :id"),
+	@NamedQuery(name = "Projeto.findByCelula", query = "SELECT p FROM Projeto p WHERE p.celula.id = :id"),
+	@NamedQuery(name = "Projeto.findByEquipeECelula", query = "SELECT p FROM Projeto p WHERE p.equipe.id = :id AND p.celula.id = :celula")
 })
 public class Projeto {
 

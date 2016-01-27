@@ -6,12 +6,16 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ValueChangeEvent;
 
 import com.ocpsoft.pretty.faces.annotation.URLAction;
 import com.ocpsoft.pretty.faces.annotation.URLActions;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
+import com.stefanini.entidade.Celula;
+import com.stefanini.entidade.Equipe;
 import com.stefanini.entidade.Projeto;
+import com.stefanini.entidade.Recurso;
 import com.stefanini.service.ProjetoService;
 
 @ManagedBean
@@ -26,6 +30,8 @@ public class ProjetoManager {
 	private Projeto projeto;
 	private List<Projeto> projetos;
 	private ProjetoService service = new ProjetoService();
+	private Equipe equipe ;
+	private Celula celula ;
 	
 	public ProjetoManager(){
 		this.projeto = new Projeto();
@@ -48,6 +54,22 @@ public class ProjetoManager {
 		this.projetos = projetos;
 	}
 	
+	public Equipe getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
+	}
+
+	public Celula getCelula() {
+		return celula;
+	}
+
+	public void setCelula(Celula celula) {
+		this.celula = celula;
+	}
+
 	public String save(){
 		if(service.save(projeto)){
 			return "pretty:projeto";
@@ -76,6 +98,22 @@ public class ProjetoManager {
 		service.desativar(id);
 		return "pretty:projeto";
 	}
+	
+	public List<Projeto> listarTudo(){
+		return projetos;
+	}
+	
+	public void valueChangeEquipe(ValueChangeEvent event) {
+	       equipe = (Equipe) event.getNewValue();
+	       projetos = service.listarTodos(this.equipe,this.celula);
+	       listarTudo();
+	    }
+
+	public void valueChangeCelula(ValueChangeEvent event) {
+	       celula = (Celula) event.getNewValue();
+	       projetos = service.listarTodos(this.equipe,this.celula);
+	       listarTudo();
+	    }
 
 	@URLActions(actions = { @URLAction(mappingId = "projeto-editar", onPostback = false) })
 	public void load() throws IOException {

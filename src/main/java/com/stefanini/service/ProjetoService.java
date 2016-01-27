@@ -1,5 +1,6 @@
 package com.stefanini.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,8 +8,11 @@ import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.stefanini.entidade.Celula;
+import com.stefanini.entidade.Equipe;
 import com.stefanini.entidade.Profissional;
 import com.stefanini.entidade.Projeto;
+import com.stefanini.entidade.Recurso;
 import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
@@ -119,4 +123,33 @@ public class ProjetoService {
 		manager.close();
 		return projeto;
 	}
+	
+	@SuppressWarnings({ "unchecked", "null" })
+	public List<Projeto> listarTodos(Equipe equipe, Celula celula) {
+		EntityManager manager = JPAUtil.getEntityManager();
+		if(equipe == null && celula !=null){
+			Query q = manager.createNamedQuery("Projeto.findByCelula");
+			q.setParameter("id", celula.getId());
+			List<Projeto> projetos = q.getResultList();
+			manager.close();
+			return projetos;
+		}else if(equipe != null && celula == null){
+			Query q = manager.createNamedQuery("Projeto.findByEquipe");
+			q.setParameter("id", equipe.getId());
+			List<Projeto> projetos = q.getResultList();
+			manager.close();
+			return projetos;
+		}else if(equipe != null && celula != null){
+		Query q = manager.createNamedQuery("Projeto.findByEquipeECelula");
+		q.setParameter("id", equipe.getId());
+		q.setParameter("celula", celula.getId());
+		List<Projeto> projetos= q.getResultList();
+		manager.close();
+		return projetos;
+		}else{
+			List<Projeto> projetos = new ArrayList<>();
+			return projetos;
+		}
+	}
+	
 }
