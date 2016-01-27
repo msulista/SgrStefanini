@@ -19,9 +19,7 @@ import com.stefanini.util.Mensagem;
 
 public class ProfissionalService implements Serializable {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private EquipeService equipeService = new EquipeService();
 	private CargoService cargoService = new CargoService();
@@ -30,7 +28,6 @@ public class ProfissionalService implements Serializable {
 	private FormaContratacaoService formaContratacaoService = new FormaContratacaoService();
 	private StatusService statusService = new StatusService();
 	private CelulaService celulaService = new CelulaService();
-	private Recurso recurso = new Recurso();
 	private RecursoService recursoService = new RecursoService();
 	
 	@SuppressWarnings("unchecked")
@@ -56,8 +53,10 @@ public class ProfissionalService implements Serializable {
 				
 				manager.getTransaction().begin();
 				profissional.setStatus(statusService.getStatusById((long) 13));
+				Recurso recurso = new Recurso();
 				recurso.setProfissional(profissional);
 				recurso.setRegistroValidadeInicio(profissional.getRegistroValidadeInicio());
+				recurso.setRegistroValidadeFim(profissional.getRegistroValidaeFim());
 				manager.persist(profissional);
 				manager.persist(recurso);
 				manager.getTransaction().commit();
@@ -99,6 +98,7 @@ public class ProfissionalService implements Serializable {
 		if (DateUtil.verificaDiaUtil(profissional.getDataAdmissao())&&DateUtil.verificaDiaUtil(profissional.getDataDemissao())&&DateUtil.verificaDiaUtil(profissional.getRegistroValidadeInicio())&&DateUtil.verificaDiaUtil(profissional.getRegistroValidaeFim())) {
 			
 			Profissional profissionalMerge = (Profissional) getProfissionalParaEdicao(profissional.getMatricula());
+			Recurso recursoMerge = (Recurso) recursoService.getRecursoParaEdicao(profissional.getMatricula());
 			
 			//verificando se data demissão e anterior a de admissão
 				if (DateUtil.verificaDataValida(profissional.getDataAdmissao(), profissional.getDataDemissao())) {
@@ -110,9 +110,6 @@ public class ProfissionalService implements Serializable {
 						
 					//verificando se a nova data de inicio é anterior a antiga
 						if(DateUtil.verificaDataValida(profissionalMerge.getRegistroValidadeInicio(),profissional.getRegistroValidadeInicio())){
-						
-							//verificando se dataFim com o dia atual
-						//if(DateUtil.verificaDataValida(DateUtil.getDataParaComparacao(new Date()),profissional.getRegistroValidaeFim())){
 									
 							//verificando se data final nao é anterior a inicial
 							if(DateUtil.verificaDataValida(profissional.getRegistroValidadeInicio(),profissional.getRegistroValidaeFim())){
@@ -123,16 +120,19 @@ public class ProfissionalService implements Serializable {
 								//comparando se o registro inicio do profissional é igual ao dia atual e igual a data inicio do antigo
 								if(profissional.getRegistroValidadeInicio().compareTo(profissionalMerge.getRegistroValidadeInicio())==0){
 									profissionalMerge.setRegistroValidaeFim(profissional.getRegistroValidadeInicio());
+									recursoMerge.setRegistroValidadeFim(profissional.getRegistroValidadeInicio());
 									manager.merge(profissionalMerge);
-					
+									manager.merge(recursoMerge);
 								}else{
 									profissionalMerge.setRegistroValidaeFim(DateUtil.retornaDataFimAntesDoNovoInicio(profissional.getRegistroValidadeInicio()));
+									recursoMerge.setRegistroValidadeFim(DateUtil.retornaDataFimAntesDoNovoInicio(profissional.getRegistroValidadeInicio()));
 									manager.merge(profissionalMerge);
+									manager.merge(recursoMerge);
 													
 								}
 				
 			
-								//recurso = recursoService.getRecursoByMatricula(profissional.getMatricula());
+								
 								Profissional profissionalPersist = new Profissional();
 								profissionalPersist.setNome(profissional.getNome());
 								profissionalPersist.setMatricula(profissional.getMatricula());
@@ -159,13 +159,22 @@ public class ProfissionalService implements Serializable {
 									profissionalPersist.setDataSaida(profissional.getDataSaida());
 									profissionalPersist.setDataRetorno(profissional.getDataRetorno());
 								}
-								//recurso.setProfissional(profissional);
+								
+								Recurso recursoPersist = new Recurso();
+								recursoPersist.setProfissional(profissional);
+								recursoPersist.setRegistroValidadeInicio(profissional.getRegistroValidadeInicio());
+								recursoPersist.setRegistroValidadeFim(profissional.getRegistroValidadeInicio());
+								
 
 								//regra da data retorno em caso de afastamento ou ferias
 								if(profissional.getDataRetorno()!=null){
 									
+									recursoPersist.setRegistroValidadeFim(profissional.getDataRetorno());
 									profissionalPersist.setRegistroValidaeFim(profissional.getDataRetorno());
+									
 									manager.persist(profissionalPersist);
+									manager.persist(recursoPersist);
+									
 									Profissional profissionalRetorno = new Profissional();
 									profissionalRetorno.setNome(profissional.getNome());
 									profissionalRetorno.setMatricula(profissional.getMatricula());
@@ -188,14 +197,19 @@ public class ProfissionalService implements Serializable {
 									profissionalRetorno.setFormaContratacao(
 											formaContratacaoService.getFormaContratacaoById(profissional.getFormaContratacao().getId()));
 										
+									Recurso recursoRetorno = new Recurso();
+									recursoRetorno.setProfissional(profissionalRetorno);
+									recursoRetorno.setRegistroValidadeInicio(profissionalRetorno.getRegistroValidadeInicio());
+									recursoRetorno.setRegistroValidadeFim(profissionalRetorno.getRegistroValidaeFim());
+									
 									manager.persist(profissionalRetorno);
-									//recursoService.update(recurso);
+									manager.persist(recursoRetorno);
 									manager.getTransaction().commit();
 									
 								}else{
 																		
 									manager.persist(profissionalPersist);
-									//recursoService.update(recurso);
+									manager.persist(recursoPersist);
 									manager.getTransaction().commit();
 								}
 						
@@ -213,12 +227,6 @@ public class ProfissionalService implements Serializable {
 											manager.close();
 											return false;
 										}
-										
-									/*}else{
-										Mensagem.add("Data final do regirstro nao pode ser anteriro ao dia atual");
-										manager.close();
-										return false;
-									}*/
 									
 								}else{
 									Mensagem.add("Data nova nao pode ser anterior a alterações ja feitas ou programadas");
@@ -245,19 +253,6 @@ public class ProfissionalService implements Serializable {
 	}
 
 
-	public void persistAfastado(Profissional profissional, EntityManager manager ){
-		
-		Profissional profissionalRetorno = profissional;
-		profissionalRetorno.setRegistroValidadeInicio(profissional.getDataRetorno());
-		profissionalRetorno.setRegistroValidaeFim(null);
-		profissionalRetorno.setDataSaida(null);
-		profissionalRetorno.setDataRetorno(null);
-		profissionalRetorno.setStatus(statusService.getStatusById((long) 13));
-			
-		manager.persist(profissionalRetorno);
-		
-	
-	}
 	@SuppressWarnings("unchecked")
 	public List<Profissional> listarTudo(String query) {
 		
@@ -268,7 +263,7 @@ public class ProfissionalService implements Serializable {
 		System.out.println("888888888888888888888888888888888888888");
 		System.out.println("888888888888888888888888888888888888888");
 		System.out.println("888888888888888888888888888888888888888");
-		EntityManager manager = JPAUtil.getEntityManager();		
+		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createQuery(query);
 		List<Profissional> profissionais = q.getResultList();
 		manager.close();
@@ -347,13 +342,21 @@ public class ProfissionalService implements Serializable {
 		Status status = statusService.getStatusById((long) 16);
 		manager.getTransaction().begin();
 		Profissional profissionalMerge = (Profissional) getProfissionalParaEdicao(profissional.getMatricula());		
+		Recurso recursoMerge = (Recurso) recursoService.getRecursoParaEdicao(profissional.getMatricula());
 		
 		if(new Date().compareTo(profissionalMerge.getRegistroValidadeInicio())==0){
+			
 			profissionalMerge.setRegistroValidaeFim(new Date());
+			recursoMerge.setRegistroValidadeFim(new Date());
 			manager.merge(profissionalMerge);
+			manager.merge(recursoMerge);
+			
 		}else{
+			
 			profissionalMerge.setRegistroValidaeFim(DateUtil.retornaDataFimAntesDoNovoInicio(new Date()));
+			recursoMerge.setRegistroValidadeFim(DateUtil.retornaDataFimAntesDoNovoInicio(new Date()));
 			manager.merge(profissionalMerge);
+			manager.merge(recursoMerge);
 			
 		}
 		
@@ -377,7 +380,6 @@ public class ProfissionalService implements Serializable {
 				formaContratacaoService.getFormaContratacaoById(profissionalMerge.getFormaContratacao().getId()));
 		profissionalPersist.setStatus(status);
 		manager.persist(profissionalPersist);
-		
 		
 		manager.getTransaction().commit();
 		manager.close();

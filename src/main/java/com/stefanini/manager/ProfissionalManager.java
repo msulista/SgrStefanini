@@ -99,7 +99,6 @@ public class ProfissionalManager implements Serializable {
 	}
 
 	private List<Profissional> listarTudo() {
-		
 		return service.listarTudo(this.query);
 	}
 

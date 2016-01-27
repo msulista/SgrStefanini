@@ -55,7 +55,16 @@ public class RecursoService {
 	public Recurso getRecursoByMatricula(int matricula){
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("Recurso.findMatricula");
-		q.setParameter("id", matricula);
+		q.setParameter("matricula", matricula);
+		Recurso recurso = (Recurso) q.getSingleResult();
+		manager.close();
+		return recurso;
+	}
+	
+	public Recurso getRecursoParaEdicao(int matricula){
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Recurso.findMatriculaParaEdicao");
+		q.setParameter("matricula", matricula);
 		Recurso recurso = (Recurso) q.getSingleResult();
 		manager.close();
 		return recurso;
