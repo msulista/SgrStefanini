@@ -78,35 +78,5 @@ public class RecursoService {
  		manager.merge(recurso);
 		manager.getTransaction().commit();
 		manager.close();
-	}
-	
-	
-	@SuppressWarnings("unchecked")
-	public List<Recurso> listarTodos(Equipe equipe, Celula celula) {
-		EntityManager manager = JPAUtil.getEntityManager();
-		if(equipe != null&&celula ==null){
-			Query q = manager.createNamedQuery("Recurso.findByEquipe");
-			q.setParameter("id", equipe.getId());
-			List<Recurso> recursos = q.getResultList();
-			manager.close();
-			return recursos;
-		}else if(equipe == null && celula != null){
-			Query q = manager.createNamedQuery("Recurso.findByCelula");
-			q.setParameter("id", celula.getId());
-			List<Recurso> recursos = q.getResultList();
-			manager.close();
-			return recursos;
-		}else if(equipe != null && celula != null){
-		Query q = manager.createNamedQuery("Recurso.findByEquipeECelula");
-		q.setParameter("id", equipe.getId());
-		q.setParameter("celula", celula.getId());
-		List<Recurso> recursos = q.getResultList();
-		manager.close();
-		return recursos;
-		}else{
-			List<Recurso> recursos = new ArrayList<>();
-			return recursos;
-		}
-	}
-	
+	}	
 }

@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "SGR_ALOCACAO")
@@ -20,6 +21,9 @@ import javax.persistence.Table;
 	@NamedQuery(name = "Alocacao.findRecursosAtivosPorProjeto", query ="SELECT a FROM Alocacao a WHERE a.projeto.codigo = :codigo AND (a.registroValidadeFim IS NULL OR a.registroValidadeFim > CURRENT_DATE) AND a.registroValidadeInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC"),
 	@NamedQuery(name = "Alocacao.findPorId", query = "SELECT a FROM Alocacao a WHERE a.id = :id AND a.registroValidadeFim IS NULL OR a.registroValidadeFim > CURRENT_DATE AND a.registroValidadeInicio <= CURRENT_DATE"),
 	@NamedQuery(name = "Alocacao.findRecursoAtivoDoProjeto", query = "SELECT a FROM Alocacao a WHERE a.projeto.codigo = :codigo AND a.recurso.profissional.matricula = :matricula AND (a.registroValidadeFim IS NULL OR a.registroValidadeFim > CURRENT_DATE) AND a.registroValidadeInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC"),
+	@NamedQuery(name = "Alocacao.findProjetoPorEquipe", query = "SELECT a FROM Alocacao a WHERE a.projeto.equipe.id = :id AND (a.registroValidadeFim IS NULL OR a.registroValidadeFim > CURRENT_DATE) AND a.registroValidadeInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC"),
+	@NamedQuery(name = "Alocacao.findProjetoPorCelula", query = "SELECT a FROM Alocacao a WHERE a.projeto.celula.id = :id AND (a.registroValidadeFim IS NULL OR a.registroValidadeFim > CURRENT_DATE) AND a.registroValidadeInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC"),
+	/*@NamedQuery(name = "Alocacao.findTodos", query = "SELECT a FROM Alocacao a WHERE a.projeto.celula.id = :celula AND a.projeto.equipe.id = :id AND (a.registroValidadeFim IS NULL OR a.registroValidadeFim > CURRENT_DATE) AND a.registroValidadeInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC"),*/
 	@NamedQuery(name = "Alocacao.findAtivos", query = "SELECT a FROM Alocacao a WHERE a.registroValidadeFim IS NULL OR a.registroValidadeFim > CURRENT_DATE AND a.registroValidadeInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC")	
 })
 public class Alocacao {
@@ -48,7 +52,7 @@ public class Alocacao {
 
 	@Column(name = "REGISTRO_VALIDADE_FIM", nullable = true)
 	private Date registroValidadeFim;
-
+	
 	public Long getId() {
 		return id;
 	}

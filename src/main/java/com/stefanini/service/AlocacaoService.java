@@ -1,5 +1,6 @@
 package com.stefanini.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +8,9 @@ import javax.faces.convert.ConverterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import com.stefanini.entidade.Alocacao;
+import com.stefanini.entidade.Celula;
+import com.stefanini.entidade.Equipe;
+import com.stefanini.entidade.Recurso;
 import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
@@ -77,13 +81,58 @@ public class AlocacaoService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Alocacao> listarTodos() {
+	public List<Recurso> listarTodosRecursos(Equipe equipe, Celula celula) {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Query q = manager.createNamedQuery("Alocacao.findAll");
+		if(equipe != null&&celula ==null){
+			Query q = manager.createNamedQuery("Recurso.findByEquipe");
+			q.setParameter("id", equipe.getId());
+			List<Recurso> recursos = q.getResultList();
+			manager.close();
+			return recursos;
+		}else if(equipe == null && celula != null){
+			Query q = manager.createNamedQuery("Recurso.findByCelula");
+			q.setParameter("id", celula.getId());
+			List<Recurso> recursos = q.getResultList();
+			manager.close();
+			return recursos;
+		}else if(equipe != null && celula != null){
+		Query q = manager.createNamedQuery("Recurso.findByEquipeECelula");
+		q.setParameter("id", equipe.getId());
+		q.setParameter("celula", celula.getId());
+		List<Recurso> recursos = q.getResultList();
+		manager.close();
+		return recursos;
+		}else{
+			List<Recurso> recursos = new ArrayList<>();
+			return recursos;
+		}
+	}
+	/*
+	@SuppressWarnings("unchecked")
+	public List<Alocacao> listarTodosAlocados(Equipe equipe, Celula celula) {
+		EntityManager manager = JPAUtil.getEntityManager();
+		if(equipe != null&&celula ==null){
+			Query q = manager.createNamedQuery("Alocacao.findProjetoPorEquipe");
+			q.setParameter("id", equipe.getId());
+			List<Alocacao> alocacoes = q.getResultList();
+			manager.close();
+			return alocacoes;
+		}else if(equipe == null && celula != null){
+			Query q = manager.createNamedQuery("Alocacao.findProjetoPorCelula");
+			q.setParameter("id", celula.getId());
+			List<Alocacao> alocacoes = q.getResultList();
+			manager.close();
+			return alocacoes;
+		}else if(equipe != null && celula != null){
+		Query q = manager.createNamedQuery("Alocacao.findProjetoPorCelulaEEquipe");
+		q.setParameter("idCelula", celula.getId());
+		q.setParameter("idEquipe", equipe.getId());
 		List<Alocacao> alocacoes = q.getResultList();
 		manager.close();
 		return alocacoes;
-	}
-	
-
+		}else{
+			List<Alocacao> alocacoes = new ArrayList<>();
+			return alocacoes;
+		}
+	}*/
 }

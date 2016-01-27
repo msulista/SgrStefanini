@@ -6,12 +6,8 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.event.ValueChangeEvent;
-
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
-import com.stefanini.entidade.Celula;
-import com.stefanini.entidade.Equipe;
 import com.stefanini.entidade.Recurso;
 import com.stefanini.service.RecursoService;
 
@@ -28,9 +24,7 @@ public class RecursoManager implements Serializable{
 	private Recurso recurso;
 	private List<Recurso> recursos = new ArrayList<>();
 	private RecursoService service = new RecursoService();
-	private Equipe equipe ;
-	private Celula celula ;
-	
+		
 	public RecursoManager() {
 	}
 
@@ -49,13 +43,7 @@ public class RecursoManager implements Serializable{
 	public void setRecursos(List<Recurso> recursos) {
 		this.recursos = recursos;
 	}
-	public Celula getCelula() {
-		return celula;
-	}
 
-	public void setCelula(Celula celula) {
-		this.celula = celula;
-	}
 	@SuppressWarnings("unused")
 	private String save(){
 		if(service.save(recurso)){
@@ -74,9 +62,7 @@ public class RecursoManager implements Serializable{
 		}
 	}
 	
-	public List<Recurso> listarTudo(){
-		return recursos;
-	}
+	
 	
 //	private List<Recurso> lista(){
 //		return service.listarAtivos();
@@ -88,18 +74,6 @@ public class RecursoManager implements Serializable{
 		return "";
 	}
 	
-	public void valueChangeEquipe(ValueChangeEvent event) {
-	       equipe = (Equipe) event.getNewValue();
-	       recursos = service.listarTodos(this.equipe,this.celula);
-	       listarTudo();
-	    }
-
-	public void valueChangeCelula(ValueChangeEvent event) {
-	       celula = (Celula) event.getNewValue();
-	       recursos = service.listarTodos(this.equipe,this.celula);
-	       listarTudo();
-	    }
-	
 	public RecursoService getService() {
 		return service;
 	}
@@ -108,11 +82,4 @@ public class RecursoManager implements Serializable{
 		this.service = service;
 	}
 
-	public Equipe getEquipe() {
-		return equipe;
-	}
-
-	public void setEquipe(Equipe equipe) {
-		this.equipe = equipe;
-	}
 }
