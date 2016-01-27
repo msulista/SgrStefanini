@@ -152,7 +152,7 @@ public class ProfissionalManager implements Serializable {
 				}
 
 			}else{
-				query = query + " AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC";
+				query = query + " AND (p.registroValidadeInicio <= CURRENT_DATE) AND (p.registroValidaeFim IS NULL OR P.registroValidaeFim > CURRENT_DATE) ORDER BY p.nome ASC";
 				this.lista = listarTudo();
 			}
 		} else {

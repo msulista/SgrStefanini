@@ -351,14 +351,10 @@ public class ProfissionalService implements Serializable {
 		if(new Date().compareTo(profissionalMerge.getRegistroValidadeInicio())==0){
 			profissionalMerge.setRegistroValidaeFim(new Date());
 			manager.merge(profissionalMerge);
-			recurso = recursoService.getRecursoByMatricula(profissional.getMatricula());
-			recursoService.desativar(recurso.getId());
 		}else{
 			profissionalMerge.setRegistroValidaeFim(DateUtil.retornaDataFimAntesDoNovoInicio(new Date()));
 			manager.merge(profissionalMerge);
-			recurso = recursoService.getRecursoByMatricula(profissional.getMatricula());
 			
-			recursoService.desativar(recurso.getId());
 		}
 		
 		Profissional profissionalPersist = new Profissional();
