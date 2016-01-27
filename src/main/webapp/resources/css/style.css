@@ -450,6 +450,10 @@ input[type=text] {
 	width: 50px;
 }
 
+.btn-alocacao {
+	width: 80px;
+}
+
 .btn {
 	width: 70px;
 }
