@@ -128,8 +128,8 @@ public class AlocacaoManager {
 	public void valueChangeEquipe(ValueChangeEvent event) {
 	       equipe = (Equipe) event.getNewValue();
 	       this.listaRecursosAtivos = service.listarTodosRecursos(this.equipe,this.celula);
-	       this.listaProjetosEAlocacoes = serviceProjeto.listarTodos(this.equipe, this.celula);
-	       this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes(this.listaProjetosEAlocacoes);
+	       this.listaProjetos = serviceProjeto.listarTodos(this.equipe, this.celula);
+	       this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes( this.listaProjetos);
 	       
 	}
 

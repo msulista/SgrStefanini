@@ -472,7 +472,7 @@ public class RelatorioManager {
 	    yAxis.setMin(0);
 	   
 	    yAxis.setTickCount(quantidadeTotal + 4);
-	    yAxis.setMax(quantidadeTotal + quantidadeTotal2+quantidadeTotal3+quantidadeTotal4+1);
+	    yAxis.setMax(quantidadeTotal+30);
 	}
 	
 	public void itemSelectPerfilPorEquipe(ItemSelectEvent event){
