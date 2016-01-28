@@ -81,37 +81,46 @@
 								var="projeto"
 								value="#{alocacaoManager.listaProjetosEAlocacoes}"
 								emptyMessage="#{message['alerta.listaVazia']}">
-		
-						<p:column headerText="#{message['label.projeto.codigo']}">
-						<h:outputText value="#{alocacao.projeto.codigo}" />
-					</p:column>
-
-					<p:column headerText="#{message['label.nome']}">
-						<h:outputText value="#{projeto.nome}" />
-					</p:column>
 					
-					<p:column headerText="#{message['label.profissional.equipe']}">
-						<h:outputText value="#{projeto.equipe.nome}" />
-					</p:column>
-
-					<p:column headerText="#{message['label.projeto.budget']}">
-						<h:outputText value="#{projeto.budget}">
-							<f:convertNumber minFractionDigits="2" type="currency"
-								currencySymbol="R$" />
-						</h:outputText>
-					</p:column>
-
-					<p:column headerText="#{message['label.projeto.dataInicial']}">
-						<h:outputText value="#{projeto.dataInicio}" >
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</h:outputText>
-					</p:column>
-
-					<p:column headerText="#{message['label.projeto.dataFinal']}">
-						<h:outputText value="#{projeto.dataFim}" >
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</h:outputText>
-					</p:column>
+						<p:subTable var="recurso" value="#{projeto.recursosDoProjeto}">
+							
+							<p:columnGroup type="header">
+					            <p:row>
+					                <p:column rowspan="3" headerText="#{projeto.nome}" />
+					                <p:column headerText="Budget:" />
+					                <p:column headerText="R$ #{projeto.budget}" />
+					                
+					            </p:row>
+					            <p:row>
+					                <p:column headerText="Custo:" />
+					                <p:column headerText="R$ #{projeto.custoPrevisto}" />
+					            </p:row>
+					            <p:row>
+					                <p:column headerText="Saldo:" />
+					                <p:column headerText="R$ #{projeto.saldo}" />
+					            </p:row>
+					        </p:columnGroup>
+				
+							<p:column headerText="#{message['label.nome']}">
+								<h:outputText value="#{recurso.profissional.nome}" />
+							</p:column>
+		
+							<p:column headerText="#{message['label.profissional.cargo']}">
+								<h:outputText value="#{recurso.profissional.cargo.nome}" />
+							</p:column>
+							
+							<p:column headerText="#{message['label.profissional.valorHora']}">
+								<h:outputText value="#{recurso.profissional.valorHora}" />
+							</p:column>
+		
+							<p:column headerText="Carga Horária">
+								<h:outputText value="#{recurso.profissional.cargaHoraria.cargaHoraria}">
+									<f:convertNumber minFractionDigits="2" type="currency"
+										currencySymbol="R$" />
+								</h:outputText>
+							</p:column>
+		
+						</p:subTable>
 					</p:dataTable>
 			</h:form>
 			</div>		
