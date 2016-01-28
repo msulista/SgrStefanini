@@ -149,14 +149,16 @@ public class AlocacaoService {
 				Query q = manager.createNamedQuery("Alocacao.findRecursosAtivosPorProjeto");
 				q.setParameter("codigo", p.getCodigo());
 				List<Alocacao> alocacoes = q.getResultList();
-				manager.close();
+				
 				if(!alocacoes.isEmpty()){
 					for(Alocacao a : alocacoes){
 						recursos.add(a.getRecurso());
 					}
 					p.setRecursosDoProjeto(recursos);
 				}
+				
 			}
+			manager.close();
 			return projetos;
 	}
 }

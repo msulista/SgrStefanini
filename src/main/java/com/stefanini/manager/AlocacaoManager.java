@@ -27,6 +27,7 @@ import com.stefanini.service.ProjetoService;
 public class AlocacaoManager {
 
 	private Alocacao alocacao;
+	private List<Projeto> listaProjetos;
 	private List<Projeto> listaProjetosEAlocacoes;
 	private AlocacaoService service = new AlocacaoService();
 	private ProjetoService serviceProjeto = new ProjetoService();
@@ -88,6 +89,16 @@ public class AlocacaoManager {
 	public void setListaRecursosAtivos(List<Recurso> listaRecursosAtivos) {
 		this.listaRecursosAtivos = listaRecursosAtivos;
 	}
+	
+	
+
+	public List<Projeto> getListaProjetos() {
+		return listaProjetos;
+	}
+
+	public void setListaProjetos(List<Projeto> listaProjetos) {
+		this.listaProjetos = listaProjetos;
+	}
 
 	public String save(){
 		if(service.save(alocacao)){
@@ -125,8 +136,8 @@ public class AlocacaoManager {
 	public void valueChangeCelula(ValueChangeEvent event) {
 	       celula = (Celula) event.getNewValue();
 	       this.listaRecursosAtivos = service.listarTodosRecursos(this.equipe,this.celula);
-	       this.listaProjetosEAlocacoes = serviceProjeto.listarTodos(this.equipe, this.celula);
-	       this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes(this.listaProjetosEAlocacoes);
+	       this.listaProjetos = serviceProjeto.listarTodos(this.equipe, this.celula);
+	       this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes(this.listaProjetos);
 	}
 
 	/*@URLActions(actions = { @URLAction(mappingId = "projeto-editar", onPostback = false) })
