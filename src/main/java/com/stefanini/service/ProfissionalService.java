@@ -163,7 +163,7 @@ public class ProfissionalService implements Serializable {
 								Recurso recursoPersist = new Recurso();
 								recursoPersist.setProfissional(profissionalPersist);
 								recursoPersist.setRegistroValidadeInicio(profissionalPersist.getRegistroValidadeInicio());
-								recursoPersist.setRegistroValidadeFim(profissionalPersist.getRegistroValidadeInicio());
+								recursoPersist.setRegistroValidadeFim(profissionalPersist.getRegistroValidaeFim());
 								
 
 								//regra da data retorno em caso de afastamento ou ferias
