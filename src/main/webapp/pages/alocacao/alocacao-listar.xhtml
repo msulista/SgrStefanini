@@ -88,16 +88,23 @@
 					            <p:row>
 					                <p:column rowspan="3" headerText="#{projeto.nome}" />
 					                <p:column headerText="Budget:" />
-					                <p:column headerText="R$ #{projeto.budget}" />
+					                <p:column colspan="2" headerText="R$ #{projeto.budget}" />
 					                
 					            </p:row>
 					            <p:row>
 					                <p:column headerText="Custo:" />
-					                <p:column headerText="R$ #{projeto.custoPrevisto}" />
+					                <p:column colspan="2" headerText="R$ #{projeto.custoPrevisto}" />
 					            </p:row>
 					            <p:row>
 					                <p:column headerText="Saldo:" />
-					                <p:column headerText="R$ #{projeto.saldo}" />
+					                <p:column colspan="2"  headerText="R$ #{projeto.saldo}" />
+					            </p:row>
+					            
+					            <p:row>
+					            	<p:column headerText="#{message['label.nome']}"/>
+					            	<p:column headerText="#{message['label.profissional.cargo']}"/>
+					            	<p:column headerText="#{message['label.profissional.valorHora']}"/>
+					            	<p:column headerText="Carga Horária"/>	
 					            </p:row>
 					        </p:columnGroup>
 				
