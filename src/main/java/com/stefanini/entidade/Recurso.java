@@ -20,9 +20,9 @@ import javax.persistence.Table;
 	@NamedQuery(name = "Recurso.findMatricula", query ="SELECT r FROM Recurso r WHERE r.profissional.matricula = :matricula"),
 	@NamedQuery(name = "Recurso.findId", query = "SELECT r FROM Recurso r where r.id = :id"),
 	@NamedQuery(name = "Recurso.findMatriculaParaEdicao", query ="SELECT r FROM Recurso r WHERE r.id = (SELECT MAX(rs.id)FROM Recurso rs WHERE rs.profissional.matricula = :matricula)"),
-	@NamedQuery(name = "Recurso.findByEquipe", query = "SELECT r FROM Recurso r WHERE r.profissional.equipe.id = :id AND r.registroValidadeInicio <= CURRENT_DATE AND (r.registroValidadeFim IS NULL OR r.registroValidadeFim >= CURRENT_DATE) ORDER BY r.profissional.nome"),
-	@NamedQuery(name = "Recurso.findByCelula", query = "SELECT r FROM Recurso r WHERE r.profissional.celula.id = :id AND r.registroValidadeInicio <= CURRENT_DATE AND (r.registroValidadeFim IS NULL OR r.registroValidadeFim >= CURRENT_DATE) ORDER BY r.profissional.nome"),
-	@NamedQuery(name = "Recurso.findByEquipeECelula", query = "SELECT r FROM Recurso r WHERE r.profissional.equipe.id = :id AND r.profissional.celula.id = :celula ")
+	@NamedQuery(name = "Recurso.findByEquipe", query = "SELECT r FROM Recurso r WHERE r.profissional.equipe.id = :id AND r.registroValidadeInicio <= CURRENT_DATE AND (r.registroValidadeFim IS NULL OR r.registroValidadeFim >= CURRENT_DATE) ORDER BY r.profissional.nome ASC"),
+	@NamedQuery(name = "Recurso.findByCelula", query = "SELECT r FROM Recurso r WHERE r.profissional.celula.id = :id AND r.registroValidadeInicio <= CURRENT_DATE AND (r.registroValidadeFim IS NULL OR r.registroValidadeFim >= CURRENT_DATE) ORDER BY r.profissional.nome ASC"),
+	@NamedQuery(name = "Recurso.findByRecursoEquipeECelula", query = "SELECT r FROM Recurso r WHERE r.registroValidadeInicio <= CURRENT_DATE AND (r.registroValidadeFim IS NULL OR r.registroValidadeFim >= CURRENT_DATE) AND r.profissional.celula.id = :idCelula AND r.profissional.equipe.id = :idEquipe ORDER BY r.profissional.nome ASC")
 })
 public class Recurso implements BaseEntity, Serializable{
 	
@@ -33,8 +33,9 @@ public class Recurso implements BaseEntity, Serializable{
 	@Column(name = "ID_RECURSO", nullable = false, precision = 32)
 	private Long id;
 		
-	@ManyToOne
+	
 	@JoinColumn(name = "SGR_PROFISSIONAL_ID_PROFISSIONAL", referencedColumnName = "ID_PROFISSIONAL")
+	@ManyToOne
 	private Profissional profissional;
 
 	
@@ -87,7 +88,6 @@ public class Recurso implements BaseEntity, Serializable{
 		this.registroValidadeFim = registroValidadeFim;
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -98,7 +98,6 @@ public class Recurso implements BaseEntity, Serializable{
 		result = prime * result + ((registroValidadeInicio == null) ? 0 : registroValidadeInicio.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {

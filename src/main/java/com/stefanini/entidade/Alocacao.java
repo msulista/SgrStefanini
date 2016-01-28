@@ -1,5 +1,6 @@
 package com.stefanini.entidade;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -26,8 +27,11 @@ import javax.persistence.Transient;
 	/*@NamedQuery(name = "Alocacao.findTodos", query = "SELECT a FROM Alocacao a WHERE a.projeto.celula.id = :celula AND a.projeto.equipe.id = :id AND (a.registroValidadeFim IS NULL OR a.registroValidadeFim > CURRENT_DATE) AND a.registroValidadeInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC"),*/
 	@NamedQuery(name = "Alocacao.findAtivos", query = "SELECT a FROM Alocacao a WHERE a.registroValidadeFim IS NULL OR a.registroValidadeFim > CURRENT_DATE AND a.registroValidadeInicio <= CURRENT_DATE ORDER BY a.recurso.profissional.nome ASC")	
 })
-public class Alocacao {
+public class Alocacao implements Serializable, BaseEntity {
 	
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_ALOCACAO", nullable = false, precision = 32)

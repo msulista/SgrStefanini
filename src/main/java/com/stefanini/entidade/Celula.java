@@ -19,7 +19,7 @@ import com.stefanini.util.DateUtil;
 @Table(name = "SGR_CELULA")
 @NamedQueries({
 	@NamedQuery(name = "Celula.findAll", query = "SELECT c FROM Celula c ORDER BY c.id DESC"),
-	@NamedQuery(name = "Celula.findAtivos", query = "SELECT c FROM Celula c WHERE c.registroValidadeFim IS NULL OR c.registroValidadeFim > CURRENT_DATE ORDER BY c.nome ASC"),
+	@NamedQuery(name = "Celula.findAtivos", query = "SELECT c FROM Celula c WHERE (c.registroValidadeFim IS NULL OR c.registroValidadeFim > CURRENT_DATE) ORDER BY c.nome ASC"),
 	@NamedQuery(name = "Celula.findNome", query = "SELECT c FROM Celula c WHERE c.nome = :nome"),
 	@NamedQuery(name = "Celula.findId", query = "SELECT c FROM Celula c WHERE c.id = :id")
 	

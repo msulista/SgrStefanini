@@ -1,5 +1,6 @@
 package com.stefanini.entidade;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +25,9 @@ import javax.persistence.Table;
 	@NamedQuery(name = "Projeto.findByEquipeECelula", query = "SELECT p FROM Projeto p WHERE p.equipe.id = :id AND p.celula.id = :celula AND (p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE) AND (p.registroValidadeInicio <= CURRENT_DATE) ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.checkCodigoParaEdicao", query ="SELECT p FROM Projeto p WHERE p.id = (SELECT MAX(pr.id)FROM Projeto pr WHERE pr.codigo = :codigo)")
 })
-public class Projeto {
+public class Projeto implements Serializable, BaseEntity {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

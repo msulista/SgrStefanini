@@ -96,9 +96,9 @@ public class AlocacaoService {
 			manager.close();
 			return recursos;
 		}else if(equipe != null && celula != null){
-		Query q = manager.createNamedQuery("Recurso.findByEquipeECelula");
-		q.setParameter("id", equipe.getId());
-		q.setParameter("celula", celula.getId());
+		Query q = manager.createNamedQuery("Recurso.findByRecursoEquipeECelula");
+		q.setParameter("idEquipe", equipe.getId());
+		q.setParameter("idCelula", celula.getId());
 		List<Recurso> recursos = q.getResultList();
 		manager.close();
 		return recursos;
