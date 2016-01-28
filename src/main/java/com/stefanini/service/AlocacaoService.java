@@ -107,7 +107,7 @@ public class AlocacaoService {
 			return recursos;
 		}
 	}
-	/*
+	
 	@SuppressWarnings("unchecked")
 	public List<Alocacao> listarTodosAlocados(Equipe equipe, Celula celula) {
 		EntityManager manager = JPAUtil.getEntityManager();
@@ -123,16 +123,16 @@ public class AlocacaoService {
 			List<Alocacao> alocacoes = q.getResultList();
 			manager.close();
 			return alocacoes;
-		}else if(equipe != null && celula != null){
+		/*}else if(equipe != null && celula != null){
 		Query q = manager.createNamedQuery("Alocacao.findProjetoPorCelulaEEquipe");
 		q.setParameter("idCelula", celula.getId());
 		q.setParameter("idEquipe", equipe.getId());
 		List<Alocacao> alocacoes = q.getResultList();
 		manager.close();
-		return alocacoes;
+		return alocacoes;*/
 		}else{
 			List<Alocacao> alocacoes = new ArrayList<>();
 			return alocacoes;
 		}
-	}*/
+	}
 }

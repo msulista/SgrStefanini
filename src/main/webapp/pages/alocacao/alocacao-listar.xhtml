@@ -31,7 +31,7 @@
 								var="celula"
 								itemLabel="#{celula.nome}"
 								itemValue="#{celula}" />
-					<p:ajax update="gridRecursos" event="change" process="@this" />
+					<p:ajax update="gridRecursos gridProjetos" event="change" process="@this" />
 				</p:selectOneMenu>
 				
 				<p:selectOneMenu styleClass="dropdown-pesquisa"
@@ -45,14 +45,14 @@
 								var="equipe"
 								itemLabel="#{equipe.nome}"
 								itemValue="#{equipe}" />
-					<p:ajax update="gridRecursos" event="change" process="@this" />	
+					<p:ajax update="gridRecursos gridProjetos" event="change" process="@this" />	
 				</p:selectOneMenu>
 				<div class="pesquisa">
 				<h3>#{message['title.recurso.ativo']} <h:outputLabel value=" - #{alocacaoManager.celula.nome} - #{alocacaoManager.equipe.nome}" /></h3>
 					
 					<p:dataTable id="gridRecursos" 
 								var="recurso"
-								value="#{alocacaoManager.listaTodosRecursosAtivos()}"
+								value="#{alocacaoManager.listaRecursosAtivos}"
 								emptyMessage="#{message['alerta.listaVazia']}">
 		
 						<p:column headerText="#{message['label.nome']}" for="recursoNome">
@@ -75,6 +75,44 @@
 					</p:dataTable>
 				</div>
 				<br />
+				<h3>Projetos</h3>
+					
+					<p:dataTable id="gridProjetos" 
+								var="alocacao"
+								value="#{alocacaoManager.listaAlocacoes}"
+								emptyMessage="#{message['alerta.listaVazia']}">
+		
+						<p:column headerText="#{message['label.projeto.codigo']}">
+						<h:outputText value="#{alocacao.projeto.codigo}" />
+					</p:column>
+
+					<p:column headerText="#{message['label.nome']}">
+						<h:outputText value="#{alocacao.projeto.nome}" />
+					</p:column>
+					
+					<p:column headerText="#{message['label.profissional.equipe']}">
+						<h:outputText value="#{alocacao.projeto.equipe.nome}" />
+					</p:column>
+
+					<p:column headerText="#{message['label.projeto.budget']}">
+						<h:outputText value="#{alocacao.projeto.budget}">
+							<f:convertNumber minFractionDigits="2" type="currency"
+								currencySymbol="R$" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="#{message['label.projeto.dataInicial']}">
+						<h:outputText value="#{alocacao.projeto.dataInicio}" >
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="#{message['label.projeto.dataFinal']}">
+						<h:outputText value="#{alocacao.projeto.dataFim}" >
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+					</p:dataTable>
 			</h:form>
 			</div>		
 	</ui:define>

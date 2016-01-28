@@ -38,10 +38,13 @@ public class AlocacaoManager {
 		this.listaAlocacoes = new ArrayList<>();
 		this.listaRecursosAtivos = new ArrayList<>();
 	}
-	
+/*	
 	public List<Recurso> listaTodosRecursosAtivos(){
 		return this.listaRecursosAtivos;
 	}
+	public List<Alocacao> listaAlocacoes(){
+		return this.listaAlocacoes;
+	}*/
 		
 	public Equipe getEquipe() {
 		return equipe;
@@ -111,7 +114,7 @@ public class AlocacaoManager {
 	public void valueChangeEquipe(ValueChangeEvent event) {
 	       equipe = (Equipe) event.getNewValue();
 	       this.listaRecursosAtivos = service.listarTodosRecursos(this.equipe,this.celula);
-	       /*this.listaAlocacoes = service.listarTodosAlocados(this.equipe, this.celula);*/
+	       this.listaAlocacoes = service.listarTodosAlocados(this.equipe, this.celula);
 	       
 	}
 
