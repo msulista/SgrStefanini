@@ -15,6 +15,7 @@ import com.stefanini.entidade.Equipe;
 import com.stefanini.entidade.Projeto;
 import com.stefanini.entidade.Recurso;
 import com.stefanini.service.AlocacaoService;
+import com.stefanini.service.ProjetoService;
 
 @ManagedBean
 @ViewScoped
@@ -28,6 +29,7 @@ public class AlocacaoManager {
 	private Alocacao alocacao;
 	private List<Projeto> listaProjetosEAlocacoes;
 	private AlocacaoService service = new AlocacaoService();
+	private ProjetoService serviceProjeto = new ProjetoService();
 	
 	private List<Recurso> listaRecursosAtivos;
 	
@@ -115,14 +117,16 @@ public class AlocacaoManager {
 	public void valueChangeEquipe(ValueChangeEvent event) {
 	       equipe = (Equipe) event.getNewValue();
 	       this.listaRecursosAtivos = service.listarTodosRecursos(this.equipe,this.celula);
-	       this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes(this.equipe, this.celula);
+	       this.listaProjetosEAlocacoes = serviceProjeto.listarTodos(this.equipe, this.celula);
+	       this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes(this.listaProjetosEAlocacoes);
 	       
 	}
 
 	public void valueChangeCelula(ValueChangeEvent event) {
 	       celula = (Celula) event.getNewValue();
 	       this.listaRecursosAtivos = service.listarTodosRecursos(this.equipe,this.celula);
-	       this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes(this.equipe, this.celula);
+	       this.listaProjetosEAlocacoes = serviceProjeto.listarTodos(this.equipe, this.celula);
+	       this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes(this.listaProjetosEAlocacoes);
 	}
 
 	/*@URLActions(actions = { @URLAction(mappingId = "projeto-editar", onPostback = false) })

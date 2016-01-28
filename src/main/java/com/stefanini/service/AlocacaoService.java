@@ -141,12 +141,9 @@ public class AlocacaoService {
 	
 
 	@SuppressWarnings("unchecked")
-	public List<Projeto> listarProjetosEAlocacoes(Equipe equipe, Celula celula) {
+	public List<Projeto> listarProjetosEAlocacoes(List<Projeto> projetos) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		
-			List<Projeto>projetos = new ArrayList<>();
-			projetos = service.listarTodos(equipe, celula);
-			
 			for(Projeto p : projetos){
 				List<Recurso>recursos = new ArrayList<>();
 				Query q = manager.createNamedQuery("Alocacao.findRecursosAtivosPorProjeto");
