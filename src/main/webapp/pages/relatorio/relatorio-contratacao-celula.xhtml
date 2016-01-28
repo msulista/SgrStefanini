@@ -31,7 +31,7 @@
 							
 							</p:selectOneMenu>
 		
-		<p:chart id="gridGrafico" type="bar" model="#{relatorioManager.contratacaoPorCelula}" style="height:300px" responsive="true">
+		<p:chart id="gridGrafico" type="bar" model="#{relatorioManager.contratacaoPorCelula}" style="height:400px" responsive="true">
 			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectCltXestagioPorCelula}" process="@this" update="gridRelatorio celula"/>
 		</p:chart>
 	

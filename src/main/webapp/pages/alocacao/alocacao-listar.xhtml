@@ -47,8 +47,10 @@
 								itemValue="#{equipe}" />
 					<p:ajax update="gridRecursos gridProjetos" event="change" process="@this" />	
 				</p:selectOneMenu>
-				<div class="pesquisa">
-				<h3>#{message['title.recurso.ativo']} <h:outputLabel value=" - #{alocacaoManager.celula.nome} - #{alocacaoManager.equipe.nome}" /></h3>
+				
+				
+				<br/><br/><br/>
+				<h3>#{message['title.recurso.ativo']}</h3>
 					
 					<p:dataTable id="gridRecursos" 
 								var="recurso"
@@ -73,7 +75,7 @@
 							<h:outputText value="#{recurso.profissional.valorHora}" id="recursoValorHora"/>
 						</p:column>
 					</p:dataTable>
-				</div>
+				
 				<br />
 				<h3>Projetos</h3>
 					
@@ -126,8 +128,15 @@
 										currencySymbol="R$" />
 								</h:outputText>
 							</p:column>
-		
+						
+							<f:facet name="footer">
+								<h:outputLabel value=" " /><br/>
+								<h:outputLabel value=" " /><br/>
+								<h:outputLabel value=" " />
+							</f:facet>
+						        
 						</p:subTable>
+							
 					</p:dataTable>
 			</h:form>
 			</div>		

@@ -36,7 +36,7 @@
 		
 		
 					
-		<p:chart id="gridGrafico"  type="bar" model="#{relatorioManager.profissionalPorEquipe}" style="height:300px" responsive="true">
+		<p:chart id="gridGrafico"  type="bar" model="#{relatorioManager.profissionalPorEquipe}" style="height:400px" responsive="true">
 			<p:ajax  event="itemSelect"   listener="#{relatorioManager.itemSelectProfissionalPorEquipe}" process="@this" update="gridRelatorio celula"/>
 		</p:chart>
 	

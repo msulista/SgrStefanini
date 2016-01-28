@@ -260,7 +260,7 @@ public class RelatorioManager {
 		quantidadeTotal =0;
 		BarChartModel model = new BarChartModel();
 	    model.setLegendPosition("ne");
-	    model.setExtender("limpaLabel");
+	    
     	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
     	model.setShowPointLabels(true);
 	    ChartSeries grafico = new ChartSeries();
@@ -288,7 +288,7 @@ public class RelatorioManager {
 	   yAxis.setLabel("N° Profissionais");
 	   yAxis.setMin(0);
 	   
-	   yAxis.setTickCount(11);
+	   yAxis.setTickCount(quantidadeTotal + 4);
 	   yAxis.setMax(quantidadeTotal + 3);
 	}
 	
@@ -423,14 +423,15 @@ public class RelatorioManager {
 		quantidadeTotal3 =0;
 		quantidadeTotal4 = 0;
 	    BarChartModel model = new BarChartModel(); 
-	    	model.setLegendPosition("ne");
-	    	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
+    	model.setLegendPosition("ne");
+    	model.setLegendPlacement(LegendPlacement.OUTSIDEGRID); 
+    	model.setExtender("decimalConverter");
 	    ChartSeries junior = new ChartSeries();
 	    ChartSeries pleno = new ChartSeries();
 	    ChartSeries senior = new ChartSeries();
 	    ChartSeries estagio = new ChartSeries();
 	    model.setShowPointLabels(true);
-	    model.setExtender("limpaLabel");
+	    
 	    estagio.setLabel("Estágio");
 	    junior.setLabel("Junior");
 	    pleno.setLabel("Pleno");

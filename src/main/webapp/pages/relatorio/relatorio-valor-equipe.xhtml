@@ -34,7 +34,7 @@
 				<p:ajax event="keyup" update="gridGrafico" process="@this" listener="#{relatorioManager.atualizaGrafico()}"/>
 			</h:inputText>
 						
-		<p:chart id="gridGrafico" type="bar" model="#{relatorioManager.valorPorEquipe}" style="height:300px" responsive="true" extender="decimalConverter">
+		<p:chart id="gridGrafico" type="bar" model="#{relatorioManager.valorPorEquipe}" style="height:400px" responsive="true">
 			
 			<p:ajax event="itemSelect" listener="#{relatorioManager.itemSelectValorPorEquipe}" process="@this" update="gridRelatorio celula"/>
 		</p:chart>
