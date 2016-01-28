@@ -12,6 +12,7 @@ import com.ocpsoft.pretty.faces.annotation.URLMappings;
 import com.stefanini.entidade.Alocacao;
 import com.stefanini.entidade.Celula;
 import com.stefanini.entidade.Equipe;
+import com.stefanini.entidade.Projeto;
 import com.stefanini.entidade.Recurso;
 import com.stefanini.service.AlocacaoService;
 
@@ -25,7 +26,7 @@ import com.stefanini.service.AlocacaoService;
 public class AlocacaoManager {
 
 	private Alocacao alocacao;
-	private List<Alocacao> listaAlocacoes;
+	private List<Projeto> listaProjetosEAlocacoes;
 	private AlocacaoService service = new AlocacaoService();
 	
 	private List<Recurso> listaRecursosAtivos;
@@ -35,7 +36,7 @@ public class AlocacaoManager {
 	
 	public AlocacaoManager(){
 		this.alocacao = new Alocacao();
-		this.listaAlocacoes = new ArrayList<>();
+		this.listaProjetosEAlocacoes = new ArrayList<>();
 		this.listaRecursosAtivos = new ArrayList<>();
 	}
 /*	
@@ -70,12 +71,12 @@ public class AlocacaoManager {
 		this.alocacao = alocacao;
 	}
 	
-	public List<Alocacao> getListaAlocacoes() {
-		return listaAlocacoes;
+	public List<Projeto> getListaProjetosEAlocacoes() {
+		return listaProjetosEAlocacoes;
 	}
 
-	public void setListaAlocacoes(List<Alocacao> listaAlocacoes) {
-		this.listaAlocacoes = listaAlocacoes;
+	public void setListaProjetosEAlocacoes(List<Projeto> listaProjetosEAlocacoes) {
+		this.listaProjetosEAlocacoes = listaProjetosEAlocacoes;
 	}
 
 	public List<Recurso> getListaRecursosAtivos() {
@@ -114,14 +115,14 @@ public class AlocacaoManager {
 	public void valueChangeEquipe(ValueChangeEvent event) {
 	       equipe = (Equipe) event.getNewValue();
 	       this.listaRecursosAtivos = service.listarTodosRecursos(this.equipe,this.celula);
-	       this.listaAlocacoes = service.listarTodosAlocados(this.equipe, this.celula);
+	       this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes(this.equipe, this.celula);
 	       
 	}
 
 	public void valueChangeCelula(ValueChangeEvent event) {
 	       celula = (Celula) event.getNewValue();
 	       this.listaRecursosAtivos = service.listarTodosRecursos(this.equipe,this.celula);
-	       /*this.listaAlocacoes = service.listarTodosAlocados(this.equipe, this.celula);*/
+	       this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes(this.equipe, this.celula);
 	}
 
 	/*@URLActions(actions = { @URLAction(mappingId = "projeto-editar", onPostback = false) })

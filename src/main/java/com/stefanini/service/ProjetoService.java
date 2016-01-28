@@ -181,7 +181,7 @@ public class ProjetoService {
 		return projeto;
 	}
 	
-	@SuppressWarnings({ "unchecked", "null" })
+	@SuppressWarnings({ "unchecked" })
 	public List<Projeto> listarTodos(Equipe equipe, Celula celula) {
 		EntityManager manager = JPAUtil.getEntityManager();
 		if(equipe == null && celula !=null){
@@ -198,7 +198,7 @@ public class ProjetoService {
 			return projetos;
 		}else if(equipe != null && celula != null){
 		Query q = manager.createNamedQuery("Projeto.findByEquipeECelula");
-		q.setParameter("id", equipe.getId());
+		q.setParameter("equipe", equipe.getId());
 		q.setParameter("celula", celula.getId());
 		List<Projeto> projetos= q.getResultList();
 		manager.close();

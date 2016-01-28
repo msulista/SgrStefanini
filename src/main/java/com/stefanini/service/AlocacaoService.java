@@ -10,12 +10,15 @@ import javax.persistence.Query;
 import com.stefanini.entidade.Alocacao;
 import com.stefanini.entidade.Celula;
 import com.stefanini.entidade.Equipe;
+import com.stefanini.entidade.Projeto;
 import com.stefanini.entidade.Recurso;
 import com.stefanini.util.DateUtil;
 import com.stefanini.util.JPAUtil;
 import com.stefanini.util.Mensagem;
 
 public class AlocacaoService {
+	
+	private ProjetoService service;
 
 	@SuppressWarnings("unchecked")
 	public  boolean save(Alocacao alocacao){
@@ -107,7 +110,7 @@ public class AlocacaoService {
 			return recursos;
 		}
 	}
-	
+	/*
 	@SuppressWarnings("unchecked")
 	public List<Alocacao> listarTodosAlocados(Equipe equipe, Celula celula) {
 		EntityManager manager = JPAUtil.getEntityManager();
@@ -123,16 +126,40 @@ public class AlocacaoService {
 			List<Alocacao> alocacoes = q.getResultList();
 			manager.close();
 			return alocacoes;
-		/*}else if(equipe != null && celula != null){
-		Query q = manager.createNamedQuery("Alocacao.findProjetoPorCelulaEEquipe");
+		}else if(equipe != null && celula != null){
+		Query q = manager.createNamedQuery("Alocacao.findProjetosPorCelulaEquipe");
 		q.setParameter("idCelula", celula.getId());
 		q.setParameter("idEquipe", equipe.getId());
 		List<Alocacao> alocacoes = q.getResultList();
 		manager.close();
-		return alocacoes;*/
+		return alocacoes;
 		}else{
 			List<Alocacao> alocacoes = new ArrayList<>();
 			return alocacoes;
 		}
+	}*/
+	
+
+	@SuppressWarnings("unchecked")
+	public List<Projeto> listarProjetosEAlocacoes(Equipe equipe, Celula celula) {
+		EntityManager manager = JPAUtil.getEntityManager();
+		
+			List<Projeto>projetos = new ArrayList<>();
+			projetos = service.listarTodos(equipe, celula);
+			
+			for(Projeto p : projetos){
+				List<Recurso>recursos = new ArrayList<>();
+				Query q = manager.createNamedQuery("Alocacao.findRecursosAtivosPorProjeto");
+				q.setParameter("codigo", p.getCodigo());
+				List<Alocacao> alocacoes = q.getResultList();
+				manager.close();
+				if(!alocacoes.isEmpty()){
+					for(Alocacao a : alocacoes){
+						recursos.add(a.getRecurso());
+					}
+					p.setRecursosDoProjeto(recursos);
+				}
+			}
+			return projetos;
 	}
 }

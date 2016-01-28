@@ -78,8 +78,8 @@
 				<h3>Projetos</h3>
 					
 					<p:dataTable id="gridProjetos" 
-								var="alocacao"
-								value="#{alocacaoManager.listaAlocacoes}"
+								var="projeto"
+								value="#{alocacaoManager.listaProjetosEAlocacoes}"
 								emptyMessage="#{message['alerta.listaVazia']}">
 		
 						<p:column headerText="#{message['label.projeto.codigo']}">
@@ -87,28 +87,28 @@
 					</p:column>
 
 					<p:column headerText="#{message['label.nome']}">
-						<h:outputText value="#{alocacao.projeto.nome}" />
+						<h:outputText value="#{projeto.nome}" />
 					</p:column>
 					
 					<p:column headerText="#{message['label.profissional.equipe']}">
-						<h:outputText value="#{alocacao.projeto.equipe.nome}" />
+						<h:outputText value="#{projeto.equipe.nome}" />
 					</p:column>
 
 					<p:column headerText="#{message['label.projeto.budget']}">
-						<h:outputText value="#{alocacao.projeto.budget}">
+						<h:outputText value="#{projeto.budget}">
 							<f:convertNumber minFractionDigits="2" type="currency"
 								currencySymbol="R$" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="#{message['label.projeto.dataInicial']}">
-						<h:outputText value="#{alocacao.projeto.dataInicio}" >
+						<h:outputText value="#{projeto.dataInicio}" >
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="#{message['label.projeto.dataFinal']}">
-						<h:outputText value="#{alocacao.projeto.dataFim}" >
+						<h:outputText value="#{projeto.dataFim}" >
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>

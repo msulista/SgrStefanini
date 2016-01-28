@@ -2,6 +2,8 @@ package com.stefanini.entidade;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "SGR_PROJETO")
@@ -22,7 +25,7 @@ import javax.persistence.Table;
 	@NamedQuery(name = "Projeto.findAtivos", query = "SELECT p FROM Projeto p WHERE (p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE) AND (p.registroValidadeInicio <= CURRENT_DATE) ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.findByEquipe", query = "SELECT p FROM Projeto p WHERE p.equipe.id = :id AND (p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE) AND (p.registroValidadeInicio <= CURRENT_DATE) ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.findByCelula", query = "SELECT p FROM Projeto p WHERE p.celula.id = :id AND (p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE) AND (p.registroValidadeInicio <= CURRENT_DATE) ORDER BY p.nome ASC "),
-	@NamedQuery(name = "Projeto.findByEquipeECelula", query = "SELECT p FROM Projeto p WHERE p.equipe.id = :id AND p.celula.id = :celula AND (p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE) AND (p.registroValidadeInicio <= CURRENT_DATE) ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Projeto.findByEquipeECelula", query = "SELECT p FROM Projeto p WHERE p.equipe.id = :equipe AND p.celula.id = :celula AND (p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE) AND p.registroValidadeInicio <= CURRENT_DATE ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.checkCodigoParaEdicao", query ="SELECT p FROM Projeto p WHERE p.id = (SELECT MAX(pr.id)FROM Projeto pr WHERE pr.codigo = :codigo)")
 })
 public class Projeto implements Serializable, BaseEntity {
@@ -60,7 +63,7 @@ public class Projeto implements Serializable, BaseEntity {
 
 	@Column(name = "REGISTRO_VALIDADE_FIM", nullable = true)
 	private Date registroValidadeFim;
-	
+		
 	@JoinColumn(name = "ID_CELULA", referencedColumnName = "ID_CELULA")
 	@ManyToOne
 	private Celula celula;
@@ -69,6 +72,16 @@ public class Projeto implements Serializable, BaseEntity {
 	@ManyToOne
 	private Equipe equipe;
 	
+	@Transient
+	private List<Recurso> recursosDoProjeto;
+	
+	public List<Recurso> getRecursosDoProjeto() {
+		return recursosDoProjeto;
+	}
+
+	public void setRecursosDoProjeto(List<Recurso> recursosDoProjeto) {
+		this.recursosDoProjeto = recursosDoProjeto;
+	}
 	public Projeto() {
 	}
 
@@ -183,6 +196,7 @@ public class Projeto implements Serializable, BaseEntity {
 		result = prime * result + ((equipe == null) ? 0 : equipe.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((recursosDoProjeto == null) ? 0 : recursosDoProjeto.hashCode());
 		result = prime * result + ((registroValidadeFim == null) ? 0 : registroValidadeFim.hashCode());
 		result = prime * result + ((registroValidadeInicio == null) ? 0 : registroValidadeInicio.hashCode());
 		result = prime * result + ((saldo == null) ? 0 : saldo.hashCode());
@@ -240,6 +254,11 @@ public class Projeto implements Serializable, BaseEntity {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
+		if (recursosDoProjeto == null) {
+			if (other.recursosDoProjeto != null)
+				return false;
+		} else if (!recursosDoProjeto.equals(other.recursosDoProjeto))
+			return false;
 		if (registroValidadeFim == null) {
 			if (other.registroValidadeFim != null)
 				return false;
@@ -257,6 +276,5 @@ public class Projeto implements Serializable, BaseEntity {
 			return false;
 		return true;
 	}
-
 	
 }
