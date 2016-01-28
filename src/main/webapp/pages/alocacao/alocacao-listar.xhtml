@@ -48,7 +48,7 @@
 					<p:ajax update="gridRecursos" event="change" process="@this" />	
 				</p:selectOneMenu>
 				<div class="pesquisa">
-				<h3>#{message['title.recurso.ativo']} <h:outputLabel value=" - #{alocacaoManager.celula.nome} - #{alocacao.equipe.nome}" /></h3>
+				<h3>#{message['title.recurso.ativo']} <h:outputLabel value=" - #{alocacaoManager.celula.nome} - #{alocacaoManager.equipe.nome}" /></h3>
 					
 					<p:dataTable id="gridRecursos" 
 								var="recurso"
