@@ -175,8 +175,9 @@ public class AlocacaoManager {
 		return service.listarAtivos();
 	}
 	
-	public String desativar(Long id){
-		service.desativar(id);
+	public String desativar(int	recurso){
+		
+		service.desativar(recurso);
 		return "pretty:alocacao";
 	}
 			

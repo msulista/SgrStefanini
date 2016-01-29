@@ -65,9 +65,18 @@ public class AlocacaoService {
 		return alocacao;
 	}
 	
-	public void desativar(Long id) throws ConverterException {
+	public Alocacao getAlocacaoByMatriculaRecurso(int matricula){
 		EntityManager manager = JPAUtil.getEntityManager();
-		Alocacao alocacao =  getAlocacaoById(id);
+		Query q = manager.createNamedQuery("Alocacao.findRecursoParaDesativar");
+		q.setParameter("matricula", matricula);
+		Alocacao alocacao = (Alocacao) q.getSingleResult();
+		manager.close();
+		return alocacao;
+	}
+	
+	public void desativar(int recurso) throws ConverterException {
+		EntityManager manager = JPAUtil.getEntityManager();
+		Alocacao alocacao =  getAlocacaoByMatriculaRecurso(recurso);
 		alocacao.setRegistroValidadeFim(new Date());
 		manager.getTransaction().begin();
  		manager.merge(alocacao);

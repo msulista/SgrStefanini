@@ -123,10 +123,12 @@
 					            
 					            <p:row>
 					            	<p:column headerText="#{message['label.profissional.matricula']}"/>
+					            	<p:column headerText="Matricula"/>
 					            	<p:column headerText="#{message['label.nome']}"/>
 					            	<p:column headerText="#{message['label.profissional.cargo']}"/>
 					            	<p:column headerText="#{message['label.profissional.valorHora']}"/>
 					            	<p:column headerText="Carga Horária"/>	
+					            	<p:column headerText="Açoes"/>/>					           
 					            </p:row>
 					        </p:columnGroup>
 				
@@ -153,6 +155,15 @@
 								</h:outputText>
 								
 							</p:column>
+							
+							<p:column>
+							<p:commandButton id="desativarRecurso" styleClass="btn-acao"
+						icon="ui-icon-closethick"
+						action="#{alocacaoManager.desativar(recurso.profissional.matricula)}"
+						/>
+						
+				
+						</p:column>
 							<f:facet name="footer">
 								
 								<h:outputLabel value=" " /><br/>
