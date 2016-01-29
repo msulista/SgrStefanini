@@ -176,7 +176,6 @@ public class AlocacaoManager {
 	}
 	
 	public String desativar(int	recurso){
-		
 		service.desativar(recurso);
 		return "pretty:alocacao";
 	}
