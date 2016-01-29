@@ -16,6 +16,7 @@ import com.stefanini.entidade.Projeto;
 import com.stefanini.entidade.Recurso;
 import com.stefanini.service.AlocacaoService;
 import com.stefanini.service.ProjetoService;
+import com.stefanini.service.RecursoService;
 
 @ManagedBean
 @ViewScoped
@@ -31,14 +32,17 @@ public class AlocacaoManager {
 	private List<Projeto> listaProjetosEAlocacoes;
 	private AlocacaoService service = new AlocacaoService();
 	private ProjetoService serviceProjeto = new ProjetoService();
+	private RecursoService serviceRecurso = new RecursoService();
 	
 	private List<Recurso> listaRecursosAtivos;
-	
+	private Recurso recurso;
 	private Equipe equipe ;
 	private Celula celula ;
+	private Projeto projeto;
 	
 	public AlocacaoManager(){
 		this.alocacao = new Alocacao();
+		this.recurso = new Recurso();
 		this.listaProjetosEAlocacoes = new ArrayList<>();
 		this.listaRecursosAtivos = new ArrayList<>();
 	}
@@ -49,9 +53,33 @@ public class AlocacaoManager {
 	public List<Alocacao> listaAlocacoes(){
 		return this.listaAlocacoes;
 	}*/
+	
+	public void alocarRecurso(Projeto projetoAtual){
+		this.recurso = serviceRecurso.getRecursoByMatricula(recurso.getProfissional().getMatricula());
+		this.alocacao.setProjeto(projetoAtual);
+		this.alocacao.setRecurso(this.recurso);
+		service.save(this.alocacao);
 		
+	}
+	
 	public Equipe getEquipe() {
 		return equipe;
+	}
+
+	public Projeto getProjeto() {
+		return projeto;
+	}
+
+	public void setProjeto(Projeto projeto) {
+		this.projeto = projeto;
+	}
+
+	public Recurso getRecurso() {
+		return recurso;
+	}
+
+	public void setRecurso(Recurso recurso) {
+		this.recurso = recurso;
 	}
 
 	public void setEquipe(Equipe equipe) {

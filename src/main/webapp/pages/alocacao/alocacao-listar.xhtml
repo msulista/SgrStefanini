@@ -4,7 +4,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/pages/template/default.xhtml"
-	xmlns:pretty="http://ocpsoft.com/prettyfaces">
+	xmlns:pretty="http://ocpsoft.com/prettyfaces"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 	<ui:define name="content">
 		<p:breadCrumb>
@@ -56,7 +58,11 @@
 								var="recurso"
 								value="#{alocacaoManager.listaRecursosAtivos}"
 								emptyMessage="#{message['alerta.listaVazia']}">
-		
+						
+						<p:column headerText="#{message['label.profissional.matricula']}" for="recursoMatricula">
+							<h:outputText value="#{recurso.profissional.matricula}" id="recursoMatricula"/>
+						</p:column>
+						
 						<p:column headerText="#{message['label.nome']}" for="recursoNome">
 							<h:outputText value="#{recurso.profissional.nome}" id="recursoNome"/>
 						</p:column>
@@ -110,6 +116,10 @@
 					            </p:row>
 					        </p:columnGroup>
 				
+							<p:column headerText="#{message['label.profissional.matricula']}">
+								<h:outputText value="#{recurso.profissional.matricula}" />
+							</p:column>
+				
 							<p:column headerText="#{message['label.nome']}">
 								<h:outputText value="#{recurso.profissional.nome}" />
 							</p:column>
@@ -130,9 +140,24 @@
 							</p:column>
 						
 							<f:facet name="footer">
+								<h:outputLabel value="Adicionar Recurso ao Projeto: "/>
+								<p:inputMask styleClass="input-pesquisa" mask="999999" value="#{alocacaoManager.recurso.profissional.matricula}" 
+								pt:placeholder="Matrícula" />
+								
+								
+	        					<p:calendar pt:placeholder="Data de Início" id="inicio" value="#{alocacaoManager.alocacao.dataInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
+								
+								<p:commandButton id="alocarRecurso" icon="ui-icon-search"
+								action="#{alocacaoManager.alocarRecurso(projeto)}"
+								/>
+														
+									
+								<br/>
+								<h:outputLabel value=" " /><br/>
 								<h:outputLabel value=" " /><br/>
 								<h:outputLabel value=" " /><br/>
 								<h:outputLabel value=" " />
+								
 							</f:facet>
 						        
 						</p:subTable>

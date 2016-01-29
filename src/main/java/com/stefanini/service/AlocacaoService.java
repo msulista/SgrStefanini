@@ -29,6 +29,7 @@ public class AlocacaoService {
 			q.setParameter("matricula", alocacao.getRecurso().getProfissional().getMatricula());
 			List<Alocacao> alocacoes = q.getResultList();
 			if(alocacoes.isEmpty()){
+				alocacao.setRegistroValidadeInicio(alocacao.getDataInicio());;
 				manager.getTransaction().begin();
 				manager.persist(alocacao);
 				manager.getTransaction().commit();

@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "SGR_RECURSO")
 @NamedQueries({
 	@NamedQuery(name = "Recurso.findAll", query = "SELECT r FROM Recurso r"),
-	@NamedQuery(name = "Recurso.findMatricula", query ="SELECT r FROM Recurso r WHERE r.profissional.matricula = :matricula"),
+	@NamedQuery(name = "Recurso.findMatricula", query ="SELECT r FROM Recurso r WHERE r.profissional.matricula = :matricula AND r.registroValidadeInicio <= CURRENT_DATE AND (r.registroValidadeFim IS NULL OR r.registroValidadeFim >= CURRENT_DATE) ORDER BY r.profissional.nome ASC"),
 	@NamedQuery(name = "Recurso.findId", query = "SELECT r FROM Recurso r where r.id = :id"),
 	@NamedQuery(name = "Recurso.findMatriculaParaEdicao", query ="SELECT r FROM Recurso r WHERE r.id = (SELECT MAX(rs.id)FROM Recurso rs WHERE rs.profissional.matricula = :matricula)"),
 	@NamedQuery(name = "Recurso.findByEquipe", query = "SELECT r FROM Recurso r WHERE r.profissional.equipe.id = :id AND r.registroValidadeInicio <= CURRENT_DATE AND (r.registroValidadeFim IS NULL OR r.registroValidadeFim >= CURRENT_DATE) ORDER BY r.profissional.nome ASC"),
