@@ -141,14 +141,14 @@
 						
 							<f:facet name="footer">
 								<h:outputLabel value="Adicionar Recurso ao Projeto: "/>
-								<p:inputMask styleClass="input-pesquisa" mask="999999" value="#{alocacaoManager.recurso.profissional.matricula}" 
+								<p:inputMask styleClass="input-pesquisa" mask="999999" value="#{alocacaoManager.matriculaRecurso}" 
 								pt:placeholder="Matrícula" />
 								
 								
 	        					<p:calendar pt:placeholder="Data de Início" id="inicio" value="#{alocacaoManager.alocacao.dataInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
 								
-								<p:commandButton id="alocarRecurso" icon="ui-icon-search"
-								action="#{alocacaoManager.alocarRecurso(projeto)}"
+								<p:commandButton id="alocarRecurso" icon="ui-icon-search" 
+								actionListener="#{alocacaoManager.alocarRecurso(projeto)}"
 								/>
 														
 									
