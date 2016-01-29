@@ -131,6 +131,15 @@ public class ProjetoService {
 		manager.close();
 		return projeto;
 	}
+	
+	public Projeto getProjetoByCodigo(Long codigo){
+		EntityManager manager = JPAUtil.getEntityManager();
+		Query q = manager.createNamedQuery("Projeto.findCodigo");
+		q.setParameter("codigo", codigo);
+		Projeto projeto = (Projeto) q.getSingleResult();
+		manager.close();
+		return projeto;
+	}
 
 	public void desativar(Long id) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();

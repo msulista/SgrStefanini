@@ -35,6 +35,7 @@ public class AlocacaoManager {
 	private RecursoService serviceRecurso = new RecursoService();
 	
 	private int matriculaRecurso;
+	private Long codProjeto;
 	
 	private List<Recurso> listaRecursosAtivos;
 	private Recurso recurso;
@@ -56,19 +57,30 @@ public class AlocacaoManager {
 		return this.listaAlocacoes;
 	}*/
 	
-	public void alocarRecurso(Projeto projetoAtual){
+
+	public void alocarRecurso(){
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println(recurso.getProfissional().getMatricula());
 		this.recurso = serviceRecurso.getRecursoByMatricula(this.matriculaRecurso);
-		this.alocacao.setProjeto(projetoAtual);
+		this.alocacao.setProjeto(serviceProjeto.getProjetoByCodigo(this.codProjeto));
 		this.alocacao.setRecurso(this.recurso);
 		service.save(this.alocacao);
 		
 	}
 	
+	public Long getCodProjeto() {
+		return codProjeto;
+	}
+
+
+	public void setCodProjeto(Long codProjeto) {
+		this.codProjeto = codProjeto;
+	}
+
+
 	public int getMatriculaRecurso() {
 		return matriculaRecurso;
 	}

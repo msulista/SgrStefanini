@@ -84,6 +84,18 @@
 				
 				<br />
 				<h3>Projetos</h3>
+				
+					<h:outputLabel value="Adicionar Recurso ao Projeto: "/>
+					<p:inputMask styleClass="input-pesquisa" mask="999999" value="#{alocacaoManager.matriculaRecurso}" 
+					pt:placeholder="Cod. Projeto" />
+					<p:inputMask styleClass="input-pesquisa" mask="999999" value="#{alocacaoManager.matriculaRecurso}" 
+					pt:placeholder="Matrícula" />
+					
+      					<p:calendar pt:placeholder="Data de Início" id="inicio" value="#{alocacaoManager.alocacao.dataInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
+					
+					<p:commandButton id="alocarRecurso" icon="ui-icon-search" 
+						actionListener="#{alocacaoManager.alocarRecurso(projeto.codigo)}">
+					</p:commandButton>
 					
 					<p:dataTable id="gridProjetos" 
 								var="projeto"
@@ -94,21 +106,23 @@
 							
 							<p:columnGroup type="header">
 					            <p:row>
-					                <p:column rowspan="3" headerText="#{projeto.nome}" />
+					                <p:column headerText="#{projeto.codigo}" />
 					                <p:column headerText="Budget:" />
-					                <p:column colspan="2" headerText="R$ #{projeto.budget}" />
+					                <p:column colspan="3" headerText="R$ #{projeto.budget}" />
 					                
 					            </p:row>
 					            <p:row>
+					            	<p:column rowspan="2" headerText="#{projeto.nome}" />
 					                <p:column headerText="Custo:" />
-					                <p:column colspan="2" headerText="R$ #{projeto.custoPrevisto}" />
+					                <p:column colspan="3" headerText="R$ #{projeto.custoPrevisto}" />
 					            </p:row>
 					            <p:row>
 					                <p:column headerText="Saldo:" />
-					                <p:column colspan="2"  headerText="R$ #{projeto.saldo}" />
+					                <p:column colspan="3"  headerText="R$ #{projeto.saldo}"/>
 					            </p:row>
 					            
 					            <p:row>
+					            	<p:column headerText="#{message['label.profissional.matricula']}"/>
 					            	<p:column headerText="#{message['label.nome']}"/>
 					            	<p:column headerText="#{message['label.profissional.cargo']}"/>
 					            	<p:column headerText="#{message['label.profissional.valorHora']}"/>
@@ -137,22 +151,10 @@
 									<f:convertNumber minFractionDigits="2" type="currency"
 										currencySymbol="R$" />
 								</h:outputText>
+								
 							</p:column>
-						
 							<f:facet name="footer">
-								<h:outputLabel value="Adicionar Recurso ao Projeto: "/>
-								<p:inputMask styleClass="input-pesquisa" mask="999999" value="#{alocacaoManager.matriculaRecurso}" 
-								pt:placeholder="Matrícula" />
 								
-								
-	        					<p:calendar pt:placeholder="Data de Início" id="inicio" value="#{alocacaoManager.alocacao.dataInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
-								
-								<p:commandButton id="alocarRecurso" icon="ui-icon-search" 
-								actionListener="#{alocacaoManager.alocarRecurso(projeto)}"
-								/>
-														
-									
-								<br/>
 								<h:outputLabel value=" " /><br/>
 								<h:outputLabel value=" " /><br/>
 								<h:outputLabel value=" " /><br/>
@@ -160,9 +162,9 @@
 								
 							</f:facet>
 						        
-						</p:subTable>
-							
+						</p:subTable>												
 					</p:dataTable>
+								
 			</h:form>
 			</div>		
 	</ui:define>

@@ -20,7 +20,7 @@ import javax.persistence.Transient;
 @Table(name = "SGR_PROJETO")
 @NamedQueries({
 	@NamedQuery(name = "Projeto.findAll", query = "SELECT p FROM Projeto p ORDER BY p.nome ASC"),
-	@NamedQuery(name = "Projeto.findCodigo", query ="SELECT p FROM Projeto p WHERE p.codigo = :codigo ORDER BY p.nome ASC"),
+	@NamedQuery(name = "Projeto.findCodigo", query ="SELECT p FROM Projeto p WHERE p.codigo = :codigo AND (p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE) AND p.registroValidadeInicio <= CURRENT_DATE ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.findId", query = "SELECT p FROM Projeto p WHERE p.id = :id"),
 	@NamedQuery(name = "Projeto.findAtivos", query = "SELECT p FROM Projeto p WHERE (p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE) AND (p.registroValidadeInicio <= CURRENT_DATE) ORDER BY p.nome ASC"),
 	@NamedQuery(name = "Projeto.findByEquipe", query = "SELECT p FROM Projeto p WHERE p.equipe.id = :id AND (p.registroValidadeFim IS NULL OR p.registroValidadeFim > CURRENT_DATE) AND (p.registroValidadeInicio <= CURRENT_DATE) ORDER BY p.nome ASC"),
