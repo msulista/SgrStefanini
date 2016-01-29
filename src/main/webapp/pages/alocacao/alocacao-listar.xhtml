@@ -23,7 +23,7 @@
 				<p:selectOneMenu styleClass="dropdown-pesquisa"
 								id="celula"
 							 	value="#{alocacaoManager.celula}"
-							 	onchange="submit()"
+							 	
 							 	valueChangeListener="#{alocacaoManager.valueChangeCelula}"
 								converter="entityConverterSelectOneMenu" >
 					<f:selectItem itemLabel="#{message['select.celula']}" noSelectionOption="true" />
@@ -37,7 +37,7 @@
 				<p:selectOneMenu styleClass="dropdown-pesquisa"
 								id="equipe"
 							 	value="#{alocacaoManager.equipe}"
-							 	onchange="submit()"
+							 	
 							 	valueChangeListener="#{alocacaoManager.valueChangeEquipe}"
 								converter="entityConverterSelectOneMenu" >
 					<f:selectItem itemLabel="#{message['select.equipe']}" noSelectionOption="true" />

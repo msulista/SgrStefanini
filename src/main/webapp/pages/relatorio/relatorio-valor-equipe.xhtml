@@ -19,14 +19,14 @@
 		<h2>#{message['title.relatorio.valor.contratacao']}</h2>
 		
 	<p:selectOneMenu styleClass="dropdown-pesquisa" id="celula"
-						 value="#{relatorioManager.celula}" onchange="submit()" valueChangeListener="#{relatorioManager.stateChangeListenerValorMedioPorEquipe}"
+						 value="#{relatorioManager.celula}" valueChangeListener="#{relatorioManager.stateChangeListenerValorMedioPorEquipe}"
 						converter="simpleEntityConverter" >
 						<f:selectItem itemLabel="#{message['select.celula']}"
 							noSelectionOption="true" />
 						<f:selectItems value="#{celulaManager.listarAtivos()}"
 							var="celula" itemLabel="#{celula.nome}" itemValue="#{celula}" />
 							
-						  <p:ajax immediate="true" update="gridGrafico" event="change" process="@this"/>
+						  <p:ajax  update="gridGrafico" event="change" process="@this"/>
 					
 							</p:selectOneMenu>
 							

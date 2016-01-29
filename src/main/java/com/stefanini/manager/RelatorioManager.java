@@ -506,7 +506,11 @@ public class RelatorioManager {
 	    	grafico.set(relatorio.getNome01(), relatorio.getValorMedio().doubleValue());
 	    	metaCelula.set(relatorio.getNome01(), this.valorMeta);
 	    	valorTotal = (double)(valorTotal + relatorio.getValorMedio().doubleValue());
+	    	
 		}	
+	    if(getRelatorioValorCelula().size()<1){
+    		grafico.set("Total", valorTotal);
+    	}
 	    model.addSeries(grafico);
 	    model.addSeries(metaCelula);
 	    return model;
@@ -558,8 +562,10 @@ public class RelatorioManager {
 	    	estagio.set(relatorio.getNome01(), relatorio.getQuantidade02());
 	    	quantidadeTotal = (int)(quantidadeTotal += relatorio.getQuantidade01()+relatorio.getQuantidade02());
 		}	
-	  
-	   total.set("Total Resultados", quantidadeTotal);
+	    if(getRelatorioContratacaoCelula().size()<1){
+    		clt.set("Total", 0);
+    	}
+	    total.set("Total Resultados", quantidadeTotal);
 	    model.addSeries(clt);	         
 	    model.addSeries(estagio);	
 	    model.addSeries(total);
@@ -620,7 +626,9 @@ public class RelatorioManager {
 	    	porcentagem = 0;
 		}	
 	
-	    
+	    if(getRelatorioPerfilPorCelula().size()<1){
+    		estagio.set("Total", 0);
+    	}
 	   
 	   model.addSeries(estagio);
 	    model.addSeries(junior);	         

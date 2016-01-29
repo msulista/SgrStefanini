@@ -19,7 +19,7 @@
 		
 		
 			<p:selectOneMenu styleClass="dropdown-pesquisa" id="celula"
-						 value="#{relatorioManager.celula}" onchange="submit()" valueChangeListener="#{relatorioManager.stateChangeListenerProfissionalPorEquipe}"
+						 value="#{relatorioManager.celula}" valueChangeListener="#{relatorioManager.stateChangeListenerProfissionalPorEquipe}"
 						converter="simpleEntityConverter" >
 						<f:selectItem itemLabel="#{message['select.celula']}"
 							noSelectionOption="true" />

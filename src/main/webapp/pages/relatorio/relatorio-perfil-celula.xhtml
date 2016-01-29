@@ -17,7 +17,7 @@
 		<h2>#{message['title.relatorio.perfil.celula']}</h2>
 		
 		<p:selectOneMenu styleClass="dropdown-pesquisa" id="celula"
-						 value="#{relatorioManager.celula}" onchange="submit()" valueChangeListener="#{relatorioManager.stateChangeListenerPerfilPorCelula}"
+						 value="#{relatorioManager.celula}"  valueChangeListener="#{relatorioManager.stateChangeListenerPerfilPorCelula}"
 						converter="simpleEntityConverter" >
 						<f:selectItem itemLabel="#{message['select.celula']}"
 							noSelectionOption="true" />
