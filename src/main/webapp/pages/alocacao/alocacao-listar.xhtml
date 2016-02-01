@@ -175,7 +175,7 @@
 							</p:column>
 							
 							<p:column headerText="Açoes">
-								<p:commandButton action="#{alocacaoManager.desativar(recurso.profissional.matricula)}" value="desativar"  update="gridRecursosDoProjeto"  ></p:commandButton>
+								<p:commandButton action="#{alocacaoManager.desativar(recurso.profissional.matricula)}" value="desativar"  update="gridProjetos gridRecursosDoProjeto"  ></p:commandButton>
 							</p:column>
 							
 							</p:dataTable>
@@ -187,7 +187,10 @@
 								
 								<p:calendar pt:placeholder="Data de Início"  id="inicio" value="#{alocacaoManager.alocacao.dataInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true" />
 								
-								<p:commandButton id="adicionar" icon="ui-icon-search" actionListener="#{alocacaoManager.alocarRecurso(projeto)}" update="gridProjetos gridRecursosDoProjeto"/>
+								<p:commandButton id="adicionar" icon="ui-icon-search" actionListener="#{alocacaoManager.alocarRecurso(projeto)}">
+									<p:ajax listener="#{alocacaoManager.valueChangeCelula}" />
+									<p:ajax listener="#{alocacaoManager.valueChangeEquipe}" />
+								</p:commandButton>
 					        </p:rowExpansion>
 					</p:dataTable>
 					
