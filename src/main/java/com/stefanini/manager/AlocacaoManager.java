@@ -58,14 +58,10 @@ public class AlocacaoManager {
 	}*/
 	
 
-	public void alocarRecurso(){
-		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+	public void alocarRecurso(Projeto projetoAtual){
 		
 		this.recurso = serviceRecurso.getRecursoByMatricula(this.matriculaRecurso);
-		this.alocacao.setProjeto(serviceProjeto.getProjetoByCodigo(this.codProjeto));
+		this.alocacao.setProjeto(projetoAtual);
 		this.alocacao.setRecurso(this.recurso);
 		service.save(this.alocacao);
 		

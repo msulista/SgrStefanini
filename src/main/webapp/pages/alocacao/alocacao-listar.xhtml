@@ -179,11 +179,20 @@
 							</p:column>
 							
 							</p:dataTable>
-					        </p:rowExpansion>
-																
-
-					</p:dataTable>
+							<h:outputLabel value="Adicionar Recurso: " />
+								<p:inputMask styleClass="input-pesquisa" mask="999999"
+									id="matriculaRecurso"
+									value="#{alocacaoManager.matriculaRecurso}"
+									pt:placeholder="Matrícula" />
 								
+								<p:calendar pt:placeholder="Data de Início"  id="inicio" value="#{alocacaoManager.alocacao.dataInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true" />
+								
+								<p:commandButton id="adicionar" icon="ui-icon-search" actionListener="#{alocacaoManager.alocarRecurso(projeto)}" update="gridProjetos gridRecursosDoProjeto"/>
+					        </p:rowExpansion>
+					</p:dataTable>
+					
+						
+					
 			</h:form>
 			</div>		
 	</ui:define>

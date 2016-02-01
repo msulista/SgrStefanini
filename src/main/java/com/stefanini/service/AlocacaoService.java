@@ -24,7 +24,7 @@ public class AlocacaoService {
 	public  boolean save(Alocacao alocacao){
 		EntityManager manager = JPAUtil.getEntityManager();
 		if (DateUtil.verificaDiaUtil(alocacao.getDataInicio())&&DateUtil.verificaDiaUtil(alocacao.getDataFim())) {	
-			Query q = manager.createNamedQuery("Alocacao.findRecursoAtivosDoProjeto");
+			Query q = manager.createNamedQuery("Alocacao.findRecursoAtivoDoProjeto");
 			q.setParameter("codigo", alocacao.getProjeto().getCodigo());
 			q.setParameter("matricula", alocacao.getRecurso().getProfissional().getMatricula());
 			List<Alocacao> alocacoes = q.getResultList();
