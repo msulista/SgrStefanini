@@ -69,6 +69,8 @@ public class AlocacaoManager {
 	    this.listaProjetos = serviceProjeto.listarTodos(this.equipe, this.celula);
 	    this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes( this.listaProjetos);
 	    this.matriculaRecurso = 0;
+	    this.alocacao.setDataInicio(null);
+	    this.alocacao = new Alocacao();
 	}
 	
 	public Long getCodProjeto() {

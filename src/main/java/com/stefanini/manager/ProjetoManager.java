@@ -72,7 +72,7 @@ public class ProjetoManager {
 
 	public String save(){
 		if(service.save(projeto)){
-			return "pretty:projeto";
+			return "pretty:alocacao";
 		} else {
 			return null;
 		}
@@ -80,7 +80,7 @@ public class ProjetoManager {
 	
 	public String update(){
 		if(service.update(projeto)){
-			return "pretty:projeto";
+			return "pretty:alocacao";
 		} else {
 			return null;
 		}

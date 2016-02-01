@@ -11,9 +11,7 @@
 	<ui:define name="content">
 		<p:breadCrumb>
 		    <p:menuitem value="#{message['pao.home']}" url="#" />
-		   	<p:menuitem value="#{message['pao.projeto']}"
-				outcome="pretty:projeto"/>
-			<p:menuitem value="#{message['pao.alocacao']}"
+		   	<p:menuitem value="#{message['pao.alocacao']}"
 				outcome="pretty:alocacao" disabled="true" />
 		</p:breadCrumb>
 		<div>
@@ -148,14 +146,13 @@
 							</p:column>
 							
 							<p:rowExpansion>
-					        
+					        <h:panelGrid id="teste">
 					        <p:dataTable id="gridRecursosDoProjeto" 
 								var="recurso"
 								value="#{projeto.recursosDoProjeto}"
 								emptyMessage="#{message['alerta.listaVazia']}">
 								    
 					        <p:column headerText="#{message['label.profissional.matricula']}">
-
 								<h:outputText value="#{recurso.profissional.matricula}" />
 							</p:column>
 				
@@ -186,6 +183,7 @@
 							</p:column>
 							
 							</p:dataTable>
+							<h:panelGroup>
 							<h:outputLabel value="Adicionar Recurso: " />
 								<p:inputMask styleClass="input-pesquisa" mask="999999"
 									id="matriculaRecurso"
@@ -195,7 +193,9 @@
 								<p:calendar pt:placeholder="Data de Início"  id="inicio" value="#{alocacaoManager.alocacao.dataInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true" />
 								
 								<p:commandButton id="adicionar" icon="ui-icon-search" 
-								actionListener="#{alocacaoManager.alocarRecurso(projeto)}" update="gridRecursosDoProjeto"/>
+								actionListener="#{alocacaoManager.alocarRecurso(projeto)}" update="teste"/>
+								</h:panelGroup>
+								</h:panelGrid>
 					        </p:rowExpansion>
 					</p:dataTable>
 					
