@@ -102,7 +102,7 @@
 								value="#{alocacaoManager.listaProjetosEAlocacoes}"
 								emptyMessage="#{message['alerta.listaVazia']}">
 					
-						<p:subTable var="recurso" value="#{projeto.recursosDoProjeto}" id="recursosDoProjeto">
+						<p:subTable var="recurso" value="#{projeto.recursosDoProjeto}">
 							
 							<p:columnGroup type="header">
 					            <p:row>
@@ -128,7 +128,7 @@
 					            	<p:column headerText="#{message['label.profissional.cargo']}"/>
 					            	<p:column headerText="#{message['label.profissional.valorHora']}"/>
 					            	<p:column headerText="Carga Horária"/>	
-					            	<p:column headerText="Açoes" rendered="true"/>
+					            	<p:column headerText="Açoes"/>/>					           
 					            </p:row>
 					        </p:columnGroup>
 				
@@ -155,22 +155,14 @@
 								</h:outputText>
 								
 							</p:column>
-							
 							<p:column>
 							<p:commandButton id="desativarRecurso" styleClass="btn-acao"
 						icon="ui-icon-closethick"
-<<<<<<< HEAD
 						action="#{alocacaoManager.desativar(recurso.profissional.matricula)}"
 						/>
 						
 				
 						</p:column>
-=======
-						actionListener="#{alocacaoManager.desativar(alocacaoManager.matriculaRecurso)}"
-						>
-						<f:setPropertyActionListener value="#{recurso.profissional.matricula}" target="#{alocacaoManager.matriculaRecurso}" /> </p:commandButton>
-						</p:column>
->>>>>>> Gabriel - ajustando desativar recurso de projeto
 							<f:facet name="footer">
 								
 								<h:outputLabel value=" " /><br/>
