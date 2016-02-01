@@ -179,7 +179,8 @@
 							</p:column>
 							
 							<p:column headerText="Açoes">
-								<p:commandButton action="#{alocacaoManager.desativar(recurso.profissional.matricula)}" value="desativar"/>
+								<p:commandButton action="#{alocacaoManager.desativar(recurso.profissional.matricula)}"
+								 value="desativar" update="gridRecursosDoProjeto"/>
 							</p:column>
 							
 							</p:dataTable>
