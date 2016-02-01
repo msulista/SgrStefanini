@@ -174,14 +174,15 @@ public class AlocacaoManager {
 		return service.listarAtivos();
 	}
 	
+
 	public void atualizaPesquisa(){
 		this.listaRecursosAtivos = service.listarTodosRecursos(this.equipe,this.celula);
 	       this.listaProjetos = serviceProjeto.listarTodos(this.equipe, this.celula);
 	       this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes( this.listaProjetos);
 	}
 	
-	public void desativar(int	recurso){
-		service.desativar(recurso);
+	public void desativar(Projeto projeto, int recurso){
+		service.desativar(projeto, recurso);
 		this.listaRecursosAtivos = service.listarTodosRecursos(this.equipe,this.celula);
 	    this.listaProjetos = serviceProjeto.listarTodos(this.equipe, this.celula);
 	    this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes( this.listaProjetos);

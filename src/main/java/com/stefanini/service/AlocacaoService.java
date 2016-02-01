@@ -65,18 +65,19 @@ public class AlocacaoService {
 		return alocacao;
 	}
 	
-	public Alocacao getAlocacaoByMatriculaRecurso(int matricula){
+	public Alocacao getAlocacaoByMatriculaRecurso(Projeto projeto,int matricula){
 		EntityManager manager = JPAUtil.getEntityManager();
 		Query q = manager.createNamedQuery("Alocacao.findRecursoParaDesativar");
 		q.setParameter("matricula", matricula);
+		q.setParameter("codigo", projeto.getCodigo());
 		Alocacao alocacao = (Alocacao) q.getSingleResult();
 		manager.close();
 		return alocacao;
 	}
 	
-	public void desativar(int recurso) throws ConverterException {
+	public void desativar(Projeto projeto,int recurso) throws ConverterException {
 		EntityManager manager = JPAUtil.getEntityManager();
-		Alocacao alocacao =  getAlocacaoByMatriculaRecurso(recurso);
+		Alocacao alocacao =  getAlocacaoByMatriculaRecurso(projeto,recurso);
 		alocacao.setRegistroValidadeFim(new Date());
 		manager.getTransaction().begin();
  		manager.merge(alocacao);
