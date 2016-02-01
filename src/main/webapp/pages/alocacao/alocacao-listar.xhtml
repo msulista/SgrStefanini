@@ -172,9 +172,12 @@
 									<f:convertNumber minFractionDigits="2" type="currency"
 										currencySymbol="R$" />
 								</h:outputText>
-								
 							</p:column>
-
+							
+							<p:column headerText="Açoes">
+								<p:commandButton action="#{alocacaoManager.desativar(recurso.id)}" value="desativar" ></p:commandButton>
+							</p:column>
+							
 							</p:dataTable>
 					        </p:rowExpansion>
 																
