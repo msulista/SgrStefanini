@@ -85,54 +85,73 @@
 				<br />
 				<h3>Projetos</h3>
 				
-					<h:outputLabel value="Adicionar Recurso ao Projeto: "/>
-					<p:inputMask styleClass="input-pesquisa" mask="999999" value="#{alocacaoManager.matriculaRecurso}" 
-					pt:placeholder="Cod. Projeto" />
-					<p:inputMask styleClass="input-pesquisa" mask="999999" value="#{alocacaoManager.matriculaRecurso}" 
-					pt:placeholder="Matrícula" />
-					
-      					<p:calendar pt:placeholder="Data de Início" id="inicio" value="#{alocacaoManager.alocacao.dataInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" required="true" requiredMessage="#{message['span.obrigatorio.dataInicio']}" disabledWeekends="true"/>
-					
-					<p:commandButton id="alocarRecurso" icon="ui-icon-search" 
-						actionListener="#{alocacaoManager.alocarRecurso(projeto.codigo)}">
-					</p:commandButton>
-					
+										
 					<p:dataTable id="gridProjetos" 
 								var="projeto"
 								value="#{alocacaoManager.listaProjetosEAlocacoes}"
 								emptyMessage="#{message['alerta.listaVazia']}">
 					
-						<p:subTable var="recurso" value="#{projeto.recursosDoProjeto}">
+							<p:column style="width:16px">
+				            	<p:rowToggler />
+					        </p:column>	
+							<p:column headerText="#{message['label.projeto.codigo']}">
+								<h:outputText value="#{projeto.codigo}" />
+							</p:column>
+		
+							<p:column headerText="#{message['label.nome']}">
+								<h:outputText value="#{projeto.nome}" />
+							</p:column>
 							
-							<p:columnGroup type="header">
-					            <p:row>
-					                <p:column headerText="#{projeto.codigo}" />
-					                <p:column headerText="Budget:" />
-					                <p:column colspan="3" headerText="R$ #{projeto.budget}" />
-					                
-					            </p:row>
-					            <p:row>
-					            	<p:column rowspan="2" headerText="#{projeto.nome}" />
-					                <p:column headerText="Custo:" />
-					                <p:column colspan="3" headerText="R$ #{projeto.custoPrevisto}" />
-					            </p:row>
-					            <p:row>
-					                <p:column headerText="Saldo:" />
-					                <p:column colspan="3"  headerText="R$ #{projeto.saldo}"/>
-					            </p:row>
-					            
-					            <p:row>
-					            	<p:column headerText="#{message['label.profissional.matricula']}"/>
-					            	<p:column headerText="Matricula"/>
-					            	<p:column headerText="#{message['label.nome']}"/>
-					            	<p:column headerText="#{message['label.profissional.cargo']}"/>
-					            	<p:column headerText="#{message['label.profissional.valorHora']}"/>
-					            	<p:column headerText="Carga Horária"/>	
-					            	<p:column headerText="Açoes"/>/>					           
-					            </p:row>
-					        </p:columnGroup>
-				
-							<p:column headerText="#{message['label.profissional.matricula']}">
+							<p:column headerText="#{message['label.profissional.equipe']}">
+								<h:outputText value="#{projeto.equipe.nome}" />
+							</p:column>
+		
+							<p:column headerText="#{message['label.projeto.budget']}">
+								<h:outputText value="#{projeto.budget}">
+									<f:convertNumber minFractionDigits="2" type="currency"
+										currencySymbol="R$" />
+								</h:outputText>
+							</p:column>
+		
+							<p:column headerText="#{message['label.projeto.dataInicial']}">
+								<h:outputText value="#{projeto.dataInicio}" >
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
+							</p:column>
+		
+							<p:column headerText="#{message['label.projeto.dataFinal']}">
+								<h:outputText value="#{projeto.dataFim}" >
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
+							</p:column>
+		
+							<p:column headerText="#{message['label.acoes']}"
+								styleClass="txtCenter">
+								<pretty:link mappingId="projeto-editar">
+									<f:param value="#{projeto.codigo}" />
+									<p:commandButton id="editar" styleClass="btn-acao" type="button" icon="ui-icon-pencil" />
+								</pretty:link>
+								<p:commandButton id="desativar" styleClass="btn-acao"
+									icon="ui-icon-closethick"
+									action="#{projetoManager.desativar(projeto.id)}"
+									update="gridProjetos">
+									<p:confirm header="#{message['button.desativar']}"
+										message="#{message['questiona.desativar']}" icon="ui-icon-alert" />
+								</p:commandButton>
+								<p:tooltip id="alt-editar" for="editar" value="#{message['label.editar']}" styleClass="alt"/>
+								<p:tooltip id="alt-desativar" for="desativar"
+									value="#{message['label.desativar']}" styleClass="alt" />
+							</p:column>
+							
+							<p:rowExpansion>
+					        
+					        <p:dataTable id="gridRecursosDoProjeto" 
+								var="recurso"
+								value="#{projeto.recursosDoProjeto}"
+								emptyMessage="#{message['alerta.listaVazia']}">
+								    
+					        <p:column headerText="#{message['label.profissional.matricula']}">
+
 								<h:outputText value="#{recurso.profissional.matricula}" />
 							</p:column>
 				
@@ -155,24 +174,11 @@
 								</h:outputText>
 								
 							</p:column>
-							<p:column>
-							<p:commandButton id="desativarRecurso" styleClass="btn-acao"
-						icon="ui-icon-closethick"
-						action="#{alocacaoManager.desativar(recurso.profissional.matricula)}"
-						/>
-						
-				
-						</p:column>
-							<f:facet name="footer">
-								
-								<h:outputLabel value=" " /><br/>
-								<h:outputLabel value=" " /><br/>
-								<h:outputLabel value=" " /><br/>
-								<h:outputLabel value=" " />
-								
-							</f:facet>
-						        
-						</p:subTable>												
+
+							</p:dataTable>
+					        </p:rowExpansion>
+																
+
 					</p:dataTable>
 								
 			</h:form>

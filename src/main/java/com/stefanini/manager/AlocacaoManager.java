@@ -63,7 +63,7 @@ public class AlocacaoManager {
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		System.out.println(recurso.getProfissional().getMatricula());
+		
 		this.recurso = serviceRecurso.getRecursoByMatricula(this.matriculaRecurso);
 		this.alocacao.setProjeto(serviceProjeto.getProjetoByCodigo(this.codProjeto));
 		this.alocacao.setRecurso(this.recurso);
