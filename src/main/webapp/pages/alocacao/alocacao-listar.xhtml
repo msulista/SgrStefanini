@@ -179,10 +179,12 @@
 							</p:column>
 							
 							<p:column headerText="Açoes">
-
+							
 								<p:commandButton action="#{alocacaoManager.desativar(projeto, recurso.profissional.matricula)}"
 								 value="desativar" update="gridRecursosDoProjeto"/>
-								 				
+
+							</p:column>
+							
 							</p:dataTable>
 							<h:outputLabel value="Adicionar Recurso: " />
 								<p:inputMask styleClass="input-pesquisa" mask="999999"
