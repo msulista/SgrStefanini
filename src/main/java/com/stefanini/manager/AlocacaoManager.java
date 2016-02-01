@@ -175,9 +175,8 @@ public class AlocacaoManager {
 		return service.listarAtivos();
 	}
 	
-	public String desativar(int	recurso){
+	public void desativar(int	recurso){
 		service.desativar(recurso);
-		return "pretty:alocacao";
 	}
 			
 	public void valueChangeEquipe(ValueChangeEvent event) {
