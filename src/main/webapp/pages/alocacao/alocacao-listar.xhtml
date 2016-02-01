@@ -84,6 +84,9 @@
 				
 				<br />
 				<h3>Projetos</h3>
+				<br/>
+				<p:button styleClass="btn-default" value="#{message['button.novo']}"
+				outcome="pretty:projeto-incluir" />
 				
 										
 					<p:dataTable id="gridProjetos" 
@@ -134,6 +137,7 @@
 								<p:commandButton id="desativar" styleClass="btn-acao"
 									icon="ui-icon-closethick"
 									action="#{projetoManager.desativar(projeto.id)}"
+									actionListener="#{alocacaoManager.atualizaPesquisa()}"
 									update="gridProjetos">
 									<p:confirm header="#{message['button.desativar']}"
 										message="#{message['questiona.desativar']}" icon="ui-icon-alert" />
@@ -175,7 +179,7 @@
 							</p:column>
 							
 							<p:column headerText="Açoes">
-								<p:commandButton action="#{alocacaoManager.desativar(recurso.profissional.matricula)}" value="desativar"  update="gridProjetos gridRecursosDoProjeto"  ></p:commandButton>
+								<p:commandButton action="#{alocacaoManager.desativar(recurso.profissional.matricula)}" value="desativar"/>
 							</p:column>
 							
 							</p:dataTable>
@@ -187,14 +191,18 @@
 								
 								<p:calendar pt:placeholder="Data de Início"  id="inicio" value="#{alocacaoManager.alocacao.dataInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true" />
 								
-								<p:commandButton id="adicionar" icon="ui-icon-search" actionListener="#{alocacaoManager.alocarRecurso(projeto)}">
-									<p:ajax listener="#{alocacaoManager.valueChangeCelula}" />
-									<p:ajax listener="#{alocacaoManager.valueChangeEquipe}" />
-								</p:commandButton>
+								<p:commandButton id="adicionar" icon="ui-icon-search" 
+								actionListener="#{alocacaoManager.alocarRecurso(projeto)}" update="gridRecursosDoProjeto"/>
 					        </p:rowExpansion>
 					</p:dataTable>
 					
-						
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="#{message['button.sim']}" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+								update="growl" />
+							<p:commandButton value="#{message['button.nao']}" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
 					
 			</h:form>
 			</div>		

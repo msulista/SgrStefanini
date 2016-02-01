@@ -94,9 +94,9 @@ public class ProjetoManager {
 		return service.listarAtivos();
 	}
 	
-	public String desativar(Long id){
+	public void desativar(Long id){
 		service.desativar(id);
-		return "pretty:projeto";
+		
 	}
 	
 	public List<Projeto> listarTudo(){

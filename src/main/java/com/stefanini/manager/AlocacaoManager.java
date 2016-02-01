@@ -65,6 +65,9 @@ public class AlocacaoManager {
 		this.alocacao.setRecurso(this.recurso);
 		service.save(this.alocacao);
 		
+		this.listaRecursosAtivos = service.listarTodosRecursos(this.equipe,this.celula);
+	    this.listaProjetos = serviceProjeto.listarTodos(this.equipe, this.celula);
+	    this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes( this.listaProjetos);
 	}
 	
 	public Long getCodProjeto() {
@@ -171,8 +174,17 @@ public class AlocacaoManager {
 		return service.listarAtivos();
 	}
 	
+	public void atualizaPesquisa(){
+		this.listaRecursosAtivos = service.listarTodosRecursos(this.equipe,this.celula);
+	       this.listaProjetos = serviceProjeto.listarTodos(this.equipe, this.celula);
+	       this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes( this.listaProjetos);
+	}
+	
 	public void desativar(int	recurso){
 		service.desativar(recurso);
+		this.listaRecursosAtivos = service.listarTodosRecursos(this.equipe,this.celula);
+	    this.listaProjetos = serviceProjeto.listarTodos(this.equipe, this.celula);
+	    this.listaProjetosEAlocacoes = service.listarProjetosEAlocacoes( this.listaProjetos);
 	}
 			
 	public void valueChangeEquipe(ValueChangeEvent event) {
