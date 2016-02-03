@@ -16,7 +16,7 @@
 		</p:breadCrumb>
 		<div>
 			<h2>#{message['title.alocacao']}</h2>
-			<p:growl id="growl" life="4000" globalOnly="true" sticky="true" />
+			<p:growl id="growl" life="4000"/>
 			<h:form>
 				<br />
 				
@@ -57,7 +57,7 @@
 								value="#{alocacaoManager.listaRecursosAtivos}"
 								emptyMessage="#{message['alerta.listaVazia']}">
 						
-						<p:column headerText="#{message['label.profissional.matricula']}" for="recursoMatricula">
+						<p:column headerText="#{message['label.profissional.matricula']}" for="recursoMatricula" styleClass="tableMatricula">
 							<h:outputText value="#{recurso.profissional.matricula}" id="recursoMatricula"/>
 						</p:column>
 						
@@ -69,14 +69,16 @@
 							<h:outputText value="#{recurso.profissional.cargo.nome}" id="recursoCargo" />
 						</p:column>
 					
-						<p:column headerText="#{message['label.cargaHoraria']}" for="recursoCargaHoraria" >
+						<p:column headerText="#{message['label.cargaHoraria']}" for="recursoCargaHoraria" styleClass="tableCargaHoraria" >
 							<h:outputText value="#{recurso.profissional.cargaHoraria.cargaHoraria}" id="recursoCargaHoraria">
 								<f:converter converterId="cargaHorariaConverter"/>
 							</h:outputText>
 						</p:column>
 							
-						<p:column headerText="#{message['label.profissional.valorHora']}" for="recursoValorHora">
-							<h:outputText value="#{recurso.profissional.valorHora}" id="recursoValorHora"/>
+						<p:column headerText="#{message['label.profissional.valorHora']}" for="recursoValorHora" styleClass="tableValorHora">
+							<h:outputText value="#{recurso.profissional.valorHora}" id="recursoValorHora">
+								<f:convertNumber minFractionDigits="2" type="currency" currencySymbol="R$"/>
+							</h:outputText>
 						</p:column>
 					</p:dataTable>
 				

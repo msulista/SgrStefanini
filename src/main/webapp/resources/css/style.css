@@ -753,3 +753,17 @@ input[type=text] {
 	font-size: 14px;
 	text-decoration: none;
 }
+
+/* CAMPOS DATATABLE */
+
+.tableMatricula {
+	width: 55px;
+}
+
+.tableCargaHoraria {
+	width: 80px;
+}
+
+.tableValorHora {
+	width: 80px;
+}
