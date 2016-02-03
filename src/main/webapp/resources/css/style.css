@@ -502,6 +502,16 @@ input[type=text] {
     width: 70px;
 }
 
+.inputDatasInicioRetorno {
+	margin-right: 10px;
+	width: 70px !important;
+}
+
+.inputMatriculaCodigo input {
+	margin-right: 10px;
+	width: 100px !important;
+}
+
 .controle-pesquisa{
 	margin-top: 10px
 }
@@ -756,7 +766,7 @@ input[type=text] {
 
 /* CAMPOS DATATABLE */
 
-.tableMatricula {
+.tableMatriculaCodigo {
 	width: 55px;
 }
 
@@ -765,9 +775,18 @@ input[type=text] {
 }
 
 .tableValorHora {
-	width: 80px;
+	width: 60px;
 }
 
 .tableCargo {
-	width: 200px;
+	width: 190px;
+}
+
+.tableDatas {
+	width: 120px;
+}
+
+.tableAcoes {
+	text-align: center;
+	width: 53px;
 }
