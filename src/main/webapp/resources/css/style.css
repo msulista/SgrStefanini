@@ -767,3 +767,7 @@ input[type=text] {
 .tableValorHora {
 	width: 80px;
 }
+
+.tableCargo {
+	width: 200px;
+}
