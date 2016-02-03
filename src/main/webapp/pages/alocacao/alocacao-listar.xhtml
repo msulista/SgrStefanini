@@ -193,7 +193,7 @@
 								<p:calendar pt:placeholder="Data de Início"  id="inicio" value="#{alocacaoManager.alocacao.dataInicio}" pattern="dd/MM/yyyy" mask="true" showOn="button" disabledWeekends="true" />
 								
 								<p:commandButton id="adicionar" icon="ui-icon-search" 
-								actionListener="#{alocacaoManager.alocarRecurso(projeto)}" update="teste"/>
+								action="#{alocacaoManager.alocarRecurso(projeto)}" update="teste growl"/>
 								</h:panelGroup>
 								</h:panelGroup>
 					        </p:rowExpansion>
