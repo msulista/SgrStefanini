@@ -146,7 +146,7 @@
 							</p:column>
 							
 							<p:rowExpansion>
-					        <h:panelGrid id="teste">
+					        <h:panelGroup id="teste" style="border:none">
 					        <p:dataTable id="gridRecursosDoProjeto" 
 								var="recurso"
 								value="#{projeto.recursosDoProjeto}"
@@ -195,7 +195,7 @@
 								<p:commandButton id="adicionar" icon="ui-icon-search" 
 								actionListener="#{alocacaoManager.alocarRecurso(projeto)}" update="teste"/>
 								</h:panelGroup>
-								</h:panelGrid>
+								</h:panelGroup>
 					        </p:rowExpansion>
 					</p:dataTable>
 					
